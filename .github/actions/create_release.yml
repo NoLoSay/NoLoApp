@@ -1,0 +1,27 @@
+name: Create a release
+
+on:
+  # Trigger manually from github
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name'
+        required: true
+        type: string
+      tag_sha:
+        description: 'Commit sha to create the tag from'
+        required: true
+        type: string
+
+jobs:
+  build:
+    - name: Create tag
+      uses: actions/github-script@v5
+      with:
+        script: |
+          github.rest.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: 'refs/tags/${{ github.event.inputs.tag_name }}',
+            sha: ${{ github.event.inputs.sha }}
+          })
