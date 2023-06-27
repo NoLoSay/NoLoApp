@@ -61,6 +61,9 @@ buck-out/
 
 # Ruby / CocoaPods
 /ios/Pods/
+
+# VSCode
+.vscode/
 /vendor/bundle/
 
 yarn.lock
