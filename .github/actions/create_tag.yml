@@ -1,7 +1,6 @@
 name: Create a tag
 
 on:
-  # Trigger manually from github
   workflow_dispatch:
     inputs:
       tag_name:
@@ -23,13 +22,4 @@ jobs:
         id: "tag_create"
         with:
           tag: ${{ github.event.inputs.version }}
-          tag_exists_error: false
           message: ${{ github.event.inputs.tag_name }}
-
-      # Print result using the env variable.
-      -  run: |
-          echo "Tag already present: ${{ env.TAG_EXISTS }}"
-
-      # Print result using the action output.
-      - run: |
-          echo "Tag already present: ${{ steps.tag_create.outputs.tag_exists }}"
