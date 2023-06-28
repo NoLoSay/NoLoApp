@@ -1,4 +1,4 @@
-name: Create a release
+name: Create a tag
 
 on:
   # Trigger manually from github
@@ -8,20 +8,28 @@ on:
         description: 'Tag name'
         required: true
         type: string
-      tag_sha:
-        description: 'Commit sha to create the tag from'
+      version:
+        description: 'Tag version'
         required: true
         type: string
+        default: '0.0.0'
 
 jobs:
-  build:
-    - name: Create tag
-      uses: actions/github-script@v5
-      with:
-        script: |
-          github.rest.git.createRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: 'refs/tags/${{ github.event.inputs.tag_name }}',
-            sha: ${{ github.event.inputs.sha }}
-          })
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: ${{ github.event.inputs.version }}
+          tag_exists_error: false
+          message: ${{ github.event.inputs.tag_name }}
+
+      # Print result using the env variable.
+      -  run: |
+          echo "Tag already present: ${{ env.TAG_EXISTS }}"
+
+      # Print result using the action output.
+      - run: |
+          echo "Tag already present: ${{ steps.tag_create.outputs.tag_exists }}"
