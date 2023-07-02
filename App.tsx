@@ -9,7 +9,7 @@
  */
 
 import React, { type PropsWithChildren } from 'react'
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 import {
   Colors,
@@ -17,7 +17,7 @@ import {
   Header,
   LearnMoreLinks,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+} from 'react-native/Libraries/NewAppScreen'
 
 const Section: React.FC<
   PropsWithChildren<{
