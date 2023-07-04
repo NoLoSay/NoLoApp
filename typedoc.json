@@ -1,0 +1,8 @@
+{
+    "entryPoints": ["./src/**/*.tsx", "./src/**/*.ts", "./*.tsx"],
+    "out": "docs/documentation",
+    "tsconfig": "tsconfig.json",
+    "plugin": ["@mxssfd/typedoc-theme"],
+    "theme": "my-theme",
+    "name": "NoLoApp"
+}
