@@ -1,9 +1,9 @@
 name: Generate documentation
 
 on:
-  push
-  # branches:
-  #   - main
+  push:
+    branches:
+      - main
 
 jobs:
   generate_documentation:
