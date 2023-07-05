@@ -1,0 +1,11 @@
+name: Push Action
+
+on: push
+
+jobs:
+  linting:
+    uses: .github/workflows/front-end-linting.yml
+
+  testing:
+    needs: linting
+    uses: .github/workflows/run_tests.yml

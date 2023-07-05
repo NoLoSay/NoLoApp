@@ -1,6 +1,7 @@
 name: Front End Linting
 
-on: push
+on:
+  workflow_call:
 
 jobs:
   front-end-linting:
