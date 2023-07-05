@@ -34,7 +34,7 @@ jobs:
         run: yarn test
 
       - name: Upload coverage
-        if: github.ref_name != 'main'
+        if: github.ref_name == 'main'
         uses: cpina/github-action-push-to-another-repository@main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_COVERAGE_KEY }}
