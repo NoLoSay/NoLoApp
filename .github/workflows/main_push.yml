@@ -12,6 +12,7 @@ jobs:
   testing:
     needs: linting
     uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@main
+    secrets: inherit
 
   documentation:
     needs: [linting, testing]
