@@ -69,5 +69,8 @@ buck-out/
 yarn.lock
 *-lock.json
 
+# Documentation
+docs/documentation
+
 # React Native Testing Library
 coverage/

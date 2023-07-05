@@ -1,11 +1,9 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
+ * @fileoverview App component
+ * @module App
+ * @description Main app component, entry point of app. Everything is rendered inside this component.
+ * @requires react react-native
+ * @see {@link https://reactnative.dev/docs/getting-started}
  */
 
 import React from 'react'
@@ -52,6 +50,10 @@ function Section({ children, title }: SectionProps) {
   )
 }
 
+/**
+ * Main app component
+ * @returns {React.FC} App
+ */
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark'
 

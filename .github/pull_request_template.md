@@ -3,14 +3,13 @@
 - [ ] Feature
 - [ ] Bug Fix
 - [ ] Improvement
-- [ ] Other (please precise) : 
+- [ ] Other (please precise) :
 
 ## Description
 
 ## Related Tickets & Documents
 
-- Related Issue #
-- Closes #
+- Related Issue [NOLO-xxx](https://...)
 
 ## QA Instructions, Screenshots, Recordings
 
@@ -25,6 +24,6 @@ images for UI changes._
       have not been included_
 - [ ] I need help with writing tests
 
-## [optional] Are there any post deployment tasks we need to perform?
-
 ## [optional] What gif best describes this PR or how it makes you feel?
+
+![](add your downloaded gif here)
