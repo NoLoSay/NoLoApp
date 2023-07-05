@@ -23,7 +23,9 @@
     "start": "react-native start",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "test": "jest",
-    "lint": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'"
+    "format": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'",
+    "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "18.1.0",
