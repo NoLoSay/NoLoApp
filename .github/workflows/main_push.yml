@@ -2,7 +2,7 @@ name: Push Action
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
 
 jobs:
