@@ -4,8 +4,8 @@ on: push
 
 jobs:
   linting:
-    uses: .github/workflows/front-end-linting.yml
+    uses: NoLoSay/NoLoApp/.github/workflows/front_end_linting.yml@NOLO-169-Connect-all-setup-branches
 
   testing:
     needs: linting
-    uses: .github/workflows/run_tests.yml
+    uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@NOLO-169-Connect-all-setup-branches
