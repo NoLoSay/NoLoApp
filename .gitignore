@@ -71,3 +71,6 @@ yarn.lock
 
 # Documentation
 docs/documentation
+
+# React Native Testing Library
+coverage/
