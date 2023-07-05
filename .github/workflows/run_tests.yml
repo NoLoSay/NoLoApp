@@ -31,4 +31,4 @@ jobs:
         run: yarn install
 
       - name: Run tests
-        run: yarn jest
+        run: yarn run test
