@@ -35,9 +35,10 @@ jobs:
 
       - name: Upload coverage
         if: github.ref_name != 'main'
-        uses: cpina/github-action-push-to-another-repository@v1.7.2
+        uses: cpina/github-action-push-to-another-repository@main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_COVERAGE_KEY }}
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
           source-directory: 'coverage/lcov-report'
           destination-github-username: 'NoLoSay'
