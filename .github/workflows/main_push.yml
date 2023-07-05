@@ -7,12 +7,12 @@ on:
 
 jobs:
   linting:
-    uses: NoLoSay/NoLoApp/.github/workflows/front_end_linting.yml@NOLO-169-Connect-all-setup-branches
+    uses: NoLoSay/NoLoApp/.github/workflows/front_end_linting.yml@main
 
   testing:
     needs: linting
-    uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@NOLO-169-Connect-all-setup-branches
+    uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@main
 
   documentation:
     needs: [linting, testing]
-    uses: NoLoSay/NoLoApp/.github/workflows/generate_documentation.yml@NOLO-169-Connect-all-setup-branches
+    uses: NoLoSay/NoLoApp/.github/workflows/generate_documentation.yml@main
