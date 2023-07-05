@@ -1,0 +1,75 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BROWN='\033[0;33m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+DARK_GREY='\033[1;30m'
+LIGHT_RED='\033[1;31m'
+LIGHT_PURPLE='\033[1;35m'
+NC='\033[0m'
+echo -e "$BROWN This script will update the version of the app. $NC"
+echo
+
+# 0. Install jq on MacOS
+echo -e  "$CYAN Checking if jq is installed...$NC"
+if ! [ -x "$(command -v jq)" ]; then
+  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    echo -e  "$RED jq is not installed. Please enter your password to install it. $NC"
+    if [[ -x "$(command -v apt-get)" ]]; then
+      command='sudo apt-get'
+    elif [[ -x "$(command -v dnf)" ]]; then
+      command='sudo dnf'
+    fi
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    echo -e  "$PURPLE jq is not installed. Installing it now... $NC"
+    command='brew'
+  fi
+  $command install jq
+else
+  echo -e  "$GREEN jq is already installed. $NC"
+fi
+
+# 1. Get the current version
+prevVersion=$(cat app.json | jq -r '.version')
+prevMajorVersion=$(echo $prevVersion | cut -d'.' -f1)
+prevMediumVersion=$(echo $prevVersion | cut -d'.' -f2)
+prevBuildNumber=$(echo $prevVersion | cut -d'.' -f3)
+
+# 2. Get the new version with the user input
+echo
+echo -e  "$DARK_GREY Current version is $prevVersion $NC"
+
+echo -e  "$PURPLE Enter the new version: $NC"
+echo -n " "
+read newMajorVersion
+
+echo -e  "$LIGHT_PURPLE Enter the new detailed version: $NC"
+echo -n " "
+read newMediumVersion
+
+echo -e  "$LIGHT_RED Enter the new build number: $NC"
+echo -n " "
+read newBuildNumber
+
+newVersion="$newMajorVersion.$newMediumVersion.$newBuildNumber"
+
+regexAndroidVersionCode="s/versionCode ${prevMajorVersion}/versionCode ${newMajorVersion}/g"
+regexAndroidVersionName="s/versionName \"${prevVersion}\"/versionName \"${newVersion}\"/g"
+regexIosBundleVersion="s/<string>${prevBuildNumber}<\/string>/<string>${newBuildNumber}<\/string>/g"
+regexIosShortVersion="s/<string>${prevVersion}<\/string>/<string>${newVersion}<\/string>/g"
+
+# 3. Update the version in app.json
+jq --arg v "$newVersion" '.version = $v' app.json > tmp.$$.json && mv tmp.$$.json app.json
+
+# 4. Update the version in package.json
+jq --arg v "$newVersion" '.version = $v' package.json > tmp.$$.json && mv tmp.$$.json package.json
+
+# 5. Update the version in build.gradle
+find ./android/app -type f -name build.gradle -exec sed -i '' $regexAndroidVersionCode {} \;
+find ./android/app -type f -name build.gradle -exec sed -i '' $regexAndroidVersionName {} \;
+
+# 6. Update the version in Info.plist
+find ./ios/NoLoSay -type f -name Info.plist -exec sed -i '' $regexIosBundleVersion {} \;
+find ./ios/NoLoSay -type f -name Info.plist -exec sed -i '' $regexIosShortVersion {} \;
