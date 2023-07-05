@@ -10,5 +10,5 @@ jobs:
     uses: NoLoSay/NoLoApp/.github/workflows/front_end_linting.yml@NOLO-169-Connect-all-setup-branches
 
   testing:
-    needs: linting
+    # needs: linting
     uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@NOLO-169-Connect-all-setup-branches
