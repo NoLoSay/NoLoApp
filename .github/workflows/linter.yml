@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  prettier:
+  eslint-and-prettier:
     runs-on: ubuntu-latest
 
     steps:
