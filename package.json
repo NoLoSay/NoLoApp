@@ -2,12 +2,28 @@
   "name": "nolosay",
   "version": "0.0.1",
   "private": true,
+  "main": "App.tsx",
+  "description": "NoLoSay is a project that aims to create a community-based sign language video platform to ensure access to information for people who are deaf or hard of hearing. The platform will first be set up in cultural places, then in other places such as administrative places.",
+  "license": "Private",
+  "author": "NoLoSay",
+  "keywords": [
+    "react-native",
+    "typescript",
+    "community",
+    "lsf",
+    "accessibility",
+    "deaf"
+  ],
+  "repository": {
+    "type": "git"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'",
     "documentation": "typedoc --options ./typedoc.json"
   },
   "dependencies": {

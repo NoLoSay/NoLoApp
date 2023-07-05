@@ -1,0 +1,53 @@
+name: Feature
+description: Create an issue for a new feature to implement.
+title: "[FEATURE]: "
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the feature you would like to have.
+      placeholder: "I would love to ..."
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What has do be done ?
+      description: Describe the steps to implement the feature.
+      placeholder: "I think that I nice start could be ..."
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Priority
+      description: Describe the priority of the feature.
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Project parts
+      description: Select the parts of the project that are affected by the feature.
+      options:
+        - label: Connexion / Subscription screen
+        - label: Discover new places
+        - label: Take a video
+        - label: Access to videos
+        - label: Settings screen
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: Add any other context or screenshots about the feature request here.
+      placeholder: "Add any other context or screenshots about the feature request here."
+    validations:
+      required: false

@@ -1,0 +1,13 @@
+{
+	"recommendations": [
+    "atlassian.atlascode",
+    "dsznajder.es7-react-js-snippets",
+    "eamodio.gitlens",
+    "equimper.react-native-react-redux",
+    "esbenp.prettier-vscode",
+    "figma.figma-vscode-extension",
+    "github.copilot",
+    "github.vscode-pull-request-github",
+    "kamikillerto.vscode-colorize",
+	]
+}

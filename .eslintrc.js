@@ -3,11 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
   parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
@@ -16,11 +12,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'eslint-plugin-react-hooks',
-    'react',
-    '@typescript-eslint',
-  ],
-  rules: {
-  },
-};
+  plugins: ['eslint-plugin-react-hooks', 'react', '@typescript-eslint'],
+  rules: {},
+}
