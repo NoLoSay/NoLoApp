@@ -55,7 +55,7 @@ read newBuildNumber
 
 newVersion="$newMajorVersion.$newMediumVersion.$newBuildNumber"
 
-regexAndroidVersionCode="s/versionCode ${prevMajorVersion}/versionCode ${newMajorVersion}/g"
+regexAndroidVersionCode="s/versionCode ${prevBuildNumber}/versionCode ${newBuildNumber}/g"
 regexAndroidVersionName="s/versionName \"${prevVersion}\"/versionName \"${newVersion}\"/g"
 regexIosBundleVersion="s/<string>${prevBuildNumber}<\/string>/<string>${newBuildNumber}<\/string>/g"
 regexIosShortVersion="s/<string>${prevVersion}<\/string>/<string>${newVersion}<\/string>/g"
