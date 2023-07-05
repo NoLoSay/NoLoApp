@@ -23,8 +23,10 @@
     "start": "react-native start",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "test": "jest --coverage",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "documentation": "typedoc --options ./typedoc.json"
+    "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
+    "documentation": "typedoc --options ./typedoc.json",
+    "format": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "18.1.0",
