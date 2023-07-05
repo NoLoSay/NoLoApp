@@ -38,7 +38,7 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_COVERAGE_KEY }}
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'coverage/lcov-report'
           destination-github-username: 'NoLoSay'
