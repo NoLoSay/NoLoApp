@@ -62,6 +62,20 @@ To launch them :
 yarn test
 ```
 
+## Build the app for production
+
+### iOS
+
+Everything is done in XCode, you will need an apple developer license to do so.
+
+### Android
+
+⚠️ This will not work unless you have the appropriate signing keys. If you want to build the app for production, please contact @JohanCDev.
+
+```sh
+yarn android-release
+```
+
 ## 🤝 Contributing
 
 Issues and requests for improvements are welcome!<br />Feel free to check [issues page](https://github.com/NoLoSay/NoLoApp/issues). You can also take a look at the [contributing guide](./CONTRIBUTING.md). For every interactions you will have with and around the project, be sure to respect the [guidelines](./CODE_OF_CONDUCT.md)
