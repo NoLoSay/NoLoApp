@@ -1,0 +1,25 @@
+name: Create a tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name'
+        required: true
+        type: string
+      version:
+        description: 'Tag version'
+        required: true
+        type: string
+        default: '0.0.0'
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: ${{ github.event.inputs.version }}
+          message: ${{ github.event.inputs.tag_name }}

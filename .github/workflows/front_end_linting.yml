@@ -1,0 +1,43 @@
+name: Front End Linting
+
+on:
+  workflow_call:
+
+jobs:
+  front-end-linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set variables
+        run: |
+          cat >> "$GITHUB_ENV" <<EOF
+          NODE_VERSION=$(cat _node-version)
+          EOF
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check Typescript
+        run: |
+          yarn run type-check
+
+      - name: Run Eslint
+        run: yarn run lint
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_options: --write **/*.{tsx,ts,jsx,js} --config ${{ github.workspace }}/.prettierrc.js

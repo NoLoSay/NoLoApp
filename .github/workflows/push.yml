@@ -1,0 +1,15 @@
+name: Push Action
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  linting:
+    uses: NoLoSay/NoLoApp/.github/workflows/front_end_linting.yml@main
+
+  testing:
+    needs: linting
+    uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@main
+    secrets: inherit

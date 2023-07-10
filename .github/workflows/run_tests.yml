@@ -1,0 +1,47 @@
+name: Run tests
+
+on:
+  workflow_call:
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set variables
+        run: |
+          cat >> "$GITHUB_ENV" <<EOF
+          NODE_VERSION=$(cat _node-version)
+          EOF
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Upload coverage
+        if: github.ref_name == 'main'
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.WORKFLOW_DEPLOY_COVERAGE_KEY }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'coverage/lcov-report'
+          destination-github-username: 'NoLoSay'
+          destination-repository-name: 'NoLoAppTestsCoverage'
+          user-email: johan.chrillesen@epitech.eu
+          target-branch: main

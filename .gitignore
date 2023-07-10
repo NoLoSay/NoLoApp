@@ -61,7 +61,15 @@ buck-out/
 
 # Ruby / CocoaPods
 /ios/Pods/
+
+# VSCode
+.vscode/
 /vendor/bundle/
 
-yarn.lock
 *-lock.json
+
+# Documentation
+docs/documentation
+
+# React Native Testing Library
+coverage/
