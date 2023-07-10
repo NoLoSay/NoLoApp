@@ -8,12 +8,16 @@
   <a href="https://github.com/NoLoSay/NoLoApp/blob/main/LICENSE.md" target="_blank">
     <img alt="License: Private" src="https://img.shields.io/badge/License-Private-yellow.svg" />
   </a>
+  <a href="https://github.com/NoLoSay/NoLoApp/actions/workflows/push.yml">
+    <img alt="CI status" src="https://github.com/NoLoSay/NoLoApp/actions/workflows/push.yml/badge.svg">
+  </a>
 </p>
+
+![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
 ![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-
-[![CI](https://github.com/NoLoSay/NoLoApp/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/NoLoSay/NoLoApp/actions/workflows/CI.yml)
 
 > NoLoSay is an EPITECH project made to improve the accessibility of deaf people in cultural sites
 
@@ -21,7 +25,13 @@
 
 ## ✨ [Visuals](https://nolosay.github.io/demo)
 
-## Install
+## 📝 [Documentation](https://nolosay.github.io/documentation)
+
+## Development environment installation
+
+Before starting, you need to setup your environment. We have a guide for that [here](./SETUP_ENVIRONMENT.md).
+
+## Install dependencies
 
 ```sh
 yarn install
@@ -79,7 +89,7 @@ Issues and requests for improvements are welcome!<br />Feel free to check [issue
 
 ## 📝 License
 
-Copyright © 2023 [NoLo Incorporation](https://github.com/JohanCDev).<br />
+Copyright © 2023 [NoLo Incorporation](https://github.com/NoLoSay).<br />
 This project is [privately](https://github.com/NoLoSay/NoLoApp/blob/main/LICENSE.md) licensed.
 
 ---
