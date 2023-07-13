@@ -2,6 +2,13 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "",
+    "paths": {
+      "@source/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@global/*": ["src/global/*"],
+      "@assets/*": ["assets/*"],
+    }
   },
 }
