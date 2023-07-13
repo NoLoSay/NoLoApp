@@ -55,10 +55,9 @@ read newBuildNumber
 
 newVersion="$newMajorVersion.$newMediumVersion.$newBuildNumber"
 
-regexAndroidVersionCode="s/versionCode ${prevBuildNumber}/versionCode ${newBuildNumber}/g"
-regexAndroidVersionName="s/versionName \"${prevVersion}\"/versionName \"${newVersion}\"/g"
 regexIosBundleVersion="s/<string>${prevBuildNumber}<\/string>/<string>${newBuildNumber}<\/string>/g"
 regexIosShortVersion="s/<string>${prevVersion}<\/string>/<string>${newVersion}<\/string>/g"
+regexVersionReadme="s/version-${prevVersion}-blue/version-${newVersion}-blue/g"
 
 # 3. Update the version in app.json
 jq --arg v "$newVersion" '.version = $v' app.json > tmp.$$.json && mv tmp.$$.json app.json
@@ -67,9 +66,10 @@ jq --arg v "$newVersion" '.version = $v' app.json > tmp.$$.json && mv tmp.$$.jso
 jq --arg v "$newVersion" '.version = $v' package.json > tmp.$$.json && mv tmp.$$.json package.json
 
 # 5. Update the version in build.gradle
-find ./android/app -type f -name build.gradle -exec sed -i '' $regexAndroidVersionCode {} \;
-find ./android/app -type f -name build.gradle -exec sed -i '' $regexAndroidVersionName {} \;
+find ./android/app -type f -name build.gradle -exec sed -i '' -e "s/versionCode ${prevBuildNumber}/versionCode ${newBuildNumber}/g" -e "s/versionName \"${prevVersion}\"/versionName \"${newVersion}\"/g" {} \;
 
 # 6. Update the version in Info.plist
-find ./ios/NoLoSay -type f -name Info.plist -exec sed -i '' $regexIosBundleVersion {} \;
-find ./ios/NoLoSay -type f -name Info.plist -exec sed -i '' $regexIosShortVersion {} \;
+find ./ios/NoLoSay -type f -name Info.plist -exec sed -i '' -e $regexIosBundleVersion -e $regexIosShortVersion {} \;
+
+# 7. Update the version in README.md
+find . -type f -name README.md -exec sed -i '' $regexVersionReadme {} \;

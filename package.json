@@ -22,7 +22,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
-    "lint": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'",
+    "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
     "documentation": "typedoc --options ./typedoc.json",
     "test": "jest --coverage",
     "format": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'",
