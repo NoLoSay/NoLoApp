@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["./src/**/*.tsx", "./src/**/*.ts", "./*.tsx"],
+  "entryPoints": ["./src/**/*.tsx", "./src/**/*.ts"],
   "out": "docs/documentation",
   "tsconfig": "tsconfig.json",
   "plugin": ["@mxssfd/typedoc-theme"],
