@@ -4,7 +4,7 @@ const mainColors = {
   white: '#FFFFFF',
   dark: '#343434',
   lightGrey: '#CFCFCF',
-  darkGrey: '646464',
+  darkGrey: '#646464',
 }
 
 const textColors = {
@@ -20,4 +20,6 @@ export const colors = {
   lightGrey: mainColors.lightGrey,
   darkGrey: mainColors.darkGrey,
   text: textColors,
+  facebook: '#3B5998',
+  google: '#CBD5E1',
 }

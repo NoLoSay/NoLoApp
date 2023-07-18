@@ -9,7 +9,6 @@
  */
 
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import ScanScreen from './screens/scan/ScanScreen'
 import AddScreen from './screens/add/AddScreen'
 import HomeScreen from './screens/home/HomeScreen'

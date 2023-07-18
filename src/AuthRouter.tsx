@@ -10,8 +10,8 @@
 
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import ConnectionScreen from './screens/connection/ConnectionScreen'
-import SubscriptionScreen from './screens/subscription/SubscriptionScreen'
+import ConnectionScreen from './screens/authentificationSection/connection/ConnectionScreen'
+import SubscriptionScreen from './screens/authentificationSection/subscription/SubscriptionScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AppRouter from './AppRouter'
 import { AuthStackParamList } from '@source/global/types/screensProps/AuthStackParams'
@@ -27,7 +27,7 @@ export default function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <AuthStack.Navigator
-        initialRouteName='Connection'
+        initialRouteName='Subscription'
         screenOptions={{
           headerShown: false,
         }}

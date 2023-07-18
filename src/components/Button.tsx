@@ -6,11 +6,13 @@
  * @link https://reactnative.dev/docs/pressable
  */
 
-import { Pressable, Text } from 'react-native'
+import { colors } from '@source/global/colors'
+import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
 
 interface Props {
   onPress: () => void
   text: string
+  style?: StyleProp<ViewStyle>
 }
 
 /**
@@ -18,15 +20,34 @@ interface Props {
  * @param {Props} props - Component props
  * @param {Function} props.onPress - Function that is called when the button is pressed
  * @param {string} props.text - Text that is displayed in the button
+ * @param {StyleProp<ViewStyle>} props.style - Style of the button
  * @returns
  */
-export default function Button({ onPress, text }: Props) {
+export default function Button({ onPress, text, style }: Props) {
   return (
-    <Pressable
-      style={{ width: 120, height: 40, backgroundColor: 'cyan' }}
-      onPress={onPress}
-    >
-      <Text>{text}</Text>
-    </Pressable>
+    <View style={{ width: '100%', paddingHorizontal: 52 }}>
+      <Pressable
+        style={[styles.button, style]}
+        onPress={onPress}
+      >
+        <Text style={styles.text}>{text}</Text>
+      </Pressable>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  text: {
+    color: 'black',
+    fontFamily: 'Poppins-SemiBold',
+    fontWeight: '700',
+    fontSize: 20,
+  },
+  button: {
+    height: 48,
+    backgroundColor: colors.accent,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})

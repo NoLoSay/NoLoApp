@@ -8,7 +8,7 @@
 import React from 'react'
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { colors } from '@global/colors'
-import { ConnectionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
+import { ConnectionScreenProps, SubscriptionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
 import Button from '@components/Button'
 
 /**
@@ -28,7 +28,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
     >
       <View>
         <Button
-          text='Connect'
+          text='Subscription'
           onPress={() => navigation.navigate('Subscription')}
         />
       </View>
