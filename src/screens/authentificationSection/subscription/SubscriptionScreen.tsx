@@ -10,8 +10,6 @@ import { SafeAreaView, View, Image, StyleSheet, TextInput, KeyboardType, Pressab
 import { colors } from '@global/colors'
 import { SubscriptionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
 import Button from '@components/Button'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faFacebookF, faApple, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import OrSeparator from '../sharedViews/OrSeparator'
 import ButtonChangeScreen from '../sharedViews/ButtonChangeScreen'
 import HeaderTexts from './Views/HeaderTexts'
@@ -61,28 +59,25 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
             { backgroundColor: colors.facebook, opacity: pressed ? 0.5 : 1 },
           ]}
         >
-          <FontAwesomeIcon
-            icon={faFacebookF}
-            size={24}
-            color={colors.white}
+          <Image
+            source={require('@assets/icons/social/facebook.png')}
+            style={{ width: 24, height: 24 }}
           />
         </Pressable>
         <Pressable
           style={({ pressed }) => [styles.socialButton, { backgroundColor: colors.black, opacity: pressed ? 0.5 : 1 }]}
         >
-          <FontAwesomeIcon
-            icon={faApple}
-            size={24}
-            color={colors.white}
+          <Image
+            source={require('@assets/icons/social/apple.png')}
+            style={{ height: 24, resizeMode: 'contain' }}
           />
         </Pressable>
         <Pressable
           style={({ pressed }) => [styles.socialButton, { backgroundColor: colors.google, opacity: pressed ? 0.5 : 1 }]}
         >
-          <FontAwesomeIcon
-            icon={faGoogle}
-            size={28}
-            color={colors.black}
+          <Image
+            source={require('@assets/icons/social/google.png')}
+            style={{ width: 24, height: 24 }}
           />
         </Pressable>
       </View>
