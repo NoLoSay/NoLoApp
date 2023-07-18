@@ -26,4 +26,5 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
   },
+  ignorePatterns: ['node_modules/', 'docs/', 'coverage/'],
 }

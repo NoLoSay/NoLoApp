@@ -8,8 +8,8 @@
   <a href="https://github.com/NoLoSay/NoLoApp/blob/main/LICENSE.md" target="_blank">
     <img alt="License: Private" src="https://img.shields.io/badge/License-Private-yellow.svg" />
   </a>
-  <a href="https://github.com/NoLoSay/NoLoApp/actions/workflows/push.yml">
-    <img alt="CI status" src="https://github.com/NoLoSay/NoLoApp/actions/workflows/push.yml/badge.svg">
+  <a href="https://github.com/NoLoSay/NoLoApp/actions/workflows/main_push.yml">
+    <img alt="CI status" src="https://github.com/NoLoSay/NoLoApp/actions/workflows/main_push.yml/badge.svg">
   </a>
 </p>
 
