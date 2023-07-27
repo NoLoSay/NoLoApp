@@ -14,42 +14,62 @@ import AddScreen from './screens/add/AddScreen'
 import HomeScreen from './screens/home/HomeScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { colors } from '@global/colors'
-import { Image } from 'react-native'
+import { Image, ImageSourcePropType } from 'react-native'
 import { images } from '@global/images'
-import { AppRouterScreenProps } from '@source/global/types/screensProps/AuthStackParams'
+
+interface getImageNameProps {
+  focused: boolean
+  route: string
+}
+
+interface NavigationImageProps {
+  focused: boolean
+  route: string
+  color: string
+  size: number
+}
+
+function getImageName({ focused, route }: getImageNameProps): ImageSourcePropType {
+  switch (route) {
+    case 'Home':
+      return focused ? images.icons.full.home : images.icons.outline.home
+    case 'Add':
+      return focused ? images.icons.full.add : images.icons.outline.add
+    case 'Scan':
+      return focused ? images.icons.full.qr : images.icons.outline.qr
+    default:
+      return images.icons.outline.home
+  }
+}
+
+const NavigationImage = ({ focused, route, color, size }: NavigationImageProps): React.JSX.Element => {
+  return (
+    <Image
+      source={getImageName({ focused, route: route })}
+      style={{ tintColor: color, width: size, height: size }}
+    />
+  )
+}
 
 /**
  * @function AppRouter
  * @description Root component of the app that renders the connection and the subscription screens.
  * @returns {React.JSX.Element} App component template
  */
-export default function AppRouter({ navigation }: AppRouterScreenProps): React.JSX.Element {
+export default function AppRouter(): React.JSX.Element {
   const Tab = createBottomTabNavigator()
 
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        // eslint-disable-next-line react/no-unstable-nested-components
         tabBarIcon: ({ focused, color, size }) => {
-          let image
-          size = size + 15
-
-          switch (route.name) {
-            case 'Home':
-              image = focused ? images.icons.full.home : images.icons.outline.home
-              break
-            case 'Add':
-              image = focused ? images.icons.full.add : images.icons.outline.add
-              break
-            case 'Scan':
-              image = focused ? images.icons.full.qr : images.icons.outline.qr
-              break
-          }
-
-          // You can return any component that you like here!
           return (
-            <Image
-              source={image}
-              style={{ tintColor: color, width: size, height: size }}
+            <NavigationImage
+              focused={focused}
+              route={route.name}
+              color={color}
+              size={size}
             />
           )
         },

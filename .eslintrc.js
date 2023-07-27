@@ -11,7 +11,7 @@ module.exports = {
     'prettier',
     'prettier/react',
   ],
-  parser: '@babel/eslint-parser',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -22,8 +22,10 @@ module.exports = {
   plugins: ['eslint-plugin-react-hooks', 'react', '@typescript-eslint', 'react-native'],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
-    'no-use-before-define': ['error', { variables: false }],
+    'no-use-before-define': 'off',
+    'react/require-default-props': 'off',
     'import/no-unresolved': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
   },
   ignorePatterns: ['node_modules/', 'docs/', 'coverage/'],

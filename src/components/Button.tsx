@@ -7,6 +7,7 @@
  */
 
 import { colors } from '@source/global/colors'
+import React from 'react'
 import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
 
 interface Props {
