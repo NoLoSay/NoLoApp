@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Images global constants, used to style the app.
+ * @module images
+ * @description Images global constants, used to style the app.
+ */
+
+/* eslint-disable global-require */
 export const images = {
   icons: {
     full: {
@@ -12,3 +19,5 @@ export const images = {
     },
   },
 }
+
+export default images

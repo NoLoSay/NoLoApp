@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Colors global constants, used to style the app.
+ * @module colors
+ * @description Colors global constants, used to style the app.
+ */
+
 const mainColors = {
   accent: '#FDC810',
   black: '#000000',
@@ -12,6 +18,20 @@ const textColors = {
   light: mainColors.lightGrey,
 }
 
+/**
+ * @typedef {Object} Colors
+ * @property {string} accent
+ * @property {string} black
+ * @property {string} white
+ * @property {string} dark
+ * @property {string} lightGrey
+ * @property {string} darkGrey
+ * @property {Object} text
+ * @property {string} text.main
+ * @property {string} text.light
+ * @property {string} facebook
+ * @property {string} google
+ */
 export const colors = {
   accent: mainColors.accent,
   black: mainColors.black,
@@ -23,3 +43,5 @@ export const colors = {
   facebook: '#3B5998',
   google: '#CBD5E1',
 }
+
+export default colors

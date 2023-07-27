@@ -2,7 +2,7 @@
   "name": "nolosay",
   "version": "0.0.1",
   "private": true,
-  "main": "App.tsx",
+  "main": "./src/AuthRouter.tsx",
   "description": "NoLoSay is a project that aims to create a community-based sign language video platform to ensure access to information for people who are deaf or hard of hearing. The platform will first be set up in cultural places, then in other places such as administrative places.",
   "license": "Private",
   "author": "NoLoSay",
@@ -32,8 +32,6 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
-    "react": "18.1.0",
-    "react-native": "0.70.6",
     "react-native-screens": "^3.22.1"
   },
   "devDependencies": {
@@ -60,6 +58,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",
+    "react": "^18.2.0",
+    "react-native": "0.70.6",
     "react-dom": "18.1.0",
     "react-native-safe-area-context": "^4.7.1",
     "react-native-svg": "^13.10.0",
