@@ -6,13 +6,10 @@
  */
 
 import React from 'react'
-import { SafeAreaView, View, Image, StyleSheet, TextInput, KeyboardType, Pressable } from 'react-native'
+import { SafeAreaView, View, Text } from 'react-native'
 import { colors } from '@global/colors'
 import { SubscriptionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
 import Button from '@components/Button'
-import OrSeparator from '../sharedViews/OrSeparator'
-import ButtonChangeScreen from '../sharedViews/ButtonChangeScreen'
-import HeaderTexts from './Views/HeaderTexts'
 
 /**
  * @function SubscriptionScreen
@@ -20,143 +17,22 @@ import HeaderTexts from './Views/HeaderTexts'
  * @returns {React.JSX.Element} App component template
  */
 export default function SubscriptionScreen({ navigation }: SubscriptionScreenProps): React.JSX.Element {
-  interface InputProps {
-    placeholder: string
-    secureTextEntry?: boolean
-    keyboardType?: KeyboardType
-  }
-
-  function Input({ placeholder, secureTextEntry = false, keyboardType = 'default' }: InputProps) {
-    return (
-      <View
-        style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 8, paddingLeft: 52, paddingRight: 52 }}
-      >
-        <TextInput
-          placeholderTextColor={colors.lightGrey}
-          placeholder={placeholder}
-          secureTextEntry={secureTextEntry}
-          keyboardType={keyboardType}
-          style={styles.input}
-        />
-      </View>
-    )
-  }
-
-  function SocialButtons() {
-    // Create a component that renders the social buttons (Google, Facebook, Apple), they should be squared
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          marginTop: 20,
-          paddingHorizontal: 24,
-        }}
-      >
-        <Pressable
-          style={({ pressed }) => [
-            styles.socialButton,
-            { backgroundColor: colors.facebook, opacity: pressed ? 0.5 : 1 },
-          ]}
-        >
-          <Image
-            source={require('@assets/icons/social/facebook.png')}
-            style={{ width: 24, height: 24 }}
-          />
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [styles.socialButton, { backgroundColor: colors.black, opacity: pressed ? 0.5 : 1 }]}
-        >
-          <Image
-            source={require('@assets/icons/social/apple.png')}
-            style={{ height: 24, resizeMode: 'contain' }}
-          />
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [styles.socialButton, { backgroundColor: colors.google, opacity: pressed ? 0.5 : 1 }]}
-        >
-          <Image
-            source={require('@assets/icons/social/google.png')}
-            style={{ width: 24, height: 24 }}
-          />
-        </Pressable>
-      </View>
-    )
-  }
-
   return (
     <SafeAreaView
       style={{
-        backgroundColor: colors.white,
+        backgroundColor: colors.accent,
         flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <Image
-        style={styles.logo}
-        source={require('@assets/images/logos/light/nolosay.png')}
-      />
-      <View style={styles.connection}>
-        <HeaderTexts />
-        <View style={{ flexDirection: 'column', paddingVertical: 24 }}>
-          <View style={{ marginBottom: 12 }}>
-            <Input
-              placeholder={'Email'}
-              keyboardType='email-address'
-            />
-            <Input
-              placeholder={'+33 06 12 34 56 78'}
-              keyboardType='phone-pad'
-            />
-            <Input
-              placeholder={'Mot de passe'}
-              secureTextEntry
-            />
-          </View>
-          <OrSeparator />
-          <SocialButtons />
-        </View>
+      <View>
+        <Text>Subscription screen</Text>
         <Button
-          text="S'inscrire"
-          onPress={() => navigation.navigate('AppRouter')}
-          style={{ marginVertical: 12 }}
-        />
-        <ButtonChangeScreen
-          infoText='Déjà un compte ?'
-          clickableText='Se connecter'
+          text='Connection'
           onPress={() => navigation.navigate('Connection')}
         />
       </View>
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  logo: {
-    flex: 1,
-    width: 200,
-    resizeMode: 'contain',
-    alignSelf: 'center',
-  },
-  connection: {
-    flex: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    borderRadius: 12,
-    backgroundColor: colors.darkGrey,
-    paddingHorizontal: 12,
-    paddingVertical: 20,
-    fontSize: 12,
-    color: colors.lightGrey,
-    fontFamily: 'Poppins-Medium',
-    width: '100%',
-  },
-  socialButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
