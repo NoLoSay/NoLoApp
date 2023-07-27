@@ -15,6 +15,6 @@ describe('SubscriptionScreenTests', () => {
         route={route}
       />
     )
-    expect(screen.getByText("S'inscrire"))
+    expect(screen.getByText('Connection'))
   })
 })
