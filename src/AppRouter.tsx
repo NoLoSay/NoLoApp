@@ -9,13 +9,14 @@
  */
 
 import React from 'react'
+import { Image, ImageSourcePropType } from 'react-native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { colors } from '@global/colors'
+import { images } from '@global/images'
 import ScanScreen from './screens/scan/ScanScreen'
 import AddScreen from './screens/add/AddScreen'
 import HomeScreen from './screens/home/HomeScreen'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { colors } from '@global/colors'
-import { Image, ImageSourcePropType } from 'react-native'
-import { images } from '@global/images'
+import { AccountProvider } from './global/contexts/AccountProvider'
 
 interface getImageNameProps {
   focused: boolean
@@ -42,10 +43,10 @@ function getImageName({ focused, route }: getImageNameProps): ImageSourcePropTyp
   }
 }
 
-const NavigationImage = ({ focused, route, color, size }: NavigationImageProps): React.JSX.Element => {
+function NavigationImage({ focused, route, color, size }: NavigationImageProps): React.JSX.Element {
   return (
     <Image
-      source={getImageName({ focused, route: route })}
+      source={getImageName({ focused, route })}
       style={{ tintColor: color, width: size, height: size }}
     />
   )
@@ -69,7 +70,7 @@ export default function AppRouter(): React.JSX.Element {
               focused={focused}
               route={route.name}
               color={color}
-              size={size}
+              size={size + 12}
             />
           )
         },

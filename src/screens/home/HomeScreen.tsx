@@ -5,9 +5,10 @@
  * @requires react react-native
  */
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { SafeAreaView, Text, View } from 'react-native'
 import { colors } from '@global/colors'
+import { AccountContext } from '@source/global/contexts/AccountProvider'
 
 /**
  * @function HomeScreen
@@ -15,6 +16,9 @@ import { colors } from '@global/colors'
  * @returns {React.JSX.Element} App component template
  */
 export default function HomeScreen(): React.JSX.Element {
+  const { account, setAccount } = useContext(AccountContext)
+  console.log(account)
+
   return (
     <SafeAreaView
       style={{
@@ -25,7 +29,7 @@ export default function HomeScreen(): React.JSX.Element {
       }}
     >
       <View>
-        <Text>Home</Text>
+        <Text>{account.email}</Text>
       </View>
     </SafeAreaView>
   )
