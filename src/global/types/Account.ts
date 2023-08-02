@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react'
+
 export interface AccountType {
   email: string
   username: string
@@ -7,5 +9,5 @@ export interface AccountType {
 
 export interface AccountContextType {
   account: AccountType
-  setAccount: (account: AccountType) => void
+  setAccount: Dispatch<SetStateAction<AccountType>>
 }
