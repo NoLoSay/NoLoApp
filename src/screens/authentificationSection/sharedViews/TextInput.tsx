@@ -39,7 +39,7 @@ export default function Input({
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         value={value}
-        onChange={e => setValue && setValue(e.nativeEvent.text)}
+        onChangeText={text => setValue && setValue(text)}
         style={styles.input}
         autoCapitalize={autoCapitalize}
       />

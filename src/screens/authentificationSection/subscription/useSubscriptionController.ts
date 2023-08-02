@@ -1,5 +1,7 @@
-import { AccountContext } from '@global/contexts/AccountContext'
 import { useContext, useState } from 'react'
+import { Alert } from 'react-native'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import post from '@helpers/httpClient/httpClient'
 
 interface SubscriptionController {
   email: string
@@ -13,6 +15,7 @@ interface SubscriptionController {
   showPasswordConfirmation: boolean
   setShowPasswordConfirmation: (showPasswordConfirmation: boolean) => void
   subscribe: () => void
+  error: string | undefined
 }
 
 interface useSubscriptionControllerProps {
@@ -27,12 +30,49 @@ export default function useSubscriptionController({
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false)
+  const [error, setError] = useState<string | undefined>(undefined)
   const { account, setAccount } = useContext(AccountContext)
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
-  function subscribe() {
-    console.log('subscribe', email, password, passwordConfirmation)
-    setAccount({ username: email, authentified: true, phoneNumber: '', email })
-    navigation.navigate('AppRouter')
+  async function subscribe() {
+    setError(undefined)
+    if (emailRegex.test(email) === false) {
+      setError('Veuillez rentrer un email valide')
+      return
+    }
+    if (!__DEV__ && password.length < 8) {
+      setError('Mot de passe trop court')
+      return
+    }
+    if (password !== passwordConfirmation) {
+      setError('Mots de passe différents')
+      return
+    }
+    setAccount({
+      ...account,
+      authentified: true,
+      email,
+      username: email,
+    })
+    await post({
+      url: 'http://api.nolosay.com:3001/users',
+      body: {
+        username: email,
+        email,
+        password,
+      },
+    })
+      .then((response: any) => {
+        if (response.status !== 201) {
+          setError('Une erreur est survenue')
+          return
+        }
+        Alert.alert('Inscription réussie')
+        navigation.navigate('AppRouter')
+      })
+      .catch(() => {
+        setError('Une erreur est survenue')
+      })
   }
 
   return {
@@ -47,5 +87,6 @@ export default function useSubscriptionController({
     showPasswordConfirmation,
     setShowPasswordConfirmation,
     subscribe,
+    error,
   }
 }
