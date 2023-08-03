@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Account type.
+ * @module Account
+ * @description  Account type.
+ * @requires react react-native
+ */
+
 import { Dispatch, SetStateAction } from 'react'
 
 export interface AccountType {

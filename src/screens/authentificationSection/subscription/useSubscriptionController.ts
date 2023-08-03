@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Subscription screen controller.
+ * @module useSubscriptionController
+ * @description Controller for the Subscription screen.
+ * @requires react react
+ */
+
 import { useContext, useState } from 'react'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import subscribe from '@helpers/httpClient/auth'
@@ -21,6 +28,12 @@ interface useSubscriptionControllerProps {
   navigation: any
 }
 
+/**
+ * @function useSubscriptionController
+ * @description Controller for the Subscription screen.
+ * @param param0 Object containing the navigation prop.
+ * @returns {SubscriptionController} Object containing the email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation, showPassword, setShowPassword, showPasswordConfirmation, setShowPasswordConfirmation, subscribe, and error.
+ */
 export default function useSubscriptionController({
   navigation,
 }: useSubscriptionControllerProps): SubscriptionController {
