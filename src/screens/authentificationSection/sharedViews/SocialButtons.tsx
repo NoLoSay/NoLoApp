@@ -15,16 +15,19 @@ export default function SocialButtons() {
       <SocialIcon
         size={24}
         socialMedia='facebook'
+        // eslint-disable-next-line no-console
         onPress={() => console.log('Facebook')}
       />
       <SocialIcon
         size={24}
         socialMedia='apple'
+        // eslint-disable-next-line no-console
         onPress={() => console.log('Apple')}
       />
       <SocialIcon
         size={24}
         socialMedia='google'
+        // eslint-disable-next-line no-console
         onPress={() => console.log('Google')}
       />
     </View>

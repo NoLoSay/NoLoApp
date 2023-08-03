@@ -16,7 +16,7 @@ import { AccountContext } from '@source/global/contexts/AccountProvider'
  * @returns {React.JSX.Element} App component template
  */
 export default function HomeScreen(): React.JSX.Element {
-  const { account, setAccount } = useContext(AccountContext)
+  const { account } = useContext(AccountContext)
 
   return (
     <SafeAreaView

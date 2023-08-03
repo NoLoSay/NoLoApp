@@ -16,7 +16,6 @@ import { images } from '@global/images'
 import ScanScreen from './screens/scan/ScanScreen'
 import AddScreen from './screens/add/AddScreen'
 import HomeScreen from './screens/home/HomeScreen'
-import { AccountProvider } from './global/contexts/AccountProvider'
 
 interface getImageNameProps {
   focused: boolean
