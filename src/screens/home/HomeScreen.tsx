@@ -17,7 +17,6 @@ import { AccountContext } from '@source/global/contexts/AccountProvider'
  */
 export default function HomeScreen(): React.JSX.Element {
   const { account, setAccount } = useContext(AccountContext)
-  console.log(account)
 
   return (
     <SafeAreaView
@@ -29,7 +28,7 @@ export default function HomeScreen(): React.JSX.Element {
       }}
     >
       <View>
-        <Text>{account.email}</Text>
+        <Text>{account.username}</Text>
       </View>
     </SafeAreaView>
   )

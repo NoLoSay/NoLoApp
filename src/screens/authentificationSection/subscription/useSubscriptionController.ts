@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
-import { Alert } from 'react-native'
 import { AccountContext } from '@global/contexts/AccountProvider'
-import post from '@helpers/httpClient/httpClient'
+import subscribe from '@helpers/httpClient/auth'
 
 interface SubscriptionController {
   email: string
@@ -34,7 +33,23 @@ export default function useSubscriptionController({
   const { account, setAccount } = useContext(AccountContext)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
-  async function subscribe() {
+  async function analyseServerResponse(res: Response) {
+    res.json().then(response => {
+      if (res.status === 201) {
+        setAccount({
+          ...account,
+          authentified: true,
+          email,
+          username: response.username,
+        })
+        navigation.navigate('AppRouter')
+      } else {
+        setError(response.message)
+      }
+    })
+  }
+
+  async function subscribeUser() {
     setError(undefined)
     if (emailRegex.test(email) === false) {
       setError('Veuillez rentrer un email valide')
@@ -48,27 +63,14 @@ export default function useSubscriptionController({
       setError('Mots de passe différents')
       return
     }
-    setAccount({
-      ...account,
-      authentified: true,
+    await subscribe({
+      url: 'http://api.nolosay.com:3001/users',
       email,
       username: email,
+      password,
     })
-    await post({
-      url: 'http://api.nolosay.com:3001/users',
-      body: {
-        username: email,
-        email,
-        password,
-      },
-    })
-      .then((response: any) => {
-        if (response.status !== 201) {
-          setError('Une erreur est survenue')
-          return
-        }
-        Alert.alert('Inscription réussie')
-        navigation.navigate('AppRouter')
+      .then(async res => {
+        await analyseServerResponse(res)
       })
       .catch(() => {
         setError('Une erreur est survenue')
@@ -86,7 +88,7 @@ export default function useSubscriptionController({
     setShowPassword,
     showPasswordConfirmation,
     setShowPasswordConfirmation,
-    subscribe,
+    subscribe: subscribeUser,
     error,
   }
 }
