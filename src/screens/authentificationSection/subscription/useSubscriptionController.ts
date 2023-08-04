@@ -78,9 +78,7 @@ export default function useSubscriptionController({
       return
     }
     await subscribe({
-      url: 'http://api.nolosay.com:3001/users',
       email,
-      username: email,
       password,
     })
       .then(async res => {

@@ -2,28 +2,18 @@
  * @fileoverview Authentication helper functions.
  * @module Auth
  * @description Helper functions for authentication.
- * @requires react react-native
  * @requires @global/types/httpClient/Header
  */
 
-import { Header } from '@global/types/httpClient/Header'
-import { NativeModules, Platform } from 'react-native'
+import { Header } from '@source/global/types/httpClient/Header'
+import { post } from './common'
 
 interface SubscribeProps {
-  url: string
+  url?: string
   email: string
   username?: string
   password: string
   headers?: Header
-}
-
-const defaultHeaders: Header = {
-  Accept: '*/*',
-  ContentType: 'application/json',
-  Locale:
-    Platform.OS === 'ios'
-      ? NativeModules.SettingsManager.settings.AppleLocale || NativeModules.SettingsManager.settings.AppleLanguages[0]
-      : NativeModules.I18nManager.localeIdentifier,
 }
 
 /**
@@ -36,21 +26,10 @@ const defaultHeaders: Header = {
  * @param param.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export default async function subscribe({
-  url,
-  email,
-  username = email,
-  password,
-  headers = defaultHeaders,
-}: SubscribeProps): Promise<Response> {
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: headers.Accept,
-      'Content-Type': headers.ContentType,
-    },
+export default async function subscribe({ email, password }: SubscribeProps): Promise<Response> {
+  return post({
+    endpoint: '/users',
     body: JSON.stringify({
-      username,
       email,
       password,
     }),
