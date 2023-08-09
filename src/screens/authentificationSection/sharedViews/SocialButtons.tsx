@@ -1,0 +1,35 @@
+import React from 'react'
+import { View } from 'react-native'
+import SocialIcon from '@source/components/SocialIcon'
+
+export default function SocialButtons() {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 20,
+        paddingHorizontal: 24,
+      }}
+    >
+      <SocialIcon
+        size={24}
+        socialMedia='facebook'
+        // eslint-disable-next-line no-console
+        onPress={() => console.log('Facebook')}
+      />
+      <SocialIcon
+        size={24}
+        socialMedia='apple'
+        // eslint-disable-next-line no-console
+        onPress={() => console.log('Apple')}
+      />
+      <SocialIcon
+        size={24}
+        socialMedia='google'
+        // eslint-disable-next-line no-console
+        onPress={() => console.log('Google')}
+      />
+    </View>
+  )
+}

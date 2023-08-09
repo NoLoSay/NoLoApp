@@ -40,8 +40,10 @@ export const colors = {
   lightGrey: mainColors.lightGrey,
   darkGrey: mainColors.darkGrey,
   text: textColors,
+  error: '#FF0000',
   facebook: '#3B5998',
   google: '#CBD5E1',
+  apple: '#000000',
 }
 
 export default colors
