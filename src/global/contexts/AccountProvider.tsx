@@ -13,6 +13,7 @@ export const defaultAccount: AccountType = {
   email: '',
   phoneNumber: '',
   username: '',
+  accessToken: '',
 }
 
 /**

@@ -12,6 +12,7 @@ export interface AccountType {
   username: string
   authentified: boolean
   phoneNumber: string
+  accessToken: string
 }
 
 export interface AccountContextType {
