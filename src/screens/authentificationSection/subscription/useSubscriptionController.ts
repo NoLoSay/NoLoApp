@@ -7,7 +7,7 @@
 
 import { useContext, useState } from 'react'
 import { AccountContext } from '@global/contexts/AccountProvider'
-import subscribe from '@helpers/httpClient/auth'
+import { subscribe } from '@helpers/httpClient/auth'
 
 interface SubscriptionController {
   email: string
