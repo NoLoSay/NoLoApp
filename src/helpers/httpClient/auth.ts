@@ -60,9 +60,9 @@ export async function subscribe({ email, password }: SubscribeProps): Promise<Re
  */
 export async function connect({ email, password }: ConnectProps): Promise<Response> {
   return post({
-    endpoint: '/users/login',
+    endpoint: '/auth/login',
     body: JSON.stringify({
-      email,
+      username: email,
       password,
     }),
   })

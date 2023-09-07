@@ -98,7 +98,7 @@ export function requestServer({
   headers,
   body,
 }: RequestServerProps): Promise<Response> {
-  return fetch(url + endpoint, {
+  return fetch((__DEV__ ? DEV_API_ENDPOINT : url) + endpoint, {
     method,
     headers: {
       Accept: headers.Accept,
