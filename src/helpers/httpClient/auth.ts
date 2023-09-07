@@ -73,5 +73,7 @@ export async function connect({ email, password }: ConnectProps): Promise<Respon
  * @param param0 email The user's email.
  */
 export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Response> {
-  console.log('Password forgotten', email)
+  return new Promise(() => {
+    console.log('forgotPassword', email)
+  })
 }
