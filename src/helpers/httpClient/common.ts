@@ -10,6 +10,7 @@ import { Header } from '@global/types/httpClient/Header'
 import { NativeModules, Platform } from 'react-native'
 
 const API_ENDPOINT = 'http://api.nolosay.com:3001'
+const DEV_API_ENDPOINT = 'http://localhost:3001'
 
 export const defaultHeaders: Header = {
   Accept: '*/*',
@@ -97,7 +98,7 @@ export function requestServer({
   headers,
   body,
 }: RequestServerProps): Promise<Response> {
-  return fetch(url + endpoint, {
+  return fetch((__DEV__ ? DEV_API_ENDPOINT : url) + endpoint, {
     method,
     headers: {
       Accept: headers.Accept,

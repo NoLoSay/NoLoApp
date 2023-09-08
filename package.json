@@ -21,6 +21,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "start-server": "cd ../NoLoBack && docker compose up",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
     "documentation": "typedoc --options ./typedoc.json",

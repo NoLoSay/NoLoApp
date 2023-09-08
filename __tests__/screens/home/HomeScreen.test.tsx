@@ -11,6 +11,7 @@ describe('HomeScreenTests', () => {
       email: 'toto@tata.com',
       username: 'toto',
       phoneNumber: '+330612345678',
+      accessToken: '123456789',
     }
 
     const contextValue = { account: user, setAccount: jest.fn() }
