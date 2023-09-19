@@ -1,8 +1,23 @@
+/**
+ * @fileoverview Social buttons component
+ * @module SocialButtons
+ * @description Component that renders the social buttons.
+ * @requires react react
+ * @requires react-native react-native
+ * @requires @source/components/SocialIcon SocialIcon component
+ * @exports SocialButtons
+ */
+
 import React from 'react'
 import { View } from 'react-native'
 import SocialIcon from '@source/components/SocialIcon'
 
-export default function SocialButtons() {
+/**
+ * @function SocialButtons
+ * @description Component that renders the social buttons.
+ * @returns {JSX.Element} SocialButtons component
+ */
+export default function SocialButtons(): JSX.Element {
   return (
     <View
       style={{

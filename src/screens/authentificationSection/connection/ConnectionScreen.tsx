@@ -21,6 +21,8 @@ import useConnectionController from './useConnectionController'
 /**
  * @function ConnectionScreen
  * @description Component that renders the connection screen.
+ * @param {ConnectionScreenProps} props ConnectionScreen props
+ * @param props.navigation Navigation props
  * @returns {React.JSX.Element} App component template
  */
 export default function ConnectionScreen({ navigation }: ConnectionScreenProps): React.JSX.Element {

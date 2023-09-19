@@ -12,6 +12,15 @@ import { NativeModules, Platform } from 'react-native'
 const API_ENDPOINT = 'http://api.nolosay.com:3001'
 const DEV_API_ENDPOINT = 'http://localhost:3001'
 
+/**
+ * @constant defaultHeaders
+ * @description Default headers to send with requests.
+ * @type {Header}
+ * @default
+ * @property {string} Accept - Accept header.
+ * @property {string} ContentType - Content-Type header.
+ * @property {string} Locale - Locale header.
+ */
 export const defaultHeaders: Header = {
   Accept: '*/*',
   ContentType: 'application/json',

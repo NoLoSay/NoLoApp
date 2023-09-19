@@ -41,7 +41,13 @@ export default function useConnectionController({ navigation }: useConnectionCon
   const { account, setAccount } = useContext(AccountContext)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
-  async function analyseServerResponse(res: Response) {
+  /**
+   * @function analyseServerResponse
+   * @description Analyse the server's response to the request.
+   * @param res Response object from the server.
+   * @returns {Promise<void>} Promise of void
+   */
+  async function analyseServerResponse(res: Response): Promise<void> {
     res.json().then(response => {
       if (res.status === 201) {
         setAccount({
@@ -58,7 +64,12 @@ export default function useConnectionController({ navigation }: useConnectionCon
     })
   }
 
-  async function connectUser() {
+  /**
+   * @function connectUser
+   * @description Send the user's email and password to the server to connect them to the app.
+   * @returns {Promise<void>} Promise of void
+   */
+  async function connectUser(): Promise<void> {
     setError(undefined)
     await connect({
       email,
@@ -72,7 +83,12 @@ export default function useConnectionController({ navigation }: useConnectionCon
       })
   }
 
-  async function forgottenPassword() {
+  /**
+   * @function forgottenPassword
+   * @description Send the user's email to the server to reset their password.
+   * @returns {Promise<void>} Promise of void
+   */
+  async function forgottenPassword(): Promise<void> {
     setError(undefined)
     if (emailRegex.test(email) === false) {
       setError('Veuillez rentrer un email valide')
