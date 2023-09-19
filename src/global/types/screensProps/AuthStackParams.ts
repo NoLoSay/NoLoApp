@@ -16,6 +16,7 @@ export type AuthStackParamList = {
   Subscription: undefined
   Connection: undefined
   AppRouter: undefined
+  SettingsModal: undefined
 }
 
 /**

@@ -5,6 +5,7 @@
  * @requires react react-native
  */
 
+import { GeolocationResponse } from '@react-native-community/geolocation'
 import { Dispatch, SetStateAction } from 'react'
 
 export interface AccountType {
@@ -13,6 +14,7 @@ export interface AccountType {
   authentified: boolean
   phoneNumber: string
   accessToken: string
+  localisation: GeolocationResponse | undefined
 }
 
 export interface AccountContextType {

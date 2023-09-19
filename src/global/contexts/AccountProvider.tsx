@@ -14,6 +14,7 @@ export const defaultAccount: AccountType = {
   phoneNumber: '',
   username: '',
   accessToken: '',
+  localisation: undefined,
 }
 
 /**
