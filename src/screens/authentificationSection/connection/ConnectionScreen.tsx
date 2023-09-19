@@ -28,20 +28,15 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
     useConnectionController({ navigation })
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: colors.white,
-        flex: 1,
-      }}
-    >
+    <SafeAreaView style={styles.container}>
       <Image
         style={styles.logo}
         source={images.logos.nolosay}
       />
       <View style={styles.connection}>
         <HeaderTexts />
-        <View style={{ flexDirection: 'column', paddingVertical: 24 }}>
-          <View style={{ marginBottom: 12 }}>
+        <View style={styles.inputContainer}>
+          <View style={styles.textInputsContainer}>
             <Input
               placeholder="Email ou nom d'utilisateur"
               keyboardType='email-address'
@@ -58,34 +53,12 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
               leftIcon={images.icons.full.shield}
               rightIcon={images.icons.full.eye}
             />
-            {error && (
-              <Text
-                style={{
-                  color: colors.error,
-                  fontFamily: 'Poppins-Medium',
-                  alignSelf: 'flex-end',
-                  paddingRight: '16%',
-                  fontSize: 12,
-                }}
-              >
-                {error}
-              </Text>
-            )}
-
+            {error && <Text style={styles.errorText}>{error}</Text>}
             <TouchableOpacity
               onPress={forgottenPassword}
-              style={{ alignSelf: 'flex-end', marginHorizontal: 52, marginTop: 8 }}
+              style={styles.forgotPassword}
             >
-              <Text
-                style={{
-                  color: colors.accent,
-                  fontFamily: 'Poppins',
-                  textDecorationLine: 'underline',
-                  fontWeight: '600',
-                }}
-              >
-                Un trou de mémoire ?
-              </Text>
+              <Text style={styles.forgotPasswordText}>Un trou de mémoire ?</Text>
             </TouchableOpacity>
           </View>
           <OrSeparator />
@@ -94,7 +67,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
         <Button
           text='Se connecter'
           onPress={connect}
-          style={{ marginVertical: 12 }}
+          style={styles.connectionButton}
         />
         <ButtonChangeScreen
           infoText='Pas de compte ?'
@@ -134,5 +107,37 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  container: {
+    backgroundColor: colors.white,
+    flex: 1,
+  },
+  inputContainer: {
+    flexDirection: 'column',
+    paddingVertical: 24,
+  },
+  textInputsContainer: {
+    marginBottom: 12,
+  },
+  errorText: {
+    color: colors.error,
+    fontFamily: 'Poppins-Medium',
+    alignSelf: 'flex-end',
+    paddingRight: '16%',
+    fontSize: 12,
+  },
+  forgotPassword: {
+    alignSelf: 'flex-end',
+    marginHorizontal: 52,
+    marginTop: 8,
+  },
+  forgotPasswordText: {
+    color: colors.accent,
+    fontFamily: 'Poppins',
+    textDecorationLine: 'underline',
+    fontWeight: '600',
+  },
+  connectionButton: {
+    marginVertical: 12,
   },
 })

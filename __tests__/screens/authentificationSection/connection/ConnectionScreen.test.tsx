@@ -1,8 +1,11 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
+import { render, fireEvent } from '@testing-library/react-native'
 import ConnectionScreen from '@source/screens/authentificationSection/connection/ConnectionScreen'
 import { AuthStackParamList } from '@source/global/types/screensProps/AuthStackParams'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { forgotPassword } from '@source/helpers/httpClient/auth'
+
+jest.mock('@source/helpers/httpClient/auth')
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')
@@ -16,6 +19,8 @@ jest.mock('react-native', () => {
   return RN
 })
 
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
+
 describe('ConnectionScreenTests', () => {
   const navigation = jest.fn() as unknown as NativeStackScreenProps<AuthStackParamList, 'Connection'>['navigation']
   const route = jest.fn() as unknown as NativeStackScreenProps<AuthStackParamList, 'Connection'>['route']
@@ -28,5 +33,37 @@ describe('ConnectionScreenTests', () => {
       />
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
+    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
+    expect(screen.getByText('Veuillez rentrer un email valide'))
+    fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), 'test@test.fr')
+    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
+    expect(forgotPassword).toHaveBeenCalledTimes(1)
+  })
+
+  it('should handle correctly the forgotten password', () => {
+    const screen = render(
+      <ConnectionScreen
+        navigation={navigation}
+        route={route}
+      />
+    )
+    expect(screen.getByText('Connectez-vous pour continuer'))
+    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
+    expect(screen.getByText('Veuillez rentrer un email valide'))
+    fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), 'test@test.fr')
+    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
+    expect(forgotPassword).toHaveBeenCalledTimes(2)
+  })
+
+  it('should handle the social buttons', () => {
+    const screen = render(
+      <ConnectionScreen
+        navigation={navigation}
+        route={route}
+      />
+    )
+    expect(screen.getByText('Connectez-vous pour continuer'))
+    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
+    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
   })
 })
