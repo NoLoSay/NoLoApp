@@ -1,6 +1,16 @@
 import { colors } from '@source/global/colors'
 import React from 'react'
-import { View, TextInput, KeyboardType, StyleSheet, Image, ImageSourcePropType, TouchableOpacity } from 'react-native'
+import {
+  View,
+  TextInput,
+  KeyboardType,
+  StyleSheet,
+  Image,
+  ImageSourcePropType,
+  TouchableOpacity,
+  ReturnKeyType,
+  Keyboard,
+} from 'react-native'
 
 interface InputProps {
   placeholder: string
@@ -8,6 +18,7 @@ interface InputProps {
   setSecureTextEntry?: (value: boolean) => void
   keyboardType?: KeyboardType
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
+  returnKeyType?: ReturnKeyType
   leftIcon?: ImageSourcePropType
   rightIcon?: ImageSourcePropType
   value: string
@@ -20,6 +31,7 @@ export default function Input({
   setSecureTextEntry,
   keyboardType = 'default',
   autoCapitalize = 'words',
+  returnKeyType = 'done',
   leftIcon,
   rightIcon,
   value,
@@ -42,6 +54,8 @@ export default function Input({
         onChangeText={text => setValue && setValue(text)}
         style={styles.input}
         autoCapitalize={autoCapitalize}
+        returnKeyType={returnKeyType}
+        onSubmitEditing={() => Keyboard.dismiss()}
       />
       {rightIcon && setSecureTextEntry && (
         <TouchableOpacity

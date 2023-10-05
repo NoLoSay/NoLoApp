@@ -22,6 +22,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "start-server": "cd ../NoLoBack && docker compose up",
+    "update-server": "cd ../NoLoBack && git submodule update --recursive --remote",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
     "documentation": "typedoc --options ./typedoc.json",
@@ -36,7 +37,8 @@
     "@react-navigation/native-stack": "^6.9.13",
     "react-native-fast-image": "^8.6.3",
     "react-native-maps": "^1.7.1",
-    "react-native-screens": "^3.22.1"
+    "react-native-screens": "^3.22.1",
+    "react-native-webview": "^13.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

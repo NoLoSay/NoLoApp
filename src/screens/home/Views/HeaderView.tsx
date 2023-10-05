@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput, Pressable } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import images from '@source/global/images'
 import colors from '@source/global/colors'
 

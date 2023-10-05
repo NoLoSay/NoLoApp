@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { colors } from '@global/colors'
 import { ConnectionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
 import Button from '@components/Button'
@@ -48,6 +48,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
               value={email}
               setValue={setEmail}
               leftIcon={images.icons.full.user}
+              returnKeyType='next'
             />
             <Input
               placeholder='Mot de passe'
@@ -57,6 +58,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
               setValue={setPassword}
               leftIcon={images.icons.full.shield}
               rightIcon={images.icons.full.eye}
+              returnKeyType='done'
             />
             {error && (
               <Text
