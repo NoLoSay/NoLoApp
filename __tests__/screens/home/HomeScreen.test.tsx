@@ -41,6 +41,18 @@ jest.mock('react-native-maps', () => {
   }
 })
 
+const mockedNavigate = jest.fn()
+
+jest.mock('@react-navigation/native', () => {
+  const actualNav = jest.requireActual('@react-navigation/native')
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: mockedNavigate,
+    }),
+  }
+})
+
 describe('HomeScreenTests', () => {
   it('should render correctly', () => {
     const user: AccountType = {
@@ -70,6 +82,6 @@ describe('HomeScreenTests', () => {
         <HomeScreen />
       </AccountContext.Provider>
     )
-    expect(screen.getByText(user.username))
+    expect(screen.getByText('Meilleurs lieux'))
   })
 })
