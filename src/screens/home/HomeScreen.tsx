@@ -5,10 +5,14 @@
  * @requires react react-native
  */
 
-import React, { useContext } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import React from 'react'
+import { SafeAreaView, StyleSheet } from 'react-native'
 import { colors } from '@global/colors'
-import { AccountContext } from '@source/global/contexts/AccountProvider'
+import { useNavigation } from '@react-navigation/native'
+import HeaderView from './Views/HeaderView'
+import useHomeScreenController from './useHomeScreenController'
+import CarouselView from './CarouselView/CarouselView'
+import MapView from './MapView/MapView'
 
 /**
  * @function HomeScreen
@@ -16,20 +20,41 @@ import { AccountContext } from '@source/global/contexts/AccountProvider'
  * @returns {React.JSX.Element} App component template
  */
 export default function HomeScreen(): React.JSX.Element {
-  const { account } = useContext(AccountContext)
+  const { city, currentPage, displaySearchBar, toggleSearchBar, searchValue, setSearchValue, togglePage, places } =
+    useHomeScreenController()
+  const navigation = useNavigation()
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: colors.accent,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <View>
-        <Text>{account.username}</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <HeaderView
+        city={city}
+        page={currentPage}
+        togglePage={togglePage}
+        displaySearchBar={displaySearchBar}
+        toggleSearchBar={toggleSearchBar}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        navigation={navigation}
+      />
+      {currentPage === 'carousel' && (
+        <CarouselView
+          places={places}
+          navigation={navigation}
+        />
+      )}
+      {currentPage === 'map' && (
+        <MapView
+          places={places}
+          navigation={navigation}
+        />
+      )}
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.veryLightGrey,
+    flex: 1,
+  },
+})

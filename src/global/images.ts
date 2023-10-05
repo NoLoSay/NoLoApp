@@ -32,7 +32,6 @@ export const images = {
       apple: require('@assets/icons/social/apple.png'),
     },
     maps: {
-      marker: require('@assets/icons/maps/ios_user.png'),
       pin: require('@assets/icons/maps/map_pin.png'),
     },
   },
