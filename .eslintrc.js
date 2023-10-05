@@ -27,6 +27,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/extensions': 'off',
+    'typescript-eslint/no-explicit-any': 0,
   },
   ignorePatterns: ['node_modules/', 'docs/', 'coverage/'],
 }
