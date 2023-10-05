@@ -30,6 +30,18 @@ describe('HomeScreenTests', () => {
       username: 'toto',
       phoneNumber: '+330612345678',
       accessToken: '123456789',
+      localisation: {
+        coords: {
+          latitude: 0,
+          longitude: 0,
+          altitude: 10,
+          accuracy: 1,
+          altitudeAccuracy: 1,
+          heading: 2,
+          speed: 232,
+        },
+        timestamp: 12729024,
+      },
     }
 
     const contextValue = { account: user, setAccount: jest.fn() }
