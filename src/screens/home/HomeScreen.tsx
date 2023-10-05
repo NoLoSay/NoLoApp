@@ -34,7 +34,6 @@ export default function HomeScreen(): React.JSX.Element {
         toggleSearchBar={toggleSearchBar}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        navigation={navigation}
       />
       {currentPage === 'carousel' && (
         <CarouselView
