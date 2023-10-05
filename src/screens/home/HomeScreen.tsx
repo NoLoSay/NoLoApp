@@ -35,16 +35,8 @@ export default function HomeScreen(): React.JSX.Element {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      {currentPage === 'carousel' && (
-        <CarouselView
-          places={places}
-        />
-      )}
-      {currentPage === 'map' && (
-        <MapView
-          places={places}
-        />
-      )}
+      {currentPage === 'carousel' && <CarouselView places={places} />}
+      {currentPage === 'map' && <MapView places={places} />}
     </SafeAreaView>
   )
 }
