@@ -19,11 +19,21 @@ export const images = {
       add: require('@assets/icons/outline/add.png'),
       home: require('@assets/icons/outline/home.png'),
       qr: require('@assets/icons/outline/qr.png'),
+      carousel: require('@assets/icons/outline/carousel.png'),
+      mapArrow: require('@assets/icons/outline/map_arrow.png'),
+      magnifier: require('@assets/icons/outline/magnifier.png'),
+      menu: require('@assets/icons/outline/menu.png'),
+      cross: require('@assets/icons/outline/cross.png'),
+      open: require('@assets/icons/outline/open.png'),
     },
     social: {
       facebook: require('@assets/icons/social/facebook.png'),
       google: require('@assets/icons/social/google.png'),
       apple: require('@assets/icons/social/apple.png'),
+    },
+    maps: {
+      marker: require('@assets/icons/maps/ios_user.png'),
+      pin: require('@assets/icons/maps/map_pin.png'),
     },
   },
   logos: {
