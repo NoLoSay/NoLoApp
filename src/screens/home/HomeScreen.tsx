@@ -22,6 +22,7 @@ import MapView from './MapView/MapView'
 export default function HomeScreen(): React.JSX.Element {
   const { city, currentPage, displaySearchBar, toggleSearchBar, searchValue, setSearchValue, togglePage, places } =
     useHomeScreenController()
+  const navigation = useNavigation()
 
   return (
     <SafeAreaView style={styles.container}>
