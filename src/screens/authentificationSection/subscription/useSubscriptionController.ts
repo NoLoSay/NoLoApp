@@ -47,7 +47,13 @@ export default function useSubscriptionController({
   const { account, setAccount } = useContext(AccountContext)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
-  async function analyseServerResponse(res: Response) {
+  /**
+   * @function analyseServerResponse
+   * @description Analyse the server's response to the request.
+   * @param res Response object from the server.
+   * @returns {Promise<void>} Promise of void
+   */
+  async function analyseServerResponse(res: Response): Promise<void> {
     res.json().then(response => {
       if (res.status === 201) {
         setAccount({
@@ -63,7 +69,12 @@ export default function useSubscriptionController({
     })
   }
 
-  async function subscribeUser() {
+  /**
+   * @function subscribeUser
+   * @description Send the user's email and password to the server to subscribe them to the app.
+   * @returns {Promise<void>} Promise of void
+   */
+  async function subscribeUser(): Promise<void> {
     setError(undefined)
     if (emailRegex.test(email) === false) {
       setError('Veuillez rentrer un email valide')
