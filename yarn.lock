@@ -1317,7 +1317,7 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.3.0.tgz#9e558170c106bbafaa1ef502bd8e6d4651012bf9"
   integrity sha512-+zDZ20NUnSWghj7Ku5aFphMzuM9JulqCW+aPXT6IfIXFbb8tzYTTOSeRFOtuekJ99ibW2fUCSsjuKNlwDIbHFg==
 
-"@react-native-community/geolocation@^3.0.6":
+"@react-native-community/geolocation@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/geolocation/-/geolocation-3.1.0.tgz#573881e9536d55cc2af74762183fa7ba575b2553"
   integrity sha512-Aj76wMeCLz9kczpe7W2IXxSRNj+hRR7sqyfXq9ZaJIWNH23jeJfzMpovclg+e1uM8Vr8jCYEcZyD4rKub6Vc/Q==

@@ -17,6 +17,8 @@ export type AuthStackParamList = {
   Connection: undefined
   AppRouter: undefined
   SettingsModal: undefined
+  WebViewModal: React.JSX.Element
+  PlaceDescription: React.JSX.Element
 }
 
 /**
@@ -33,3 +35,18 @@ export type ConnectionScreenProps = NativeStackScreenProps<AuthStackParamList, '
  * @typedef {Object} AppRouterScreenProps
  */
 export type AppRouterScreenProps = NativeStackScreenProps<AuthStackParamList, 'AppRouter'>
+
+/**
+ * @typedef {Object} SettingsModalScreenProps
+ */
+export type SettingsModalScreenProps = NativeStackScreenProps<AuthStackParamList, 'SettingsModal'>
+
+/**
+ * @typedef {Object} WebViewModalScreenProps
+ */
+export type WebViewModalScreenProps = NativeStackScreenProps<AuthStackParamList, 'WebViewModal'>
+
+/**
+ * @typedef {Object} PlaceDescriptionScreenProps
+ */
+export type PlaceDescriptionScreenProps = NativeStackScreenProps<AuthStackParamList, 'PlaceDescription'>

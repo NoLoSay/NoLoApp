@@ -5,9 +5,10 @@ import Category from './Views/Category'
 
 interface CarouselViewProps {
   places: Place[]
+  navigation: any
 }
 
-export default function CarouselView({ places }: CarouselViewProps): React.JSX.Element {
+export default function CarouselView({ places, navigation }: CarouselViewProps): React.JSX.Element {
   return (
     <ScrollView
       style={{ paddingLeft: 20 }}
@@ -16,14 +17,17 @@ export default function CarouselView({ places }: CarouselViewProps): React.JSX.E
       <Category
         text='Meilleurs lieux'
         places={places}
+        navigation={navigation}
       />
       <Category
         text='Nouveaux lieux'
         places={places}
+        navigation={navigation}
       />
       <Category
         text='Lieux à proximité'
         places={places}
+        navigation={navigation}
       />
     </ScrollView>
   )

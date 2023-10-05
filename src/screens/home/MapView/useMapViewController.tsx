@@ -11,7 +11,11 @@ interface MapViewController {
   onMarkerPress: (place: Place) => void
 }
 
-export default function useMapViewController(): MapViewController {
+interface Props {
+  navigation: any
+}
+
+export default function useMapViewController({ navigation }: Props): MapViewController {
   const mapRef = useRef(null)
   const { account } = useContext(AccountContext)
 
@@ -35,7 +39,7 @@ export default function useMapViewController(): MapViewController {
       {
         text: 'Voir',
         onPress: () => {
-          console.log(`Voir ${place.name}`)
+          navigation.navigate('PlaceDescription', { place })
         },
       },
     ])

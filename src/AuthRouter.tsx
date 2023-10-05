@@ -17,6 +17,8 @@ import SubscriptionScreen from './screens/authentificationSection/subscription/S
 import AppRouter from './AppRouter'
 import { AccountProvider } from './global/contexts/AccountProvider'
 import SettingsScreen from './screens/settings/SettingsScreen'
+import WebViewScreen from './screens/webView/WebView'
+import PlaceDescription from './screens/PlaceDescription/PlaceDescription'
 
 export default function App(): React.JSX.Element {
   const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -48,6 +50,16 @@ export default function App(): React.JSX.Element {
             <AuthStack.Screen
               name='SettingsModal'
               component={SettingsScreen}
+            />
+          </AuthStack.Group>
+          <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+            <AuthStack.Screen
+              name='WebViewModal'
+              component={WebViewScreen}
+            />
+            <AuthStack.Screen
+              name='PlaceDescription'
+              component={PlaceDescription}
             />
           </AuthStack.Group>
         </AuthStack.Navigator>

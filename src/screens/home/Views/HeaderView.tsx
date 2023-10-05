@@ -11,6 +11,7 @@ interface HeaderViewProps {
   togglePage: () => void
   searchValue: string
   setSearchValue: (value: string) => void
+  navigation: any
 }
 export default function HeaderView({
   city,
@@ -20,6 +21,7 @@ export default function HeaderView({
   togglePage,
   searchValue,
   setSearchValue,
+  navigation,
 }: HeaderViewProps) {
   const updateText = (val: string) => {
     setSearchValue(val)
@@ -48,7 +50,7 @@ export default function HeaderView({
               style={[styles.icon, { marginRight: 20 }]}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log('SettingsModal')}>
+          <TouchableOpacity onPress={() => navigation.navigate('SettingsModal')}>
             <Image
               source={images.icons.outline.menu}
               style={styles.icon}

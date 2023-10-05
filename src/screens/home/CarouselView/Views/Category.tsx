@@ -7,9 +7,10 @@ import CategorySeparator from './CategorySeparator'
 interface Props {
   text: string
   places: Place[]
+  navigation: any
 }
 
-export default function Category({ text, places }: Props): React.JSX.Element {
+export default function Category({ text, places, navigation }: Props): React.JSX.Element {
   return (
     <View style={styles.container}>
       <CategorySeparator text={text} />
@@ -23,7 +24,7 @@ export default function Category({ text, places }: Props): React.JSX.Element {
             style={styles.categoryContainer}
             key={item.id}
           >
-            <TouchableOpacity onPress={() => console.log(places)}>
+            <TouchableOpacity onPress={() => navigation.navigate('PlaceDescription', { place: item })}>
               <FastImage
                 source={{
                   uri: item.image,

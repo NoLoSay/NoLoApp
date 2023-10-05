@@ -23,6 +23,8 @@ export const images = {
       mapArrow: require('@assets/icons/outline/map_arrow.png'),
       magnifier: require('@assets/icons/outline/magnifier.png'),
       menu: require('@assets/icons/outline/menu.png'),
+      cross: require('@assets/icons/outline/cross.png'),
+      open: require('@assets/icons/outline/open.png'),
     },
     social: {
       facebook: require('@assets/icons/social/facebook.png'),
@@ -30,7 +32,6 @@ export const images = {
       apple: require('@assets/icons/social/apple.png'),
     },
     maps: {
-      marker: require('@assets/icons/maps/ios_user.png'),
       pin: require('@assets/icons/maps/map_pin.png'),
     },
   },

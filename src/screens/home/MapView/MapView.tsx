@@ -8,10 +8,11 @@ import useMapViewController from './useMapViewController'
 
 interface Props {
   places: Place[]
+  navigation: any
 }
 
-export default function PlacesMapView({ places }: Props) {
-  const { account, onMarkerPress, mapRef } = useMapViewController()
+export default function PlacesMapView({ places, navigation }: Props) {
+  const { account, onMarkerPress, mapRef } = useMapViewController({ navigation })
 
   return (
     <View style={styles.container}>

@@ -22,6 +22,7 @@ import MapView from './MapView/MapView'
 export default function HomeScreen(): React.JSX.Element {
   const { city, currentPage, displaySearchBar, toggleSearchBar, searchValue, setSearchValue, togglePage, places } =
     useHomeScreenController()
+  const navigation = useNavigation()
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,9 +34,20 @@ export default function HomeScreen(): React.JSX.Element {
         toggleSearchBar={toggleSearchBar}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        navigation={navigation}
       />
-      {currentPage === 'carousel' && <CarouselView places={places} />}
-      {currentPage === 'map' && <MapView places={places} />}
+      {currentPage === 'carousel' && (
+        <CarouselView
+          places={places}
+          navigation={navigation}
+        />
+      )}
+      {currentPage === 'map' && (
+        <MapView
+          places={places}
+          navigation={navigation}
+        />
+      )}
     </SafeAreaView>
   )
 }
