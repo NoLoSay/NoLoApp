@@ -20,8 +20,17 @@ import MapView from './MapView/MapView'
  * @returns {React.JSX.Element} App component template
  */
 export default function HomeScreen(): React.JSX.Element {
-  const { city, currentPage, displaySearchBar, toggleSearchBar, searchValue, setSearchValue, togglePage, places } =
-    useHomeScreenController()
+  const {
+    city,
+    currentPage,
+    displaySearchBar,
+    toggleSearchBar,
+    searchValue,
+    setSearchValue,
+    togglePage,
+    places,
+    getNearestPlaces,
+  } = useHomeScreenController()
   const navigation = useNavigation()
 
   return (
@@ -40,6 +49,7 @@ export default function HomeScreen(): React.JSX.Element {
         <CarouselView
           places={places}
           navigation={navigation}
+          getNearestPlaces={getNearestPlaces}
         />
       )}
       {currentPage === 'map' && (

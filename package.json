@@ -34,6 +34,7 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "geolib": "^3.3.4",
     "react-native-fast-image": "^8.6.3",
     "react-native-maps": "^1.7.1",
     "react-native-screens": "^3.22.1",

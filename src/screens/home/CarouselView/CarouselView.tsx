@@ -6,9 +6,10 @@ import Category from './Views/Category'
 interface CarouselViewProps {
   places: Place[]
   navigation: any
+  getNearestPlaces: () => Place[]
 }
 
-export default function CarouselView({ places, navigation }: CarouselViewProps): React.JSX.Element {
+export default function CarouselView({ places, navigation, getNearestPlaces }: CarouselViewProps): React.JSX.Element {
   return (
     <ScrollView
       style={{ paddingLeft: 20 }}
@@ -26,7 +27,7 @@ export default function CarouselView({ places, navigation }: CarouselViewProps):
       />
       <Category
         text='Lieux à proximité'
-        places={places}
+        places={getNearestPlaces()}
         navigation={navigation}
       />
     </ScrollView>

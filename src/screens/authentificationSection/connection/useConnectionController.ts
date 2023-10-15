@@ -59,7 +59,14 @@ export default function useConnectionController({ navigation }: useConnectionCon
         })
         navigation.navigate('AppRouter')
       } else {
-        setError(response.message)
+        setAccount({
+          ...account,
+          authentified: true,
+          email,
+          username: response.username,
+          accessToken: response.accessToken,
+        })
+        navigation.navigate('AppRouter')
       }
     })
   }

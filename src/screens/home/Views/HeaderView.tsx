@@ -30,7 +30,7 @@ export default function HeaderView({
   function defaultView() {
     return (
       <>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.defaultViewContainer}>
           <TouchableOpacity onPress={togglePage}>
             <Image
               source={page === 'map' ? images.icons.outline.carousel : images.icons.outline.mapArrow}
@@ -90,6 +90,9 @@ export default function HeaderView({
 }
 
 const styles = StyleSheet.create({
+  defaultViewContainer: {
+    flexDirection: 'row',
+  },
   searchContainer: {
     flexDirection: 'row',
     marginBottom: 8,
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
   headerView: {
     flexDirection: 'row',
     paddingHorizontal: 24,
+    marginBottom: 16,
     justifyContent: 'space-between',
     alignContent: 'center',
     alignItems: 'center',
