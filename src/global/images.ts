@@ -25,6 +25,9 @@ export const images = {
       menu: require('@assets/icons/outline/menu.png'),
       cross: require('@assets/icons/outline/cross.png'),
       open: require('@assets/icons/outline/open.png'),
+      blind: require('@assets/icons/outline/blind.png'),
+      deaf: require('@assets/icons/outline/deaf.png'),
+      disabled: require('@assets/icons/outline/disabled.png'),
     },
     social: {
       facebook: require('@assets/icons/social/facebook.png'),
