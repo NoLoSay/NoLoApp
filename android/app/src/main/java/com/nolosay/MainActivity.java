@@ -26,6 +26,7 @@ public class MainActivity extends ReactActivity {
     return new MainActivityDelegate(this, getMainComponentName());
   }
 
+  //react-native-screens override
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
