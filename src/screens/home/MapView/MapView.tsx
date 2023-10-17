@@ -26,7 +26,6 @@ export default function PlacesMapView({ places, navigation }: Props) {
         }}
         style={styles.map}
         showsUserLocation
-        followsUserLocation
         loadingEnabled
         loadingIndicatorColor={colors.accent}
         loadingBackgroundColor={colors.lightGrey}
