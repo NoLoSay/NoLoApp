@@ -55,10 +55,14 @@ export default function App(): React.JSX.Element {
           <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
             <AuthStack.Screen
               name='WebViewModal'
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore: Unreachable code error
               component={WebViewScreen}
             />
             <AuthStack.Screen
               name='PlaceDescription'
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore: Unreachable code error
               component={PlaceDescription}
             />
           </AuthStack.Group>
