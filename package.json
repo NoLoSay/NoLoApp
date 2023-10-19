@@ -21,8 +21,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
     "start-server": "cd ../NoLoBack && docker compose up",
-    "update-server": "cd ../NoLoBack && git submodule update --recursive --remote",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
     "documentation": "typedoc --options ./typedoc.json",
@@ -31,10 +31,11 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@react-native-community/geolocation": "^3.0.6",
+    "@react-native-community/geolocation": "^3.1.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "geolib": "^3.3.4",
     "react-native-fast-image": "^8.6.3",
     "react-native-maps": "^1.7.1",
     "react-native-screens": "^3.22.1",

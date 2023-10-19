@@ -11,9 +11,31 @@ interface MapViewController {
   onMarkerPress: (place: Place) => void
 }
 
-export default function useMapViewController(): MapViewController {
+interface Props {
+  navigation: any
+}
+
+export default function useMapViewController({ navigation }: Props): MapViewController {
   const mapRef = useRef(null)
   const { account } = useContext(AccountContext)
+
+  const navigateToPlaceDescription = (place: Place) => {
+    navigation.navigate('PlaceDescription', { place })
+  }
+
+  const goBackToUserLocation = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: Object is possibly 'null'.
+    mapRef.current?.animateToRegion(
+      {
+        latitude: account.localisation?.coords.latitude ?? 0.0,
+        longitude: account.localisation?.coords.longitude ?? 0.0,
+        latitudeDelta: 0.02,
+        longitudeDelta: 0.02,
+      },
+      500
+    )
+  }
 
   function onMarkerPress(place: Place) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -31,12 +53,11 @@ export default function useMapViewController(): MapViewController {
       {
         text: 'Annuler',
         style: 'cancel',
+        onPress: goBackToUserLocation,
       },
       {
         text: 'Voir',
-        onPress: () => {
-          console.log(`Voir ${place.name}`)
-        },
+        onPress: () => navigateToPlaceDescription(place),
       },
     ])
   }

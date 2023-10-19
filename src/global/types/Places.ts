@@ -14,6 +14,11 @@ export enum PlaceTag {
   BLIND = 'blind',
 }
 
+export interface Tag {
+  id: number
+  name: PlaceTag
+}
+
 export interface Place {
   id: number
   name: string
@@ -32,5 +37,5 @@ export interface Place {
   price: number
   city: string
   country: string
-  tags: PlaceTag[]
+  tags: Tag[]
 }
