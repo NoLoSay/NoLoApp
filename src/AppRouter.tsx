@@ -77,7 +77,6 @@ export default function AppRouter(): React.JSX.Element {
         tabBarInactiveTintColor: colors.lightGrey,
         headerShown: false,
         tabBarShowLabel: false,
-        gestureEnabled: false,
       })}
     >
       <Tab.Screen

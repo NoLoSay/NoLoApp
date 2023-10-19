@@ -52,10 +52,10 @@ export default function useConnectionController({ navigation }: useConnectionCon
       if (res.status === 201) {
         setAccount({
           ...account,
-          authentified: true,
           email,
-          username: response.username,
-          accessToken: response.accessToken,
+          username: email,
+          authentified: true,
+          accessToken: response.access_token,
         })
         navigation.navigate('AppRouter')
       } else {

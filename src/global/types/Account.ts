@@ -9,6 +9,7 @@ import { GeolocationResponse } from '@react-native-community/geolocation'
 import { Dispatch, SetStateAction } from 'react'
 
 export interface AccountType {
+  accountID: number
   email: string
   username: string
   authentified: boolean

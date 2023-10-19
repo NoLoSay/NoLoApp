@@ -30,6 +30,7 @@ export default function App(): React.JSX.Element {
           initialRouteName='Subscription'
           screenOptions={{
             headerShown: false,
+            gestureEnabled: false,
           }}
         >
           <AuthStack.Group>

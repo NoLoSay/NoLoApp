@@ -20,6 +20,7 @@ import { AccountContextType, AccountType } from '@global/types/Account'
  * @property {string} accessToken Default account accessToken
  */
 export const defaultAccount: AccountType = {
+  accountID: 0,
   authentified: false,
   email: '',
   phoneNumber: '',

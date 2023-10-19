@@ -58,8 +58,10 @@ export default function useSubscriptionController({
       if (res.status === 201) {
         setAccount({
           ...account,
+          accountID: response.id,
           authentified: true,
-          email,
+          accessToken: 'subscribedToken',
+          email: response.email,
           username: response.username,
         })
         navigation.navigate('AppRouter')
