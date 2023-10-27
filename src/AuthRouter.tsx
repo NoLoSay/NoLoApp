@@ -47,13 +47,13 @@ export default function App(): React.JSX.Element {
               component={AppRouter}
             />
           </AuthStack.Group>
-          <AuthStack.Group screenOptions={{ presentation: 'modal' }}>
+          <AuthStack.Group screenOptions={{ presentation: 'modal', gestureEnabled: true }}>
             <AuthStack.Screen
               name='SettingsModal'
               component={SettingsScreen}
             />
           </AuthStack.Group>
-          <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+          <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal', gestureEnabled: true }}>
             <AuthStack.Screen
               name='WebViewModal'
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
