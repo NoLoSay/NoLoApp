@@ -5,7 +5,7 @@
  * @requires react react
  */
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Alert, Linking, Platform, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { colors } from '@global/colors'
 import FastImage from 'react-native-fast-image'

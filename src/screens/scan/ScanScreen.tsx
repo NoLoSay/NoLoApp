@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { SafeAreaView, StyleSheet, Text, TouchableHighlightBase, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { colors } from '@global/colors'
 import { Camera } from 'react-native-vision-camera'
 import useScanScreenController from './useScanScreenController'
@@ -18,8 +18,7 @@ import NoCameraView from './Views/NoCameraView'
  * @returns {React.JSX.Element} App component template
  */
 export default function ScanScreen(): React.JSX.Element {
-  const { account, hasPermission, backCamera, isQRScanningActive, codeScanner, toggleQRScanning } =
-    useScanScreenController()
+  const { hasPermission, backCamera, isQRScanningActive, codeScanner, toggleQRScanning } = useScanScreenController()
 
   if (backCamera === undefined || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
   return (
