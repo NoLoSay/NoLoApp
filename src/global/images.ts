@@ -40,6 +40,7 @@ export const images = {
   },
   logos: {
     nolosay: require('@assets/images/logos/nolosay.png'),
+    nolosad: require('@assets/images/logos/nolosad.png'),
     heart: require('@assets/images/logos/heart.png'),
     logo: require('@assets/images/logos/logo.png'),
   },
