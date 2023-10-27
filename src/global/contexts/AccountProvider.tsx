@@ -21,7 +21,6 @@ import { AccountContextType, AccountType } from '@global/types/Account'
  */
 export const defaultAccount: AccountType = {
   accountID: 0,
-  authentified: false,
   email: '',
   phoneNumber: '',
   username: '',

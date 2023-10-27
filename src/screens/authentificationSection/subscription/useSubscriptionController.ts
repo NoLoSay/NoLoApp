@@ -59,7 +59,6 @@ export default function useSubscriptionController({
         setAccount({
           ...account,
           accountID: response.id,
-          authentified: true,
           accessToken: 'subscribedToken',
           email: response.email,
           username: response.username,
