@@ -37,6 +37,7 @@ export const images = {
     maps: {
       pin: require('@assets/icons/maps/map_pin.png'),
     },
+    qrScanner: require('@assets/images/qr_scanner.png'),
   },
   logos: {
     nolosay: require('@assets/images/logos/nolosay.png'),

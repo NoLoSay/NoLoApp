@@ -9,6 +9,8 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { colors } from '@global/colors'
 import { Camera } from 'react-native-vision-camera'
+import FastImage from 'react-native-fast-image'
+import images from '@source/global/images'
 import useScanScreenController from './useScanScreenController'
 import NoCameraView from './Views/NoCameraView'
 
@@ -29,6 +31,12 @@ export default function ScanScreen(): React.JSX.Element {
         isActive={isQRScanningActive}
         codeScanner={codeScanner}
       />
+      <FastImage
+        source={images.icons.qrScanner}
+        style={styles.qrScannerImage}
+      />
+      <Text style={styles.title}>Scanner un QR Code</Text>
+      <Text style={styles.subtitle}>Placez le QR code dans le rectangle afin de le scanner</Text>
       <TouchableOpacity
         style={styles.buttonContainer}
         onPress={toggleQRScanning}
@@ -48,14 +56,36 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   camera: {
-    width: '100%',
+    width: '80%',
     height: '50%',
     position: 'absolute',
     top: '20%',
+    left: '5%',
+  },
+  qrScannerImage: {
+    width: 240,
+    height: 240,
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonContainer: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  title: {
+    color: colors.accent,
+    fontFamily: 'Poppins',
+    fontWeight: '700',
+    fontSize: 24,
+  },
+  subtitle: {
+    color: colors.darkGrey,
+    fontFamily: 'Poppins',
+    fontWeight: '500',
+    fontSize: 18,
+    width: '75%',
+    textAlign: 'center',
   },
 })
