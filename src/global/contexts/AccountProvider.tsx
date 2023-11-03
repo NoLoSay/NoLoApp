@@ -6,7 +6,7 @@
  */
 
 import React, { createContext, useMemo, useState } from 'react'
-import { AccountContextType, AccountType } from '@global/types/Account'
+import { AccountContextType, AccountType, AccountElevationEnum } from '@global/types/Account'
 
 /**
  * @constant defaultAccount Default account data
@@ -26,6 +26,7 @@ export const defaultAccount: AccountType = {
   username: '',
   accessToken: '',
   localisation: undefined,
+  elevation: AccountElevationEnum.USER,
 }
 
 /**
