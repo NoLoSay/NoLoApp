@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import AddScreen from '@source/screens/add/AddScreen'
+import AddScreen from '@source/screens/addSection/AddSection'
 
 describe('AddScreenTests', () => {
   it('should render correctly', () => {
