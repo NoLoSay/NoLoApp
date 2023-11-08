@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { Image, LayoutRectangle, Pressable, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { Image, LayoutRectangle, Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors } from '@global/colors'
 import AddContentCategory from '@source/global/types/AddContentCategory'
 import FastImage, { Source } from 'react-native-fast-image'

@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react-native'
 import HomeScreen from '@source/screens/home/HomeScreen'
 import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountType } from '@source/global/types/Account'
+import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { View } from 'react-native'
 
 jest.mock('react-native', () => {
@@ -23,14 +23,16 @@ jest.mock('@react-native-community/geolocation', () => {
   }
 })
 
-function MockMapView(props: any) {
-  // eslint-disable-next-line react/destructuring-assignment
-  return <View>{props.children}</View>
+interface MockMapViewProps {
+  children: React.ReactNode
 }
 
-function MockMarker(props: any) {
-  // eslint-disable-next-line react/destructuring-assignment
-  return <View>{props.children}</View>
+function MockMapView({ children }: MockMapViewProps) {
+  return <View>{children}</View>
+}
+
+function MockMarker({ children }: MockMapViewProps) {
+  return <View>{children}</View>
 }
 
 jest.mock('react-native-maps', () => {
@@ -73,6 +75,7 @@ describe('HomeScreenTests', () => {
         },
         timestamp: 12729024,
       },
+      elevation: AccountElevationEnum.ADMIN,
     }
 
     const contextValue = { account: user, setAccount: jest.fn() }
