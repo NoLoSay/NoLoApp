@@ -14,7 +14,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { colors } from '@global/colors'
 import { images } from '@global/images'
 import ScanScreen from './screens/scan/ScanScreen'
-import AddScreen from './screens/add/AddScreen'
+import AddScreen from './screens/addSection/AddSection'
 import HomeScreen from './screens/home/HomeScreen'
 
 interface getImageNameProps {

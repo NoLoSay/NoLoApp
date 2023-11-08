@@ -17,7 +17,7 @@ import {
   View,
 } from 'react-native'
 import { colors } from '@global/colors'
-import { Place, PlaceTag, Tag } from '@source/global/types/Places'
+import { Place, PlaceTag } from '@source/global/types/Places'
 import { RouteProp, useNavigation } from '@react-navigation/native'
 import Button from '@source/components/Button'
 import images from '@source/global/images'
