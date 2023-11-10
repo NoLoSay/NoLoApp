@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountType } from '@source/global/types/Account'
+import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { Text, View } from 'react-native'
 import PlacesMapView from '@source/screens/home/MapView/MapView'
 import { PlaceType, PlaceTag } from '@source/global/types/Places'
@@ -24,6 +24,7 @@ const defaultUser: AccountType = {
     },
     timestamp: 12729024,
   },
+  elevation: AccountElevationEnum.ADMIN,
 }
 
 jest.mock('react-native', () => {
