@@ -1,12 +1,30 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import HomeScreen from '@source/screens/home/HomeScreen'
 import { AccountContext } from '@source/global/contexts/AccountProvider'
 import { AccountType } from '@source/global/types/Account'
 import { Text, View } from 'react-native'
 import PlacesMapView from '@source/screens/home/MapView/MapView'
 import { PlaceType, PlaceTag } from '@source/global/types/Places'
-import defaultUser from '__mocks__/account'
+
+const defaultUser: AccountType = {
+  accountID: 1,
+  email: 'toto@tata.com',
+  username: 'toto',
+  phoneNumber: '+330612345678',
+  accessToken: '123456789',
+  localisation: {
+    coords: {
+      latitude: 0,
+      longitude: 0,
+      altitude: 10,
+      accuracy: 1,
+      altitudeAccuracy: 1,
+      heading: 2,
+      speed: 232,
+    },
+    timestamp: 12729024,
+  },
+}
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')
@@ -26,7 +44,11 @@ jest.mock('@react-native-community/geolocation', () => {
   }
 })
 
-function MockMapView({ children }: any) {
+interface MockMapViewProps {
+  children: React.ReactNode
+}
+
+function MockMapView({ children }: MockMapViewProps) {
   return (
     <>
       <Text>MapView</Text>
@@ -35,7 +57,7 @@ function MockMapView({ children }: any) {
   )
 }
 
-function MockMarker({ children }: any) {
+function MockMarker({ children }: MockMapViewProps) {
   return (
     <>
       <Text>Marker</Text>
