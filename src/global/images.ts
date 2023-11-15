@@ -11,6 +11,7 @@ export const images = {
       add: require('@assets/icons/full/add.png'),
       eye: require('@assets/icons/full/eye.png'),
       home: require('@assets/icons/full/home.png'),
+      username: require('@assets/icons/full/username.png'),
       qr: require('@assets/icons/full/qr.png'),
       shield: require('@assets/icons/full/shield.png'),
       user: require('@assets/icons/full/user.png'),
