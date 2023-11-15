@@ -17,9 +17,9 @@ export enum AccountElevationEnum {
 }
 
 export interface AccountType {
+  accountID: number
   email: string
   username: string
-  authentified: boolean
   phoneNumber: string
   accessToken: string
   localisation: GeolocationResponse | undefined

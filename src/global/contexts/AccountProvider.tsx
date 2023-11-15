@@ -20,7 +20,7 @@ import { AccountContextType, AccountType, AccountElevationEnum } from '@global/t
  * @property {string} accessToken Default account accessToken
  */
 export const defaultAccount: AccountType = {
-  authentified: false,
+  accountID: 0,
   email: '',
   phoneNumber: '',
   username: '',

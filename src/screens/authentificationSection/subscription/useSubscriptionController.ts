@@ -34,7 +34,7 @@ interface useSubscriptionControllerProps {
 /**
  * @function useSubscriptionController
  * @description Controller for the Subscription screen.
- * @param param0 Object containing the navigation prop.
+ * @param navigation Object containing the navigation prop.
  * @returns {SubscriptionController} Object containing the email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation, showPassword, setShowPassword, showPasswordConfirmation, setShowPasswordConfirmation, subscribe, and error.
  */
 export default function useSubscriptionController({
@@ -61,8 +61,9 @@ export default function useSubscriptionController({
       if (res.status === 201) {
         setAccount({
           ...account,
-          authentified: true,
-          email,
+          accountID: response.id,
+          accessToken: 'subscribedToken',
+          email: response.email,
           username: response.username,
         })
         navigation.navigate('AppRouter')

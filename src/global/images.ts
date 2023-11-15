@@ -42,10 +42,12 @@ export const images = {
       facebook: require('@assets/icons/social/facebook.png'),
       google: require('@assets/icons/social/google.png'),
     },
+    qrScanner: require('@assets/images/qr_scanner.png'),
   },
   logos: {
     heart: require('@assets/images/logos/heart.png'),
     logo: require('@assets/images/logos/logo.png'),
+    nolosad: require('@assets/images/logos/nolosad.png'),
     nolosay: require('@assets/images/logos/nolosay.png'),
   },
 }

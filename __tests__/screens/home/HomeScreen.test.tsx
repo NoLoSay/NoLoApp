@@ -58,7 +58,7 @@ jest.mock('@react-navigation/native', () => {
 describe('HomeScreenTests', () => {
   it('should render correctly', () => {
     const user: AccountType = {
-      authentified: true,
+      accountID: 1,
       email: 'toto@tata.com',
       username: 'toto',
       phoneNumber: '+330612345678',

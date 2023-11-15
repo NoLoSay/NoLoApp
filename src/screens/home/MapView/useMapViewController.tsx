@@ -53,7 +53,6 @@ export default function useMapViewController({ navigation }: Props): MapViewCont
       {
         text: 'Annuler',
         style: 'cancel',
-        onPress: goBackToUserLocation,
       },
       {
         text: 'Voir',

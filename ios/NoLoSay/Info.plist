@@ -51,6 +51,8 @@
 	<string>Nous avons besoin de votre localisation afin de trouver les musées les plus proches de vous !</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Nous avons besoin de votre localisation afin de trouver les musées les plus proches de vous !</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Nous avons besoin de l'accès à votre caméra pour scanner des QR codes !</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Bold.ttf</string>

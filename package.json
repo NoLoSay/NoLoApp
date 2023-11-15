@@ -31,14 +31,17 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@react-native-clipboard/clipboard": "^1.12.1",
     "@react-native-community/geolocation": "^3.1.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "geolib": "^3.3.4",
+    "react-native-device-info": "^10.11.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-maps": "^1.7.1",
     "react-native-screens": "^3.22.1",
+    "react-native-vision-camera": "^3.6.3",
     "react-native-webview": "^13.6.0"
   },
   "devDependencies": {

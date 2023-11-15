@@ -30,7 +30,7 @@ interface useConnectionControllerProps {
 /**
  * @function useConnectionController
  * @description Controller for the Connection screen.
- * @param param0 Object containing the navigation prop.
+ * @param navigation Object containing the navigation prop.
  * @returns {ConnectionController} Object containing the email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation, showPassword, setShowPassword, showPasswordConfirmation, setShowPasswordConfirmation, subscribe, and error.
  */
 export default function useConnectionController({ navigation }: useConnectionControllerProps): ConnectionController {
@@ -52,7 +52,6 @@ export default function useConnectionController({ navigation }: useConnectionCon
       if (res.status === 201) {
         setAccount({
           ...account,
-          authentified: true,
           email,
           username: response.username,
           accessToken: response.access_token,

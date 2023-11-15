@@ -71,7 +71,7 @@ export async function connect({ username, password }: ConnectProps): Promise<Res
 
 /**
  * @function forgotPassword Send the user's email to the server to reset their password.
- * @param param0 email The user's email.
+ * @param email email The user's email.
  */
 export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Response> {
   return new Promise(() => {
