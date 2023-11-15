@@ -20,7 +20,7 @@ import NoCameraView from './Views/NoCameraView'
  * @returns {React.JSX.Element} App component template
  */
 export default function ScanScreen(): React.JSX.Element {
-  const { hasPermission, backCamera, isQRScanningActive, codeScanner, toggleQRScanning } = useScanScreenController()
+  const { hasPermission, backCamera, isQRScanningActive, codeScanner } = useScanScreenController()
 
   if (backCamera === undefined || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
   return (
@@ -37,12 +37,6 @@ export default function ScanScreen(): React.JSX.Element {
       />
       <Text style={styles.title}>Scanner un QR Code</Text>
       <Text style={styles.subtitle}>Placez le QR code dans le rectangle afin de le scanner</Text>
-      <TouchableOpacity
-        style={styles.buttonContainer}
-        onPress={toggleQRScanning}
-      >
-        <Text>{isQRScanningActive ? 'Pause' : 'Resume'}</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   )
 }
@@ -51,7 +45,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     alignContent: 'center',
     backgroundColor: colors.white,
   },
@@ -66,8 +59,7 @@ const styles = StyleSheet.create({
     width: 240,
     height: 240,
     position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    top: '47%',
   },
   buttonContainer: {
     flex: 1,
