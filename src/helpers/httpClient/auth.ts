@@ -18,7 +18,7 @@ interface SubscribeProps {
 
 interface ConnectProps {
   url?: string
-  email: string
+  username: string
   password: string
   headers?: Header
 }
@@ -39,11 +39,12 @@ interface ForgotPasswordProps {
  * @param param.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export async function subscribe({ email, password }: SubscribeProps): Promise<Response> {
+export async function subscribe({ email, username, password }: SubscribeProps): Promise<Response> {
   return post({
-    endpoint: '/users',
+    endpoint: '/register',
     body: JSON.stringify({
       email,
+      username,
       password,
     }),
   })
@@ -58,11 +59,11 @@ export async function subscribe({ email, password }: SubscribeProps): Promise<Re
  * @param param.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export async function connect({ email, password }: ConnectProps): Promise<Response> {
+export async function connect({ username, password }: ConnectProps): Promise<Response> {
   return post({
     endpoint: '/auth/login',
     body: JSON.stringify({
-      username: email,
+      username,
       password,
     }),
   })

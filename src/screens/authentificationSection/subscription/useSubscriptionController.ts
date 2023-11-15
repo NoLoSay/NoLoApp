@@ -93,6 +93,7 @@ export default function useSubscriptionController({
     }
     await subscribe({
       email,
+      username,
       password,
     })
       .then(async res => {
