@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 12,
     backgroundColor: colors.darkGrey,
-    paddingVertical: 20,
+    paddingVertical: 16,
   },
   input: {
     paddingHorizontal: 12,

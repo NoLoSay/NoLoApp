@@ -27,6 +27,8 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
   const {
     email,
     setEmail,
+    username,
+    setUsername,
     password,
     setPassword,
     passwordConfirmation,
@@ -59,6 +61,13 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
               keyboardType='email-address'
               value={email}
               setValue={setEmail}
+              leftIcon={images.icons.full.username}
+            />
+            <Input
+              placeholder="Nom d'utilisateur"
+              keyboardType='email-address'
+              value={username}
+              setValue={setUsername}
               leftIcon={images.icons.full.user}
             />
             <Input
