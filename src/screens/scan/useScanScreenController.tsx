@@ -15,8 +15,9 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera'
 import { AccountType } from '@source/global/types/Account'
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { Alert } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 
 interface ScanScreenController {
   account: AccountType
@@ -24,7 +25,6 @@ interface ScanScreenController {
   backCamera: CameraDevice | undefined
   isQRScanningActive: boolean
   codeScanner: CodeScanner
-  toggleQRScanning: () => void
 }
 
 /**
@@ -44,6 +44,17 @@ export default function useScanScreenController(): ScanScreenController {
     },
   })
 
+  // React-navigation hook allowing us to know when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      setIsQRScanningActive(true)
+
+      return () => {
+        setIsQRScanningActive(false)
+      }
+    }, [])
+  )
+
   function handleQRScanning(codes: Code[]) {
     setIsQRScanningActive(false)
     if (isQRScanningActive)
@@ -58,6 +69,9 @@ export default function useScanScreenController(): ScanScreenController {
         {
           text: 'Cancel',
           style: 'cancel',
+          onPress: () => {
+            setIsQRScanningActive(true)
+          },
         },
       ])
   }
@@ -78,6 +92,5 @@ export default function useScanScreenController(): ScanScreenController {
     backCamera,
     isQRScanningActive,
     codeScanner,
-    toggleQRScanning,
   }
 }
