@@ -53,7 +53,7 @@ export default function useConnectionController({ navigation }: useConnectionCon
         setAccount({
           ...account,
           email,
-          username: email,
+          username: response.username,
           accessToken: response.access_token,
         })
         navigation.navigate('AppRouter')
@@ -71,7 +71,7 @@ export default function useConnectionController({ navigation }: useConnectionCon
   async function connectUser(): Promise<void> {
     setError(undefined)
     await connect({
-      email,
+      username: email,
       password,
     })
       .then(async res => {

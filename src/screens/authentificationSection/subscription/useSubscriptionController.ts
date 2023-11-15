@@ -12,6 +12,8 @@ import { subscribe } from '@helpers/httpClient/auth'
 interface SubscriptionController {
   email: string
   setEmail: (email: string) => void
+  username: string
+  setUsername: (username: string) => void
   password: string
   setPassword: (password: string) => void
   passwordConfirmation: string
@@ -39,6 +41,7 @@ export default function useSubscriptionController({
   navigation,
 }: useSubscriptionControllerProps): SubscriptionController {
   const [email, setEmail] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('')
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -91,6 +94,7 @@ export default function useSubscriptionController({
     }
     await subscribe({
       email,
+      username,
       password,
     })
       .then(async res => {
@@ -104,6 +108,8 @@ export default function useSubscriptionController({
   return {
     email,
     setEmail,
+    username,
+    setUsername,
     password,
     setPassword,
     passwordConfirmation,
