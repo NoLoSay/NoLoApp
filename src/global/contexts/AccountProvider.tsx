@@ -27,6 +27,11 @@ export const defaultAccount: AccountType = {
   accessToken: '',
   localisation: undefined,
   elevation: AccountElevationEnum.USER,
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
+  name: {
+    firstName: 'Prénom',
+    lastName: 'Nom',
+  },
 }
 
 /**

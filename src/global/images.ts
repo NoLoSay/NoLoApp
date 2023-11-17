@@ -35,6 +35,7 @@ export const images = {
       mapArrow: require('@assets/icons/outline/map_arrow.png'),
       menu: require('@assets/icons/outline/menu.png'),
       open: require('@assets/icons/outline/open.png'),
+      pen: require('@assets/icons/outline/pen.png'),
       qr: require('@assets/icons/outline/qr.png'),
     },
     social: {
