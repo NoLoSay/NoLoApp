@@ -34,7 +34,7 @@ export default function PlacesMapView({ places, navigation }: Props) {
           <Marker
             key={marker.id}
             coordinate={marker.coordinates}
-            image={images.icons.maps.pin}
+            image={images.icons.maps.pin()}
             onPress={() => onMarkerPress(marker)}
           />
         ))}
