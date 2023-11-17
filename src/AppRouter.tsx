@@ -32,13 +32,13 @@ interface NavigationImageProps {
 function getImageName({ focused, route }: getImageNameProps): ImageSourcePropType {
   switch (route) {
     case 'Home':
-      return focused ? images.icons.full.home : images.icons.outline.home
+      return focused ? images.icons.full.home() : images.icons.outline.home()
     case 'Add':
-      return focused ? images.icons.full.add : images.icons.outline.add
+      return focused ? images.icons.full.add() : images.icons.outline.add()
     case 'Scan':
-      return focused ? images.icons.full.qr : images.icons.outline.qr
+      return focused ? images.icons.full.qr() : images.icons.outline.qr()
     default:
-      return images.icons.outline.home
+      return images.icons.outline.home()
   }
 }
 
