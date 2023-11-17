@@ -1,7 +1,6 @@
 import React from 'react'
 import { AccountContext } from '@source/global/contexts/AccountProvider'
 import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
-import HomeScreen from '@source/screens/home/HomeScreen'
 import { render } from '@testing-library/react-native'
 import SettingsScreen from '@source/screens/settings/SettingsScreen'
 

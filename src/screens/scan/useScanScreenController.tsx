@@ -55,6 +55,12 @@ export default function useScanScreenController(): ScanScreenController {
     }, [])
   )
 
+  useEffect(() => {
+    if (!hasPermission) {
+      requestPermission()
+    }
+  }, [hasPermission, requestPermission])
+
   function handleQRScanning(codes: Code[]) {
     setIsQRScanningActive(false)
     if (isQRScanningActive)
@@ -62,7 +68,7 @@ export default function useScanScreenController(): ScanScreenController {
         {
           text: 'Open',
           onPress: () => {
-            console.log(`Open ${codes[codes.length - 1].value}` ?? 'No value')
+            console.log(`Open ${codes[codes.length - 1].value}`)
           },
           style: 'default',
         },
@@ -75,16 +81,6 @@ export default function useScanScreenController(): ScanScreenController {
         },
       ])
   }
-
-  function toggleQRScanning() {
-    setIsQRScanningActive(!isQRScanningActive)
-  }
-
-  useEffect(() => {
-    if (!hasPermission) {
-      requestPermission()
-    }
-  }, [hasPermission, requestPermission])
 
   return {
     account,
