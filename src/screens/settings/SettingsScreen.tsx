@@ -49,6 +49,14 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
           showModal={showModal}
         />
       </ScrollView>
+      <ModalView
+        account={account}
+        hideModal={hideModal}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
+        setUsername={setUsername}
+        isVisible={isModalVisible}
+      />
     </SafeAreaView>
   )
 }
