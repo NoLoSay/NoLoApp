@@ -6,27 +6,60 @@
  */
 
 import React from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native'
 import { colors } from '@global/colors'
+import useSettingsScreenController from './useSettingsScreenController'
+import TopBar from './Views/TopBar'
+import MainInfos from './Views/MainInfos'
+import ModalView from './ModalModule/ModalView'
+
+type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  navigation: any
+}
 
 /**
  * @function SettingsScreen
  * @description Component that renders the Settings screen.
  * @returns {React.JSX.Element} App component template
  */
-export default function AddScreen(): React.JSX.Element {
+export default function SettingsScreen({ navigation }: Props): React.JSX.Element {
+  const {
+    account,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    username,
+    setUsername,
+    isModalVisible,
+    showModal,
+    hideModal,
+  } = useSettingsScreenController()
+
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: colors.accent,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <View>
-        <Text>Settings</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <TopBar navigation={navigation} />
+      <ScrollView style={styles.scrollview}>
+        <MainInfos
+          accountImage={account.image}
+          firstName={firstName}
+          lastName={lastName}
+          username={username}
+          showModal={showModal}
+        />
+      </ScrollView>
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.veryLightGrey,
+    flex: 1,
+    paddingHorizontal: '10%',
+  },
+  scrollview: {
+    paddingHorizontal: 16,
+  },
+})
