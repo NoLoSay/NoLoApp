@@ -28,6 +28,7 @@ type SettingsScreenController = {
 /**
  * @function useSettingsScreenController
  * @description Controller that handles the logic for the settings screen.
+ * @param navigation Object containing the navigation prop.
  * @returns {SettingsScreenController} Scan screen controller.
  */
 const useSettingsScreenController = ({ navigation }: any): SettingsScreenController => {

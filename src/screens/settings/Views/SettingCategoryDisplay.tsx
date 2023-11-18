@@ -1,10 +1,17 @@
+/**
+ * @fileoverview Single category display view for the SettingsScreen component
+ * @module SettingCategoryDisplay
+ * @description Display of a single category of the SettingsScreen component
+ * @requires react react-native
+ */
 import colors from '@source/global/colors'
 import images from '@source/global/images'
 import React from 'react'
 import { Image, ImageProps, Pressable, StyleSheet, Text, View } from 'react-native'
-import FastImage, { Source } from 'react-native-fast-image'
+import FastImage from 'react-native-fast-image'
 
 type Props = {
+  key: number
   title: string
   subtitle?: string
   onPress?: () => void
@@ -14,7 +21,20 @@ type Props = {
   iconColor?: string
 }
 
+/**
+ * @function SettingCategoryDisplay
+ * @param key The key of the category
+ * @param title The title of the category
+ * @param subtitle The subtitle of the category
+ * @param onPress The function that is called when the category is pressed
+ * @param icon The icon of the category
+ * @param childrenIcon The icon of the category's children
+ * @param backIconColor The color of the back icon
+ * @param iconColor The color of the icon
+ * @returns {React.JSX.Element} SettingCategoryDisplay component template
+ */
 export default function SettingCategoryDisplay({
+  key,
   title,
   subtitle,
   onPress,
@@ -22,33 +42,30 @@ export default function SettingCategoryDisplay({
   childrenIcon,
   backIconColor = '#FFFCF4',
   iconColor = colors.accent,
-}: Props) {
+}: Props): React.JSX.Element {
   return (
     <Pressable
       onPress={onPress}
       style={styles.container}
+      key={key}
     >
-      <View style={{ aspectRatio: 1, borderRadius: 25, backgroundColor: backIconColor, padding: 10, flex: 2 }}>
+      <View style={[styles.imageContainer, { backgroundColor: backIconColor }]}>
         <Image
           source={icon as ImageProps['source']}
-          style={{ aspectRatio: 1, tintColor: iconColor, flex: 1 }}
+          style={[styles.image, { tintColor: iconColor }]}
         />
       </View>
-      <View style={{ flexDirection: 'column', flex: 22, paddingLeft: 12 }}>
-        <Text style={{ fontFamily: 'Poppins', fontSize: 16, fontWeight: '500' }}>{title}</Text>
-        {subtitle && (
-          <Text style={{ fontFamily: 'Poppins', fontSize: 12, fontWeight: '300', color: colors.darkGrey }}>
-            {subtitle}
-          </Text>
-        )}
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>{title}</Text>
+        {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
       </View>
       {!childrenIcon && (
         <FastImage
           source={images.icons.outline.backArrow()}
-          style={{ height: 16, aspectRatio: 2 / 3, flex: 1 }}
+          style={styles.penIcon}
         />
       )}
-      {childrenIcon && <View style={{ flex: 1, right: 36 }}>{childrenIcon}</View>}
+      {childrenIcon && <View style={styles.childIcon}>{childrenIcon}</View>}
     </Pressable>
   )
 }
@@ -61,5 +78,40 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     display: 'flex',
     padding: 10,
+  },
+  imageContainer: {
+    aspectRatio: 1,
+    borderRadius: 25,
+    padding: 10,
+    flex: 2,
+  },
+  image: {
+    aspectRatio: 1,
+    flex: 1,
+  },
+  textContainer: {
+    flexDirection: 'column',
+    flex: 22,
+    paddingLeft: 12,
+  },
+  title: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  subtitle: {
+    fontFamily: 'Poppins',
+    fontSize: 12,
+    fontWeight: '300',
+    color: colors.darkGrey,
+  },
+  penIcon: {
+    height: 16,
+    aspectRatio: 2 / 3,
+    flex: 1,
+  },
+  childIcon: {
+    flex: 1,
+    right: 36,
   },
 })

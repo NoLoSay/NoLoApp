@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
       height: 4,
     },
     shadowOpacity: 0.25,
+    marginBottom: 16,
   },
   accountImage: {
     height: '66%',
