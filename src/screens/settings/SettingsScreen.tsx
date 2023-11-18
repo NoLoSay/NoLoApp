@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Switch, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import { colors } from '@global/colors'
 import images from '@source/global/images'
 import useSettingsScreenController from './useSettingsScreenController'
@@ -58,16 +58,16 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
             title='Mon compte'
             subtitle='Faire des changements sur mon compte'
             onPress={() => console.log('account settings')}
-            icon={images.icons.outline.community}
+            icon={images.icons.twoTones.profile()}
           />
           <SettingCategoryDisplay
             title='Biométrie'
             subtitle='Se connecter avec des données biométriques'
-            icon={images.icons.outline.carousel}
+            icon={images.icons.twoTones.lock()}
             childrenIcon={
               <Switch
                 trackColor={{ false: colors.veryLightGrey, true: colors.accent }}
-                thumbColor={!isBiometryEnabled ? colors.darkGrey : colors.darkGrey}
+                thumbColor={colors.white}
                 ios_backgroundColor={colors.veryLightGrey}
                 onValueChange={toggleBiometry}
                 value={isBiometryEnabled}
@@ -79,24 +79,25 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
             onPress={logoutUser}
             backIconColor={colors.veryLightGrey}
             iconColor={colors.darkGrey}
-            icon={images.icons.outline.camera}
+            icon={images.icons.twoTones.logout()}
           />
         </View>
-        <View style={{ marginTop: 32, borderRadius: 8, backgroundColor: colors.white }}>
+        <Text style={{ fontFamily: 'Poppins', fontSize: 16, fontWeight: '500', marginTop: 32 }}>Plus</Text>
+        <View style={{ marginTop: 16, borderRadius: 8, backgroundColor: colors.white }}>
           <SettingCategoryDisplay
             title='Aide et support'
             onPress={() => console.log('Help and support')}
-            icon={images.icons.outline.library}
+            icon={images.icons.twoTones.bell()}
           />
           <SettingCategoryDisplay
             title="À propos de l'application"
             onPress={() => console.log('About the app')}
-            icon={images.icons.outline.magnifier}
+            icon={images.icons.twoTones.heart()}
           />
           <SettingCategoryDisplay
             title='CGU'
             onPress={() => console.log('CGU')}
-            icon={images.icons.outline.mapArrow}
+            icon={images.icons.outline.contract()}
           />
         </View>
       </ScrollView>

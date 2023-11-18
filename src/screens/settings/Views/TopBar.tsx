@@ -29,7 +29,7 @@ export default function TopBar({ navigation }: Props) {
         onPress={() => navigation.goBack()}
       >
         <FastImage
-          source={images.icons.outline.backArrow}
+          source={images.icons.outline.backArrow()}
           style={styles.backIcon}
         />
       </Pressable>

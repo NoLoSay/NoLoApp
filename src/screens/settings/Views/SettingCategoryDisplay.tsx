@@ -37,14 +37,14 @@ export default function SettingCategoryDisplay({
       <View style={{ flexDirection: 'column', flex: 22, paddingLeft: 12 }}>
         <Text style={{ fontFamily: 'Poppins', fontSize: 16, fontWeight: '500' }}>{title}</Text>
         {subtitle && (
-          <Text style={{ fontFamily: 'Poppins', fontSize: 12, fontWeight: '300', color: colors.lightGrey }}>
+          <Text style={{ fontFamily: 'Poppins', fontSize: 12, fontWeight: '300', color: colors.darkGrey }}>
             {subtitle}
           </Text>
         )}
       </View>
       {!childrenIcon && (
         <FastImage
-          source={images.icons.outline.backArrow}
+          source={images.icons.outline.backArrow()}
           style={{ height: 16, aspectRatio: 2 / 3, flex: 1 }}
         />
       )}

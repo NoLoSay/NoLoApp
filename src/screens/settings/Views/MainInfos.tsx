@@ -45,7 +45,7 @@ export default function MainInfos({ accountImage, firstName, lastName, username,
       >
         <FastImage
           style={styles.icon}
-          source={images.icons.outline.pen}
+          source={images.icons.outline.pen()}
         />
       </Pressable>
     </View>
