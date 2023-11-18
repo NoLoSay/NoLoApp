@@ -84,7 +84,7 @@ export default function NoCameraView({ hasPermission }: NoCameraViewProps): Reac
         onLongPress={() => createDebugText()}
       >
         <FastImage
-          source={images.logos.nolosad}
+          source={images.logos.nolosad()}
           style={styles.image}
         />
       </Pressable>
