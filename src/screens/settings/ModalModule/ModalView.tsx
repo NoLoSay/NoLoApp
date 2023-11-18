@@ -68,7 +68,7 @@ export default function ModalView({ account, setFirstName, setLastName, setUsern
               style={{ marginBottom: 16 }}
             />
             <Button
-              text='Cancel'
+              text='Annuler'
               onPress={hideModal}
               style={{ backgroundColor: colors.white, borderColor: colors.accent, borderWidth: 1 }}
             />

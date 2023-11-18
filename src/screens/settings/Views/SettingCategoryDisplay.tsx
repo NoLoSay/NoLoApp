@@ -11,7 +11,7 @@ import { Image, ImageProps, Pressable, StyleSheet, Text, View } from 'react-nati
 import FastImage from 'react-native-fast-image'
 
 type Props = {
-  key: number
+  id: number
   title: string
   subtitle?: string
   onPress?: () => void
@@ -23,7 +23,7 @@ type Props = {
 
 /**
  * @function SettingCategoryDisplay
- * @param key The key of the category
+ * @param id The id of the category
  * @param title The title of the category
  * @param subtitle The subtitle of the category
  * @param onPress The function that is called when the category is pressed
@@ -34,7 +34,7 @@ type Props = {
  * @returns {React.JSX.Element} SettingCategoryDisplay component template
  */
 export default function SettingCategoryDisplay({
-  key,
+  id,
   title,
   subtitle,
   onPress,
@@ -47,7 +47,7 @@ export default function SettingCategoryDisplay({
     <Pressable
       onPress={onPress}
       style={styles.container}
-      key={key}
+      key={id}
     >
       <View style={[styles.imageContainer, { backgroundColor: backIconColor }]}>
         <Image
