@@ -11,6 +11,6 @@ export default interface AddContentCategory {
   id: ContentCategoryId
   title: string
   subtitle: string | null
-  icon: string
+  icon: () => NodeRequire
   elevation?: AccountElevationEnum
 }
