@@ -1,8 +1,28 @@
-import colors from '@source/global/colors'
+/**
+ * @fileoverview Loading modal component
+ * @module LoadingModal
+ * @description Component that renders a loading modal.
+ * @requires react react-native
+ * @requires Modal react-native
+ * @requires View react-native
+ * @requires ActivityIndicator react-native
+ * @requires StyleSheet react-native
+ */
+
 import React from 'react'
+import colors from '@source/global/colors'
 import { Modal, View, ActivityIndicator, StyleSheet } from 'react-native'
 
-export default function LoadingModal({ visible }: { visible: boolean }) {
+type Props = {
+  visible: boolean
+}
+
+/**
+ * @function LoadingModal
+ * @param visible Wether the modal is visible or not
+ * @returns
+ */
+export default function LoadingModal({ visible }: Props) {
   return (
     <Modal
       visible={visible}
