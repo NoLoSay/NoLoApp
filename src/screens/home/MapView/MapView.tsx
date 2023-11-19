@@ -2,7 +2,7 @@ import colors from '@source/global/colors'
 import images from '@source/global/images'
 import { Place } from '@source/global/types/Places'
 import React from 'react'
-import { StyleSheet, View, Platform, Text } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import useMapViewController from './useMapViewController'
 
