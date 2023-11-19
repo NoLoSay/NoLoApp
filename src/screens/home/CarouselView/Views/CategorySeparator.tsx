@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Category separator component
+ * @module CategorySeparator
+ * @description Component that renders a category separator, it is the text of the category.
+ * @requires react react-native
+ */
 import colors from '@source/global/colors'
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
@@ -6,6 +12,12 @@ interface Props {
   text: string
 }
 
+/**
+ * @function CategorySeparator
+ * @description Component that renders a category separator.
+ * @param text Title of the category
+ * @returns {React.JSX.Element}
+ */
 export default function CategorySeparator({ text }: Props): React.JSX.Element {
   return <Text style={styles.text}>{text}</Text>
 }

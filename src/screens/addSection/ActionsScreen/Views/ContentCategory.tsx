@@ -12,6 +12,11 @@ import AddContentCategory from '@source/global/types/AddContentCategory'
 import FastImage, { Source } from 'react-native-fast-image'
 import images from '@source/global/images'
 
+/**
+ * @typedef ContentCategoryProps
+ * @property {AddContentCategory} contentCategory
+ * @property {() => void} onPress
+ */
 interface ContentCategoryProps {
   contentCategory: AddContentCategory
   onPress: () => void
@@ -20,6 +25,7 @@ interface ContentCategoryProps {
 /**
  * @function ActionsScreen
  * @description Component that renders the Scan screen.
+ * @param {ContentCategoryProps} props Component props
  * @returns {React.JSX.Element} App component template
  */
 export default function ContentCategory({ contentCategory, onPress }: ContentCategoryProps): React.JSX.Element {

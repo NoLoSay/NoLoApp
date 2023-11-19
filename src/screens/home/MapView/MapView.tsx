@@ -1,9 +1,18 @@
-import colors from '@source/global/colors'
-import images from '@source/global/images'
-import { Place } from '@source/global/types/Places'
+/**
+ * @fileoverview Map View component
+ * @module MapView
+ * @description Component that renders the map view, it allows users to see places directly on the map.
+ * @requires react react-native
+ * @requires MapView react-native-maps
+ * @requires Marker react-native-maps
+ */
+
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
+import colors from '@source/global/colors'
+import images from '@source/global/images'
+import { Place } from '@source/global/types/Places'
 import useMapViewController from './useMapViewController'
 
 interface Props {
@@ -11,7 +20,13 @@ interface Props {
   navigation: any
 }
 
-export default function PlacesMapView({ places, navigation }: Props) {
+/**
+ * @function PlacesMapView
+ * @param places Places to display on the map
+ * @param navigation Navigation object
+ * @returns {JSX.Element}
+ */
+export default function PlacesMapView({ places, navigation }: Props): JSX.Element {
   const { account, onMarkerPress, mapRef, isMapAvailable } = useMapViewController({ navigation })
 
   return (
