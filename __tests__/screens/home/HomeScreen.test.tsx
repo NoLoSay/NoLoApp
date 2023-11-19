@@ -76,6 +76,11 @@ describe('HomeScreenTests', () => {
         timestamp: 12729024,
       },
       elevation: AccountElevationEnum.ADMIN,
+      name: {
+        firstName: 'Prénom',
+        lastName: 'Nom',
+      },
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
     }
 
     const contextValue = { account: user, setAccount: jest.fn() }

@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text } from 'react-native'
 import { colors } from '@global/colors'
 import { Camera } from 'react-native-vision-camera'
 import FastImage from 'react-native-fast-image'
