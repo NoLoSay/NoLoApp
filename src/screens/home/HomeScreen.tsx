@@ -9,6 +9,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { colors } from '@global/colors'
 import { useNavigation } from '@react-navigation/native'
+import LoadingModal from '@source/components/LoadingModal'
 import HeaderView from './Views/HeaderView'
 import useHomeScreenController from './useHomeScreenController'
 import CarouselView from './CarouselView/CarouselView'
@@ -30,6 +31,9 @@ export default function HomeScreen(): React.JSX.Element {
     togglePage,
     places,
     getNearestPlaces,
+    isLoading,
+    onRefresh,
+    isRefreshing,
   } = useHomeScreenController()
   const navigation = useNavigation()
 
@@ -50,6 +54,8 @@ export default function HomeScreen(): React.JSX.Element {
           places={places}
           navigation={navigation}
           getNearestPlaces={getNearestPlaces}
+          isLoading={isRefreshing}
+          onRefresh={onRefresh}
         />
       )}
       {currentPage === 'map' && (
@@ -58,6 +64,7 @@ export default function HomeScreen(): React.JSX.Element {
           navigation={navigation}
         />
       )}
+      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   )
 }

@@ -1,6 +1,6 @@
 /**
  * @fileoverview useHomeScreenController hook controls the HomeScreen component
- * @module HomeScreen Controller Hook
+ * @module useHomeScreenController Controller Hook
  * @description Controls the HomeScreen component by managing the states of the screen.
  * @requires react
  * @requires react-native
@@ -9,11 +9,11 @@
  * @requires @source/global/types/Account
  */
 
+import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
 import { AccountContext } from '@source/global/contexts/AccountProvider'
 import { Place } from '@source/global/types/Places'
 import getPlaces from '@source/helpers/httpClient/places'
-import { useContext, useEffect, useState } from 'react'
 
 /**
  * @interface HomeScreenController
@@ -38,6 +38,9 @@ interface HomeScreenController {
   togglePage: () => void
   places: Place[]
   getNearestPlaces: () => Place[]
+  isLoading: boolean
+  onRefresh: () => void
+  isRefreshing: boolean
 }
 
 /**
@@ -52,11 +55,28 @@ export default function useHomeScreenController(): HomeScreenController {
   const [searchValue, setSearchValue] = useState('')
   const { account, setAccount } = useContext(AccountContext)
   const [places, setPlaces] = useState<Place[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
+  const getAllPlaces = () => {
+    getPlaces().then(loadedPlaces => {
+      setPlaces(loadedPlaces)
+      setIsLoading(false)
+    })
+  }
 
   useEffect(() => {
     Geolocation.getCurrentPosition(info => setAccount({ ...account, localisation: info }))
-    getPlaces().then(loadedPlaces => setPlaces(loadedPlaces))
-  })
+    getAllPlaces()
+    // Avoid infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function onRefresh() {
+    setIsRefreshing(true)
+    getAllPlaces()
+    setIsRefreshing(false)
+  }
 
   function togglePage() {
     setCurrentPage(currentPage === 'map' ? 'carousel' : 'map')
@@ -97,5 +117,8 @@ export default function useHomeScreenController(): HomeScreenController {
     togglePage,
     places,
     getNearestPlaces,
+    isLoading,
+    onRefresh,
+    isRefreshing,
   }
 }
