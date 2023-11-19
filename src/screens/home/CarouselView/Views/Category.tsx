@@ -1,8 +1,17 @@
+/**
+ * @fileoverview Category View
+ * @module Category
+ * @description Component that renders a category view, it is used to order what the user sees.
+ * @requires react react-native
+ * @requires ScrollView react-native
+ * @requires RefreshControl react-native
+ */
+
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import FastImage from 'react-native-fast-image'
 import { Place } from '@source/global/types/Places'
 import CategorySeparator from './CategorySeparator'
+import PlaceImage from './PlaceImage'
 
 interface Props {
   text: string
@@ -10,6 +19,14 @@ interface Props {
   navigation: any
 }
 
+/**
+ * @function Category
+ * @description Component that renders a category view.
+ * @param text Title of the category
+ * @param places Places to display in the category
+ * @param navigation Navigation object
+ * @returns {React.JSX.Element}
+ */
 export default function Category({ text, places, navigation }: Props): React.JSX.Element {
   return (
     <View style={styles.container}>
@@ -25,13 +42,7 @@ export default function Category({ text, places, navigation }: Props): React.JSX
             key={item.id}
           >
             <TouchableOpacity onPress={() => navigation.navigate('PlaceDescription', { place: item })}>
-              <FastImage
-                source={{
-                  uri: item.image,
-                  priority: FastImage.priority.normal,
-                }}
-                style={styles.image}
-              />
+              <PlaceImage item={item} />
             </TouchableOpacity>
             <Text style={styles.itemText}>
               {item.name.length > 13 ? `${item.name.substring(0, 13)}...` : item.name}
@@ -51,11 +62,6 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 12,
     textAlign: 'center',
-  },
-  image: {
-    width: 96,
-    height: 154,
-    borderRadius: 20,
   },
   categoryContainer: {
     flexDirection: 'column',
