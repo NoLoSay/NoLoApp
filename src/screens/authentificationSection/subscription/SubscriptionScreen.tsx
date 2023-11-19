@@ -17,6 +17,7 @@ import ButtonChangeScreen from '../sharedViews/ButtonChangeScreen'
 import HeaderTexts from './Views/HeaderTexts'
 import useSubscriptionController from './useSubscriptionController'
 import Input from '../sharedViews/TextInput'
+import LoadingModal from '../sharedViews/LoadingModal'
 
 /**
  * @function SubscriptionScreen
@@ -39,6 +40,7 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
     setShowPasswordConfirmation,
     subscribe,
     error,
+    isLoading,
   } = useSubscriptionController({ navigation })
 
   return (
@@ -116,6 +118,7 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
           onPress={() => navigation.navigate('Connection')}
         />
       </View>
+      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   )
 }
