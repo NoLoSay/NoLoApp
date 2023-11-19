@@ -42,7 +42,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
   const { place } = route.params
   const navigation: any = useNavigation()
 
-  const getImageForTag = (tag: PlaceTag): ImageSourcePropType => {
+  const getImageForTag = (tag: PlaceTag): (() => ImageSourcePropType) => {
     switch (tag) {
       case PlaceTag.BLIND:
         return images.icons.outline.blind
@@ -60,7 +60,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
       <View style={styles.topbar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
-            source={images.icons.outline.cross}
+            source={images.icons.outline.cross()}
             style={styles.icon}
           />
         </TouchableOpacity>
@@ -83,7 +83,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
             >
               <Image
                 key={tag.id}
-                source={getImageForTag(tag.name)}
+                source={getImageForTag(tag.name)()}
                 style={styles.tagIcon}
                 accessibilityLabel={`tag ${tag.name}`}
               />

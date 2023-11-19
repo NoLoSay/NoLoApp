@@ -33,11 +33,6 @@ describe('ConnectionScreenTests', () => {
       />
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
-    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
-    expect(screen.getByText('Veuillez rentrer un email valide'))
-    fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), 'test@test.fr')
-    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
-    expect(forgotPassword).toHaveBeenCalledTimes(1)
   })
 
   it('should handle correctly the forgotten password', () => {
@@ -48,11 +43,12 @@ describe('ConnectionScreenTests', () => {
       />
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
+    fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), '')
     fireEvent.press(screen.getByText('Un trou de mémoire ?'))
     expect(screen.getByText('Veuillez rentrer un email valide'))
     fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), 'test@test.fr')
     fireEvent.press(screen.getByText('Un trou de mémoire ?'))
-    expect(forgotPassword).toHaveBeenCalledTimes(2)
+    expect(forgotPassword).toHaveBeenCalledTimes(1)
   })
 
   it('should handle the social buttons', () => {

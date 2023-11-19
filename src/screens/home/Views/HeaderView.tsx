@@ -33,26 +33,26 @@ export default function HeaderView({
         <View style={styles.defaultViewContainer}>
           <TouchableOpacity onPress={togglePage}>
             <Image
-              source={page === 'map' ? images.icons.outline.carousel : images.icons.outline.mapArrow}
+              source={page === 'map' ? images.icons.outline.carousel() : images.icons.outline.mapArrow()}
               style={styles.icon}
             />
           </TouchableOpacity>
           <Text style={styles.cityText}>{city}</Text>
         </View>
         <Image
-          source={images.logos.nolosay}
+          source={images.logos.nolosay()}
           style={styles.logo}
         />
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity onPress={toggleSearchBar}>
             <Image
-              source={images.icons.outline.magnifier}
+              source={images.icons.outline.magnifier()}
               style={[styles.icon, { marginRight: 20 }]}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('SettingsModal')}>
             <Image
-              source={images.icons.outline.menu}
+              source={images.icons.outline.menu()}
               style={styles.icon}
             />
           </TouchableOpacity>

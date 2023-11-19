@@ -33,7 +33,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
     <SafeAreaView style={styles.container}>
       <Image
         style={styles.logo}
-        source={images.logos.nolosay}
+        source={images.logos.nolosay()}
       />
       <View style={styles.connection}>
         <HeaderTexts />
@@ -44,7 +44,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
               keyboardType='email-address'
               value={email}
               setValue={setEmail}
-              leftIcon={images.icons.full.user}
+              leftIcon={images.icons.full.user()}
               returnKeyType='next'
             />
             <Input
@@ -53,8 +53,8 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
               setSecureTextEntry={setShowPassword}
               value={password}
               setValue={setPassword}
-              leftIcon={images.icons.full.shield}
-              rightIcon={images.icons.full.eye}
+              leftIcon={images.icons.full.shield()}
+              rightIcon={images.icons.full.eye()}
               returnKeyType='done'
             />
             {error && <Text style={styles.errorText}>{error}</Text>}

@@ -32,7 +32,14 @@ type Props = {
  * @param hideModal The function that hides the modal
  * @returns {React.JSX.Element} Modal component View
  */
-export default function ModalView({ account, setFirstName, setLastName, setUsername, isVisible, hideModal }: Props) {
+export default function ModalView({
+  account,
+  setFirstName,
+  setLastName,
+  setUsername,
+  isVisible,
+  hideModal,
+}: Props): React.JSX.Element {
   const { tmpFirstName, setTmpFirstName, tmpLastName, setTmpLastName, tmpUsername, setTmpUsername, onModalValidate } =
     useModalViewController({ account, hideModal, setFirstName, setLastName, setUsername })
   return (
@@ -61,16 +68,16 @@ export default function ModalView({ account, setFirstName, setLastName, setUsern
             placeholder="Nom d'utilisateur"
             autoCapitalize='none'
           />
-          <View style={{ width: '100%' }}>
+          <View style={styles.buttonContainer}>
             <Button
               text='Valider'
               onPress={onModalValidate}
-              style={{ marginBottom: 16 }}
+              style={styles.validateButton}
             />
             <Button
-              text='Cancel'
+              text='Annuler'
               onPress={hideModal}
-              style={{ backgroundColor: colors.white, borderColor: colors.accent, borderWidth: 1 }}
+              style={styles.cancelButton}
             />
           </View>
         </View>
@@ -94,5 +101,16 @@ const styles = StyleSheet.create({
     padding: 24,
     alignItems: 'center',
     opacity: 1,
+  },
+  buttonContainer: {
+    width: '100%',
+  },
+  validateButton: {
+    marginBottom: 16,
+  },
+  cancelButton: {
+    backgroundColor: colors.white,
+    borderColor: colors.accent,
+    borderWidth: 1,
   },
 })

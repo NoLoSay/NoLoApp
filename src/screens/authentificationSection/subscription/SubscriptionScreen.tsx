@@ -50,7 +50,7 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
     >
       <Image
         style={styles.logo}
-        source={images.logos.nolosay}
+        source={images.logos.nolosay()}
       />
       <View style={styles.connection}>
         <HeaderTexts />
@@ -61,14 +61,14 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
               keyboardType='email-address'
               value={email}
               setValue={setEmail}
-              leftIcon={images.icons.full.username}
+              leftIcon={images.icons.full.username()}
             />
             <Input
               placeholder="Nom d'utilisateur"
               keyboardType='email-address'
               value={username}
               setValue={setUsername}
-              leftIcon={images.icons.full.user}
+              leftIcon={images.icons.full.user()}
             />
             <Input
               placeholder='Mot de passe'
@@ -76,8 +76,8 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
               setSecureTextEntry={setShowPassword}
               value={password}
               setValue={setPassword}
-              leftIcon={images.icons.full.shield}
-              rightIcon={images.icons.full.eye}
+              leftIcon={images.icons.full.shield()}
+              rightIcon={images.icons.full.eye()}
             />
             <Input
               placeholder='Confirmation'
@@ -85,8 +85,8 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
               setSecureTextEntry={setShowPasswordConfirmation}
               value={passwordConfirmation}
               setValue={setPasswordConfirmation}
-              leftIcon={images.icons.full.shield}
-              rightIcon={images.icons.full.eye}
+              leftIcon={images.icons.full.shield()}
+              rightIcon={images.icons.full.eye()}
             />
             {error && (
               <Text

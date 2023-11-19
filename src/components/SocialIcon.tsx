@@ -32,7 +32,7 @@ export default function SocialIcon({ socialMedia, size = 24, darkMode = false, o
       onPress={onPress}
     >
       <Image
-        source={socialMediaIcon[socialMedia]}
+        source={socialMediaIcon[socialMedia]()}
         style={[styles.logo, { height: size, width: size }, darkMode && styles.darkMode]}
       />
     </Pressable>

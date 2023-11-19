@@ -73,14 +73,14 @@ export default function WebViewScreen({ route }: Props): React.JSX.Element {
       <View style={styles.topbar}>
         <TouchableOpacity onPress={goBack}>
           <Image
-            source={images.icons.outline.cross}
+            source={images.icons.outline.cross()}
             style={styles.icon}
           />
         </TouchableOpacity>
         <Text style={styles.text}>{name}</Text>
         <TouchableOpacity onPress={openInBrowser}>
           <Image
-            source={images.icons.outline.open}
+            source={images.icons.outline.open()}
             style={styles.icon}
           />
         </TouchableOpacity>

@@ -1,0 +1,43 @@
+name: Compress Assets
+
+on:
+  workflow_call:
+
+jobs:
+  compress-assets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set variables
+        run: |
+          cat >> "$GITHUB_ENV" <<EOF
+          NODE_VERSION=$(cat _node-version)
+          EOF
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Compress images
+        run: |
+          sudo apt-get install -y optipng
+
+          find ./assets -name '*.png' -exec optipng -o7 {} \;
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add ./assets
+          git commit -m "Compress PNG assets"
+          git push

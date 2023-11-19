@@ -32,7 +32,7 @@ export default function ScanScreen(): React.JSX.Element {
         codeScanner={codeScanner}
       />
       <FastImage
-        source={images.icons.qrScanner}
+        source={images.icons.qrScanner()}
         style={styles.qrScannerImage}
       />
       <Text style={styles.title}>Scanner un QR Code</Text>
