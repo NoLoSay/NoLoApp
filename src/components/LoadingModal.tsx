@@ -11,28 +11,43 @@
 
 import React from 'react'
 import colors from '@source/global/colors'
-import { Modal, View, ActivityIndicator, StyleSheet } from 'react-native'
+import { Modal, View, ActivityIndicator, StyleSheet, StyleProp, ViewStyle } from 'react-native'
 
 type Props = {
   visible: boolean
+  loadingColor?: string
+  size?: number | 'small' | 'large' | undefined
+  loadingStyle?: StyleProp<ViewStyle>
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 /**
  * @function LoadingModal
  * @param visible Wether the modal is visible or not
- * @returns
+ * @param loadingColor Color of the loading indicator
+ * @param size Size of the loading indicator
+ * @param loadingStyle Style of the loading indicator
+ * @param containerStyle Style of the container
+ * @returns {JSX.Element}
  */
-export default function LoadingModal({ visible }: Props) {
+export default function LoadingModal({
+  visible,
+  loadingColor = colors.accent,
+  size = 'large',
+  loadingStyle,
+  containerStyle,
+}: Props): JSX.Element {
   return (
     <Modal
       visible={visible}
       transparent
     >
       <View style={styles.background}>
-        <View style={styles.container}>
+        <View style={[styles.container, containerStyle]}>
           <ActivityIndicator
-            size='large'
-            color={colors.accent}
+            size={size}
+            color={loadingColor}
+            style={loadingStyle}
           />
         </View>
       </View>
@@ -46,6 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000000A0',
+    zIndex: 100,
   },
   container: {
     backgroundColor: 'white',

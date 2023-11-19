@@ -13,6 +13,7 @@ type Props = {
   setFirstName: (firstName: string) => void
   setLastName: (lastName: string) => void
   setUsername: (username: string) => void
+  setIsLoading: (isLoading: boolean) => void
 }
 
 type ModalViewController = {
@@ -34,6 +35,7 @@ type ModalViewController = {
  * @param setFirstName Function to set the first name.
  * @param setLastName Function to set the last name.
  * @param setUsername Function to set the username.
+ * @param setIsLoading Function to set the loading state.
  * @returns {ModalViewController} Modal view controller.
  */
 export default function useModalViewController({
@@ -42,17 +44,22 @@ export default function useModalViewController({
   setFirstName,
   setLastName,
   setUsername,
+  setIsLoading,
 }: Props): ModalViewController {
   const [tmpFirstName, setTmpFirstName] = useState(account.name.firstName)
   const [tmpLastName, setTmpLastName] = useState(account.name.lastName)
   const [tmpUsername, setTmpUsername] = useState(account.username)
 
   const handleSave = () => {
-    // TODO: Send request to update account to the server
-    setFirstName(tmpFirstName)
-    setLastName(tmpLastName)
-    setUsername(tmpUsername)
     hideModal()
+    setIsLoading(true)
+    // TODO: Send request to update account to the server
+    setTimeout(() => {
+      setFirstName(tmpFirstName)
+      setLastName(tmpLastName)
+      setUsername(tmpUsername)
+      setIsLoading(false)
+    }, 1000)
   }
 
   return {

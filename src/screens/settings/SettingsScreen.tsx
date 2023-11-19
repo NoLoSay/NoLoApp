@@ -9,6 +9,7 @@ import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import { colors } from '@global/colors'
 import images from '@source/global/images'
+import LoadingModal from '@source/components/LoadingModal'
 import useSettingsScreenController from './useSettingsScreenController'
 import TopBar from './Views/TopBar'
 import MainInfos from './Views/MainInfos'
@@ -58,6 +59,8 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     logoutUser,
     aboutApp,
     openTerms,
+    isLoading,
+    setIsLoading,
   } = useSettingsScreenController({ navigation })
 
   /**
@@ -188,12 +191,14 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         setLastName={setLastName}
         setUsername={setUsername}
         isVisible={isModalVisible}
+        setIsLoading={setIsLoading}
       />
       <HelpModal
         isVisible={isHelpModalVisible}
         hideModal={hideHelpModal}
         onValidate={goToMail}
       />
+      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   )
 }

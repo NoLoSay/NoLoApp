@@ -30,6 +30,8 @@ type SettingsScreenController = {
   logoutUser: () => void
   aboutApp: () => void
   openTerms: () => void
+  isLoading: boolean
+  setIsLoading: (isLoading: boolean) => void
 }
 
 /**
@@ -46,6 +48,7 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false)
   const [isBiometryEnabled, setIsBiometryEnabled] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const showModal = () => setIsModalVisible(true)
 
@@ -90,6 +93,8 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
     logoutUser,
     aboutApp,
     openTerms,
+    isLoading,
+    setIsLoading,
   }
 }
 

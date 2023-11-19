@@ -7,9 +7,10 @@
 
 import React from 'react'
 import { SafeAreaView, View, Image, StyleSheet, Text } from 'react-native'
+import Button from '@components/Button'
+import LoadingModal from '@components/LoadingModal'
 import { colors } from '@global/colors'
 import { SubscriptionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
-import Button from '@components/Button'
 import images from '@source/global/images'
 import OrSeparator from '../sharedViews/OrSeparator'
 import SocialButtons from '../sharedViews/SocialButtons'
@@ -17,7 +18,6 @@ import ButtonChangeScreen from '../sharedViews/ButtonChangeScreen'
 import HeaderTexts from './Views/HeaderTexts'
 import useSubscriptionController from './useSubscriptionController'
 import Input from '../sharedViews/TextInput'
-import LoadingModal from '../sharedViews/LoadingModal'
 
 /**
  * @function SubscriptionScreen
@@ -56,8 +56,8 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
       />
       <View style={styles.connection}>
         <HeaderTexts />
-        <View style={{ flexDirection: 'column', paddingVertical: 24 }}>
-          <View style={{ marginBottom: 12 }}>
+        <View style={styles.inputContainer}>
+          <View style={styles.textInputsContainer}>
             <Input
               placeholder='Email'
               keyboardType='email-address'
@@ -90,19 +90,7 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
               leftIcon={images.icons.full.shield()}
               rightIcon={images.icons.full.eye()}
             />
-            {error && (
-              <Text
-                style={{
-                  color: colors.error,
-                  fontFamily: 'Poppins-Medium',
-                  alignSelf: 'flex-end',
-                  paddingRight: '16%',
-                  fontSize: 12,
-                }}
-              >
-                {error}
-              </Text>
-            )}
+            {error && <Text style={styles.errorText}>{error}</Text>}
           </View>
           <OrSeparator />
           <SocialButtons />
@@ -151,5 +139,19 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  errorText: {
+    color: colors.error,
+    fontFamily: 'Poppins-Medium',
+    alignSelf: 'flex-end',
+    paddingRight: '16%',
+    fontSize: 12,
+  },
+  inputContainer: {
+    flexDirection: 'column',
+    paddingVertical: 24,
+  },
+  textInputsContainer: {
+    marginBottom: 12,
   },
 })

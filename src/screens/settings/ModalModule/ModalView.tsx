@@ -19,6 +19,7 @@ type Props = {
   setUsername: (username: string) => void
   isVisible: boolean
   hideModal: () => void
+  setIsLoading: (isLoading: boolean) => void
 }
 
 /**
@@ -30,6 +31,7 @@ type Props = {
  * @param setUsername The function that sets the username
  * @param isVisible Is the modal visible
  * @param hideModal The function that hides the modal
+ * @param setIsLoading The function that sets the loading state
  * @returns {React.JSX.Element} Modal component View
  */
 export default function ModalView({
@@ -39,9 +41,10 @@ export default function ModalView({
   setUsername,
   isVisible,
   hideModal,
+  setIsLoading,
 }: Props): React.JSX.Element {
   const { tmpFirstName, setTmpFirstName, tmpLastName, setTmpLastName, tmpUsername, setTmpUsername, onModalValidate } =
-    useModalViewController({ account, hideModal, setFirstName, setLastName, setUsername })
+    useModalViewController({ account, hideModal, setFirstName, setLastName, setUsername, setIsLoading })
   return (
     <Modal
       animationType='fade'

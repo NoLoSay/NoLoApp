@@ -7,9 +7,10 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import Button from '@components/Button'
+import LoadingModal from '@components/LoadingModal'
 import { colors } from '@global/colors'
 import { ConnectionScreenProps } from '@source/global/types/screensProps/AuthStackParams'
-import Button from '@components/Button'
 import images from '@source/global/images'
 import OrSeparator from '../sharedViews/OrSeparator'
 import SocialButtons from '../sharedViews/SocialButtons'
@@ -17,7 +18,6 @@ import ButtonChangeScreen from '../sharedViews/ButtonChangeScreen'
 import Input from '../sharedViews/TextInput'
 import HeaderTexts from './Views/HeaderTexts'
 import useConnectionController from './useConnectionController'
-import LoadingModal from '../sharedViews/LoadingModal'
 
 /**
  * @function ConnectionScreen
