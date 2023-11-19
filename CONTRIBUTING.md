@@ -51,3 +51,9 @@ You must have at least 1 reviewer who approve your pull request.
 Try not to exceed 24 hours before reading your PRs.
 
 It is obviously forbidden to approve a merge until all the reviewers have accepted the PR as well as the success of the workflows.
+
+## See also
+
+### Code quality
+
+We have a code quality check with [DeepScan](https://deepscan.io/). You can see the results [here](https://deepscan.io/dashboard/#view=project&tid=22612&pid=25903&bid=817294&prid=&subview=overview).

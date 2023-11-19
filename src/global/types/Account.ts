@@ -24,6 +24,11 @@ export interface AccountType {
   accessToken: string
   localisation: GeolocationResponse | undefined
   elevation: AccountElevationEnum
+  image: string
+  name: {
+    firstName: string
+    lastName: string
+  }
 }
 
 export interface AccountContextType {

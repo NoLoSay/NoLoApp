@@ -2,7 +2,7 @@ import colors from '@source/global/colors'
 import images from '@source/global/images'
 import { Place } from '@source/global/types/Places'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Platform, Text } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import useMapViewController from './useMapViewController'
 
@@ -12,33 +12,36 @@ interface Props {
 }
 
 export default function PlacesMapView({ places, navigation }: Props) {
-  const { account, onMarkerPress, mapRef } = useMapViewController({ navigation })
+  const { account, onMarkerPress, mapRef, isMapAvailable } = useMapViewController({ navigation })
 
   return (
     <View style={styles.container}>
-      <MapView
-        ref={mapRef}
-        initialRegion={{
-          latitude: account.localisation?.coords.latitude ?? 0.0,
-          longitude: account.localisation?.coords.longitude ?? 0.0,
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
-        }}
-        style={styles.map}
-        showsUserLocation
-        loadingEnabled
-        loadingIndicatorColor={colors.accent}
-        loadingBackgroundColor={colors.lightGrey}
-      >
-        {places.map(marker => (
-          <Marker
-            key={marker.id}
-            coordinate={marker.coordinates}
-            image={images.icons.maps.pin()}
-            onPress={() => onMarkerPress(marker)}
-          />
-        ))}
-      </MapView>
+      {isMapAvailable() && (
+        <MapView
+          ref={mapRef}
+          initialRegion={{
+            latitude: account.localisation?.coords.latitude ?? 0.0,
+            longitude: account.localisation?.coords.longitude ?? 0.0,
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02,
+          }}
+          style={styles.map}
+          showsUserLocation
+          loadingEnabled
+          loadingIndicatorColor={colors.accent}
+          loadingBackgroundColor={colors.lightGrey}
+        >
+          {places.map(marker => (
+            <Marker
+              key={marker.id}
+              coordinate={marker.coordinates}
+              image={images.icons.maps.pin()}
+              onPress={() => onMarkerPress(marker)}
+            />
+          ))}
+        </MapView>
+      )}
+      {!isMapAvailable() && <Text style={styles.errorText}>Pas encore fonctionnel</Text>}
     </View>
   )
 }
@@ -72,5 +75,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '300',
     marginBottom: 12,
+  },
+  errorText: {
+    fontFamily: 'Poppins',
+    fontSize: 24,
+    fontWeight: '500',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

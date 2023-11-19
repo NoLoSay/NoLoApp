@@ -41,7 +41,7 @@ export default function ContentCategory({ contentCategory, onPress }: ContentCat
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{contentCategory.title}</Text>
-        {contentCategory.subtitle !== undefined ?? <Text style={styles.subtitle}>{contentCategory.subtitle}</Text>}
+        {contentCategory.subtitle !== null ?? <Text style={styles.subtitle}>{contentCategory.subtitle}</Text>}
       </View>
       <Image
         style={styles.arrowContainer}

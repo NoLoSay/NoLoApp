@@ -6,7 +6,6 @@
  */
 
 import { Place, PlaceTag, PlaceType } from '@source/global/types/Places'
-import { get } from './common'
 
 const PLACES: Place[] = [
   {
