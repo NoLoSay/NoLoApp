@@ -14,10 +14,22 @@ import TopBar from './Views/TopBar'
 import MainInfos from './Views/MainInfos'
 import ModalView from './ModalModule/ModalView'
 import SettingCategoryDisplay from './Views/SettingCategoryDisplay'
+import HelpModal from './Views/HelpModal'
 
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
+}
+
+type SettingsCategory = {
+  id: number
+  title: string
+  subtitle?: string
+  onPress?: () => void
+  icon?: React.ReactNode
+  childrenIcon?: React.ReactNode
+  backIconColor?: string
+  iconColor?: string
 }
 
 /**
@@ -37,21 +49,16 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     isModalVisible,
     showModal,
     hideModal,
+    isHelpModalVisible,
+    showHelpModal,
+    hideHelpModal,
+    goToMail,
     isBiometryEnabled,
     toggleBiometry,
     logoutUser,
+    aboutApp,
+    openTerms,
   } = useSettingsScreenController({ navigation })
-
-  type SettingsCategory = {
-    id: number
-    title: string
-    subtitle?: string
-    onPress?: () => void
-    icon?: React.ReactNode
-    childrenIcon?: React.ReactNode
-    backIconColor?: string
-    iconColor?: string
-  }
 
   /**
    * @constant MainSettingsCategories
@@ -85,7 +92,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
           thumbColor={colors.white}
           ios_backgroundColor={colors.veryLightGrey}
           onValueChange={toggleBiometry}
-          value={isBiometryEnabled}
+          value={!isBiometryEnabled}
         />
       ),
     },
@@ -116,19 +123,19 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     {
       id: 4,
       title: 'Aide et support',
-      onPress: () => console.log('Help and support'),
+      onPress: showHelpModal,
       icon: images.icons.twoTones.bell(),
     },
     {
       id: 5,
       title: "À propos de l'application",
-      onPress: () => console.log('About the app'),
+      onPress: aboutApp,
       icon: images.icons.twoTones.heart(),
     },
     {
       id: 6,
       title: 'CGU',
-      onPress: () => console.log('CGU'),
+      onPress: openTerms,
       icon: images.icons.outline.contract(),
     },
   ]
@@ -181,6 +188,11 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         setLastName={setLastName}
         setUsername={setUsername}
         isVisible={isModalVisible}
+      />
+      <HelpModal
+        isVisible={isHelpModalVisible}
+        hideModal={hideHelpModal}
+        onValidate={goToMail}
       />
     </SafeAreaView>
   )
