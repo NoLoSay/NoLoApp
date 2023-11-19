@@ -24,6 +24,7 @@ interface SubscriptionController {
   setShowPasswordConfirmation: (showPasswordConfirmation: boolean) => void
   subscribe: () => void
   error: string | undefined
+  isLoading: boolean
 }
 
 interface useSubscriptionControllerProps {
@@ -48,6 +49,7 @@ export default function useSubscriptionController({
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
   const { account, setAccount } = useContext(AccountContext)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
   /**
@@ -66,10 +68,12 @@ export default function useSubscriptionController({
           email: response.email,
           username: response.username,
         })
+        setIsLoading(false)
         navigation.navigate('AppRouter')
       } else {
         setError(response.message)
       }
+      setIsLoading(false)
     })
   }
 
@@ -92,6 +96,7 @@ export default function useSubscriptionController({
       setError('Mots de passe différents')
       return
     }
+    setIsLoading(true)
     await subscribe({
       email,
       username,
@@ -102,6 +107,7 @@ export default function useSubscriptionController({
       })
       .catch(() => {
         setError('Une erreur est survenue')
+        setIsLoading(false)
       })
   }
 
@@ -120,5 +126,6 @@ export default function useSubscriptionController({
     setShowPasswordConfirmation,
     subscribe: subscribeUser,
     error,
+    isLoading,
   }
 }

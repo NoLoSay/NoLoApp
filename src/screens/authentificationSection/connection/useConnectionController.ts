@@ -20,6 +20,7 @@ interface ConnectionController {
   connect: () => void
   forgottenPassword: () => void
   error: string | undefined
+  isLoading: boolean
 }
 
 interface useConnectionControllerProps {
@@ -38,6 +39,7 @@ export default function useConnectionController({ navigation }: useConnectionCon
   const [password, setPassword] = useState<string>(__DEV__ ? 'JesuisJohan2003?' : '')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { account, setAccount } = useContext(AccountContext)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
 
@@ -56,10 +58,12 @@ export default function useConnectionController({ navigation }: useConnectionCon
           username: response.username,
           accessToken: response.access_token,
         })
+        setIsLoading(false)
         navigation.navigate('AppRouter')
       } else {
         setError(response.message)
       }
+      setIsLoading(false)
     })
   }
 
@@ -70,6 +74,7 @@ export default function useConnectionController({ navigation }: useConnectionCon
    */
   async function connectUser(): Promise<void> {
     setError(undefined)
+    setIsLoading(true)
     await connect({
       username: email,
       password,
@@ -107,5 +112,6 @@ export default function useConnectionController({ navigation }: useConnectionCon
     connect: connectUser,
     forgottenPassword,
     error,
+    isLoading,
   }
 }

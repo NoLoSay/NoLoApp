@@ -17,6 +17,7 @@ import ButtonChangeScreen from '../sharedViews/ButtonChangeScreen'
 import Input from '../sharedViews/TextInput'
 import HeaderTexts from './Views/HeaderTexts'
 import useConnectionController from './useConnectionController'
+import LoadingModal from '../sharedViews/LoadingModal'
 
 /**
  * @function ConnectionScreen
@@ -26,8 +27,18 @@ import useConnectionController from './useConnectionController'
  * @returns {React.JSX.Element} App component template
  */
 export default function ConnectionScreen({ navigation }: ConnectionScreenProps): React.JSX.Element {
-  const { email, setEmail, password, setPassword, showPassword, setShowPassword, connect, forgottenPassword, error } =
-    useConnectionController({ navigation })
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    showPassword,
+    setShowPassword,
+    connect,
+    forgottenPassword,
+    error,
+    isLoading,
+  } = useConnectionController({ navigation })
 
   return (
     <SafeAreaView style={styles.container}>
@@ -79,6 +90,7 @@ export default function ConnectionScreen({ navigation }: ConnectionScreenProps):
           onPress={() => navigation.navigate('Subscription')}
         />
       </View>
+      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   )
 }
