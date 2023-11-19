@@ -39,5 +39,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add ./assets
-          git commit -m "Compress PNG assets"
+          git diff --cached --exit-code || git commit -m "Compress PNG assets" --allow-empty
           git push
