@@ -1,9 +1,16 @@
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountType } from '@source/global/types/Account'
-import { Place } from '@source/global/types/Places'
+/**
+ * @fileoverview Map view controller.
+ * @module useMapViewController
+ * @description Controller for the map view, it handles all the logic related to the map view component.
+ * @requires react react-native
+ * @requires MapView react-native-maps
+ */
 import { Ref, useContext, useRef } from 'react'
 import { Alert, Platform } from 'react-native'
 import MapView from 'react-native-maps'
+import { AccountContext } from '@source/global/contexts/AccountProvider'
+import { AccountType } from '@source/global/types/Account'
+import { Place } from '@source/global/types/Places'
 
 interface MapViewController {
   account: AccountType
@@ -16,15 +23,31 @@ interface Props {
   navigation: any
 }
 
+/**
+ * @function useMapViewController
+ * @description Controller that handles the logic for the map view.
+ * @param navigation Navigation object
+ * @returns {MapViewController} Map view controller.
+ */
 export default function useMapViewController({ navigation }: Props): MapViewController {
   const mapRef = useRef(null)
   const { account } = useContext(AccountContext)
 
-  const navigateToPlaceDescription = (place: Place) => {
+  /**
+   * @function navigateToPlaceDescription
+   * @description Navigates to the place description screen.
+   * @param place Place to display
+   */
+  const navigateToPlaceDescription = (place: Place): void => {
     navigation.navigate('PlaceDescription', { place })
   }
 
-  function onMarkerPress(place: Place) {
+  /**
+   * @function onMarkerPress
+   * @description Handles the marker press event.
+   * @param place Place to display
+   */
+  function onMarkerPress(place: Place): void {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Object is possibly 'null'.
     mapRef.current?.animateToRegion(
@@ -48,7 +71,12 @@ export default function useMapViewController({ navigation }: Props): MapViewCont
     ])
   }
 
-  const isMapAvailable = () => Platform.OS === 'ios' || Platform.OS === 'macos'
+  /**
+   * @function isMapAvailable
+   * @description Checks if the map is available on the current platform.
+   * @returns {boolean}
+   */
+  const isMapAvailable = (): boolean => Platform.OS === 'ios' || Platform.OS === 'macos'
 
   return {
     account,

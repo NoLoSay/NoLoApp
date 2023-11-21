@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Header View of the homescreen
+ * @module HeaderView
+ * @description Header view, it contains the logo, the city name, the search bar and the settings button.
+ * @requires react react-native
+ */
+
 import React from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
 import images from '@source/global/images'
@@ -13,6 +20,20 @@ interface HeaderViewProps {
   setSearchValue: (value: string) => void
   navigation: any
 }
+
+/**
+ * @function HeaderView
+ * @description Component that renders the header view.
+ * @param city The city of the user
+ * @param page The current page of the screen
+ * @param displaySearchBar The display state of the search bar
+ * @param toggleSearchBar The function to toggle the search bar
+ * @param togglePage The function to toggle the current page of the screen
+ * @param searchValue The value of the search bar
+ * @param setSearchValue The function to set the value of the search bar
+ * @param navigation Navigation object
+ * @returns {React.JSX.Element}
+ */
 export default function HeaderView({
   city,
   page,
@@ -22,12 +43,17 @@ export default function HeaderView({
   searchValue,
   setSearchValue,
   navigation,
-}: HeaderViewProps) {
+}: HeaderViewProps): React.JSX.Element {
   const updateText = (val: string) => {
     setSearchValue(val)
   }
 
-  function defaultView() {
+  /**
+   * @function defaultView
+   * @description The default view of the header
+   * @returns {React.JSX.Element} The default view of the header
+   */
+  function defaultView(): React.JSX.Element {
     return (
       <>
         <View style={styles.defaultViewContainer}>
@@ -61,7 +87,12 @@ export default function HeaderView({
     )
   }
 
-  function searchView() {
+  /**
+   * @function searchView
+   * @description The search view of the header
+   * @returns {React.JSX.Element}
+   */
+  function searchView(): React.JSX.Element {
     return (
       <View style={styles.searchContainer}>
         <TextInput
