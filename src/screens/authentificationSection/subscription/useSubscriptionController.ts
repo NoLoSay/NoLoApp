@@ -68,12 +68,10 @@ export default function useSubscriptionController({
           email: response.email,
           username: response.username,
         })
-        setIsLoading(false)
         navigation.navigate('AppRouter')
       } else {
         setError(response.message)
       }
-      setIsLoading(false)
     })
   }
 
@@ -104,6 +102,7 @@ export default function useSubscriptionController({
     })
       .then(async res => {
         await analyseServerResponse(res)
+        setIsLoading(false)
       })
       .catch(() => {
         setError('Une erreur est survenue')

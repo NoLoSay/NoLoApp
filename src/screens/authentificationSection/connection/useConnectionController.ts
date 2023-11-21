@@ -58,12 +58,10 @@ export default function useConnectionController({ navigation }: useConnectionCon
           username: response.username,
           accessToken: response.access_token,
         })
-        setIsLoading(false)
         navigation.navigate('AppRouter')
       } else {
         setError(response.message)
       }
-      setIsLoading(false)
     })
   }
 
@@ -81,8 +79,10 @@ export default function useConnectionController({ navigation }: useConnectionCon
     })
       .then(async res => {
         await analyseServerResponse(res)
+        setIsLoading(false)
       })
       .catch(() => {
+        setIsLoading(false)
         setError('Une erreur est survenue')
       })
   }
