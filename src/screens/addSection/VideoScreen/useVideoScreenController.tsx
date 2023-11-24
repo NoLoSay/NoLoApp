@@ -12,6 +12,8 @@ const useVideoScreenController = () => {
   const [isCameraActive, setIsCameraActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  // TODO If user don't have authorized the access to camera roll, display error page
+
   const toggleRecording = () => setIsRecording(!isRecording)
 
   useEffect(() => {
