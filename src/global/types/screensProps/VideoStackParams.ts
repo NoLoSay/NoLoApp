@@ -12,9 +12,11 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
  */
 export type VideoStackParamList = {
   ActionsScreen: undefined
+  VideoScreen: undefined
 }
 
 /**
  * @typedef {Object} SubscriptionScreenProps
  */
 export type ListElementScreenProps = NativeStackScreenProps<VideoStackParamList, 'ActionsScreen'>
+export type VideoScreenProps = NativeStackScreenProps<VideoStackParamList, 'VideoScreen'>

@@ -2,6 +2,7 @@ import { AccountContext } from '@source/global/contexts/AccountProvider'
 import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { useContext } from 'react'
 import { ContentCategoryId } from '@source/global/types/AddContentCategory'
+import { useNavigation } from '@react-navigation/native'
 
 interface useActionScreenControllerProps {
   account: AccountType
@@ -11,6 +12,8 @@ interface useActionScreenControllerProps {
 
 export default function useActionsScreenController(): useActionScreenControllerProps {
   const { account } = useContext(AccountContext)
+  const navigation = useNavigation()
+
   const displayAdminCategory = (categoryElevation?: AccountElevationEnum) => {
     return account.elevation >= (categoryElevation ?? AccountElevationEnum.USER)
   }
@@ -18,7 +21,7 @@ export default function useActionsScreenController(): useActionScreenControllerP
   function onCategoryPress(categoryId: string) {
     switch (categoryId) {
       case ContentCategoryId.ADDCONTENT:
-        console.log('Pressed on add content')
+        navigation.navigate('VideoScreen')
         break
       case ContentCategoryId.LIBRARY:
         console.log('Pressed on library')
