@@ -13,6 +13,8 @@ import LoadingModal from '@source/components/LoadingModal'
 import ErrorModal from '@source/components/ErrorModal'
 import useVideoScreenController from './useVideoScreenController'
 import NoCameraView from './Views/NoCameraView'
+import OverlayModule from './OverlayModule/OverlayModule'
+
 /**
  * @function VideoScreen
  * @description Component that renders the Video screen.
@@ -40,6 +42,7 @@ export default function VideoScreen(): React.JSX.Element {
       isActive={isCameraActive}
       video
     >
+      <OverlayModule isRecording={isRecording} />
       <SafeAreaView style={styles.bottomContainer}>
         <Pressable
           onPress={onRecordPress}
