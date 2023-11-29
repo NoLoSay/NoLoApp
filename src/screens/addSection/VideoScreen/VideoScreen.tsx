@@ -1,7 +1,7 @@
 /**
- * @fileoverview Actions screen component
- * @module ActionsScreen
- * @description Actions screen, it is the first screen that a user sees when clicking on the + tab
+ * @fileoverview Video screen component
+ * @module VideoScreen
+ * @description Video screen, it is the screen that the user will be shown when he wants to create a video.
  * @requires react react-native
  */
 
@@ -14,8 +14,8 @@ import ErrorModal from '@source/components/ErrorModal'
 import useVideoScreenController from './useVideoScreenController'
 import NoCameraView from './Views/NoCameraView'
 /**
- * @function ActionsScreen
- * @description Component that renders the Scan screen.
+ * @function VideoScreen
+ * @description Component that renders the Video screen.
  * @returns {React.JSX.Element} App component template
  */
 export default function VideoScreen(): React.JSX.Element {
