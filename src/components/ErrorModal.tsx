@@ -11,7 +11,7 @@
 
 import React from 'react'
 import colors from '@source/global/colors'
-import { Modal, View, ActivityIndicator, StyleSheet, StyleProp, ViewStyle, Text } from 'react-native'
+import { Modal, View, StyleSheet, StyleProp, ViewStyle, Text } from 'react-native'
 
 type Props = {
   visible: boolean
