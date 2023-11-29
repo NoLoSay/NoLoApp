@@ -34,7 +34,9 @@ export default function VideoScreen(): React.JSX.Element {
         <Pressable
           onPress={onRecordPress}
           style={isRecording ? styles.recordingButton : styles.recordButton}
-        />
+        >
+          {isRecording && <View style={styles.recordingSquare} />}
+        </Pressable>
       </SafeAreaView>
       <LoadingModal visible={isLoading} />
     </Camera>
@@ -68,12 +70,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   recordingButton: {
-    width: '10%',
+    width: '20%',
+    aspectRatio: 1,
+    borderRadius: 50,
+    borderColor: colors.accent,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  recordingSquare: {
+    width: '100%',
     aspectRatio: 1,
     borderRadius: 5,
     backgroundColor: colors.accent,
     opacity: 0.8,
-    marginBottom: '5%',
     justifyContent: 'center',
     alignItems: 'center',
   },
