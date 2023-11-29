@@ -8,12 +8,13 @@
 
 import { colors } from '@source/global/colors'
 import React from 'react'
-import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
+import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 
 interface Props {
   onPress: () => void
   text: string
   style?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
 }
 
 /**
@@ -24,14 +25,14 @@ interface Props {
  * @param {StyleProp<ViewStyle>} props.style - Style of the button
  * @returns
  */
-export default function Button({ onPress, text, style }: Props) {
+export default function Button({ onPress, text, style, textStyle }: Props) {
   return (
     <View style={{ width: '100%', paddingHorizontal: 52 }}>
       <Pressable
         style={[styles.button, style]}
         onPress={onPress}
       >
-        <Text style={styles.text}>{text}</Text>
+        <Text style={[styles.text, textStyle]}>{text}</Text>
       </Pressable>
     </View>
   )

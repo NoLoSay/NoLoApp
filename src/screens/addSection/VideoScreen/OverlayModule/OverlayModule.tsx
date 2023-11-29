@@ -6,37 +6,56 @@
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import colors from '@source/global/colors'
-import images from '@source/global/images'
 import useOverlayModuleController from './useOverlayModuleController'
 import AssistantView from './Views/AssistantView'
+import TimerCountdownView from './Views/TimerCountdownView'
+import TimerSliderView from './Views/TimerSliderView'
 
+/**
+ * @typedef Props
+ * @property {boolean} isRecording Wether the user is recording a video or not
+ * @property {React.Dispatch<React.SetStateAction<number>>} setTimer Function that sets the timer value
+ * @property {number} timer The timer value
+ */
 type Props = {
   isRecording: boolean
+  setTimer: React.Dispatch<React.SetStateAction<number>>
+  timer: number
 }
 
 /**
  * @function OverlayModule
  * @description Component that renders the Overlay module.
  * @param {boolean} isRecording Wether the user is recording a video or not
+ * @param {React.Dispatch<React.SetStateAction<number>>} setTimer Function that sets the timer value
+ * @param {number} timer The timer value
  * @returns {JSX.Element} OverlayModule component
  */
-export default function OverlayModule({ isRecording }: Props): JSX.Element {
-  const { isAssistantVisible, toggleAssistant } = useOverlayModuleController()
-
-  const OPTIONS = [
-    {
-      title: 'Assistant',
-      icon: images.icons.outline.assistant(),
-      onPress: toggleAssistant,
-      isActivated: isAssistantVisible,
-    },
-  ]
+export default function OverlayModule({ isRecording, setTimer, timer }: Props): JSX.Element {
+  const { isAssistantVisible, onTimerPress, isTimerModalVisible, OVERLAY_OPTIONS, initialTimer, setInitialTimer } =
+    useOverlayModuleController({
+      timer,
+    })
 
   return (
     <View style={styles.container}>
+      {isAssistantVisible && <AssistantView />}
+      <TimerCountdownView
+        timerValue={timer}
+        initialTimerValue={initialTimer}
+        isRecording={isRecording}
+      />
+      {isTimerModalVisible && (
+        <TimerSliderView
+          toggleVisibility={onTimerPress}
+          setTimerValue={setTimer}
+          initialTimer={initialTimer}
+          setInitialTimer={setInitialTimer}
+        />
+      )}
       {!isRecording && (
         <View style={styles.optionsContainer}>
-          {OPTIONS.map(option => (
+          {OVERLAY_OPTIONS.map(option => (
             <Pressable
               key={option.title}
               style={styles.overlayCategoryButton}
@@ -47,12 +66,11 @@ export default function OverlayModule({ isRecording }: Props): JSX.Element {
                 style={styles.icon}
               />
               <Text style={styles.categoryText}>{option.title}</Text>
-              {option.isActivated && <View style={styles.activatedLine} />}
+              {option.isActivated() && <View style={styles.activatedLine} />}
             </Pressable>
           ))}
         </View>
       )}
-      {isAssistantVisible && <AssistantView />}
     </View>
   )
 }

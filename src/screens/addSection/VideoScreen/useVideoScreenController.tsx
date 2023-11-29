@@ -19,7 +19,7 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll'
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import DeviceInfo from 'react-native-device-info'
-import { Camera, CameraDevice, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
+import { Camera, CameraDevice, VideoFile, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
 
 /**
  * @typedef VideoScreenController
@@ -43,6 +43,8 @@ type VideoScreenController = {
   isCameraActive: boolean
   isErrorModalVisible: boolean
   errorText: string
+  timer: number
+  setTimer: React.Dispatch<React.SetStateAction<number>>
 }
 
 /**
@@ -59,6 +61,7 @@ const useVideoScreenController = (): VideoScreenController => {
   const [isLoading, setIsLoading] = useState(false)
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false)
   const [errorText, setErrorText] = useState("Vous n'avez pas autorisé l'accès à la galerie.")
+  const [timer, setTimer] = useState(0)
 
   // TODO If user don't have authorized the access to camera roll, display error page
 
@@ -96,6 +99,23 @@ const useVideoScreenController = (): VideoScreenController => {
     setTimeout(() => setIsErrorModalVisible(false), 3000)
   }
 
+  const recordIsFinished = async (video: VideoFile) => {
+    setIsLoading(true)
+    const { path } = video
+    await CameraRoll.save(`file://${path}`, {
+      type: 'video',
+      album: DeviceInfo.getApplicationName(),
+    })
+      .then(() => console.log('success')) // TODO Redirect to ? See with team
+      .catch(err => {
+        console.error(err.message)
+        if (err.message === 'Access to photo library was denied')
+          displayErrorModal("Vous n'avez pas autorisé l'accès à la galerie.")
+        else displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+      })
+    setIsLoading(false)
+  }
+
   /**
    * @function onRecordPress
    * @description Function that is called when the user presses the record button, wether it starts or stops the recording
@@ -103,28 +123,17 @@ const useVideoScreenController = (): VideoScreenController => {
   const onRecordPress = async () => {
     if (!isRecording) {
       toggleRecording()
-      cameraRef.current?.startRecording({
-        onRecordingFinished: async video => {
-          setIsLoading(true)
-          const { path } = video
-          await CameraRoll.save(`file://${path}`, {
-            type: 'video',
-            album: DeviceInfo.getApplicationName(),
-          })
-            .then(() => console.log('success')) // TODO Redirect to ? See with team
-            .catch(err => {
-              console.error(err.message)
-              if (err.message === 'Access to photo library was denied')
-                displayErrorModal("Vous n'avez pas autorisé l'accès à la galerie.")
-              else displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
-            })
-          setIsLoading(false)
-        },
-        onRecordingError: error => {
-          console.error(error)
-          displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
-        },
-      })
+      setTimeout(() => {
+        cameraRef.current?.startRecording({
+          onRecordingFinished: async video => {
+            recordIsFinished(video)
+          },
+          onRecordingError: error => {
+            console.error(error)
+            displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+          },
+        })
+      }, timer * 1000)
     }
     if (isRecording) {
       await cameraRef.current?.stopRecording().catch(err => {
@@ -145,6 +154,8 @@ const useVideoScreenController = (): VideoScreenController => {
     isCameraActive,
     isErrorModalVisible,
     errorText,
+    timer,
+    setTimer,
   }
 }
 
