@@ -11,6 +11,8 @@ const useVideoScreenController = () => {
   const [isRecording, setIsRecording] = useState(false)
   const [isCameraActive, setIsCameraActive] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false)
+  const [errorText, setErrorText] = useState("Vous n'avez pas autorisé l'accès à la galerie.")
 
   // TODO If user don't have authorized the access to camera roll, display error page
 
@@ -33,6 +35,12 @@ const useVideoScreenController = () => {
     }, [])
   )
 
+  const displayErrorModal = (text: string) => {
+    setErrorText(text)
+    setIsErrorModalVisible(true)
+    setTimeout(() => setIsErrorModalVisible(false), 3000)
+  }
+
   const onRecordPress = async () => {
     if (!isRecording) {
       toggleRecording()
@@ -45,14 +53,25 @@ const useVideoScreenController = () => {
             album: DeviceInfo.getApplicationName(),
           })
             .then(() => console.log('success')) // TODO Redirect to ? See with team
-            .catch(err => console.error(err)) // TODO Afficher un message d'erreur
+            .catch(err => {
+              console.error(err.message)
+              if (err.message === 'Access to photo library was denied')
+                displayErrorModal("Vous n'avez pas autorisé l'accès à la galerie.")
+              else displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+            })
           setIsLoading(false)
         },
-        onRecordingError: error => console.error(error), // TODO Afficher un message d'erreur
+        onRecordingError: error => {
+          console.error(error)
+          displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+        },
       })
     }
     if (isRecording) {
-      await cameraRef.current?.stopRecording().catch(err => console.error(err)) // TODO Afficher un message d'erreur
+      await cameraRef.current?.stopRecording().catch(err => {
+        console.error(err)
+        displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+      })
       toggleRecording()
     }
   }
@@ -65,6 +84,8 @@ const useVideoScreenController = () => {
     onRecordPress,
     isLoading,
     isCameraActive,
+    isErrorModalVisible,
+    errorText,
   }
 }
 

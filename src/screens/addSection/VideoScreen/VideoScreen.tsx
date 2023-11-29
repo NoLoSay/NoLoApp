@@ -6,10 +6,11 @@
  */
 
 import React from 'react'
-import { Pressable, SafeAreaView, StyleSheet } from 'react-native'
+import { Pressable, SafeAreaView, StyleSheet, View } from 'react-native'
 import { colors } from '@global/colors'
 import { Camera } from 'react-native-vision-camera'
 import LoadingModal from '@source/components/LoadingModal'
+import ErrorModal from '@source/components/ErrorModal'
 import useVideoScreenController from './useVideoScreenController'
 import NoCameraView from './Views/NoCameraView'
 /**
@@ -18,8 +19,17 @@ import NoCameraView from './Views/NoCameraView'
  * @returns {React.JSX.Element} App component template
  */
 export default function VideoScreen(): React.JSX.Element {
-  const { hasPermission, frontCamera, cameraRef, isRecording, onRecordPress, isLoading, isCameraActive } =
-    useVideoScreenController()
+  const {
+    hasPermission,
+    frontCamera,
+    cameraRef,
+    isRecording,
+    onRecordPress,
+    isLoading,
+    isCameraActive,
+    isErrorModalVisible,
+    errorText,
+  } = useVideoScreenController()
 
   if (!frontCamera || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
   return (
@@ -39,6 +49,10 @@ export default function VideoScreen(): React.JSX.Element {
         </Pressable>
       </SafeAreaView>
       <LoadingModal visible={isLoading} />
+      <ErrorModal
+        visible={isErrorModalVisible}
+        errorText={errorText}
+      />
     </Camera>
   )
 }
