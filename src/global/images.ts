@@ -21,6 +21,7 @@ export const images = {
     },
     outline: {
       add: () => require('@assets/icons/outline/add.png'),
+      assistant: () => require('@assets/icons/outline/assistant.png'),
       backArrow: () => require('@assets/icons/outline/back_arrow.png'),
       blind: () => require('@assets/icons/outline/blind.png'),
       camera: () => require('@assets/icons/outline/camera.png'),
