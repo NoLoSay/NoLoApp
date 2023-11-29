@@ -21,6 +21,8 @@ export default function useActionsScreenController(): useActionScreenControllerP
   function onCategoryPress(categoryId: string) {
     switch (categoryId) {
       case ContentCategoryId.ADDCONTENT:
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         navigation.navigate('VideoScreen')
         break
       case ContentCategoryId.LIBRARY:
