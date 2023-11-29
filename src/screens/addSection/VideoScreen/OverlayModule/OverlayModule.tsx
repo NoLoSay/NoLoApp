@@ -21,6 +21,7 @@ type Props = {
  * @returns {JSX.Element} OverlayModule component
  */
 export default function OverlayModule({ isRecording }: Props): JSX.Element {
+  const { isAssistantVisible, toggleAssistant } = useOverlayModuleController()
 
   const OPTIONS = [
     {
