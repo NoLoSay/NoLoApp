@@ -18,7 +18,7 @@ type useOverlayModuleController = {
 /**
  * @function useOverlayModuleController
  * @description Logic for the OverlayModule.
- * @returns {useOverlayModuleControllerProps} Variable that alters the OverlayModule.
+ * @returns {useOverlayModuleController} Variables that alters the OverlayModule.
  */
 const useOverlayModuleController = (): useOverlayModuleController => {
   const [isAssistantVisible, setIsAssistantVisible] = useState(false)
