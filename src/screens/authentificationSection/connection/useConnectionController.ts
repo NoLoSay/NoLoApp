@@ -81,7 +81,8 @@ export default function useConnectionController({ navigation }: useConnectionCon
         await analyseServerResponse(res)
         setIsLoading(false)
       })
-      .catch(() => {
+      .catch(err => {
+        console.error(err) // TODO Should we send errors to back-end ? To have a trace of what went wrong
         setIsLoading(false)
         setError('Une erreur est survenue')
       })

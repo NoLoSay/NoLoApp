@@ -9,6 +9,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { VideoStackParamList } from '@source/global/types/screensProps/VideoStackParams'
 import ActionsScreen from './ActionsScreen/ActionsScreen'
+import VideoScreen from './VideoScreen/VideoScreen'
 
 /**
  * @function AddScreen
@@ -29,6 +30,10 @@ export default function AddScreen(): React.JSX.Element {
         <VideoStack.Screen
           name='ActionsScreen'
           component={ActionsScreen}
+        />
+        <VideoStack.Screen
+          name='VideoScreen'
+          component={VideoScreen}
         />
       </VideoStack.Group>
     </VideoStack.Navigator>

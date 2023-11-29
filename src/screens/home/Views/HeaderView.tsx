@@ -100,6 +100,7 @@ export default function HeaderView({
           placeholder='Rechercher'
           value={searchValue}
           onChangeText={updateText}
+          placeholderTextColor={colors.lightGrey}
         />
         <TouchableOpacity
           onPress={toggleSearchBar}
