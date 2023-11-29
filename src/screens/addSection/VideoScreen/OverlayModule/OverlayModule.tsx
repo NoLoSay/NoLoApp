@@ -6,12 +6,17 @@
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import colors from '@source/global/colors'
-import images from '@source/global/images'
 import useOverlayModuleController from './useOverlayModuleController'
 import AssistantView from './Views/AssistantView'
 import TimerCountdownView from './Views/TimerCountdownView'
 import TimerSliderView from './Views/TimerSliderView'
 
+/**
+ * @typedef Props
+ * @property {boolean} isRecording Wether the user is recording a video or not
+ * @property {React.Dispatch<React.SetStateAction<number>>} setTimer Function that sets the timer value
+ * @property {number} timer The timer value
+ */
 type Props = {
   isRecording: boolean
   setTimer: React.Dispatch<React.SetStateAction<number>>
@@ -22,6 +27,8 @@ type Props = {
  * @function OverlayModule
  * @description Component that renders the Overlay module.
  * @param {boolean} isRecording Wether the user is recording a video or not
+ * @param {React.Dispatch<React.SetStateAction<number>>} setTimer Function that sets the timer value
+ * @param {number} timer The timer value
  * @returns {JSX.Element} OverlayModule component
  */
 export default function OverlayModule({ isRecording, setTimer, timer }: Props): JSX.Element {

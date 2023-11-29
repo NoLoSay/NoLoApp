@@ -1,8 +1,18 @@
+/**
+ * @fileoverview AssistantView component.
+ * @module AssistantView
+ * @requires react react-native
+ */
 import colors from '@source/global/colors'
 import React from 'react'
 import { View, StyleSheet, useWindowDimensions } from 'react-native'
 
-export default function AssistantView() {
+/**
+ * @function AssistantView
+ * @description Component that renders the assistant view.
+ * @returns {JSX.Element} AssistantView component
+ */
+export default function AssistantView(): JSX.Element {
   const { width } = useWindowDimensions()
   const assistantDimensions = {
     height: 130,

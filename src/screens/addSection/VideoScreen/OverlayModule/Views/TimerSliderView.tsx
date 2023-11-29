@@ -1,9 +1,23 @@
+/**
+ * @fileoverview Timer slider view component
+ * @module TimerSliderView
+ * @description Timer slider view, it is the view that is displayed when the user wants to change the timer value.
+ * @requires react react-native
+ * @requires @react-native-picker/picker
+ */
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import Button from '@source/components/Button'
 import colors from '@source/global/colors'
 
+/**
+ * @typedef Props
+ * @property {Function} toggleVisibility Function that toggles the visibility of the timer slider
+ * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
+ * @property {number} initialTimer The initial timer value
+ * @property {Function} setInitialTimer Function that sets the initial timer value
+ */
 type Props = {
   toggleVisibility: () => void
   setTimerValue: React.Dispatch<React.SetStateAction<number>>
@@ -11,19 +25,41 @@ type Props = {
   setInitialTimer: (timer: number) => void
 }
 
+/**
+ * @function TimerSliderView
+ * @description Component that renders the Timer slider view.
+ * @param {() => void} toggleVisibility Function that toggles the visibility of the timer slider
+ * @param {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
+ * @param {number} initialTimer The initial timer value
+ * @param {(timer: number) => void} setInitialTimer Function that sets the initial timer value
+ * @returns
+ */
 function TimerSliderView({ toggleVisibility, setTimerValue, initialTimer, setInitialTimer }: Props) {
   const [selectedValue, setSelectedValue] = useState(initialTimer)
 
+  /**
+   * @function handleSliderChange
+   * @description Function that handles the change of the slider value
+   * @param {number} value The new value of the slider
+   */
   const handleSliderChange = (value: number) => {
     setSelectedValue(value)
   }
 
+  /**
+   * @function handleSliderConfirm
+   * @description Function that handles the confirmation of the slider value
+   */
   const handleSliderConfirm = () => {
     setTimerValue(selectedValue)
     setInitialTimer(selectedValue)
     toggleVisibility()
   }
 
+  /**
+   * @function handleSliderCancel
+   * @description Function that handles the cancellation of the slider value
+   */
   const handleSliderCancel = () => {
     toggleVisibility()
   }

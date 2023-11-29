@@ -23,10 +23,23 @@ type useOverlayModuleController = {
   setInitialTimer: (timer: number) => void
 }
 
+/**
+ * @typedef Props
+ * @description Type for the props of the useOverlayModuleController custom hook.
+ * @property {number} timer The timer.
+ */
 type Props = {
   timer: number
 }
 
+/**
+ * @typedef OverlayOption
+ * @description Type for the OverlayOption object.
+ * @property {string} title The title of the option.
+ * @property {ImageSourcePropType} icon The icon of the option.
+ * @property {function} onPress The function to call when the option is pressed.
+ * @property {function} isActivated The function to call to check if the option is activated.
+ */
 type OverlayOption = {
   title: string
   icon: ImageSourcePropType

@@ -1,13 +1,33 @@
+/**
+ * @fileoverview Timer countdown view component
+ * @module TimerCountdownView
+ * @description Timer countdown view, it is the view that is displayed when the user is recording a video.
+ * @requires react react-native
+ */
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
+/**
+ * @typedef Props
+ * @property {number} timerValue The current timer value
+ * @property {number} initialTimerValue The initial timer value
+ * @property {boolean} isRecording Wether the user is recording a video or not
+ */
 type Props = {
   timerValue: number
   initialTimerValue: number
   isRecording: boolean
 }
 
-export default function TimerCountdownView({ timerValue, initialTimerValue, isRecording }: Props) {
+/**
+ * @function TimerCountdownView
+ * @description Component that renders the Timer countdown view.
+ * @param {number} timerValue The current timer value
+ * @param {number} initialTimerValue The initial timer value
+ * @param {boolean} isRecording Wether the user is recording a video or not
+ * @returns {JSX.Element} TimerCountdownView component
+ */
+export default function TimerCountdownView({ timerValue, initialTimerValue, isRecording }: Props): JSX.Element {
   const [timer, setTimer] = useState(timerValue)
 
   // eslint-disable-next-line consistent-return
