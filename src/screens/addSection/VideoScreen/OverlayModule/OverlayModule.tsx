@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Overlay module that displays different options to help the user while he records a video.
+ * @module OverlayModule
+ * @requires react react-native
+ */
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import colors from '@source/global/colors'
@@ -9,8 +14,13 @@ type Props = {
   isRecording: boolean
 }
 
-export default function OverlayModule({ isRecording }: Props) {
-  const { isAssistantVisible, toggleAssistant } = useOverlayModuleController()
+/**
+ * @function OverlayModule
+ * @description Component that renders the Overlay module.
+ * @param {boolean} isRecording Wether the user is recording a video or not
+ * @returns {JSX.Element} OverlayModule component
+ */
+export default function OverlayModule({ isRecording }: Props): JSX.Element {
 
   const OPTIONS = [
     {
