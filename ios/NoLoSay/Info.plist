@@ -8,7 +8,7 @@
 		<string></string>
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>fr</string>
 	<key>CFBundleDisplayName</key>
 	<string>NoLoSay</string>
 	<key>CFBundleExecutable</key>
@@ -54,7 +54,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Nous avons besoin de l&apos;accès à votre caméra pour scanner des QR codes !</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Nous avons besoin d&apos;accéder à votre bibliothèque pour enregistrer et récupérer les traductions que vous faites sur l'application !</string>
+	<string>Nous avons besoin d&apos;accéder à votre bibliothèque pour enregistrer et récupérer les traductions que vous faites sur l&apos;application !</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Bold.ttf</string>
@@ -75,8 +75,6 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
