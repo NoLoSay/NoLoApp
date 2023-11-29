@@ -26,6 +26,7 @@ export const images = {
       blind: () => require('@assets/icons/outline/blind.png'),
       camera: () => require('@assets/icons/outline/camera.png'),
       carousel: () => require('@assets/icons/outline/carousel.png'),
+      clock: () => require('@assets/icons/outline/clock.png'),
       community: () => require('@assets/icons/outline/community.png'),
       contract: () => require('@assets/icons/outline/CGU.png'),
       cross: () => require('@assets/icons/outline/cross.png'),
