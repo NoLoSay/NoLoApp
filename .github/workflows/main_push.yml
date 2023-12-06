@@ -9,14 +9,11 @@ jobs:
   linting:
     uses: NoLoSay/NoLoApp/.github/workflows/front_end_linting.yml@main
 
-  optimization:
-    uses: NoLoSay/NoLoApp/.github/workflows/optimize_images.yml@main
-
   testing:
     needs: linting
     uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@main
     secrets: inherit
 
   documentation:
-    needs: [linting, testing, optimization]
+    needs: [linting, testing]
     uses: NoLoSay/NoLoApp/.github/workflows/generate_documentation.yml@main

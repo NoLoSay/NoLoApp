@@ -22,10 +22,6 @@ jobs:
 
           find ./assets -name '*.png' -exec optipng -o7 {} \;
 
-      - name: Commit and push changes
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
           git diff --exit-code
           if [ $? -eq 0 ]; then
             echo "No changes detected."
