@@ -26,10 +26,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git checkout -b image-optimization
-          git add ./assets
-          git diff --cached --exit-code || git commit -m "Compress PNG assets" --allow-empty
-          git push --set-upstream origin image-optimization --force
-          gh pr create --title "Compress PNG assets" --body "Compress PNG assets" --base main
+          git diff --exit-code
+          if [ $? -eq 0 ]; then
+            echo "No changes detected."
+          else
+            echo "Images not compressed. Run `find ./assets -name '*.png' -exec optipng -o7 {} \;` to fix it."
+            exit 1
+          fi
