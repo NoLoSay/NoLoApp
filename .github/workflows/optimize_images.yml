@@ -25,3 +25,4 @@ jobs:
           git add ./assets
           git diff --cached --exit-code || git commit -m "Compress PNG assets" --allow-empty
           git push
+          git pr create --title "Compress PNG assets" --body "Compress PNG assets" --base master
