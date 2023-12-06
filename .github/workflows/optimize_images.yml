@@ -23,6 +23,8 @@ jobs:
           find ./assets -name '*.png' -exec optipng -o7 {} \;
 
       - name: Commit and push changes
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
