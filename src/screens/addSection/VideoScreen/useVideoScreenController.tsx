@@ -126,11 +126,12 @@ const useVideoScreenController = (): VideoScreenController => {
       setTimeout(() => {
         cameraRef.current?.startRecording({
           onRecordingFinished: async video => {
-            recordIsFinished(video)
+            // eslint-disable-next-line eqeqeq -- Idk why but it doesn't work with ===
+            if (timer == 0) recordIsFinished(video)
           },
           onRecordingError: error => {
             console.error(error)
-            displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+            if (timer === 0) displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
           },
         })
       }, timer * 1000)
@@ -138,7 +139,7 @@ const useVideoScreenController = (): VideoScreenController => {
     if (isRecording) {
       await cameraRef.current?.stopRecording().catch(err => {
         console.error(err)
-        displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+        if (timer === 0) displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
       })
       toggleRecording()
     }
