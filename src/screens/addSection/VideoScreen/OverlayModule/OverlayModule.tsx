@@ -20,8 +20,10 @@ import PrompterModule from './PrompterModule/PrompterModule'
  */
 type Props = {
   isRecording: boolean
-  setTimer: React.Dispatch<React.SetStateAction<number>>
-  timer: number
+  timerValue: number
+  setTimerValue: React.Dispatch<React.SetStateAction<number>>
+  defaultTimerValue: number
+  setDefaultTimerValue: React.Dispatch<React.SetStateAction<number>>
 }
 
 /**
@@ -32,33 +34,28 @@ type Props = {
  * @param {number} timer The timer value
  * @returns {JSX.Element} OverlayModule component
  */
-export default function OverlayModule({ isRecording, setTimer, timer }: Props): JSX.Element {
-  const {
-    isAssistantVisible,
-    onTimerPress,
-    isTimerModalVisible,
-    OVERLAY_OPTIONS,
-    initialTimer,
-    setInitialTimer,
-    isPrompterVisible,
-  } = useOverlayModuleController({
-    timer,
-  })
+export default function OverlayModule({
+  isRecording,
+  timerValue,
+  setTimerValue,
+  defaultTimerValue,
+  setDefaultTimerValue,
+}: Props): JSX.Element {
+  const { isAssistantVisible, onTimerPress, isTimerModalVisible, OVERLAY_OPTIONS, isPrompterVisible } =
+    useOverlayModuleController({
+      defaultTimerValue,
+    })
 
   return (
     <View style={styles.container}>
       {isAssistantVisible && <AssistantView />}
-      <TimerCountdownView
-        timerValue={timer}
-        initialTimerValue={initialTimer}
-        isRecording={isRecording}
-      />
+      <TimerCountdownView timerValue={timerValue} />
       {isTimerModalVisible && (
         <TimerSliderView
           toggleVisibility={onTimerPress}
-          setTimerValue={setTimer}
-          initialTimer={initialTimer}
-          setInitialTimer={setInitialTimer}
+          setTimerValue={setTimerValue}
+          defaultTimerValue={defaultTimerValue}
+          setDefaultTimerValue={setDefaultTimerValue}
         />
       )}
       {isPrompterVisible && (

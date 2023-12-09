@@ -27,10 +27,10 @@ type useOverlayModuleController = {
 /**
  * @typedef Props
  * @description Type for the props of the useOverlayModuleController custom hook.
- * @property {number} timer The timer.
+ * @property {number} defaultTimerValue The default timer value.
  */
 type Props = {
-  timer: number
+  defaultTimerValue: number
 }
 
 /**
@@ -53,7 +53,7 @@ type OverlayOption = {
  * @description Logic for the OverlayModule.
  * @returns {useOverlayModuleController} Variables that alters the OverlayModule.
  */
-const useOverlayModuleController = ({ timer }: Props): useOverlayModuleController => {
+const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayModuleController => {
   const [isAssistantVisible, setIsAssistantVisible] = useState(false)
   const [isTimerModalVisible, setIsTimerModalVisible] = useState(false)
   const [initialTimer, setInitialTimer] = useState(0)
@@ -98,7 +98,7 @@ const useOverlayModuleController = ({ timer }: Props): useOverlayModuleControlle
       icon: images.icons.outline.clock(),
       onPress: toggleTimer,
       isActivated: () => {
-        return timer > 0
+        return defaultTimerValue > 0
       },
     },
   ]

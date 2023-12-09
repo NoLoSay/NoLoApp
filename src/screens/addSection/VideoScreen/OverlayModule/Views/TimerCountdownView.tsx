@@ -4,7 +4,7 @@
  * @description Timer countdown view, it is the view that is displayed when the user is recording a video.
  * @requires react react-native
  */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 /**
@@ -15,8 +15,6 @@ import { View, Text, StyleSheet } from 'react-native'
  */
 type Props = {
   timerValue: number
-  initialTimerValue: number
-  isRecording: boolean
 }
 
 /**
@@ -27,27 +25,8 @@ type Props = {
  * @param {boolean} isRecording Wether the user is recording a video or not
  * @returns {JSX.Element} TimerCountdownView component
  */
-export default function TimerCountdownView({ timerValue, initialTimerValue, isRecording }: Props): JSX.Element {
-  const [timer, setTimer] = useState(timerValue)
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    if (isRecording) {
-      const countdownInterval = setInterval(() => {
-        setTimer(prevTimer => prevTimer - 1)
-      }, 1000)
-
-      return () => clearInterval(countdownInterval)
-    }
-    setTimer(initialTimerValue)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isRecording])
-
-  useEffect(() => {
-    setTimer(timerValue)
-  }, [timerValue])
-
-  return <View style={styles.container}>{timer > 0 && <Text style={styles.textStyle}>{timer}</Text>}</View>
+export default function TimerCountdownView({ timerValue }: Props): JSX.Element {
+  return <View style={styles.container}>{timerValue > 0 && <Text style={styles.textStyle}>{timerValue}</Text>}</View>
 }
 
 const styles = StyleSheet.create({
