@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   image: {
+    marginTop: 32,
     width: '60%',
     aspectRatio: 2.59,
     alignSelf: 'center',

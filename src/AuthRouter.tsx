@@ -47,15 +47,15 @@ export default function App(): React.JSX.Element {
               name='AppRouter'
               component={AppRouter}
             />
-            <AuthStack.Screen
-              name='VerifyEmail'
-              component={VerifyEmail}
-            />
           </AuthStack.Group>
           <AuthStack.Group screenOptions={{ presentation: 'modal', gestureEnabled: true }}>
             <AuthStack.Screen
               name='SettingsModal'
               component={SettingsScreen}
+            />
+            <AuthStack.Screen
+              name='VerifyEmail'
+              component={VerifyEmail}
             />
           </AuthStack.Group>
           <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal', gestureEnabled: true }}>
