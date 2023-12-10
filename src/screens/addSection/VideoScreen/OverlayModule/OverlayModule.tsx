@@ -15,8 +15,10 @@ import PrompterModule from './PrompterModule/PrompterModule'
 /**
  * @typedef Props
  * @property {boolean} isRecording Wether the user is recording a video or not
- * @property {React.Dispatch<React.SetStateAction<number>>} setTimer Function that sets the timer value
- * @property {number} timer The timer value
+ * @property {number} timerValue The timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
+ * @property {number} defaultTimerValue The default timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setDefaultTimerValue Function that sets the default timer value
  */
 type Props = {
   isRecording: boolean
@@ -30,8 +32,10 @@ type Props = {
  * @function OverlayModule
  * @description Component that renders the Overlay module.
  * @param {boolean} isRecording Wether the user is recording a video or not
- * @param {React.Dispatch<React.SetStateAction<number>>} setTimer Function that sets the timer value
- * @param {number} timer The timer value
+ * @param {number} timerValue The timer value
+ * @param {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
+ * @param {number} defaultTimerValue The default timer value
+ * @param {React.Dispatch<React.SetStateAction<number>>} setDefaultTimerValue Function that sets the default timer value
  * @returns {JSX.Element} OverlayModule component
  */
 export default function OverlayModule({
@@ -98,6 +102,7 @@ Aliquip anim ullamco anim ullamco aliqua non. Aliqua laboris tempor ipsum elit s
 
 Duis quis laborum tempor ipsum eu. Aliquip irure consequat ea ipsum aute elit magna anim irure cupidatat magna adipisicing non. Deserunt elit amet nisi officia et id aute. Amet qui proident ut quis culpa consequat incididunt aliquip adipisicing fugiat fugiat do velit quis.'
           isRecording={isRecording}
+          timer={timerValue}
         />
       )}
       {!isRecording && (

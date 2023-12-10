@@ -32,6 +32,10 @@ import { Camera, CameraDevice, VideoFile, useCameraDevice, useCameraPermission }
  * @property {boolean} isCameraActive Wether the camera is active or not
  * @property {boolean} isErrorModalVisible Wether the error modal is visible or not
  * @property {string} errorText The text to display in the error modal
+ * @property {number} timerValue The current timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
+ * @property {number} defaultTimerValue The default timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setDefaultTimerValue Function that sets the default timer value
  */
 type VideoScreenController = {
   hasPermission: boolean
@@ -102,6 +106,12 @@ const useVideoScreenController = (): VideoScreenController => {
     setTimeout(() => setIsErrorModalVisible(false), 3000)
   }
 
+  /**
+   * @function recordIsFinished
+   * @description Function that is called when the recording is finished, it saves the video to the camera roll
+   * @param {VideoFile} video The video file
+   * @returns {Promise<void>} Promise that resolves when the video is saved to the camera roll
+   */
   const recordIsFinished = async (video: VideoFile) => {
     setIsLoading(true)
     const { path } = video
@@ -119,6 +129,11 @@ const useVideoScreenController = (): VideoScreenController => {
     setIsLoading(false)
   }
 
+  /**
+   * @function startRecording
+   * @description Starts the recording of the video and handles events related to the recording
+   * @returns {Promise<void>} Promise that resolves when the recording is finished
+   */
   const startRecording = async () => {
     cameraRef.current?.startRecording({
       onRecordingFinished: async video => {
@@ -132,6 +147,11 @@ const useVideoScreenController = (): VideoScreenController => {
     })
   }
 
+  /**
+   * @function stopRecording
+   * @description Stops the recording of the video and handles errors
+   * @returns {Promise<void>} Promise that resolves when the recording is stopped
+   */
   const stopRecording = async () => {
     cameraRef.current?.stopRecording().catch(err => {
       console.error(err)
@@ -147,6 +167,10 @@ const useVideoScreenController = (): VideoScreenController => {
     toggleRecording()
   }
 
+  /**
+   * @function useEffect
+   * @description Starts the recording when the timer value is 0
+   */
   useEffect(() => {
     if (timerValue === 0) {
       startRecording()

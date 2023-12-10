@@ -13,14 +13,14 @@ import { ImageSourcePropType } from 'react-native'
  * @description Type for the useOverlayModuleController custom hook.
  * @property {boolean} isAssistantVisible Is the assistant visible.
  * @property {function} toggleAssistant Toggle the assistant.
+ * @property {Object[]} OVERLAY_OPTIONS The overlay buttons.
+ * @property {boolean} isPrompterVisible Is the prompter visible.
  */
 type useOverlayModuleController = {
   isAssistantVisible: boolean
   onTimerPress: () => void
   isTimerModalVisible: boolean
   OVERLAY_OPTIONS: OverlayOption[]
-  initialTimer: number
-  setInitialTimer: (timer: number) => void
   isPrompterVisible: boolean
 }
 
@@ -51,12 +51,12 @@ type OverlayOption = {
 /**
  * @function useOverlayModuleController
  * @description Logic for the OverlayModule.
+ * @param {defaultTimerValue} number The default timer value.
  * @returns {useOverlayModuleController} Variables that alters the OverlayModule.
  */
 const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayModuleController => {
   const [isAssistantVisible, setIsAssistantVisible] = useState(false)
   const [isTimerModalVisible, setIsTimerModalVisible] = useState(false)
-  const [initialTimer, setInitialTimer] = useState(0)
   const [isPrompterVisible, setIsPrompterVisible] = useState(false)
 
   const toggleAssistant = () => setIsAssistantVisible(!isAssistantVisible)
@@ -108,8 +108,6 @@ const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayMod
     onTimerPress: toggleTimer,
     isTimerModalVisible,
     OVERLAY_OPTIONS,
-    initialTimer,
-    setInitialTimer,
     isPrompterVisible,
   }
 }

@@ -15,8 +15,8 @@ import colors from '@source/global/colors'
  * @typedef Props
  * @property {Function} toggleVisibility Function that toggles the visibility of the timer slider
  * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
- * @property {number} initialTimer The initial timer value
- * @property {Function} setInitialTimer Function that sets the initial timer value
+ * @property {number} defaultTimerValue The default timer value
+ * @property {Function} setDefaultTimerValue Function that sets the default timer value
  */
 type Props = {
   toggleVisibility: () => void
@@ -90,7 +90,7 @@ function TimerSliderView({ toggleVisibility, setTimerValue, defaultTimerValue, s
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Choisissez un temps avant que la vidéo commence</Text>
+      <Text style={styles.text}>Choisissez une durée avant que la vidéo commence</Text>
       <Picker
         selectedValue={selectedValue}
         onValueChange={handleSliderChange}

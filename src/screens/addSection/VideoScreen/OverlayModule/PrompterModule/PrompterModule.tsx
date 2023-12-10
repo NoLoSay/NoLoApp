@@ -24,7 +24,7 @@ export default function PrompterModule({ text, isRecording, timer }: Props): JSX
   const { svRef, speed, setSpeed, size, setSize } = usePrompterModuleController({ isRecording, timer })
 
   return (
-    <View style={{ position: 'absolute', width: '100%', height: '100%' }}>
+    <View style={styles.container}>
       <ScrollView
         style={styles.prompterOverlay}
         ref={svRef}
@@ -61,6 +61,11 @@ export default function PrompterModule({ text, isRecording, timer }: Props): JSX
 }
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
   prompterOverlay: {
     position: 'absolute',
     top: '20%',
