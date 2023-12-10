@@ -35,10 +35,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 75,
   },
   textStyle: {
-    fontSize: 120,
+    fontSize: 80,
     fontFamily: 'Poppins',
     fontWeight: '700',
     opacity: 0.5,
