@@ -62,7 +62,7 @@ export default function OverlayModule({
           setDefaultTimerValue={setDefaultTimerValue}
         />
       )}
-      {isPrompterVisible && (
+      {isPrompterVisible && !isTimerModalVisible && (
         <PrompterModule
           text='Dolor qui irure labore est magna. Qui labore occaecat minim esse sunt voluptate est magna. Magna magna id elit consequat sit.
 
