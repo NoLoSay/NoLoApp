@@ -33,7 +33,8 @@ export default function PrompterModule({ text, isRecording, timer }: Props): JSX
         <Text style={[styles.text, { fontSize: size }]}>{text}</Text>
       </ScrollView>
       {!isRecording && (
-        <>
+        <View style={styles.slidersOVerlay}>
+          <Text style={styles.textStyle}>Taille du texte</Text>
           <Slider
             minimumValue={24}
             maximumValue={48}
@@ -42,8 +43,8 @@ export default function PrompterModule({ text, isRecording, timer }: Props): JSX
             step={4}
             value={size}
             onValueChange={value => setSize(value)}
-            style={styles.sliderPosition}
           />
+          <Text style={styles.textStyle}>Vitesse de défilement</Text>
           <Slider
             minimumValue={4}
             maximumValue={20}
@@ -52,9 +53,8 @@ export default function PrompterModule({ text, isRecording, timer }: Props): JSX
             step={1}
             value={speed}
             onValueChange={value => setSpeed(value)}
-            style={styles.slider2Position}
           />
-        </>
+        </View>
       )}
     </View>
   )
@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
   },
   prompterOverlay: {
     position: 'absolute',
-    top: '20%',
+    top: '14%',
     left: '5%',
-    height: '50%',
+    height: '54%',
     width: '80%',
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -85,16 +85,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingBottom: 40,
   },
-  sliderPosition: {
-    position: 'absolute',
-    top: '75%',
-    left: '12.5%',
-    width: '75%',
+  slidersOVerlay: {
+    position: 'relative',
+    top: '70%',
+    left: '5%',
+    width: '90%',
+    backgroundColor: colors.black,
+    opacity: 0.8,
+    borderRadius: 16,
+    paddingHorizontal: 40,
+    paddingVertical: 12,
   },
-  slider2Position: {
-    position: 'absolute',
-    top: '80%',
-    left: '12.5%',
-    width: '75%',
+  textStyle: {
+    color: colors.white,
+    fontFamily: 'Poppins',
   },
 })
