@@ -160,10 +160,15 @@ const useVideoScreenController = (): VideoScreenController => {
       if (timerValue <= 0) stopRecording()
       setTimerValue(defaultTimerValue)
     } else {
+      if (defaultTimerValue === 0) {
+        startRecording()
+        return
+      }
       const countdown = setInterval(() => {
         setTimerValue(prev => prev - 1)
       }, 1000)
 
+      // eslint-disable-next-line consistent-return
       return () => {
         clearInterval(countdown)
       }
