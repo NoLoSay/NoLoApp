@@ -64,11 +64,11 @@ export default function useSubscriptionController({
         setAccount({
           ...account,
           accountID: response.id,
-          accessToken: 'subscribedToken',
+          accessToken: '',
           email: response.email,
           username: response.username,
         })
-        navigation.navigate('AppRouter')
+        navigation.navigate('VerifyEmail')
       } else {
         setError(response.message)
       }

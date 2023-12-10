@@ -19,6 +19,7 @@ import { AccountProvider } from './global/contexts/AccountProvider'
 import SettingsScreen from './screens/settings/SettingsScreen'
 import WebViewScreen from './screens/webView/WebView'
 import PlaceDescription from './screens/PlaceDescription/PlaceDescription'
+import VerifyEmail from './screens/authentificationSection/verifyEmail/VerifyEmailScreen'
 
 export default function App(): React.JSX.Element {
   const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -45,6 +46,10 @@ export default function App(): React.JSX.Element {
             <AuthStack.Screen
               name='AppRouter'
               component={AppRouter}
+            />
+            <AuthStack.Screen
+              name='VerifyEmail'
+              component={VerifyEmail}
             />
           </AuthStack.Group>
           <AuthStack.Group screenOptions={{ presentation: 'modal', gestureEnabled: true }}>
