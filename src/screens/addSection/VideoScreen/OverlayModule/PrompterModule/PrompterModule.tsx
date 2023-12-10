@@ -12,6 +12,7 @@ import usePrompterModuleController from './usePrompterModuleController'
 type Props = {
   text: string
   isRecording: boolean
+  timer: number
 }
 
 /**
@@ -19,10 +20,8 @@ type Props = {
  * @description Component that renders the prompter module.
  * @returns {JSX.Element} PrompterModule component
  */
-export default function PrompterModule({ text, isRecording }: Props): JSX.Element {
-  const [speed, setSpeed] = React.useState<number>(10)
-  const { svRef } = usePrompterModuleController({ isRecording, speed })
-  const [textSize, setTextSize] = React.useState<number>(36)
+export default function PrompterModule({ text, isRecording, timer }: Props): JSX.Element {
+  const { svRef, speed, setSpeed, size, setSize } = usePrompterModuleController({ isRecording, timer })
 
   return (
     <View style={{ position: 'absolute', width: '100%', height: '100%' }}>
@@ -31,7 +30,7 @@ export default function PrompterModule({ text, isRecording }: Props): JSX.Elemen
         ref={svRef}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={[styles.text, { fontSize: textSize }]}>{text}</Text>
+        <Text style={[styles.text, { fontSize: size }]}>{text}</Text>
       </ScrollView>
       {!isRecording && (
         <>
@@ -41,8 +40,8 @@ export default function PrompterModule({ text, isRecording }: Props): JSX.Elemen
             maximumTrackTintColor={colors.darkGrey}
             minimumTrackTintColor={colors.accent}
             step={4}
-            value={textSize}
-            onValueChange={value => setTextSize(value)}
+            value={size}
+            onValueChange={value => setSize(value)}
             style={styles.sliderPosition}
           />
           <Slider

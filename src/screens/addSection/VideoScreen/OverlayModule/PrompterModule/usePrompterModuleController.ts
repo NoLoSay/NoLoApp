@@ -3,24 +3,26 @@
  * @description Logic for the OverlayModule.
  * @requires react
  */
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountType } from '@source/global/types/Account'
-import { RefObject, useContext, useEffect, useRef, useState } from 'react'
+import { Dispatch, RefObject, useEffect, useRef, useState } from 'react'
 import { ScrollView } from 'react-native'
 
 type useOverlayModuleController = {
-  account: AccountType
   svRef: RefObject<ScrollView>
+  speed: number
+  setSpeed: Dispatch<React.SetStateAction<number>>
+  size: number
+  setSize: Dispatch<React.SetStateAction<number>>
 }
 
 type Props = {
   isRecording: boolean
-  speed: number
+  timer: number
 }
 
-const useOverlayModuleController = ({ isRecording, speed }: Props): useOverlayModuleController => {
-  const { account } = useContext(AccountContext)
+const useOverlayModuleController = ({ isRecording, timer }: Props): useOverlayModuleController => {
   const [yPosition, setYPosition] = useState(0)
+  const [speed, setSpeed] = useState<number>(10)
+  const [size, setSize] = useState<number>(36)
   const svRef = useRef<ScrollView>(null)
 
   useEffect(() => {
@@ -28,18 +30,21 @@ const useOverlayModuleController = ({ isRecording, speed }: Props): useOverlayMo
       setYPosition(0)
       svRef.current?.scrollTo({ y: 0, animated: true })
     }
-    if (isRecording) {
+    if (isRecording && timer <= 0) {
       setTimeout(() => {
         const newPos = yPosition + speed
         setYPosition(newPos)
         svRef.current?.scrollTo({ y: newPos, animated: true })
       }, 250)
     }
-  }, [isRecording, yPosition, speed])
+  }, [isRecording, yPosition, speed, timer])
 
   return {
-    account,
     svRef,
+    speed,
+    setSpeed,
+    size,
+    setSize,
   }
 }
 
