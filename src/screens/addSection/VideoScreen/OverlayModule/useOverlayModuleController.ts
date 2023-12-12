@@ -13,23 +13,24 @@ import { ImageSourcePropType } from 'react-native'
  * @description Type for the useOverlayModuleController custom hook.
  * @property {boolean} isAssistantVisible Is the assistant visible.
  * @property {function} toggleAssistant Toggle the assistant.
+ * @property {Object[]} OVERLAY_OPTIONS The overlay buttons.
+ * @property {boolean} isPrompterVisible Is the prompter visible.
  */
 type useOverlayModuleController = {
   isAssistantVisible: boolean
   onTimerPress: () => void
   isTimerModalVisible: boolean
   OVERLAY_OPTIONS: OverlayOption[]
-  initialTimer: number
-  setInitialTimer: (timer: number) => void
+  isPrompterVisible: boolean
 }
 
 /**
  * @typedef Props
  * @description Type for the props of the useOverlayModuleController custom hook.
- * @property {number} timer The timer.
+ * @property {number} defaultTimerValue The default timer value.
  */
 type Props = {
-  timer: number
+  defaultTimerValue: number
 }
 
 /**
@@ -50,16 +51,19 @@ type OverlayOption = {
 /**
  * @function useOverlayModuleController
  * @description Logic for the OverlayModule.
+ * @param {defaultTimerValue} number The default timer value.
  * @returns {useOverlayModuleController} Variables that alters the OverlayModule.
  */
-const useOverlayModuleController = ({ timer }: Props): useOverlayModuleController => {
+const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayModuleController => {
   const [isAssistantVisible, setIsAssistantVisible] = useState(false)
   const [isTimerModalVisible, setIsTimerModalVisible] = useState(false)
-  const [initialTimer, setInitialTimer] = useState(0)
+  const [isPrompterVisible, setIsPrompterVisible] = useState(false)
 
   const toggleAssistant = () => setIsAssistantVisible(!isAssistantVisible)
 
   const toggleTimer = () => setIsTimerModalVisible(!isTimerModalVisible)
+
+  const togglePrompter = () => setIsPrompterVisible(!isPrompterVisible)
 
   useFocusEffect(
     useCallback(() => {
@@ -67,6 +71,7 @@ const useOverlayModuleController = ({ timer }: Props): useOverlayModuleControlle
 
       return () => {
         setIsTimerModalVisible(false)
+        setIsPrompterVisible(false)
       }
     }, [])
   )
@@ -81,11 +86,19 @@ const useOverlayModuleController = ({ timer }: Props): useOverlayModuleControlle
       },
     },
     {
+      title: 'Prompteur',
+      icon: images.icons.outline.text(),
+      onPress: togglePrompter,
+      isActivated: () => {
+        return isPrompterVisible
+      },
+    },
+    {
       title: 'Minuteur',
       icon: images.icons.outline.clock(),
       onPress: toggleTimer,
       isActivated: () => {
-        return timer > 0
+        return defaultTimerValue > 0
       },
     },
   ]
@@ -95,8 +108,7 @@ const useOverlayModuleController = ({ timer }: Props): useOverlayModuleControlle
     onTimerPress: toggleTimer,
     isTimerModalVisible,
     OVERLAY_OPTIONS,
-    initialTimer,
-    setInitialTimer,
+    isPrompterVisible,
   }
 }
 

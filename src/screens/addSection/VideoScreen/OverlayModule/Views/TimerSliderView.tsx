@@ -15,14 +15,14 @@ import colors from '@source/global/colors'
  * @typedef Props
  * @property {Function} toggleVisibility Function that toggles the visibility of the timer slider
  * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
- * @property {number} initialTimer The initial timer value
- * @property {Function} setInitialTimer Function that sets the initial timer value
+ * @property {number} defaultTimerValue The default timer value
+ * @property {Function} setDefaultTimerValue Function that sets the default timer value
  */
 type Props = {
   toggleVisibility: () => void
   setTimerValue: React.Dispatch<React.SetStateAction<number>>
-  initialTimer: number
-  setInitialTimer: (timer: number) => void
+  defaultTimerValue: number
+  setDefaultTimerValue: (timer: number) => void
 }
 
 /**
@@ -30,12 +30,12 @@ type Props = {
  * @description Component that renders the Timer slider view.
  * @param {() => void} toggleVisibility Function that toggles the visibility of the timer slider
  * @param {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
- * @param {number} initialTimer The initial timer value
- * @param {(timer: number) => void} setInitialTimer Function that sets the initial timer value
+ * @param {number} defaultTimerValue The default timer value
+ * @param {(timer: number) => void} setDefaultTimerValue Function that sets the default timer value
  * @returns
  */
-function TimerSliderView({ toggleVisibility, setTimerValue, initialTimer, setInitialTimer }: Props) {
-  const [selectedValue, setSelectedValue] = useState(initialTimer)
+function TimerSliderView({ toggleVisibility, setTimerValue, defaultTimerValue, setDefaultTimerValue }: Props) {
+  const [selectedValue, setSelectedValue] = useState(defaultTimerValue)
 
   /**
    * @function handleSliderChange
@@ -44,6 +44,8 @@ function TimerSliderView({ toggleVisibility, setTimerValue, initialTimer, setIni
    */
   const handleSliderChange = (value: number) => {
     setSelectedValue(value)
+    setTimerValue(value)
+    setDefaultTimerValue(value)
   }
 
   /**
@@ -51,8 +53,6 @@ function TimerSliderView({ toggleVisibility, setTimerValue, initialTimer, setIni
    * @description Function that handles the confirmation of the slider value
    */
   const handleSliderConfirm = () => {
-    setTimerValue(selectedValue)
-    setInitialTimer(selectedValue)
     toggleVisibility()
   }
 
@@ -90,7 +90,7 @@ function TimerSliderView({ toggleVisibility, setTimerValue, initialTimer, setIni
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Choisissez un temps avant que la vidéo commence</Text>
+      <Text style={styles.text}>Choisissez une durée avant que la vidéo commence</Text>
       <Picker
         selectedValue={selectedValue}
         onValueChange={handleSliderChange}

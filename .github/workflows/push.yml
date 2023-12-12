@@ -13,6 +13,6 @@ jobs:
     uses: NoLoSay/NoLoApp/.github/workflows/optimize_images.yml@main
 
   testing:
-    needs: linting
+    needs: [linting, optimization]
     uses: NoLoSay/NoLoApp/.github/workflows/run_tests.yml@main
     secrets: inherit

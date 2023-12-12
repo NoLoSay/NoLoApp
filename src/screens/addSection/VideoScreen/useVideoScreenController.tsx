@@ -32,6 +32,10 @@ import { Camera, CameraDevice, VideoFile, useCameraDevice, useCameraPermission }
  * @property {boolean} isCameraActive Wether the camera is active or not
  * @property {boolean} isErrorModalVisible Wether the error modal is visible or not
  * @property {string} errorText The text to display in the error modal
+ * @property {number} timerValue The current timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
+ * @property {number} defaultTimerValue The default timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setDefaultTimerValue Function that sets the default timer value
  */
 type VideoScreenController = {
   hasPermission: boolean
@@ -43,8 +47,10 @@ type VideoScreenController = {
   isCameraActive: boolean
   isErrorModalVisible: boolean
   errorText: string
-  timer: number
-  setTimer: React.Dispatch<React.SetStateAction<number>>
+  timerValue: number
+  setTimerValue: React.Dispatch<React.SetStateAction<number>>
+  defaultTimerValue: number
+  setDefaultTimerValue: React.Dispatch<React.SetStateAction<number>>
 }
 
 /**
@@ -61,7 +67,8 @@ const useVideoScreenController = (): VideoScreenController => {
   const [isLoading, setIsLoading] = useState(false)
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false)
   const [errorText, setErrorText] = useState("Vous n'avez pas autorisé l'accès à la galerie.")
-  const [timer, setTimer] = useState(0)
+  const [timerValue, setTimerValue] = useState(0)
+  const [defaultTimerValue, setDefaultTimerValue] = useState(0)
 
   // TODO If user don't have authorized the access to camera roll, display error page
 
@@ -99,6 +106,12 @@ const useVideoScreenController = (): VideoScreenController => {
     setTimeout(() => setIsErrorModalVisible(false), 3000)
   }
 
+  /**
+   * @function recordIsFinished
+   * @description Function that is called when the recording is finished, it saves the video to the camera roll
+   * @param {VideoFile} video The video file
+   * @returns {Promise<void>} Promise that resolves when the video is saved to the camera roll
+   */
   const recordIsFinished = async (video: VideoFile) => {
     setIsLoading(true)
     const { path } = video
@@ -117,33 +130,75 @@ const useVideoScreenController = (): VideoScreenController => {
   }
 
   /**
+   * @function startRecording
+   * @description Starts the recording of the video and handles events related to the recording
+   * @returns {Promise<void>} Promise that resolves when the recording is finished
+   */
+  const startRecording = async () => {
+    cameraRef.current?.startRecording({
+      onRecordingFinished: async video => {
+        // eslint-disable-next-line eqeqeq -- Idk why but it doesn't work with ===
+        recordIsFinished(video)
+      },
+      onRecordingError: error => {
+        console.error(error)
+        displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+      },
+    })
+  }
+
+  /**
+   * @function stopRecording
+   * @description Stops the recording of the video and handles errors
+   * @returns {Promise<void>} Promise that resolves when the recording is stopped
+   */
+  const stopRecording = async () => {
+    cameraRef.current?.stopRecording().catch(err => {
+      console.error(err)
+      displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
+    })
+  }
+
+  /**
    * @function onRecordPress
    * @description Function that is called when the user presses the record button, wether it starts or stops the recording
    */
   const onRecordPress = async () => {
-    if (!isRecording) {
-      toggleRecording()
-      setTimeout(() => {
-        cameraRef.current?.startRecording({
-          onRecordingFinished: async video => {
-            // eslint-disable-next-line eqeqeq -- Idk why but it doesn't work with ===
-            if (timer == 0) recordIsFinished(video)
-          },
-          onRecordingError: error => {
-            console.error(error)
-            if (timer === 0) displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
-          },
-        })
-      }, timer * 1000)
-    }
-    if (isRecording) {
-      await cameraRef.current?.stopRecording().catch(err => {
-        console.error(err)
-        if (timer === 0) displayErrorModal("Une erreur est survenue lors de l'enregistrement de la vidéo")
-      })
-      toggleRecording()
-    }
+    toggleRecording()
   }
+
+  /**
+   * @function useEffect
+   * @description Starts the recording when the timer value is 0
+   */
+  useEffect(() => {
+    if (timerValue === 0) {
+      startRecording()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when timerValue changes
+  }, [timerValue])
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (!isRecording) {
+      if (timerValue <= 0) stopRecording()
+      setTimerValue(defaultTimerValue)
+    } else {
+      if (defaultTimerValue === 0) {
+        startRecording()
+        return
+      }
+      const countdown = setInterval(() => {
+        setTimerValue(prev => prev - 1)
+      }, 1000)
+
+      // eslint-disable-next-line consistent-return
+      return () => {
+        clearInterval(countdown)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when isRecording changes
+  }, [isRecording, timerValue])
 
   return {
     hasPermission,
@@ -155,8 +210,10 @@ const useVideoScreenController = (): VideoScreenController => {
     isCameraActive,
     isErrorModalVisible,
     errorText,
-    timer,
-    setTimer,
+    timerValue,
+    setTimerValue,
+    defaultTimerValue,
+    setDefaultTimerValue,
   }
 }
 
