@@ -7,10 +7,10 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
-import { colors } from '@global/colors'
 import { Camera } from 'react-native-vision-camera'
 import FastImage from 'react-native-fast-image'
-import images from '@source/global/images'
+import { colors } from '../../global/colors'
+import images from '../../global/images'
 import useScanScreenController from './useScanScreenController'
 import NoCameraView from './Views/NoCameraView'
 

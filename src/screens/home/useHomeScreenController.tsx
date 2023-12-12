@@ -5,15 +5,13 @@
  * @requires react
  * @requires react-native
  * @requires @react-native-community/geolocation
- * @requires @source/global/contexts/AccountProvider
- * @requires @source/global/types/Account
  */
 
 import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { Place } from '@source/global/types/Places'
-import getPlaces from '@source/helpers/httpClient/places'
+import { Place } from '../../global/types/Places'
+import getPlaces from '../../helpers/httpClient/places'
+import { AccountContext } from '../../global/contexts/AccountProvider'
 
 /**
  * @interface HomeScreenController

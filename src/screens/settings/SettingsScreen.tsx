@@ -7,9 +7,9 @@
 
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
-import { colors } from '@global/colors'
-import images from '@source/global/images'
-import LoadingModal from '@source/components/LoadingModal'
+import images from '../../global/images'
+import LoadingModal from '../../components/LoadingModal'
+import { colors } from '../../global/colors'
 import useSettingsScreenController from './useSettingsScreenController'
 import TopBar from './Views/TopBar'
 import MainInfos from './Views/MainInfos'

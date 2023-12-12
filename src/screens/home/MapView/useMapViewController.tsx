@@ -8,9 +8,9 @@
 import { Ref, useContext, useRef } from 'react'
 import { Alert, Platform } from 'react-native'
 import MapView from 'react-native-maps'
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountType } from '@source/global/types/Account'
-import { Place } from '@source/global/types/Places'
+import { AccountContext } from '../../../global/contexts/AccountProvider'
+import { AccountType } from '../../../global/types/Account'
+import { Place } from '../../../global/types/Places'
 
 interface MapViewController {
   account: AccountType

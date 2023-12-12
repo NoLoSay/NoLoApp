@@ -4,9 +4,9 @@
  * @description Component that renders a category separator, it is the text of the category.
  * @requires react react-native
  */
-import colors from '@source/global/colors'
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
+import colors from '../../../../global/colors'
 
 interface Props {
   text: string

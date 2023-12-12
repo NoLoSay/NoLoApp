@@ -4,8 +4,8 @@
  * @description Controller for the modal.
  * @requires react react-native
  */
-import { AccountType } from '@source/global/types/Account'
 import { useState } from 'react'
+import { AccountType } from '../../../global/types/Account'
 
 type Props = {
   account: AccountType

@@ -1,7 +1,7 @@
-import { colors } from '@source/global/colors'
-import { images } from '@source/global/images'
 import React from 'react'
 import { Image, StyleSheet, Pressable } from 'react-native'
+import { images } from '../global/images'
+import { colors } from '../global/colors'
 
 interface SocialIconProps {
   socialMedia: 'facebook' | 'google' | 'apple'

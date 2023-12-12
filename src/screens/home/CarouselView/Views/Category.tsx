@@ -9,7 +9,7 @@
 
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Place } from '@source/global/types/Places'
+import { Place } from '../../../../global/types/Places'
 import CategorySeparator from './CategorySeparator'
 import PlaceImage from './PlaceImage'
 

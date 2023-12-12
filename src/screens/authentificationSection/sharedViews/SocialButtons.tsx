@@ -4,13 +4,13 @@
  * @description Component that renders the social buttons.
  * @requires react react
  * @requires react-native react-native
- * @requires @source/components/SocialIcon SocialIcon component
+ * @requires ../../..//components/SocialIcon SocialIcon component
  * @exports SocialButtons
  */
 
 import React from 'react'
 import { View } from 'react-native'
-import SocialIcon from '@source/components/SocialIcon'
+import SocialIcon from '../../..//components/SocialIcon'
 
 /**
  * @function SocialButtons

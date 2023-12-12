@@ -5,7 +5,7 @@
  */
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import colors from '@source/global/colors'
+import colors from '../../../../global/colors'
 import useOverlayModuleController from './useOverlayModuleController'
 import AssistantView from './Views/AssistantView'
 import TimerCountdownView from './Views/TimerCountdownView'

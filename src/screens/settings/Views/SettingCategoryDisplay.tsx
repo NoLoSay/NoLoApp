@@ -4,11 +4,11 @@
  * @description Display of a single category of the SettingsScreen component
  * @requires react react-native
  */
-import colors from '@source/global/colors'
-import images from '@source/global/images'
 import React from 'react'
 import { Image, ImageProps, Pressable, StyleSheet, Text, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
+import colors from '../../../global/colors'
+import images from '../../../global/images'
 
 type Props = {
   id: number

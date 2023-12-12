@@ -7,10 +7,10 @@
 
 import React from 'react'
 import { Pressable, SafeAreaView, StyleSheet, View } from 'react-native'
-import { colors } from '@global/colors'
 import { Camera } from 'react-native-vision-camera'
-import LoadingModal from '@source/components/LoadingModal'
-import ErrorModal from '@source/components/ErrorModal'
+import LoadingModal from '../../../components/LoadingModal'
+import ErrorModal from '../../../components/ErrorModal'
+import { colors } from '../../../global/colors'
 import useVideoScreenController from './useVideoScreenController'
 import NoCameraView from './Views/NoCameraView'
 import OverlayModule from './OverlayModule/OverlayModule'

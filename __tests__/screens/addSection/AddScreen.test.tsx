@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import ActionsScreen from '@source/screens/addSection/ActionsScreen/ActionsScreen'
+import ActionsScreen from '../../../src/screens/addSection/ActionsScreen/ActionsScreen'
 
 const mockedNavigate = jest.fn()
 

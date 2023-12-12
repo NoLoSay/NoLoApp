@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
-import SubscriptionScreen from '@source/screens/authentificationSection/subscription/SubscriptionScreen'
-import { AuthStackParamList } from '@source/global/types/screensProps/AuthStackParams'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import SubscriptionScreen from '../../../../src/screens/authentificationSection/subscription/SubscriptionScreen'
+import { AuthStackParamList } from '../../../../src/global/types/screensProps/AuthStackParams'
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')

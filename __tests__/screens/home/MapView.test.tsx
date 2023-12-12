@@ -1,10 +1,10 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { Text, View } from 'react-native'
-import PlacesMapView from '@source/screens/home/MapView/MapView'
-import { PlaceType, PlaceTag } from '@source/global/types/Places'
+import { render } from '@testing-library/react-native'
+import { AccountContext } from '../../../src/global/contexts/AccountProvider'
+import { AccountElevationEnum, AccountType } from '../../../src/global/types/Account'
+import PlacesMapView from '../../../src/screens/home/MapView/MapView'
+import { PlaceType, PlaceTag } from '../../../src/global/types/Places'
 
 const defaultUser: AccountType = {
   accountID: 1,

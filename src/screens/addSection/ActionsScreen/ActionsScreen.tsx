@@ -7,10 +7,10 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import { colors } from '@global/colors'
-import { AccountElevationEnum } from '@source/global/types/Account'
-import AddContentCategory, { ContentCategoryId } from '@source/global/types/AddContentCategory'
-import images from '@source/global/images'
+import AddContentCategory, { ContentCategoryId } from '../../../global/types/AddContentCategory'
+import images from '../../../global/images'
+import { AccountElevationEnum } from '../../../global/types/Account'
+import { colors } from '../../../global/colors'
 import useActionsScreenController from './useActionsScreenController'
 import ContentCategory from './Views/ContentCategory'
 

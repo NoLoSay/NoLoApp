@@ -2,10 +2,9 @@
  * @fileoverview Places helper functions.
  * @module Places
  * @description Helper functions to get and handle places.
- * @requires @global/types/httpClient/Header
  */
 
-import { Place, PlaceTag, PlaceType } from '@source/global/types/Places'
+import { Place, PlaceTag, PlaceType } from '../../global/types/Places'
 
 const PLACES: Place[] = [
   {

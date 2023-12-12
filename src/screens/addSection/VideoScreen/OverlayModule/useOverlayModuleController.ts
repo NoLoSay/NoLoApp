@@ -4,9 +4,9 @@
  * @requires react
  */
 import { useFocusEffect } from '@react-navigation/native'
-import images from '@source/global/images'
 import { useCallback, useState } from 'react'
 import { ImageSourcePropType } from 'react-native'
+import images from '../../../../global/images'
 
 /**
  * @typedef useOverlayModuleController

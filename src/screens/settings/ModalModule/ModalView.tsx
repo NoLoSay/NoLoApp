@@ -5,10 +5,10 @@
  * @requires react react-native
  */
 import React from 'react'
-import colors from '@source/global/colors'
 import { Modal, StyleSheet, View } from 'react-native'
-import Button from '@source/components/Button'
-import { AccountType } from '@source/global/types/Account'
+import colors from '../../../global/colors'
+import Button from '../../../components/Button'
+import { AccountType } from '../../../global/types/Account'
 import Input from '../Views/Input'
 import useModalViewController from './useModalViewController'
 

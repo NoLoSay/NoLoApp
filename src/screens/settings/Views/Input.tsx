@@ -4,9 +4,9 @@
  * @description Input view for the SettingsScreen component
  * @requires react react-native
  */
-import colors from '@source/global/colors'
 import React from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
+import colors from '../../../global/colors'
 
 type Props = {
   value: string

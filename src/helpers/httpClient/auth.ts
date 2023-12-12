@@ -2,11 +2,10 @@
  * @fileoverview Authentication helper functions.
  * @module Auth
  * @description Helper functions for authentication.
- * @requires @global/types/httpClient/Header
  */
 
-import { Header } from '@source/global/types/httpClient/Header'
 import { post } from './common'
+import { Header } from '../../global/types/httpClient/Header'
 
 interface SubscribeProps {
   url?: string

@@ -7,7 +7,7 @@
 
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { VideoStackParamList } from '@source/global/types/screensProps/VideoStackParams'
+import { VideoStackParamList } from '../../global/types/screensProps/VideoStackParams'
 import ActionsScreen from './ActionsScreen/ActionsScreen'
 import VideoScreen from './VideoScreen/VideoScreen'
 

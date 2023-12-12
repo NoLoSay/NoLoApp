@@ -1,4 +1,4 @@
-import { colors } from '@source/global/colors'
+import { colors } from '../../..//global/colors'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
