@@ -2,7 +2,7 @@
   "name": "nolosay",
   "version": "0.0.1",
   "private": true,
-  "main": "./src/AuthRouter.tsx",
+  "main": "./index.js",
   "description": "NoLoSay is a project that aims to create a community-based sign language video platform to ensure access to information for people who are deaf or hard of hearing. The platform will first be set up in cultural places, then in other places such as administrative places.",
   "license": "Private",
   "author": "NoLoSay",
