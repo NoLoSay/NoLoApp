@@ -1,8 +1,8 @@
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { useContext } from 'react'
-import { ContentCategoryId } from '@source/global/types/AddContentCategory'
 import { useNavigation } from '@react-navigation/native'
+import { ContentCategoryId } from '../../../global/types/AddContentCategory'
+import { AccountElevationEnum, AccountType } from '../../../global/types/Account'
+import { AccountContext } from '../../../global/contexts/AccountProvider'
 
 interface useActionScreenControllerProps {
   account: AccountType

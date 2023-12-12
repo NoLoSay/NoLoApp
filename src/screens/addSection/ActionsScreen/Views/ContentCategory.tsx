@@ -7,10 +7,10 @@
 
 import React from 'react'
 import { Image, LayoutRectangle, Pressable, StyleSheet, Text, View } from 'react-native'
-import { colors } from '@global/colors'
-import AddContentCategory from '@source/global/types/AddContentCategory'
 import FastImage, { Source } from 'react-native-fast-image'
-import images from '@source/global/images'
+import AddContentCategory from '../../../../global/types/AddContentCategory'
+import { colors } from '../../../../global/colors'
+import images from '../../../../global/images'
 
 /**
  * @typedef ContentCategoryProps

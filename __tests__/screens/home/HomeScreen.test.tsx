@@ -1,9 +1,9 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
-import HomeScreen from '@source/screens/home/HomeScreen'
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { View } from 'react-native'
+import { render } from '@testing-library/react-native'
+import { AccountContext } from '../../../src/global/contexts/AccountProvider'
+import { AccountElevationEnum, AccountType } from '../../../src/global/types/Account'
+import HomeScreen from '../../../src/screens/home/HomeScreen'
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')

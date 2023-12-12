@@ -5,7 +5,6 @@
  * @requires react react
  */
 
-import { AccountContext } from '@source/global/contexts/AccountProvider'
 import {
   CameraDevice,
   Code,
@@ -14,10 +13,11 @@ import {
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera'
-import { AccountType } from '@source/global/types/Account'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
+import { AccountType } from '../../global/types/Account'
+import { AccountContext } from '../../global/contexts/AccountProvider'
 
 interface ScanScreenController {
   account: AccountType

@@ -16,12 +16,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { colors } from '@global/colors'
-import { Place, PlaceTag } from '@source/global/types/Places'
 import { RouteProp, useNavigation } from '@react-navigation/native'
-import Button from '@source/components/Button'
-import images from '@source/global/images'
 import FastImage from 'react-native-fast-image'
+import Button from '../../components/Button'
+import images from '../../global/images'
+import { Place, PlaceTag } from '../../global/types/Places'
+import { colors } from '../../global/colors'
 
 type AuthStackParamList = {
   WebViewModal: { place?: Place } // Make 'uri' optional as a route parameter

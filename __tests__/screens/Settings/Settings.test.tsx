@@ -1,8 +1,8 @@
 import React from 'react'
-import { AccountContext } from '@source/global/contexts/AccountProvider'
-import { AccountElevationEnum, AccountType } from '@source/global/types/Account'
 import { fireEvent, render } from '@testing-library/react-native'
-import SettingsScreen from '@source/screens/settings/SettingsScreen'
+import { AccountContext } from '../../../src/global/contexts/AccountProvider'
+import { AccountElevationEnum, AccountType } from '../../../src/global/types/Account'
+import SettingsScreen from '../../../src/screens/settings/SettingsScreen'
 
 const mockDefaultUser: AccountType = {
   accountID: 1,

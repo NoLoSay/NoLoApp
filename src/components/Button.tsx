@@ -6,9 +6,9 @@
  * @link https://reactnative.dev/docs/pressable
  */
 
-import { colors } from '@source/global/colors'
 import React from 'react'
 import { Pressable, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
+import { colors } from '../global/colors'
 
 interface Props {
   onPress: () => void

@@ -6,9 +6,9 @@
  */
 
 import { useContext, useState } from 'react'
-import { AccountContext } from '@global/contexts/AccountProvider'
-import { connect, forgotPassword } from '@helpers/httpClient/auth'
 import { Alert } from 'react-native'
+import { connect, forgotPassword } from '../../../helpers/httpClient/auth'
+import { AccountContext } from '../../../global/contexts/AccountProvider'
 
 interface ConnectionController {
   email: string

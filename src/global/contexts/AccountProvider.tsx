@@ -6,7 +6,7 @@
  */
 
 import React, { createContext, useMemo, useState } from 'react'
-import { AccountContextType, AccountType, AccountElevationEnum } from '@global/types/Account'
+import { AccountContextType, AccountType, AccountElevationEnum } from '../../global/types/Account'
 
 /**
  * @constant defaultAccount Default account data

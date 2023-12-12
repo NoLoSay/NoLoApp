@@ -7,9 +7,9 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
-import { colors } from '@global/colors'
 import { useNavigation } from '@react-navigation/native'
-import LoadingModal from '@source/components/LoadingModal'
+import LoadingModal from '../../components/LoadingModal'
+import { colors } from '../../global/colors'
 import HeaderView from './Views/HeaderView'
 import useHomeScreenController from './useHomeScreenController'
 import CarouselView from './CarouselView/CarouselView'

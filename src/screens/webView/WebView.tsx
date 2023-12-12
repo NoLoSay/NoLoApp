@@ -5,12 +5,12 @@
  * @requires react react-native
  */
 import { RouteProp } from '@react-navigation/native'
-import colors from '@source/global/colors'
-import images from '@source/global/images'
 import React from 'react'
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import WebView from 'react-native-webview'
+import images from '../../global/images'
+import colors from '../../global/colors'
 import ErrorPage from './ErrorView'
 import useWebViewScreenController from './useWebViewController'
 

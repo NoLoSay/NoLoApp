@@ -3,9 +3,9 @@
  * @module AssistantView
  * @requires react react-native
  */
-import colors from '@source/global/colors'
 import React from 'react'
 import { View, StyleSheet, useWindowDimensions } from 'react-native'
+import colors from '../../../../../global/colors'
 
 /**
  * @function AssistantView

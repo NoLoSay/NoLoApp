@@ -11,7 +11,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { AuthStackParamList } from '@source/global/types/screensProps/AuthStackParams'
+import { AuthStackParamList } from './global/types/screensProps/AuthStackParams'
 import ConnectionScreen from './screens/authentificationSection/connection/ConnectionScreen'
 import SubscriptionScreen from './screens/authentificationSection/subscription/SubscriptionScreen'
 import AppRouter from './AppRouter'

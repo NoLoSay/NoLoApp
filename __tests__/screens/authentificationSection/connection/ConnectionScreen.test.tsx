@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
-import ConnectionScreen from '@source/screens/authentificationSection/connection/ConnectionScreen'
-import { AuthStackParamList } from '@source/global/types/screensProps/AuthStackParams'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { forgotPassword } from '@source/helpers/httpClient/auth'
+import { AuthStackParamList } from '../../../../src/global/types/screensProps/AuthStackParams'
+import ConnectionScreen from '../../../../src/screens/authentificationSection/connection/ConnectionScreen'
+import { forgotPassword } from '../../../../src/helpers/httpClient/auth'
 
 jest.mock('@source/helpers/httpClient/auth')
 

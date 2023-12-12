@@ -7,8 +7,8 @@
 import React, { useState } from 'react'
 import FastImage from 'react-native-fast-image'
 import { View, StyleSheet } from 'react-native'
-import { Place } from '@source/global/types/Places'
-import colors from '@source/global/colors'
+import { Place } from '../../../../global/types/Places'
+import colors from '../../../../global/colors'
 
 type Props = {
   item: Place

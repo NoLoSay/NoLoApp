@@ -7,8 +7,8 @@
 
 import React from 'react'
 import { View, Image, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native'
-import images from '@source/global/images'
-import colors from '@source/global/colors'
+import images from '../../../global/images'
+import colors from '../../../global/colors'
 
 interface HeaderViewProps {
   city: string

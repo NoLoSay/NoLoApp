@@ -8,13 +8,13 @@
  * @requires Pressable from 'react-native'
  * @requires View from 'react-native'
  * @requires LineSeparator from './LineSeparator'
- * @requires colors from '@source/global/colors'
+ * @requires colors from '../../..//global/colors'
  * @exports ButtonChangeScreen
  */
 
-import { colors } from '@source/global/colors'
 import React from 'react'
 import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { colors } from '../../../global/colors'
 import LineSeparator from './LineSeparator'
 
 interface ButtonChangeScreenProps {
