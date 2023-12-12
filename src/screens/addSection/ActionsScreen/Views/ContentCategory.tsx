@@ -41,7 +41,7 @@ export default function ContentCategory({ contentCategory, onPress }: ContentCat
         onLayout={event => setIconContainerSize(event.nativeEvent.layout)}
       >
         <FastImage
-          source={contentCategory.icon() as Source}
+          source={contentCategory.icon() as unknown as Source}
           style={{ width: (iconContainerSize?.width ?? 40) - 16, height: (iconContainerSize?.width ?? 40) - 16 }}
         />
       </View>
