@@ -5,11 +5,11 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          "@source/*": "./src",
-          "@components/*": "./src/components",
-          "@global/*": "./src/global",
-          "@assets/*": "./assets",
-          "@helpers/*": "./src/helper*"
+          '@source/*': './src',
+          '@components/*': './src/components',
+          '@global/*': './src/global',
+          '@assets/*': './assets',
+          '@helpers/*': './src/helper*',
         },
       },
     ],
