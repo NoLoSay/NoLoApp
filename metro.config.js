@@ -1,4 +1,4 @@
-import { getDefaultConfig, mergeConfig } from '@react-native/metro-config';
+import { getDefaultConfig, mergeConfig } from '@react-native/metro-config'
 
 /**
  * Metro configuration
@@ -6,6 +6,6 @@ import { getDefaultConfig, mergeConfig } from '@react-native/metro-config';
  *
  * @type {import('metro-config').MetroConfig}
  */
-const config = {};
+const config = {}
 
-export default mergeConfig(getDefaultConfig(__dirname), config);
+export default mergeConfig(getDefaultConfig(__dirname), config)
