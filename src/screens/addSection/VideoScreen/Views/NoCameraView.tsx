@@ -22,7 +22,7 @@ function PermissionNotGranted(): React.JSX.Element {
   return (
     <>
       <Text style={styles.descriptionText}>
-        Vous ne nous avez pas autorisé à utiliser votre caméra, le scan de QR code est donc impossible.
+        Vous ne nous avez pas autorisé à utiliser votre caméra, la prise de vidéo est donc impossible.
       </Text>
       <Button
         text='Autoriser'

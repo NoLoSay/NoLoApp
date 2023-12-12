@@ -31,8 +31,10 @@ export default function VideoScreen(): React.JSX.Element {
     isCameraActive,
     isErrorModalVisible,
     errorText,
-    timer,
-    setTimer,
+    timerValue,
+    setTimerValue,
+    defaultTimerValue,
+    setDefaultTimerValue,
   } = useVideoScreenController()
 
   if (!frontCamera || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
@@ -46,8 +48,10 @@ export default function VideoScreen(): React.JSX.Element {
     >
       <OverlayModule
         isRecording={isRecording}
-        setTimer={setTimer}
-        timer={timer}
+        timerValue={timerValue}
+        setTimerValue={setTimerValue}
+        defaultTimerValue={defaultTimerValue}
+        setDefaultTimerValue={setDefaultTimerValue}
       />
       <SafeAreaView style={styles.bottomContainer}>
         <Pressable
