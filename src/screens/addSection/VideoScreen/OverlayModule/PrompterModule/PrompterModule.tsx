@@ -3,11 +3,11 @@
  * @module PrompterModule
  * @requires react react-native
  */
-import colors from '@source/global/colors'
 import React from 'react'
 import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import Slider from '@react-native-community/slider'
 import usePrompterModuleController from './usePrompterModuleController'
+import colors from '../../../../../global/colors'
 
 type Props = {
   text: string

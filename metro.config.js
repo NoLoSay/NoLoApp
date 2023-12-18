@@ -1,4 +1,5 @@
-import { getDefaultConfig, mergeConfig } from '@react-native/metro-config'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 /**
  * Metro configuration
@@ -6,6 +7,6 @@ import { getDefaultConfig, mergeConfig } from '@react-native/metro-config'
  *
  * @type {import('metro-config').MetroConfig}
  */
-const config = {}
+const config = {};
 
-export default mergeConfig(getDefaultConfig(__dirname), config)
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);
