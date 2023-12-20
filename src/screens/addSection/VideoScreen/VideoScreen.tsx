@@ -20,7 +20,7 @@ import OverlayModule from './OverlayModule/OverlayModule'
  * @description Component that renders the Video screen.
  * @returns {React.JSX.Element} App component template
  */
-export default function VideoScreen(): React.JSX.Element {
+export default function VideoScreen({ route }: any): React.JSX.Element {
   const {
     hasPermission,
     frontCamera,
@@ -52,6 +52,7 @@ export default function VideoScreen(): React.JSX.Element {
         setTimerValue={setTimerValue}
         defaultTimerValue={defaultTimerValue}
         setDefaultTimerValue={setDefaultTimerValue}
+        translatedText={route.params.translateText}
       />
       <SafeAreaView style={styles.bottomContainer}>
         <Pressable

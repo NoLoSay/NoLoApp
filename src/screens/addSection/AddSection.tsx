@@ -10,6 +10,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { VideoStackParamList } from '../../global/types/screensProps/VideoStackParams'
 import ActionsScreen from './ActionsScreen/ActionsScreen'
 import VideoScreen from './VideoScreen/VideoScreen'
+import PlacesNeedingTranslation from './PlacesNeedTranslation/PlacesNeedingTranslation'
+import PlaceArtsPiecesScreen from './PlaceArtsPiecesScreen/PlaceArtsPiecesScreen'
 
 /**
  * @function AddScreen
@@ -34,6 +36,18 @@ export default function AddScreen(): React.JSX.Element {
         <VideoStack.Screen
           name='VideoScreen'
           component={VideoScreen}
+        />
+      </VideoStack.Group>
+      <VideoStack.Group screenOptions={{ presentation: 'modal', gestureEnabled: false }}>
+        <VideoStack.Screen
+          name='PlacesNeedingTranslation'
+          component={PlacesNeedingTranslation}
+        />
+        <VideoStack.Screen
+          name='PlaceArtsPiecesScreen'
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          component={PlaceArtsPiecesScreen}
         />
       </VideoStack.Group>
     </VideoStack.Navigator>
