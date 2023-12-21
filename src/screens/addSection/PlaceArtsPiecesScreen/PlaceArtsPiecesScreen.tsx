@@ -33,7 +33,7 @@ type Props = {
  * @returns {JSX.Element} PlacesNeedingTranslation component template
  */
 export default function PlaceArtsPiecesScreen({ navigation, route }: Props): JSX.Element {
-  const { place, onCreatePress, doPlaceHaveOpenTranslation } = usePlaceArtsPiecesScreenController({
+  const { place, onCreatePress, onTextPress, doPlaceHaveOpenTranslation } = usePlaceArtsPiecesScreenController({
     navigation,
     route,
   })
@@ -54,6 +54,7 @@ export default function PlaceArtsPiecesScreen({ navigation, route }: Props): JSX
               artPiece={artPiece}
               key={artPiece.id}
               onCreatePress={() => onCreatePress(artPiece.textToTranslate)}
+              onTextPress={() => onTextPress(artPiece.textToTranslate, artPiece.name)}
             />
           ))}
         {!doPlaceHaveOpenTranslation() && (

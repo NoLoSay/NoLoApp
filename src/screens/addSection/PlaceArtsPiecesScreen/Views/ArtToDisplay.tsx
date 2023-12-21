@@ -50,6 +50,7 @@ function Icon({ iconURI, text, onPress }: IconProps): JSX.Element {
 type ArtToDisplayProps = {
   artPiece: ArtToTranslate
   onCreatePress: () => void
+  onTextPress: () => void
 }
 
 /**
@@ -57,9 +58,10 @@ type ArtToDisplayProps = {
  * @description Component that renders an art piece to translate
  * @param artPiece Art piece to display
  * @param onCreatePress Function to execute when the create button is pressed
+ * @param onTextPress Function to execute when the text button is pressed
  * @returns {JSX.Element} ArtToDisplay component template
  */
-export default function ArtToDisplay({ artPiece, onCreatePress }: ArtToDisplayProps): JSX.Element {
+export default function ArtToDisplay({ artPiece, onCreatePress, onTextPress }: ArtToDisplayProps): JSX.Element {
   return (
     <View style={styles.container}>
       <ImageLoader
@@ -72,7 +74,7 @@ export default function ArtToDisplay({ artPiece, onCreatePress }: ArtToDisplayPr
           <Icon
             iconURI={images.icons.outline.text()}
             text='Texte'
-            onPress={() => console.log(`Texte${artPiece.name}`)}
+            onPress={onTextPress}
           />
           <Icon
             iconURI={images.icons.outline.add()}

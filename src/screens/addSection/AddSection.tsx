@@ -12,6 +12,7 @@ import ActionsScreen from './ActionsScreen/ActionsScreen'
 import VideoScreen from './VideoScreen/VideoScreen'
 import PlacesNeedingTranslation from './PlacesNeedTranslation/PlacesNeedingTranslation'
 import PlaceArtsPiecesScreen from './PlaceArtsPiecesScreen/PlaceArtsPiecesScreen'
+import TextScreen from './TextScreen/TextScreen'
 
 /**
  * @function AddScreen
@@ -48,6 +49,12 @@ export default function AddScreen(): React.JSX.Element {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           component={PlaceArtsPiecesScreen}
+        />
+        <VideoStack.Screen
+          name='TextScreen'
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          component={TextScreen}
         />
       </VideoStack.Group>
     </VideoStack.Navigator>
