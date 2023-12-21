@@ -11,11 +11,12 @@ import React from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Place } from '../../../../global/types/Places'
 import CategorySeparator from './CategorySeparator'
-import PlaceImage from './PlaceImage'
+import ImageLoader from '../../../../components/ImageLoader'
 
 interface Props {
   text: string
   places: Place[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
@@ -42,7 +43,14 @@ export default function Category({ text, places, navigation }: Props): React.JSX
             key={item.id}
           >
             <TouchableOpacity onPress={() => navigation.navigate('PlaceDescription', { place: item })}>
-              <PlaceImage item={item} />
+              <ImageLoader
+                imageURL={item.image}
+                imageStyle={{
+                  width: 96,
+                  height: 154,
+                  borderRadius: 20,
+                }}
+              />
             </TouchableOpacity>
             <Text style={styles.itemText}>
               {item.name.length > 13 ? `${item.name.substring(0, 13)}...` : item.name}

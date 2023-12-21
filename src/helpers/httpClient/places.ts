@@ -4,7 +4,7 @@
  * @description Helper functions to get and handle places.
  */
 
-import { Place, PlaceTag, PlaceType } from '../../global/types/Places'
+import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '../../global/types/Places'
 
 const PLACES: Place[] = [
   {
@@ -307,6 +307,45 @@ export default async function getPlaces() {
   return new Promise<Place[]>(resolve => {
     setTimeout(() => {
       resolve(PLACES)
+    }, 500)
+  })
+}
+
+const PlacesToTranslate: PlaceNeedingTranslation[] = [
+  {
+    id: '1',
+    name: 'Chateau des Ducs de Bretagne',
+    smallImage:
+      'https://www.chateaunantes.fr/wp-content/uploads/2020/09/Chateau-des-ducs-de-Bretagne.-Nantes-©-Philippe-Piron-_-LVAN-4-1-768x1152.jpg',
+    bigImage: 'https://www.balladins.com/assets/img/visiter/735/nantes_-_chateau_des_ducs_de_bretagne__gallery.jpg',
+    artsToTranslate: [
+      {
+        id: '1',
+        name: 'La tapisserie de Charles X',
+        image: 'https://collections.louvre.fr/media/cache/medium/0000000021/0000101500/0000793562_OG.JPG',
+        textToTranslate: "Fantastique tapisserie de Charles X en soie et coton (aucune idée de si c'est vrai)",
+      },
+      {
+        id: '2',
+        name: 'Chateau sur bois',
+        image: 'https://media.paperblog.fr/i/580/5808387/nantes-L-BoeJzB.jpeg',
+        textToTranslate: 'Peinture sur bois représentant le chateau des ducs de Bretagne à Nantes en 1800',
+      },
+    ],
+  },
+  {
+    id: '2',
+    name: "Rendez vous de l'Erdre",
+    smallImage: 'https://www.nort-sur-erdre.fr/fileadmin/_processed_/f/a/csm_RDVE_2022_Bleu_Portrait_b3ff4ac9b9.jpg',
+    bigImage: 'https://www.bigcitylife.fr/wp-content/uploads/2023/07/RDV-Erdre-©-Patrick-Garcon.jpg',
+    artsToTranslate: [],
+  },
+]
+
+export async function getPlacesNeedingDescription() {
+  return new Promise<PlaceNeedingTranslation[]>(resolve => {
+    setTimeout(() => {
+      resolve(PlacesToTranslate)
     }, 500)
   })
 }

@@ -13,6 +13,8 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 export type VideoStackParamList = {
   ActionsScreen: undefined
   VideoScreen: undefined
+  PlacesNeedingTranslation: undefined
+  PlaceArtsPiecesScreen: undefined
 }
 
 /**
@@ -20,3 +22,8 @@ export type VideoStackParamList = {
  */
 export type ListElementScreenProps = NativeStackScreenProps<VideoStackParamList, 'ActionsScreen'>
 export type VideoScreenProps = NativeStackScreenProps<VideoStackParamList, 'VideoScreen'>
+export type PlacesNeedingDescriptionScreenProps = NativeStackScreenProps<
+  VideoStackParamList,
+  'PlacesNeedingTranslation'
+>
+export type PlaceArtsPiecesScreenProps = NativeStackScreenProps<VideoStackParamList, 'PlaceArtsPiecesScreen'>

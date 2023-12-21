@@ -39,3 +39,18 @@ export interface Place {
   country: string
   tags: Tag[]
 }
+
+export type ArtToTranslate = {
+  id: string
+  name: string
+  image: string
+  textToTranslate: string
+}
+
+export type PlaceNeedingTranslation = {
+  id: string
+  name: string
+  smallImage: string
+  bigImage: string
+  artsToTranslate: ArtToTranslate[]
+}
