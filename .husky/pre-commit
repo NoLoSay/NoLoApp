@@ -1,11 +1,19 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-find ./assets -name '*.png' -exec optipng -o7 > /dev/null {} \; > /dev/null
-git diff --exit-code
-if [ $? -eq 0 ]; then
-  echo "No changes detected."
-else
-  echo "Images not compressed. Run `find ./assets -name '*.png' -exec optipng -o7 {} \;` to fix it."
-  exit 1
+git diff --exit-code --quiet HEAD ./assets/
+if [ $? -ne 0 ]; then
+  echo "Compressing images..."
+  find ./assets -name '*.png' -exec optipng -o7 {} \; > /dev/null 2>&1
+
+  echo "Checking for changes..."
+  git diff --exit-code
+  if [ $? -eq 0 ]; then
+    echo "No changes detected."
+    exit 0
+  else
+    echo "Changes detected. We'll add the changes to the commit. Please commit again."
+    exit 0
+  fi
 fi
+exit 0
