@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running husky pre-commit hooks ✨"
+
+yarn image-optimization
+
+echo "All done 🚀"
