@@ -1,0 +1,27 @@
+#!/bin/bash
+
+staged_png_files=$(git diff --cached --name-only --diff-filter=ACM | grep "^assets/.*\.png$")
+
+if [ -z "$staged_png_files" ]; then
+  exit 0
+fi
+
+echo "Compressing staged .png images in assets..."
+
+# Loop over each staged .png file and compress it
+for file in $staged_png_files; do
+  echo "Compressing $file"
+  optipng -o7 "$file" > /dev/null 2>&1
+done
+
+echo "Checking for changes..."
+git diff --exit-code --quiet -- ./assets
+if [ $? -eq 0 ]; then
+  echo "No changes detected."
+else
+  echo "Changes detected. We'll add the changes to the commit. Please commit again."
+  for file in $staged_png_files; do
+    git add "$file"
+  done
+  exit 1
+fi
