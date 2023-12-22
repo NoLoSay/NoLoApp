@@ -48,7 +48,9 @@ export default function useActionsScreenController(): useActionScreenControllerP
         navigation.navigate('PlacesNeedingTranslation')
         break
       case ContentCategoryId.LIBRARY:
-        console.log('Pressed on library')
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        navigation.navigate('LibraryScreen')
         break
       case ContentCategoryId.COMMUNITY:
         console.log('Pressed on community')
