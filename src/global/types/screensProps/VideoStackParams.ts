@@ -15,6 +15,7 @@ export type VideoStackParamList = {
   VideoScreen: undefined
   PlacesNeedingTranslation: undefined
   PlaceArtsPiecesScreen: undefined
+  TextScreen: undefined
 }
 
 /**
@@ -27,3 +28,4 @@ export type PlacesNeedingDescriptionScreenProps = NativeStackScreenProps<
   'PlacesNeedingTranslation'
 >
 export type PlaceArtsPiecesScreenProps = NativeStackScreenProps<VideoStackParamList, 'PlaceArtsPiecesScreen'>
+export type TextScreenProps = NativeStackScreenProps<VideoStackParamList, 'TextScreen'>

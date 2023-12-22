@@ -10,11 +10,13 @@ import { PlaceNeedingTranslation } from '../../../global/types/Places'
  * @typedef {Object} usePlaceArtsPiecesScreenControllerType
  * @property {PlaceNeedingTranslation} place - Place needing description
  * @property {function} onCreatePress - Function to call when the create button is pressed
+ * @property {function} onTextPress - Function to call when the text is pressed
  * @property {function} doPlaceHaveOpenTranslation - Function to call to know if the place needs some translation(s)
  */
 type usePlaceArtsPiecesScreenControllerType = {
   place: PlaceNeedingTranslation
   onCreatePress: (textToTranslate: string) => void
+  onTextPress: (textToTranslate: string, artName: string) => void
   doPlaceHaveOpenTranslation: () => boolean
 }
 
@@ -58,6 +60,19 @@ export default function usePlacesNeedingTranslationController({
   }
 
   /**
+   * @function onTextPress
+   * @description Function to call when the text is pressed
+   * @param textToTranslate - Text to translate
+   * @param artName - Name of the art work
+   */
+  const onTextPress = (textToTranslate: string, artName: string) => {
+    navigation.navigate('TextScreen', {
+      textToTranslate,
+      artName,
+    })
+  }
+
+  /**
    * @function doPlaceHaveOpenTranslation
    * @description Function to call to know if the place needs some translation(s)
    * @returns boolean - Boolean indicating if the place needs some translation(s)
@@ -67,6 +82,7 @@ export default function usePlacesNeedingTranslationController({
   return {
     place,
     onCreatePress,
+    onTextPress,
     doPlaceHaveOpenTranslation,
   }
 }
