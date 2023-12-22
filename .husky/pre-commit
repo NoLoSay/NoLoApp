@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+find ./assets -name '*.png' -exec optipng -o7 > /dev/null {} \; > /dev/null
+git diff --exit-code
+if [ $? -eq 0 ]; then
+  echo "No changes detected."
+else
+  echo "Images not compressed. Run `find ./assets -name '*.png' -exec optipng -o7 {} \;` to fix it."
+  exit 1
+fi
