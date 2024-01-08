@@ -33,6 +33,7 @@ export const images = {
       deaf: () => require('../../assets/icons/outline/deaf.png'),
       disabled: () => require('../../assets/icons/outline/disabled.png'),
       home: () => require('../../assets/icons/outline/home.png'),
+      hourglass: () => require('../../assets/icons/outline/hourglass.png'),
       library: () => require('../../assets/icons/outline/library.png'),
       magnifier: () => require('../../assets/icons/outline/magnifier.png'),
       mapArrow: () => require('../../assets/icons/outline/map_arrow.png'),
