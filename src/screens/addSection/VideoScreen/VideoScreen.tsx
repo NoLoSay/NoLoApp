@@ -35,6 +35,12 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
     setTimerValue,
     defaultTimerValue,
     setDefaultTimerValue,
+    endTimerValue,
+    setEndTimerValue,
+    defaultEndTimerValue,
+    setDefaultEndTimerValue,
+    isTimerModalVisible,
+    setIsTimerModalVisible,
   } = useVideoScreenController()
 
   if (!frontCamera || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
@@ -52,6 +58,12 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
         setTimerValue={setTimerValue}
         defaultTimerValue={defaultTimerValue}
         setDefaultTimerValue={setDefaultTimerValue}
+        endTimerValue={endTimerValue}
+        setEndTimerValue={setEndTimerValue}
+        defaultEndTimerValue={defaultEndTimerValue}
+        setDefaultEndTimerValue={setDefaultEndTimerValue}
+        isTimerModalVisible={isTimerModalVisible}
+        setIsTimerModalVisible={setIsTimerModalVisible}
         translatedText={route.params.translateText}
       />
       <SafeAreaView style={styles.bottomContainer}>

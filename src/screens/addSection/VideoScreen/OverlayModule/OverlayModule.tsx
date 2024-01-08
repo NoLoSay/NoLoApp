@@ -26,6 +26,12 @@ type Props = {
   setTimerValue: React.Dispatch<React.SetStateAction<number>>
   defaultTimerValue: number
   setDefaultTimerValue: React.Dispatch<React.SetStateAction<number>>
+  endTimerValue: number
+  setEndTimerValue: React.Dispatch<React.SetStateAction<number>>
+  defaultEndTimerValue: number
+  isTimerModalVisible: boolean
+  setIsTimerModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  setDefaultEndTimerValue: React.Dispatch<React.SetStateAction<number>>
   translatedText: string
 }
 
@@ -45,26 +51,55 @@ export default function OverlayModule({
   setTimerValue,
   defaultTimerValue,
   setDefaultTimerValue,
+  endTimerValue,
+  setEndTimerValue,
+  defaultEndTimerValue,
+  setDefaultEndTimerValue,
+  isTimerModalVisible,
+  setIsTimerModalVisible,
   translatedText,
 }: Props): JSX.Element {
-  const { isAssistantVisible, onTimerPress, isTimerModalVisible, OVERLAY_OPTIONS, isPrompterVisible } =
-    useOverlayModuleController({
-      defaultTimerValue,
-    })
+  const {
+    isAssistantVisible,
+    onTimerPress,
+    onEndTimerPress,
+    OVERLAY_OPTIONS,
+    isPrompterVisible,
+    isEndTimerModalVisible,
+  } = useOverlayModuleController({
+    defaultTimerValue,
+    defaultEndTimerValue,
+    isTimerModalVisible,
+    setIsTimerModalVisible,
+  })
 
   return (
     <View style={styles.container}>
       {isAssistantVisible && <AssistantView />}
-      <TimerCountdownView timerValue={timerValue} />
+      <TimerCountdownView
+        timerValue={timerValue}
+        endTimerValue={endTimerValue}
+        isRecording={isRecording}
+      />
       {isTimerModalVisible && (
         <TimerSliderView
           toggleVisibility={onTimerPress}
           setTimerValue={setTimerValue}
           defaultTimerValue={defaultTimerValue}
           setDefaultTimerValue={setDefaultTimerValue}
+          type='START'
         />
       )}
-      {isPrompterVisible && !isTimerModalVisible && (
+      {isEndTimerModalVisible && !isTimerModalVisible && (
+        <TimerSliderView
+          toggleVisibility={onEndTimerPress}
+          setTimerValue={setEndTimerValue}
+          defaultTimerValue={defaultEndTimerValue}
+          setDefaultTimerValue={setDefaultEndTimerValue}
+          type='STOP'
+        />
+      )}
+      {isPrompterVisible && !isTimerModalVisible && !isEndTimerModalVisible && (
         <PrompterModule
           text={translatedText}
           isRecording={isRecording}

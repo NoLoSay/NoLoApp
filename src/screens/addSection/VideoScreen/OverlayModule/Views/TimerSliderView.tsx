@@ -23,6 +23,7 @@ type Props = {
   setTimerValue: React.Dispatch<React.SetStateAction<number>>
   defaultTimerValue: number
   setDefaultTimerValue: (timer: number) => void
+  type: 'START' | 'STOP'
 }
 
 /**
@@ -32,9 +33,10 @@ type Props = {
  * @param {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
  * @param {number} defaultTimerValue The default timer value
  * @param {(timer: number) => void} setDefaultTimerValue Function that sets the default timer value
+ * @param {string} type The type of timer (start or stop)
  * @returns
  */
-function TimerSliderView({ toggleVisibility, setTimerValue, defaultTimerValue, setDefaultTimerValue }: Props) {
+function TimerSliderView({ toggleVisibility, setTimerValue, defaultTimerValue, setDefaultTimerValue, type }: Props) {
   const [selectedValue, setSelectedValue] = useState(defaultTimerValue)
 
   /**
@@ -88,23 +90,67 @@ function TimerSliderView({ toggleVisibility, setTimerValue, defaultTimerValue, s
     },
   ]
 
+  const TIMER_STOP_OPTIONS = [
+    {
+      label: 'Désactivé',
+      value: 0,
+      color: 'red',
+    },
+    {
+      label: '10s',
+      value: 10,
+    },
+    {
+      label: '20s',
+      value: 20,
+    },
+    {
+      label: '30s',
+      value: 30,
+    },
+    {
+      label: '45s',
+      value: 45,
+    },
+    {
+      label: '1mn',
+      value: 60,
+    },
+    {
+      label: '1mn30',
+      value: 90,
+    },
+  ]
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Choisissez une durée avant que la vidéo commence</Text>
+      <Text style={styles.text}>
+        Choisissez une durée avant que la vidéo ne {type === 'START' ? 'commence' : "s'arrête"}.
+      </Text>
       <Picker
         selectedValue={selectedValue}
         onValueChange={handleSliderChange}
         style={styles.picker}
         prompt='Select Timer Value'
       >
-        {TIMER_OPTIONS.map(option => (
-          <Picker.Item
-            key={option.value}
-            label={option.label}
-            value={option.value}
-            color={option.color}
-          />
-        ))}
+        {type === 'START' &&
+          TIMER_OPTIONS.map(option => (
+            <Picker.Item
+              key={option.value}
+              label={option.label}
+              value={option.value}
+              color={option.color}
+            />
+          ))}
+        {type === 'STOP' &&
+          TIMER_STOP_OPTIONS.map(option => (
+            <Picker.Item
+              key={option.value}
+              label={option.label}
+              value={option.value}
+              color={option.color}
+            />
+          ))}
       </Picker>
       <View style={styles.buttonContainer}>
         <Button

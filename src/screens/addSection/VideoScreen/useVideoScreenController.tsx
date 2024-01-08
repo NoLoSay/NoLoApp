@@ -36,6 +36,12 @@ import { Camera, CameraDevice, VideoFile, useCameraDevice, useCameraPermission }
  * @property {React.Dispatch<React.SetStateAction<number>>} setTimerValue Function that sets the timer value
  * @property {number} defaultTimerValue The default timer value
  * @property {React.Dispatch<React.SetStateAction<number>>} setDefaultTimerValue Function that sets the default timer value
+ * @property {number} endTimerValue The end timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setEndTimerValue Function that sets the end timer value
+ * @property {number} defaultEndTimerValue The default end timer value
+ * @property {React.Dispatch<React.SetStateAction<number>>} setDefaultEndTimerValue Function that sets the default end timer value
+ * @property {boolean} isTimerModalVisible Wether the timer modal is visible or not
+ * @property {React.Dispatch<React.SetStateAction<boolean>>} setIsTimerModalVisible Function that sets the visibility of the timer modal
  */
 type VideoScreenController = {
   hasPermission: boolean
@@ -51,6 +57,12 @@ type VideoScreenController = {
   setTimerValue: React.Dispatch<React.SetStateAction<number>>
   defaultTimerValue: number
   setDefaultTimerValue: React.Dispatch<React.SetStateAction<number>>
+  endTimerValue: number
+  setEndTimerValue: React.Dispatch<React.SetStateAction<number>>
+  defaultEndTimerValue: number
+  setDefaultEndTimerValue: React.Dispatch<React.SetStateAction<number>>
+  isTimerModalVisible: boolean
+  setIsTimerModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 /**
@@ -69,6 +81,9 @@ const useVideoScreenController = (): VideoScreenController => {
   const [errorText, setErrorText] = useState("Vous n'avez pas autorisé l'accès à la galerie.")
   const [timerValue, setTimerValue] = useState(0)
   const [defaultTimerValue, setDefaultTimerValue] = useState(0)
+  const [endTimerValue, setEndTimerValue] = useState(0)
+  const [defaultEndTimerValue, setDefaultEndTimerValue] = useState(0)
+  const [isTimerModalVisible, setIsTimerModalVisible] = useState(false)
 
   // TODO If user don't have authorized the access to camera roll, display error page
 
@@ -181,10 +196,13 @@ const useVideoScreenController = (): VideoScreenController => {
   // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (!isRecording) {
-      if (timerValue <= 0) stopRecording()
+      if (timerValue <= 0 && !isTimerModalVisible) {
+        stopRecording()
+      }
       setTimerValue(defaultTimerValue)
     } else {
-      if (defaultTimerValue === 0) {
+      // eslint-disable-next-line eqeqeq -- Idk why but it doesn't work with ===
+      if (defaultTimerValue == 0) {
         startRecording()
         return
       }
@@ -200,6 +218,24 @@ const useVideoScreenController = (): VideoScreenController => {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when isRecording changes
   }, [isRecording, timerValue])
 
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (isRecording) {
+      if (endTimerValue === 0 && defaultEndTimerValue !== 0) {
+        toggleRecording()
+      }
+      const countdown = setInterval(() => {
+        setEndTimerValue(prev => prev - 1)
+      }, 1000)
+
+      // eslint-disable-next-line consistent-return
+      return () => {
+        clearInterval(countdown)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when endTimerValue changes
+  }, [isRecording, endTimerValue])
+
   return {
     hasPermission,
     frontCamera,
@@ -214,6 +250,12 @@ const useVideoScreenController = (): VideoScreenController => {
     setTimerValue,
     defaultTimerValue,
     setDefaultTimerValue,
+    endTimerValue,
+    setEndTimerValue,
+    defaultEndTimerValue,
+    setDefaultEndTimerValue,
+    isTimerModalVisible,
+    setIsTimerModalVisible,
   }
 }
 
