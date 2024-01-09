@@ -12,25 +12,36 @@ import images from '../../../../global/images'
  * @typedef useOverlayModuleController
  * @description Type for the useOverlayModuleController custom hook.
  * @property {boolean} isAssistantVisible Is the assistant visible.
- * @property {function} toggleAssistant Toggle the assistant.
+ * @property {function} onTimerPress Handle the timer press
+ * @property {function} onEndTimerPress Handle the end timer press
+ * @property {boolean} isTimerModalVisible Is the timer modal visible.
  * @property {Object[]} OVERLAY_OPTIONS The overlay buttons.
  * @property {boolean} isPrompterVisible Is the prompter visible.
+ * @property {boolean} isEndTimerModalVisible Is the end timer modal visible.
  */
 type useOverlayModuleController = {
   isAssistantVisible: boolean
   onTimerPress: () => void
+  onEndTimerPress: () => void
   isTimerModalVisible: boolean
   OVERLAY_OPTIONS: OverlayOption[]
   isPrompterVisible: boolean
+  isEndTimerModalVisible: boolean
 }
 
 /**
  * @typedef Props
  * @description Type for the props of the useOverlayModuleController custom hook.
  * @property {number} defaultTimerValue The default timer value.
+ * @property {number} defaultEndTimerValue The default end timer value.
+ * @property {boolean} isTimerModalVisible Is the timer modal visible.
+ * @property {function} setIsTimerModalVisible Set the timer modal visibility.
  */
 type Props = {
   defaultTimerValue: number
+  defaultEndTimerValue: number
+  isTimerModalVisible: boolean
+  setIsTimerModalVisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 /**
@@ -52,11 +63,18 @@ type OverlayOption = {
  * @function useOverlayModuleController
  * @description Logic for the OverlayModule.
  * @param {defaultTimerValue} number The default timer value.
+ * @param {defaultEndTimerValue} number The default end timer value.
+ * @param {isTimerModalVisible} boolean Is the timer modal visible.
  * @returns {useOverlayModuleController} Variables that alters the OverlayModule.
  */
-const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayModuleController => {
+const useOverlayModuleController = ({
+  defaultTimerValue,
+  defaultEndTimerValue,
+  isTimerModalVisible,
+  setIsTimerModalVisible,
+}: Props): useOverlayModuleController => {
   const [isAssistantVisible, setIsAssistantVisible] = useState(false)
-  const [isTimerModalVisible, setIsTimerModalVisible] = useState(false)
+  const [isEndTimerModalVisible, setIsEndTimerModalVisible] = useState(false)
   const [isPrompterVisible, setIsPrompterVisible] = useState(false)
 
   const toggleAssistant = () => setIsAssistantVisible(!isAssistantVisible)
@@ -64,6 +82,8 @@ const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayMod
   const toggleTimer = () => setIsTimerModalVisible(!isTimerModalVisible)
 
   const togglePrompter = () => setIsPrompterVisible(!isPrompterVisible)
+
+  const toggleEndTimer = () => setIsEndTimerModalVisible(!isEndTimerModalVisible)
 
   useFocusEffect(
     useCallback(() => {
@@ -73,7 +93,7 @@ const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayMod
         setIsTimerModalVisible(false)
         setIsPrompterVisible(false)
       }
-    }, [])
+    }, [setIsTimerModalVisible])
   )
 
   const OVERLAY_OPTIONS: OverlayOption[] = [
@@ -101,14 +121,24 @@ const useOverlayModuleController = ({ defaultTimerValue }: Props): useOverlayMod
         return defaultTimerValue > 0
       },
     },
+    {
+      title: 'Durée',
+      icon: images.icons.outline.hourglass(),
+      onPress: toggleEndTimer,
+      isActivated: () => {
+        return defaultEndTimerValue > 0
+      },
+    },
   ]
 
   return {
     isAssistantVisible,
     onTimerPress: toggleTimer,
+    onEndTimerPress: toggleEndTimer,
     isTimerModalVisible,
     OVERLAY_OPTIONS,
     isPrompterVisible,
+    isEndTimerModalVisible,
   }
 }
 

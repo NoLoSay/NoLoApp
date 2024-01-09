@@ -10,19 +10,39 @@ import { View, Text, StyleSheet } from 'react-native'
 /**
  * @typedef Props
  * @property {number} timerValue The current timer value
+ * @property {number} endTimerValue The end timer value
  */
 type Props = {
   timerValue: number
+  endTimerValue: number
+  isRecording: boolean
 }
 
 /**
  * @function TimerCountdownView
  * @description Component that renders the Timer countdown view.
  * @param {number} timerValue The current timer value
+ * @param {number} endTimerValue The end timer value
+ * @param {boolean} isRecording Wether the user is recording a video or not
  * @returns {JSX.Element} TimerCountdownView component
  */
-export default function TimerCountdownView({ timerValue }: Props): JSX.Element {
-  return <View style={styles.container}>{timerValue > 0 && <Text style={styles.textStyle}>{timerValue}</Text>}</View>
+export default function TimerCountdownView({ timerValue, endTimerValue, isRecording }: Props): JSX.Element {
+  if (timerValue > 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.textStyle}>{timerValue}</Text>
+      </View>
+    )
+  }
+  if (endTimerValue > 0 && isRecording) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.textStyle}>{endTimerValue}</Text>
+      </View>
+    )
+  }
+
+  return <View />
 }
 
 const styles = StyleSheet.create({
