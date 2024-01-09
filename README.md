@@ -1,12 +1,12 @@
 # Welcome to NoLoSay 👋
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000"/>
   <a href="https://nolosay.github.io/documentation" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg"/>
   </a>
   <a href="https://github.com/NoLoSay/NoLoApp/blob/main/LICENSE.md" target="_blank">
-    <img alt="License: Private" src="https://img.shields.io/badge/License-Private-yellow.svg" />
+    <img alt="License: Private" src="https://img.shields.io/badge/License-Private-yellow.svg"/>
   </a>
   <a href="https://github.com/NoLoSay/NoLoApp/actions/workflows/main_push.yml">
     <img alt="CI status" src="https://github.com/NoLoSay/NoLoApp/actions/workflows/main_push.yml/badge.svg">
