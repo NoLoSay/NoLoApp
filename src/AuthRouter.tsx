@@ -19,6 +19,7 @@ import { AccountProvider } from './global/contexts/AccountProvider'
 import SettingsScreen from './screens/settings/SettingsScreen'
 import WebViewScreen from './screens/webView/WebView'
 import PlaceDescription from './screens/PlaceDescription/PlaceDescription'
+import VideoConsumptionView from './screens/VideoConsumptionView/VideoConsumptionView'
 
 export default function App(): React.JSX.Element {
   const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -59,6 +60,12 @@ export default function App(): React.JSX.Element {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore: Unreachable code error
               component={WebViewScreen}
+            />
+            <AuthStack.Screen
+              name='VideoConsumptionModal'
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore: Unreachable code error
+              component={VideoConsumptionView}
             />
             <AuthStack.Screen
               name='PlaceDescription'
