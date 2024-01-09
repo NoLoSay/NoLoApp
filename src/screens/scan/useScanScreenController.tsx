@@ -25,6 +25,7 @@ interface ScanScreenController {
   backCamera: CameraDevice | undefined
   isQRScanningActive: boolean
   codeScanner: CodeScanner
+  navigateToVideoConsumption: (videoId: string) => void
 }
 
 /**
@@ -32,7 +33,7 @@ interface ScanScreenController {
  * @description Controller that handles the logic for the scan screen.
  * @returns {ScanScreenController} Scan screen controller.
  */
-export default function useScanScreenController(): ScanScreenController {
+export default function useScanScreenController({ navigation }: any): ScanScreenController {
   const { account } = useContext(AccountContext)
   const { hasPermission, requestPermission } = useCameraPermission()
   const backCamera = useCameraDevice('back')
@@ -61,6 +62,15 @@ export default function useScanScreenController(): ScanScreenController {
     }
   }, [hasPermission, requestPermission])
 
+  function navigateToVideoConsumption(videoId: string | undefined) {
+    navigation.navigate('VideoConsumptionModal', {
+      videoId,
+      title: "Titre de l'oeuvre",
+      videoText:
+        'Do qui commodo cupidatat dolor velit dolor elit consequat mollit incididunt nisi officia. Exercitation aute ut dolore eiusmod ut aute veniam nostrud id laboris amet in culpa dolore.',
+    })
+  }
+
   function handleQRScanning(codes: Code[]) {
     setIsQRScanningActive(false)
     if (isQRScanningActive)
@@ -69,6 +79,7 @@ export default function useScanScreenController(): ScanScreenController {
           text: 'Open',
           onPress: () => {
             console.log(`Open ${codes[codes.length - 1].value}`)
+            navigateToVideoConsumption(codes[codes.length - 1].value)
           },
           style: 'default',
         },
@@ -88,5 +99,6 @@ export default function useScanScreenController(): ScanScreenController {
     backCamera,
     isQRScanningActive,
     codeScanner,
+    navigateToVideoConsumption,
   }
 }

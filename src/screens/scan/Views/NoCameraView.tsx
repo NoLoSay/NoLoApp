@@ -16,6 +16,7 @@ import { colors } from '../../../global/colors'
 
 interface NoCameraViewProps {
   hasPermission: boolean
+  onNavigationButtonPressed: () => void
 }
 
 function PermissionNotGranted(): React.JSX.Element {
@@ -57,7 +58,10 @@ function NoCamera(): React.JSX.Element {
  * @description Component that renders the NoCameraView.
  * @returns {React.JSX.Element} NoCameraView component template
  */
-export default function NoCameraView({ hasPermission }: NoCameraViewProps): React.JSX.Element {
+export default function NoCameraView({
+  hasPermission,
+  onNavigationButtonPressed,
+}: NoCameraViewProps): React.JSX.Element {
   async function createDebugText() {
     Clipboard.setString(
       `${
@@ -89,6 +93,14 @@ export default function NoCameraView({ hasPermission }: NoCameraViewProps): Reac
         />
       </Pressable>
       <View style={styles.contentContainer}>{!hasPermission ? <PermissionNotGranted /> : <NoCamera />}</View>
+      {__DEV__ && (
+        <Pressable
+          onPress={onNavigationButtonPressed}
+          style={{ justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Text>Accéder à la vidéo</Text>
+        </Pressable>
+      )}
     </SafeAreaView>
   )
 }
