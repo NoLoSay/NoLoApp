@@ -15,6 +15,7 @@ interface Props {
   text: string
   style?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 /**
@@ -25,9 +26,9 @@ interface Props {
  * @param {StyleProp<ViewStyle>} props.style - Style of the button
  * @returns
  */
-export default function Button({ onPress, text, style, textStyle }: Props) {
+export default function Button({ onPress, text, style, textStyle, containerStyle }: Props) {
   return (
-    <View style={{ width: '100%', paddingHorizontal: 52 }}>
+    <View style={[{ width: '100%' }, containerStyle]}>
       <Pressable
         style={[styles.button, style]}
         onPress={onPress}
