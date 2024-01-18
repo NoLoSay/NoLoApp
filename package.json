@@ -43,6 +43,7 @@
     "@react-navigation/native-stack": "^6.9.13",
     "geolib": "^3.3.4",
     "react-native-device-info": "^10.11.0",
+    "react-native-dotenv": "^3.4.9",
     "react-native-fast-image": "^8.6.3",
     "react-native-maps": "^1.7.1",
     "react-native-screens": "^3.22.1",
