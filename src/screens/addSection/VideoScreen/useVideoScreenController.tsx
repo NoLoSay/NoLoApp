@@ -130,7 +130,7 @@ const useVideoScreenController = (): VideoScreenController => {
   const recordIsFinished = async (video: VideoFile) => {
     setIsLoading(true)
     const { path } = video
-    await CameraRoll.save(`file://${path}`, {
+    await CameraRoll.saveAsset(`file://${path}`, {
       type: 'video',
       album: DeviceInfo.getApplicationName(),
     })
