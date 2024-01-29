@@ -9,9 +9,6 @@ import { NativeModules, Platform } from 'react-native'
 import { DEV_API_URL, PROD_API_URL } from '@env'
 import { Header } from '../../global/types/httpClient/Header'
 
-const API_ENDPOINT = 'http://api.nolosay.com:3001'
-const DEV_API_ENDPOINT = 'http://172.20.10.5:3001' // Local ip for testing on real device
-
 /**
  * @constant defaultHeaders
  * @description Default headers to send with requests.
