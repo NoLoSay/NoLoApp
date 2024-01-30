@@ -4,13 +4,13 @@
  * @requires react react-native
  */
 import React from 'react'
-import { SafeAreaView, ScrollView } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
 import TopBar from './Views/TopBar'
 import usePlacesNeedingTranslationController from './usePlacesNeedingTranslationController'
 import { PlaceNeedingTranslation } from '../../../global/types/Places'
 import LoadingModal from '../../../components/LoadingModal'
 import PlaceDisplay from './Views/PlaceDisplay'
-import ErrorModal from '../../../components/ErrorModal'
+import colors from '../../../global/colors'
 
 /**
  * @typedef Props
@@ -35,23 +35,32 @@ export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Ele
     <SafeAreaView>
       <TopBar navigation={navigation} />
       <ScrollView>
-        {places.map((place: PlaceNeedingTranslation) => (
-          <PlaceDisplay
-            place={place}
-            key={place.id}
-            onPress={() =>
-              onPlacePress({
-                place,
-              })
-            }
-          />
-        ))}
+        {!displayError &&
+          places.map((place: PlaceNeedingTranslation) => (
+            <PlaceDisplay
+              place={place}
+              key={place.id}
+              onPress={() =>
+                onPlacePress({
+                  place,
+                })
+              }
+            />
+          ))}
       </ScrollView>
+      {displayError && <Text style={styles.errorText}>{errorText}</Text>}
       <LoadingModal visible={isLoading} />
-      <ErrorModal
-        visible={displayError}
-        errorText={errorText}
-      />
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  errorText: {
+    textAlign: 'center',
+    color: colors.error,
+    fontFamily: 'Poppins',
+    fontWeight: '600',
+    fontSize: 16,
+    paddingHorizontal: 16,
+  },
+})

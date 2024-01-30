@@ -6,6 +6,7 @@
 import { useEffect, useState } from 'react'
 import { PlaceNeedingTranslation } from '../../../global/types/Places'
 import { getPlacesNeedingDescription } from '../../../helpers/httpClient/places'
+import usePlacesNeedingDescription from '../../../helpers/httpClient/queries/places/usePlacesNeedingDescription'
 
 /**
  * @typedef {Object} onPlacePressParams
@@ -50,36 +51,22 @@ export default function usePlacesNeedingTranslationController({
   navigation,
 }: Props): usePlacesNeedingTranslationControllerType {
   const [places, setPlaces] = useState<PlaceNeedingTranslation[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [displayError, setDisplayError] = useState<boolean>(false)
   const [errorText, setErrorText] = useState<string>('')
+  const placesNeedingTranslationMutation = usePlacesNeedingDescription({ setPlaces, displayErrorModal })
 
   /**
    * @function displayErrorModal
    * @description Display an error modal with the given text for 3 seconds and then go back to the previous screen
    * @param text - Text to display in the error modal
    */
-  const displayErrorModal = (text: string) => {
+  function displayErrorModal(text: string) {
     setErrorText(text)
     setDisplayError(true)
-    setTimeout(() => {
-      setDisplayError(false)
-      navigation.goBack()
-    }, 3000)
   }
 
   useEffect(() => {
-    getPlacesNeedingDescription()
-      .then(fetchedPlaces => {
-        setPlaces(fetchedPlaces)
-        setIsLoading(false)
-      })
-      .catch(error => {
-        console.error(error)
-        setIsLoading(false)
-        displayErrorModal('Une erreur est survenue lors de la récupération des lieux')
-      })
-    setIsLoading(false)
+    placesNeedingTranslationMutation.mutate()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -90,7 +77,7 @@ export default function usePlacesNeedingTranslationController({
   return {
     onPlacePress,
     places,
-    isLoading,
+    isLoading: placesNeedingTranslationMutation.isPending,
     displayError,
     errorText,
   }
