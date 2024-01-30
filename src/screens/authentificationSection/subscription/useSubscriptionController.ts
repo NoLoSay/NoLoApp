@@ -7,7 +7,7 @@
 
 import { useContext, useState } from 'react'
 import { AccountContext } from '../../../global/contexts/AccountProvider'
-import { subscribe } from '../../../helpers/httpClient/auth'
+import useRegister from '../../../helpers/httpClient/auth/useRegister'
 
 interface SubscriptionController {
   email: string
@@ -48,32 +48,8 @@ export default function useSubscriptionController({
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
-  const { account, setAccount } = useContext(AccountContext)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
-
-  /**
-   * @function analyseServerResponse
-   * @description Analyse the server's response to the request.
-   * @param res Response object from the server.
-   * @returns {Promise<void>} Promise of void
-   */
-  async function analyseServerResponse(res: Response): Promise<void> {
-    res.json().then(response => {
-      if (res.status === 201) {
-        setAccount({
-          ...account,
-          accountID: response.id,
-          accessToken: 'subscribedToken',
-          email: response.email,
-          username: response.username,
-        })
-        navigation.navigate('AppRouter')
-      } else {
-        setError(response.message)
-      }
-    })
-  }
+  const regitrationMutation = useRegister({ formUsername: username, formEmail: email, password, navigation, setError })
 
   /**
    * @function subscribeUser
@@ -94,20 +70,7 @@ export default function useSubscriptionController({
       setError('Mots de passe différents')
       return
     }
-    setIsLoading(true)
-    await subscribe({
-      email,
-      username,
-      password,
-    })
-      .then(async res => {
-        await analyseServerResponse(res)
-        setIsLoading(false)
-      })
-      .catch(() => {
-        setError('Une erreur est survenue')
-        setIsLoading(false)
-      })
+    regitrationMutation.mutate()
   }
 
   return {
@@ -125,6 +88,6 @@ export default function useSubscriptionController({
     setShowPasswordConfirmation,
     subscribe: subscribeUser,
     error,
-    isLoading,
+    isLoading: regitrationMutation.isPending,
   }
 }

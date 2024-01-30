@@ -6,6 +6,8 @@
 
 import { post } from './common'
 import { Header } from '../../global/types/httpClient/Header'
+import RegisterJSON from '../../global/types/httpClient/auth/Registration'
+import ConnectionJSON from '../../global/types/httpClient/auth/Connection'
 
 interface SubscribeProps {
   url?: string
@@ -17,11 +19,10 @@ interface SubscribeProps {
 
 interface ConnectProps {
   url?: string
-  username: string
+  formUsername: string
   password: string
   headers?: Header
 }
-
 interface ForgotPasswordProps {
   url?: string
   email: string
@@ -38,15 +39,31 @@ interface ForgotPasswordProps {
  * @param param.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export async function subscribe({ email, username, password }: SubscribeProps): Promise<Response> {
-  return post({
-    endpoint: '/register',
-    body: JSON.stringify({
-      email,
-      username,
-      password,
-    }),
-  })
+export async function subscribe({ email, username, password }: SubscribeProps): Promise<RegisterJSON> {
+  try {
+    const response = await post({
+      endpoint: '/register',
+      body: JSON.stringify({
+        email,
+        username,
+        password,
+      }),
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(responseData.message)
+    }
+
+    return {
+      json: responseData,
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : String(error))
+  }
 }
 
 /**
@@ -58,14 +75,30 @@ export async function subscribe({ email, username, password }: SubscribeProps): 
  * @param param.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export async function connect({ username, password }: ConnectProps): Promise<Response> {
-  return post({
-    endpoint: '/auth/login',
-    body: JSON.stringify({
-      username,
-      password,
-    }),
-  })
+export async function connect({ formUsername, password }: ConnectProps): Promise<ConnectionJSON> {
+  try {
+    const response = await post({
+      endpoint: '/auth/login',
+      body: JSON.stringify({
+        username: formUsername,
+        password,
+      }),
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(responseData.message)
+    }
+
+    return {
+      json: responseData,
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : String(error))
+  }
 }
 
 /**
