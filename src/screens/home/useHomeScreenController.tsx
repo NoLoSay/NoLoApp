@@ -70,7 +70,6 @@ export default function useHomeScreenController(): HomeScreenController {
 
       const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
 
-      console.log(reversedCity)
       setCity(reversedCity)
     })
     getAllPlaces()
