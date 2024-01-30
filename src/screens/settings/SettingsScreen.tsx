@@ -157,6 +157,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         <View style={styles.settingsCategoriesContainer}>
           {MainSettingsCategories.map(category => (
             <SettingCategoryDisplay
+              key={category.title + category.id}
               id={category.id}
               title={category.title}
               subtitle={category.subtitle}
@@ -172,6 +173,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         <View style={styles.settingsCategoriesContainer}>
           {MoreSettingsCategories.map(category => (
             <SettingCategoryDisplay
+              key={category.title + category.id}
               id={category.id}
               title={category.title}
               subtitle={category.subtitle}
