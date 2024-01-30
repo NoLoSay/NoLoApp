@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { Header } from '../../../global/types/httpClient/Header'
-import { AccountContext } from '../../../global/contexts/AccountProvider'
-import { subscribe } from '../auth'
-import RegisterJSON from '../../../global/types/httpClient/auth/Registration'
+import { Header } from '../../../../global/types/httpClient/Header'
+import { AccountContext } from '../../../../global/contexts/AccountProvider'
+import { subscribe } from '../../auth'
+import RegisterJSON from '../../../../global/types/httpClient/auth/Registration'
 
 interface RegisterProps {
   url?: string
