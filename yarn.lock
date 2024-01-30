@@ -1527,10 +1527,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@react-native-camera-roll/camera-roll@^7.0.0":
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-7.2.2.tgz#debac059df33cb53e632db4ae8bac1a993464592"
-  integrity sha512-imxzopalST7BCDRA1VNjlN8JUXiSenH201DX7u3Z2wc/5W9ctPDHkJVheJqdQRO4k0COvNpe3b3RV1zCs3FOrw==
+"@react-native-camera-roll/camera-roll@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-7.4.0.tgz#931e25b076b40dc57ca6d380f0a85d494a120f06"
+  integrity sha512-y0bVpMJLaFphYvMMx1BsqgMA0kXq9CKxKYNnt4ocUvwJj5Rp4TZ233rzJoDqz1oxd56Tz5f1g+yhYN5RImKl8Q==
 
 "@react-native-clipboard/clipboard@^1.12.1":
   version "1.13.2"
@@ -3300,6 +3300,11 @@ domutils@^3.0.1:
     dom-serializer "^2.0.0"
     domelementtype "^2.3.0"
     domhandler "^5.0.3"
+
+dotenv@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -6423,6 +6428,13 @@ react-native-device-info@^10.11.0:
   version "10.12.0"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.12.0.tgz#be4e71cbcc9a05e8643b1a419a4450d4cef9bbcc"
   integrity sha512-gnBkjyZNEqRd+5BNrdzuvmlraHTCH/to2x0Gp9rtDt0O9xWWW1MTYohUVWX9A0Ad2HVYcGanDCIvjWp4ngMZFg==
+
+react-native-dotenv@^3.4.9:
+  version "3.4.9"
+  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-3.4.9.tgz#621c5b0c1d0c5c7f569bfe5a1d804bec7885c010"
+  integrity sha512-dbyd+mcy7SUzxEgmt33TRf1FGcNe6swJhXmB0unKkI49F7+pidog9kPtjxMLTAfmKA8gcN2XHQSKltGfGbGCLQ==
+  dependencies:
+    dotenv "^16.3.1"
 
 react-native-fast-image@^8.6.3:
   version "8.6.3"

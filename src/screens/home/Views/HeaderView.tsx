@@ -63,7 +63,7 @@ export default function HeaderView({
               style={styles.icon}
             />
           </TouchableOpacity>
-          <Text style={styles.cityText}>{city}</Text>
+          <Text style={styles.cityText}>{city.length > 8 ? `${city.substring(0, 5)}...` : city}</Text>
         </View>
         <Image
           source={images.logos.nolosay()}

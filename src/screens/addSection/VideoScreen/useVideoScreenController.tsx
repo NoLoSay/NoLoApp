@@ -130,7 +130,7 @@ const useVideoScreenController = (): VideoScreenController => {
   const recordIsFinished = async (video: VideoFile) => {
     setIsLoading(true)
     const { path } = video
-    await CameraRoll.save(`file://${path}`, {
+    await CameraRoll.saveAsset(`file://${path}`, {
       type: 'video',
       album: DeviceInfo.getApplicationName(),
     })
@@ -224,17 +224,20 @@ const useVideoScreenController = (): VideoScreenController => {
       if (endTimerValue === 0 && defaultEndTimerValue !== 0) {
         toggleRecording()
       }
-      const countdown = setInterval(() => {
-        setEndTimerValue(prev => prev - 1)
-      }, 1000)
 
-      // eslint-disable-next-line consistent-return
-      return () => {
-        clearInterval(countdown)
+      if (timerValue <= 0) {
+        const countdown = setInterval(() => {
+          setEndTimerValue(prev => prev - 1)
+        }, 1000)
+
+        // eslint-disable-next-line consistent-return
+        return () => {
+          clearInterval(countdown)
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when endTimerValue changes
-  }, [isRecording, endTimerValue])
+  }, [isRecording, endTimerValue, timerValue])
 
   return {
     hasPermission,
