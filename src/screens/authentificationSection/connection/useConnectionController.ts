@@ -8,7 +8,7 @@
 import { useState } from 'react'
 import { Alert } from 'react-native'
 import { forgotPassword } from '../../../helpers/httpClient/auth'
-import useConnect from '../../../helpers/httpClient/auth/useConnect'
+import useConnect from '../../../helpers/httpClient/queries/auth/useConnect'
 
 interface ConnectionController {
   email: string

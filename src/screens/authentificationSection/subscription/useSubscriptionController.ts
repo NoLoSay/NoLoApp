@@ -7,7 +7,7 @@
 
 import { useContext, useState } from 'react'
 import { AccountContext } from '../../../global/contexts/AccountProvider'
-import useRegister from '../../../helpers/httpClient/auth/useRegister'
+import useRegister from '../../../helpers/httpClient/queries/auth/useRegister'
 
 interface SubscriptionController {
   email: string
