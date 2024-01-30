@@ -8,7 +8,7 @@
  */
 import React from 'react'
 import { RefreshControl, ScrollView } from 'react-native'
-import { Place } from '../../../global/types/Places'
+import { Place } from '@global/types/Places'
 import Category from './Views/Category'
 
 interface CarouselViewProps {

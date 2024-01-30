@@ -6,10 +6,10 @@
 
 import React from 'react'
 import { StyleSheet, ScrollView, View, Text } from 'react-native'
+import LoadingModal from '@components/LoadingModal'
+import colors from '@global/colors'
 import useLibraryScreenController from './useLibraryScreenController'
 import TopBar from './Views/TopBar'
-import LoadingModal from '../../../components/LoadingModal'
-import colors from '../../../global/colors'
 import VideoDisplay from './Views/VideoDisplay'
 
 type Props = {

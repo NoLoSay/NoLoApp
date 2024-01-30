@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
-import colors from '../../../../global/colors'
+import colors from '@global/colors'
 
 interface Props {
   text: string

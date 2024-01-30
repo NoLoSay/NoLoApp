@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { Header } from '../../../../global/types/httpClient/Header'
-import { AccountContext } from '../../../../global/contexts/AccountProvider'
-import { connect } from '../../auth'
-import ConnectJSON from '../../../../global/types/httpClient/auth/Connection'
+import { Header } from '@global/types/httpClient/Header'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import ConnectJSON from '@global/types/httpClient/auth/Connection'
+import { connect } from '@helpers/httpClient/auth'
 
 interface ConnectProps {
   url?: string

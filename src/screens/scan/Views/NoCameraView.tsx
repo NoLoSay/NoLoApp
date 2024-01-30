@@ -10,9 +10,9 @@ import { Alert, Linking, Platform, Pressable, SafeAreaView, StyleSheet, Text, Vi
 import FastImage from 'react-native-fast-image'
 import DeviceInfo from 'react-native-device-info'
 import Clipboard from '@react-native-clipboard/clipboard'
-import Button from '../../../components/Button'
-import images from '../../../global/images'
-import { colors } from '../../../global/colors'
+import Button from '@components/Button'
+import images from '@global/images'
+import { colors } from '@global/colors'
 
 interface NoCameraViewProps {
   hasPermission: boolean

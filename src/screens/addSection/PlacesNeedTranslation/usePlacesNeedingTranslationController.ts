@@ -4,9 +4,8 @@
  * @requires react react-native
  */
 import { useEffect, useState } from 'react'
-import { PlaceNeedingTranslation } from '../../../global/types/Places'
-import { getPlacesNeedingDescription } from '../../../helpers/httpClient/places'
-import usePlacesNeedingDescription from '../../../helpers/httpClient/queries/places/usePlacesNeedingDescription'
+import { PlaceNeedingTranslation } from '@global/types/Places'
+import usePlacesNeedingDescription from '@helpers/httpClient/queries/places/usePlacesNeedingDescription'
 
 /**
  * @typedef {Object} onPlacePressParams

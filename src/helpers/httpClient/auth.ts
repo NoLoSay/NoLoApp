@@ -4,10 +4,10 @@
  * @description Helper functions for authentication.
  */
 
+import { Header } from '@global/types/httpClient/Header'
+import RegisterJSON from '@global/types/httpClient/auth/Registration'
+import ConnectionJSON from '@global/types/httpClient/auth/Connection'
 import { post } from './common'
-import { Header } from '../../global/types/httpClient/Header'
-import RegisterJSON from '../../global/types/httpClient/auth/Registration'
-import ConnectionJSON from '../../global/types/httpClient/auth/Connection'
 
 interface SubscribeProps {
   url?: string

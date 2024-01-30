@@ -7,7 +7,7 @@
 
 import { NativeModules, Platform } from 'react-native'
 import { DEV_API_URL, PROD_API_URL } from '@env'
-import { Header } from '../../global/types/httpClient/Header'
+import { Header } from '@global/types/httpClient/Header'
 
 /**
  * @constant defaultHeaders

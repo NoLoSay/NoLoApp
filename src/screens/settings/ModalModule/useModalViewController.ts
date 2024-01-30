@@ -5,7 +5,7 @@
  * @requires react react-native
  */
 import { useState } from 'react'
-import { AccountType } from '../../../global/types/Account'
+import { AccountType } from '@global/types/Account'
 
 type Props = {
   account: AccountType

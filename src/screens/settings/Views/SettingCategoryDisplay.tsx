@@ -7,8 +7,8 @@
 import React from 'react'
 import { Image, ImageProps, Pressable, StyleSheet, Text, View } from 'react-native'
 import FastImage from 'react-native-fast-image'
-import colors from '../../../global/colors'
-import images from '../../../global/images'
+import colors from '@global/colors'
+import images from '@global/images'
 
 type Props = {
   id: number

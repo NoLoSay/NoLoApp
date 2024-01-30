@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
-import Button from '../../components/Button'
+import Button from '@components/Button'
 
 interface ErrorPageProps {
   goBack: () => void

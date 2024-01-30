@@ -4,12 +4,13 @@ module.exports = {
     [
       'module-resolver',
       {
+        root: ['./src'],
+        extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
         alias: {
-          '@source/*': './src',
-          '@components/*': './src/components',
-          '@global/*': './src/global',
-          '@assets/*': './assets',
-          '@helpers/*': './src/helper*',
+          '@components': './src/components',
+          '@global': './src/global',
+          '@assets': './assets',
+          '@helpers': './src/helpers',
         },
       },
     ],

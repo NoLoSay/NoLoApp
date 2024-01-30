@@ -9,10 +9,10 @@
 
 import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
-import { Place } from '../../global/types/Places'
-import getPlaces from '../../helpers/httpClient/places'
-import { AccountContext } from '../../global/contexts/AccountProvider'
-import getCity from '../../helpers/httpClient/localization'
+import { Place } from '@global/types/Places'
+import getPlaces from '@helpers/httpClient/places'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import getCity from '@helpers/httpClient/localization'
 
 /**
  * @interface HomeScreenController

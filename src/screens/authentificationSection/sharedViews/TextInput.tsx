@@ -1,4 +1,3 @@
-import { colors } from '../../..//global/colors'
 import React from 'react'
 import {
   View,
@@ -11,6 +10,7 @@ import {
   ReturnKeyType,
   Keyboard,
 } from 'react-native'
+import { colors } from '@global/colors'
 
 interface InputProps {
   placeholder: string

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Image, ImageProps, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { ArtToTranslate } from '../../../../global/types/Places'
-import ImageLoader from '../../../../components/ImageLoader'
-import images from '../../../../global/images'
-import colors from '../../../../global/colors'
+import { ArtToTranslate } from '@global/types/Places'
+import ImageLoader from '@components/ImageLoader'
+import images from '@global/images'
+import colors from '@global/colors'
 
 /**
  * @typedef IconProps

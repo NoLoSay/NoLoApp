@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import getUserVideos from '../../videos'
-import { Video } from '../../../../global/types/Videos'
-import VideosJSON from '../../../../global/types/httpClient/queries/videos'
+import getUserVideos from '@helpers/httpClient/videos'
+import { Video } from '@global/types/Videos'
+import VideosJSON from '@global/types/httpClient/queries/videos'
 
 type UpdatePlacesDisplayedProps = {
   userId: number

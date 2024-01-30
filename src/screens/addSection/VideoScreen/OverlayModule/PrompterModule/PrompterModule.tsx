@@ -6,8 +6,8 @@
 import React from 'react'
 import { StyleSheet, Text, ScrollView, View } from 'react-native'
 import Slider from '@react-native-community/slider'
+import colors from '@global/colors'
 import usePrompterModuleController from './usePrompterModuleController'
-import colors from '../../../../../global/colors'
 
 type Props = {
   text: string

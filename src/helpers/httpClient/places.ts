@@ -4,8 +4,8 @@
  * @description Helper functions to get and handle places.
  */
 
-import PlacesNeedingTranslationJSON from '@source/global/types/httpClient/queries/places'
-import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '../../global/types/Places'
+import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
+import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '@global/types/Places'
 
 const PLACES: Place[] = [
   {

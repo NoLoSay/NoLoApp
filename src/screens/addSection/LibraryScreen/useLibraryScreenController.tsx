@@ -5,9 +5,9 @@
  */
 
 import { useContext, useEffect, useState } from 'react'
-import { AccountContext } from '../../../global/contexts/AccountProvider'
-import { Video } from '../../../global/types/Videos'
-import useUserVideo from '../../../helpers/httpClient/queries/videos/useUserVideo'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import { Video } from '@global/types/Videos'
+import useUserVideo from '@helpers/httpClient/queries/videos/useUserVideo'
 
 export default function useLibraryScreenController() {
   const { account } = useContext(AccountContext)

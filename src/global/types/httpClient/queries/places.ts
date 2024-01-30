@@ -1,4 +1,4 @@
-import { PlaceNeedingTranslation } from '../../Places'
+import { PlaceNeedingTranslation } from '@global/types/Places'
 
 export type PlacesNeedingTranslationJSON = {
   json: PlaceNeedingTranslation[]

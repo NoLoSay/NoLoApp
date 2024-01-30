@@ -5,9 +5,8 @@
  * @requires react react
  */
 
-import { useContext, useState } from 'react'
-import { AccountContext } from '../../../global/contexts/AccountProvider'
-import useRegister from '../../../helpers/httpClient/queries/auth/useRegister'
+import { useState } from 'react'
+import useRegister from '@helpers/httpClient/queries/auth/useRegister'
 
 interface SubscriptionController {
   email: string

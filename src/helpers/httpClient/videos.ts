@@ -4,8 +4,8 @@
  * @description Helper functions for videos.
  */
 
-import VideosJSON from '@source/global/types/httpClient/queries/videos'
-import { Video, VideoValidationStatus } from '../../global/types/Videos'
+import VideosJSON from '@global/types/httpClient/queries/videos'
+import { Video, VideoValidationStatus } from '@global/types/Videos'
 
 type GetUserVideosParams = {
   userId: number

@@ -4,8 +4,8 @@
  * @requires react react-native
  */
 import React, { Text, StyleSheet, View } from 'react-native'
-import ImageLoader from '../../../../components/ImageLoader'
-import { Video, VideoValidationStatus } from '../../../../global/types/Videos'
+import ImageLoader from '@components/ImageLoader'
+import { Video, VideoValidationStatus } from '@global/types/Videos'
 
 /**
  * @typedef Props
@@ -27,8 +27,8 @@ export default function VideoDisplay({ video }: Props): JSX.Element {
     video.validationStatus === VideoValidationStatus.Pending
       ? { text: 'En attente de vérification', color: 'orange' }
       : VideoValidationStatus.Approved
-        ? { text: 'Validé', color: 'green' }
-        : { text: 'Refusé', color: 'red' }
+      ? { text: 'Validé', color: 'green' }
+      : { text: 'Refusé', color: 'red' }
 
   return (
     <View style={styles.container}>

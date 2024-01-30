@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import { getPlacesNeedingDescription } from '../../places'
-import { PlaceNeedingTranslation } from '../../../../global/types/Places'
-import PlacesNeedingTranslationJSON from '../../../../global/types/httpClient/queries/places'
+import { PlaceNeedingTranslation } from '@global/types/Places'
+import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
+import { getPlacesNeedingDescription } from '@helpers/httpClient/places'
 
 type UpdatePlacesDisplayedProps = {
   setPlaces: (places: PlaceNeedingTranslation[]) => void

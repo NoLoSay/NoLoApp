@@ -12,14 +12,14 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AuthStackParamList } from './global/types/screensProps/AuthStackParams'
+import { AuthStackParamList } from '@global/types/screensProps/AuthStackParams'
+import { AccountProvider } from '@global/contexts/AccountProvider'
 import ConnectionScreen from './screens/authentificationSection/connection/ConnectionScreen'
 import SubscriptionScreen from './screens/authentificationSection/subscription/SubscriptionScreen'
-import AppRouter from './AppRouter'
-import { AccountProvider } from './global/contexts/AccountProvider'
 import SettingsScreen from './screens/settings/SettingsScreen'
 import WebViewScreen from './screens/webView/WebView'
 import PlaceDescription from './screens/PlaceDescription/PlaceDescription'
+import AppRouter from './AppRouter'
 
 export default function App(): React.JSX.Element {
   const AuthStack = createNativeStackNavigator<AuthStackParamList>()

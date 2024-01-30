@@ -5,12 +5,12 @@
  */
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
-import TopBar from './Views/TopBar'
+import { PlaceNeedingTranslation } from '@global/types/Places'
+import LoadingModal from '@components/LoadingModal'
+import colors from '@global/colors'
 import usePlacesNeedingTranslationController from './usePlacesNeedingTranslationController'
-import { PlaceNeedingTranslation } from '../../../global/types/Places'
-import LoadingModal from '../../../components/LoadingModal'
+import TopBar from './Views/TopBar'
 import PlaceDisplay from './Views/PlaceDisplay'
-import colors from '../../../global/colors'
 
 /**
  * @typedef Props

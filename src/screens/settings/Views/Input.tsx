@@ -6,7 +6,7 @@
  */
 import React from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import colors from '../../../global/colors'
+import colors from '@global/colors'
 
 type Props = {
   value: string

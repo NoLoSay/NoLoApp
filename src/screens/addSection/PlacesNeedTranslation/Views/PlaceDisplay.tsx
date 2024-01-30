@@ -4,8 +4,8 @@
  * @requires react react-native
  */
 import React, { Text, Pressable, StyleSheet } from 'react-native'
-import ImageLoader from '../../../../components/ImageLoader'
-import { PlaceNeedingTranslation } from '../../../../global/types/Places'
+import ImageLoader from '@components/ImageLoader'
+import { PlaceNeedingTranslation } from '@global/types/Places'
 
 /**
  * @typedef Props
