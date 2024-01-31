@@ -1,11 +1,12 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { AuthStackParamList } from '../../../../src/global/types/screensProps/AuthStackParams'
+import { AuthStackParamList } from '@global/types/screensProps/AuthStackParams'
+import { forgotPassword } from '@helpers/httpClient/auth'
 import ConnectionScreen from '../../../../src/screens/authentificationSection/connection/ConnectionScreen'
-import { forgotPassword } from '../../../../src/helpers/httpClient/auth'
 
-jest.mock('@source/helpers/httpClient/auth')
+jest.mock('@helpers/httpClient/auth')
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')
@@ -21,26 +22,46 @@ jest.mock('react-native', () => {
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 
+const createTestQueryClient = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false, // turn off retries for testing
+      },
+    },
+  })
+  return queryClient
+}
+
+function RenderWithProviders({ children }: { children: React.ReactNode }) {
+  const queryClient = createTestQueryClient()
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+}
+
 describe('ConnectionScreenTests', () => {
   const navigation = jest.fn() as unknown as NativeStackScreenProps<AuthStackParamList, 'Connection'>['navigation']
   const route = jest.fn() as unknown as NativeStackScreenProps<AuthStackParamList, 'Connection'>['route']
 
   it('should render correctly', () => {
     const screen = render(
-      <ConnectionScreen
-        navigation={navigation}
-        route={route}
-      />
+      <RenderWithProviders>
+        <ConnectionScreen
+          navigation={navigation}
+          route={route}
+        />
+      </RenderWithProviders>
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
   })
 
   it('should handle correctly the forgotten password', () => {
     const screen = render(
-      <ConnectionScreen
-        navigation={navigation}
-        route={route}
-      />
+      <RenderWithProviders>
+        <ConnectionScreen
+          navigation={navigation}
+          route={route}
+        />
+      </RenderWithProviders>
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
     fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), '')
@@ -53,10 +74,12 @@ describe('ConnectionScreenTests', () => {
 
   it('should handle the social buttons', () => {
     const screen = render(
-      <ConnectionScreen
-        navigation={navigation}
-        route={route}
-      />
+      <RenderWithProviders>
+        <ConnectionScreen
+          navigation={navigation}
+          route={route}
+        />
+      </RenderWithProviders>
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
     fireEvent.press(screen.getByText('Un trou de mémoire ?'))

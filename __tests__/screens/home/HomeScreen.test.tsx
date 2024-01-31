@@ -1,8 +1,9 @@
 import React from 'react'
 import { View } from 'react-native'
 import { render } from '@testing-library/react-native'
-import { AccountContext } from '../../../src/global/contexts/AccountProvider'
-import { AccountElevationEnum, AccountType } from '../../../src/global/types/Account'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import { AccountElevationEnum, AccountType } from '@global/types/Account'
 import HomeScreen from '../../../src/screens/home/HomeScreen'
 
 jest.mock('react-native', () => {
@@ -22,6 +23,22 @@ jest.mock('@react-native-community/geolocation', () => {
     getCurrentPosition: jest.fn(),
   }
 })
+
+const createTestQueryClient = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false, // turn off retries for testing
+      },
+    },
+  })
+  return queryClient
+}
+
+function QueryProvider({ children }: { children: React.ReactNode }) {
+  const queryClient = createTestQueryClient()
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+}
 
 interface MockMapViewProps {
   children: React.ReactNode
@@ -87,7 +104,9 @@ describe('HomeScreenTests', () => {
 
     const screen = render(
       <AccountContext.Provider value={contextValue}>
-        <HomeScreen />
+        <QueryProvider>
+          <HomeScreen />
+        </QueryProvider>
       </AccountContext.Provider>
     )
     expect(screen.getByText('Meilleurs lieux'))

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { render } from '@testing-library/react-native'
-import { AccountContext } from '../../../src/global/contexts/AccountProvider'
-import { AccountElevationEnum, AccountType } from '../../../src/global/types/Account'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import { AccountElevationEnum, AccountType } from '@global/types/Account'
+import { PlaceType, PlaceTag } from '@global/types/Places'
 import PlacesMapView from '../../../src/screens/home/MapView/MapView'
-import { PlaceType, PlaceTag } from '../../../src/global/types/Places'
 
 const defaultUser: AccountType = {
   accountID: 1,
@@ -49,6 +50,22 @@ jest.mock('@react-native-community/geolocation', () => {
     getCurrentPosition: jest.fn(),
   }
 })
+
+const createTestQueryClient = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false, // turn off retries for testing
+      },
+    },
+  })
+  return queryClient
+}
+
+function QueryProvider({ children }: { children: React.ReactNode }) {
+  const queryClient = createTestQueryClient()
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+}
 
 interface MockMapViewProps {
   children: React.ReactNode
@@ -99,65 +116,67 @@ describe('MapScreenTests', () => {
   it('should render correctly', () => {
     const screen = render(
       <AccountContext.Provider value={contextValue}>
-        <PlacesMapView
-          places={[
-            {
-              id: 1,
-              name: 'Château des ducs de Bretagne',
-              longDescription:
-                "Le Château des Ducs de Bretagne est une imposante forteresse entourée de douves et de remparts, offrant une vue impressionnante dès l'approche. Sa construction a débuté au XIIIe siècle sous Pierre Mauclerc et a été achevée au XVe siècle par François II. Il incarne la puissance et le prestige des ducs de Bretagne. À l'intérieur de ses murs, on découvre un mélange captivant d'architecture médiévale et de style Renaissance, créant une atmosphère unique. Le château abrite aujourd'hui un musée qui raconte l'histoire de Nantes et de la Bretagne, avec des expositions interactives, des artefacts historiques et des maquettes impressionnantes.",
-              shortDescription:
-                'Forteresse historique, ancien siège des ducs de Bretagne, mêlant architecture médiévale et musée captivant.',
-              image:
-                'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
-              address: '4 Place Marc Elder, 44000 Nantes',
-              phone: '02 51 17 49 48',
-              email: 'chateau@nantes.fr',
-              website: 'https://www.chateaunantes.fr/fr',
-              coordinates: {
-                latitude: 47.215833,
-                longitude: -1.55,
+        <QueryProvider>
+          <PlacesMapView
+            places={[
+              {
+                id: 1,
+                name: 'Château des ducs de Bretagne',
+                longDescription:
+                  "Le Château des Ducs de Bretagne est une imposante forteresse entourée de douves et de remparts, offrant une vue impressionnante dès l'approche. Sa construction a débuté au XIIIe siècle sous Pierre Mauclerc et a été achevée au XVe siècle par François II. Il incarne la puissance et le prestige des ducs de Bretagne. À l'intérieur de ses murs, on découvre un mélange captivant d'architecture médiévale et de style Renaissance, créant une atmosphère unique. Le château abrite aujourd'hui un musée qui raconte l'histoire de Nantes et de la Bretagne, avec des expositions interactives, des artefacts historiques et des maquettes impressionnantes.",
+                shortDescription:
+                  'Forteresse historique, ancien siège des ducs de Bretagne, mêlant architecture médiévale et musée captivant.',
+                image:
+                  'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
+                address: '4 Place Marc Elder, 44000 Nantes',
+                phone: '02 51 17 49 48',
+                email: 'chateau@nantes.fr',
+                website: 'https://www.chateaunantes.fr/fr',
+                coordinates: {
+                  latitude: 47.215833,
+                  longitude: -1.55,
+                },
+                type: PlaceType.MUSEUM,
+                price: 0,
+                city: 'Nantes',
+                country: 'France',
+                tags: [
+                  { name: PlaceTag.NO_LOSAY, id: 1 },
+                  { name: PlaceTag.BLIND, id: 2 },
+                  { name: PlaceTag.DEAF, id: 3 },
+                  { name: PlaceTag.DISABLED, id: 4 },
+                ],
               },
-              type: PlaceType.MUSEUM,
-              price: 0,
-              city: 'Nantes',
-              country: 'France',
-              tags: [
-                { name: PlaceTag.NO_LOSAY, id: 1 },
-                { name: PlaceTag.BLIND, id: 2 },
-                { name: PlaceTag.DEAF, id: 3 },
-                { name: PlaceTag.DISABLED, id: 4 },
-              ],
-            },
-            {
-              id: 2,
-              name: 'Hellfest',
-              shortDescription:
-                'Festival de musique métal de renommée mondiale, attirant des fans passionnés et offrant des performances exceptionnelles.',
-              longDescription:
-                "Hellfest est un festival de musique métal qui prend place dans un cadre pittoresque à Clisson, une charmante ville de l'ouest de la France. Ce festival, créé en 2006, est devenu rapidement l'un des événements incontournables pour les amateurs de métal, offrant une programmation variée allant du heavy metal au black metal, en passant par le death metal et le doom metal. Chaque année, des milliers de fans se réunissent pour célébrer la musique métal dans une atmosphère de camaraderie et de passion.",
-              image: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
-              address: 'Rue du Champ Louet, 44190 Clisson',
-              phone: '02 51 17 49 48',
-              email: 'hellfest@hellfest.fr',
-              website: 'https://www.hellfest.fr',
-              coordinates: {
-                latitude: 47.09750371051718,
-                longitude: -1.2700803720514064,
+              {
+                id: 2,
+                name: 'Hellfest',
+                shortDescription:
+                  'Festival de musique métal de renommée mondiale, attirant des fans passionnés et offrant des performances exceptionnelles.',
+                longDescription:
+                  "Hellfest est un festival de musique métal qui prend place dans un cadre pittoresque à Clisson, une charmante ville de l'ouest de la France. Ce festival, créé en 2006, est devenu rapidement l'un des événements incontournables pour les amateurs de métal, offrant une programmation variée allant du heavy metal au black metal, en passant par le death metal et le doom metal. Chaque année, des milliers de fans se réunissent pour célébrer la musique métal dans une atmosphère de camaraderie et de passion.",
+                image: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
+                address: 'Rue du Champ Louet, 44190 Clisson',
+                phone: '02 51 17 49 48',
+                email: 'hellfest@hellfest.fr',
+                website: 'https://www.hellfest.fr',
+                coordinates: {
+                  latitude: 47.09750371051718,
+                  longitude: -1.2700803720514064,
+                },
+                type: PlaceType.PUBLIC,
+                price: 105,
+                city: 'Clisson',
+                country: 'France',
+                tags: [
+                  { name: PlaceTag.NO_LOSAY, id: 1 },
+                  { name: PlaceTag.BLIND, id: 2 },
+                  { name: PlaceTag.DISABLED, id: 4 },
+                ],
               },
-              type: PlaceType.PUBLIC,
-              price: 105,
-              city: 'Clisson',
-              country: 'France',
-              tags: [
-                { name: PlaceTag.NO_LOSAY, id: 1 },
-                { name: PlaceTag.BLIND, id: 2 },
-                { name: PlaceTag.DISABLED, id: 4 },
-              ],
-            },
-          ]}
-          navigation={mockedNavigate}
-        />
+            ]}
+            navigation={mockedNavigate}
+          />
+        </QueryProvider>
       </AccountContext.Provider>
     )
     expect(mockedNavigate).toHaveBeenCalledTimes(0)
@@ -168,10 +187,12 @@ describe('MapScreenTests', () => {
   it('should render correctly with no markers', () => {
     const screen = render(
       <AccountContext.Provider value={contextValue}>
-        <PlacesMapView
-          places={[]}
-          navigation={mockedNavigate}
-        />
+        <QueryProvider>
+          <PlacesMapView
+            places={[]}
+            navigation={mockedNavigate}
+          />
+        </QueryProvider>
       </AccountContext.Provider>
     )
     expect(mockedNavigate).toHaveBeenCalledTimes(0)
