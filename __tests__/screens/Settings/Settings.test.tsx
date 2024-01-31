@@ -2,7 +2,7 @@ import React from 'react'
 import { fireEvent, render } from '@testing-library/react-native'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
-import SettingsScreen from '../../../src/screens/settings/SettingsScreen'
+import SettingsScreen from '@screens/settings/SettingsScreen'
 
 const mockDefaultUser: AccountType = {
   accountID: 1,
@@ -38,7 +38,7 @@ const mockOpenTerms = jest.fn()
 const mockShowHelpModal = jest.fn()
 const mockShowModal = jest.fn()
 
-jest.mock('../../../src/screens/settings/useSettingsScreenController', () => {
+jest.mock('@screens/settings/useSettingsScreenController', () => {
   return jest.fn().mockImplementation(() => {
     return {
       account: mockDefaultUser,

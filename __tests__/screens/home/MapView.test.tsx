@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
 import { PlaceType, PlaceTag } from '@global/types/Places'
-import PlacesMapView from '../../../src/screens/home/MapView/MapView'
+import PlacesMapView from '@screens/home/MapView/MapView'
 
 const defaultUser: AccountType = {
   accountID: 1,

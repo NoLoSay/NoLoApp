@@ -4,7 +4,7 @@ import { render } from '@testing-library/react-native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
-import HomeScreen from '../../../src/screens/home/HomeScreen'
+import HomeScreen from '@screens/home/HomeScreen'
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')

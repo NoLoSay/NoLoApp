@@ -6,7 +6,8 @@
       "@components/*": ["src/components/*"],
       "@global/*": ["src/global/*"],
       "@assets/*": ["src/assets/*"],
-      "@helpers/*": ["src/helpers/*"]
+      "@helpers/*": ["src/helpers/*"],
+      "@screens/*": ["src/screens/*"]
     }
   }
 }

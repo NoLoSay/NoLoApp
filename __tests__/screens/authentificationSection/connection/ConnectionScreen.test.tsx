@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { AuthStackParamList } from '@global/types/screensProps/AuthStackParams'
 import { forgotPassword } from '@helpers/httpClient/auth'
-import ConnectionScreen from '../../../../src/screens/authentificationSection/connection/ConnectionScreen'
+import ConnectionScreen from '@screens/authentificationSection/connection/ConnectionScreen'
 
 jest.mock('@helpers/httpClient/auth')
 

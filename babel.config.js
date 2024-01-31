@@ -11,6 +11,7 @@ module.exports = {
           '@global': './src/global',
           '@assets': './assets',
           '@helpers': './src/helpers',
+          '@screens': './src/screens',
         },
       },
     ],
