@@ -8,9 +8,9 @@
  * @exports HeaderTexts
  */
 
-import { colors } from '../../../..//global/colors'
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
+import { colors } from '@global/colors'
 
 /**
  * @function HeaderTexts

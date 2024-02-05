@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Modal, View, StyleSheet } from 'react-native'
-import Button from '../../../components/Button'
-import colors from '../../../global/colors'
+import Button from '@components/Button'
+import colors from '@global/colors'
 
 type Props = {
   isVisible: boolean

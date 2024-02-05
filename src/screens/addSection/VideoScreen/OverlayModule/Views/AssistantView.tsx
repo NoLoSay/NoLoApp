@@ -5,7 +5,7 @@
  */
 import React from 'react'
 import { View, StyleSheet, useWindowDimensions } from 'react-native'
-import colors from '../../../../../global/colors'
+import colors from '@global/colors'
 
 /**
  * @function AssistantView

@@ -8,8 +8,8 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
-import Button from '../../../../../components/Button'
-import colors from '../../../../../global/colors'
+import Button from '@components/Button'
+import colors from '@global/colors'
 
 /**
  * @typedef Props

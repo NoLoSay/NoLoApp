@@ -8,7 +8,7 @@
 import React from 'react'
 import { View, Pressable, Text, StyleSheet } from 'react-native'
 import FastImage from 'react-native-fast-image'
-import images from '../../../global/images'
+import images from '@global/images'
 
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

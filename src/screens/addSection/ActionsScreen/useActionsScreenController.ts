@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { ContentCategoryId } from '../../../global/types/AddContentCategory'
-import { AccountElevationEnum, AccountType } from '../../../global/types/Account'
-import { AccountContext } from '../../../global/contexts/AccountProvider'
+import { ContentCategoryId } from '@global/types/AddContentCategory'
+import { AccountElevationEnum, AccountType } from '@global/types/Account'
+import { AccountContext } from '@global/contexts/AccountProvider'
 
 /**
  * @typedef {Object} useActionScreenControllerProps

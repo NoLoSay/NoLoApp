@@ -8,9 +8,9 @@
 import React from 'react'
 import { Image, LayoutRectangle, Pressable, StyleSheet, Text, View } from 'react-native'
 import FastImage, { Source } from 'react-native-fast-image'
-import AddContentCategory from '../../../../global/types/AddContentCategory'
-import { colors } from '../../../../global/colors'
-import images from '../../../../global/images'
+import AddContentCategory from '@global/types/AddContentCategory'
+import { colors } from '@global/colors'
+import images from '@global/images'
 
 /**
  * @typedef ContentCategoryProps

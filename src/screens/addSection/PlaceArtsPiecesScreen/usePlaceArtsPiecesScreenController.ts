@@ -4,7 +4,7 @@
  * @requires react react-native
  */
 
-import { PlaceNeedingTranslation } from '../../../global/types/Places'
+import { PlaceNeedingTranslation } from '@global/types/Places'
 
 /**
  * @typedef {Object} usePlaceArtsPiecesScreenControllerType

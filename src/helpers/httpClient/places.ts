@@ -4,7 +4,8 @@
  * @description Helper functions to get and handle places.
  */
 
-import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '../../global/types/Places'
+import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
+import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '@global/types/Places'
 
 const PLACES: Place[] = [
   {
@@ -343,9 +344,13 @@ const PlacesToTranslate: PlaceNeedingTranslation[] = [
 ]
 
 export async function getPlacesNeedingDescription() {
-  return new Promise<PlaceNeedingTranslation[]>(resolve => {
+  return new Promise<PlacesNeedingTranslationJSON>(resolve => {
     setTimeout(() => {
-      resolve(PlacesToTranslate)
+      resolve({
+        json: PlacesToTranslate,
+        status: 200,
+        message: 'Success',
+      })
     }, 500)
   })
 }

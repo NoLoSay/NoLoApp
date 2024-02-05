@@ -7,8 +7,8 @@
 
 import { useContext, useState } from 'react'
 import { Linking } from 'react-native'
-import { AccountContext, defaultAccount } from '../../global/contexts/AccountProvider'
-import { AccountType } from '../../global/types/Account'
+import { AccountContext, defaultAccount } from '@global/contexts/AccountProvider'
+import { AccountType } from '@global/types/Account'
 
 type SettingsScreenController = {
   account: AccountType

@@ -11,11 +11,11 @@
 import React from 'react'
 import { Image, ImageSourcePropType } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { colors } from './global/colors'
-import { images } from './global/images'
-import ScanScreen from './screens/scan/ScanScreen'
-import AddScreen from './screens/addSection/AddSection'
-import HomeScreen from './screens/home/HomeScreen'
+import { colors } from '@global/colors'
+import { images } from '@global/images'
+import ScanScreen from '@screens/scan/ScanScreen'
+import AddScreen from '@screens/addSection/AddSection'
+import HomeScreen from '@screens/home/HomeScreen'
 
 interface getImageNameProps {
   focused: boolean
