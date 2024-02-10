@@ -14,7 +14,7 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera'
 import { useCallback, useContext, useEffect, useState } from 'react'
-import { Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { AccountType } from '@global/types/Account'
 import { AccountContext } from '@global/contexts/AccountProvider'
@@ -25,6 +25,7 @@ interface ScanScreenController {
   backCamera: CameraDevice | undefined
   isQRScanningActive: boolean
   codeScanner: CodeScanner
+  hasLoaded: boolean
 }
 
 /**
@@ -43,11 +44,17 @@ export default function useScanScreenController(): ScanScreenController {
       handleQRScanning(codes)
     },
   })
+  const [hasLoaded, setHasLoaded] = useState(false)
 
   // React-navigation hook allowing us to know when the screen is focused
   useFocusEffect(
     useCallback(() => {
       setIsQRScanningActive(true)
+      if (Platform.OS === 'android') {
+        setTimeout(() => {
+          setHasLoaded(true)
+        }, 1500)
+      }
 
       return () => {
         setIsQRScanningActive(false)
@@ -58,6 +65,14 @@ export default function useScanScreenController(): ScanScreenController {
   useEffect(() => {
     if (!hasPermission) {
       requestPermission()
+    }
+    if (hasPermission) {
+      setIsQRScanningActive(true)
+      if (Platform.OS === 'android') {
+        setTimeout(() => {
+          setHasLoaded(true)
+        }, 1500)
+      }
     }
   }, [hasPermission, requestPermission])
 
@@ -88,5 +103,6 @@ export default function useScanScreenController(): ScanScreenController {
     backCamera,
     isQRScanningActive,
     codeScanner,
+    hasLoaded: Platform.OS === 'android' ? hasLoaded : true,
   }
 }

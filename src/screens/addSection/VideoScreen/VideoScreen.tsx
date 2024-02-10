@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { Pressable, SafeAreaView, StyleSheet, View } from 'react-native'
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { Camera } from 'react-native-vision-camera'
 import LoadingModal from '@components/LoadingModal'
 import ErrorModal from '@components/ErrorModal'
@@ -41,9 +41,11 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
     setDefaultEndTimerValue,
     isTimerModalVisible,
     setIsTimerModalVisible,
+    hasLoaded,
   } = useVideoScreenController()
 
   if (!frontCamera || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
+  if (!hasLoaded) return <Text>Loading</Text>
   return (
     <Camera
       style={styles.camera}
@@ -93,8 +95,10 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+    zIndex: 0,
   },
   bottomContainer: {
+    zIndex: 50,
     position: 'absolute',
     bottom: 16,
     width: '100%',

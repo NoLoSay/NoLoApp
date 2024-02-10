@@ -18,6 +18,7 @@
 import { CameraRoll } from '@react-native-camera-roll/camera-roll'
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Platform } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
 import { Camera, CameraDevice, VideoFile, useCameraDevice, useCameraPermission } from 'react-native-vision-camera'
 
@@ -42,6 +43,7 @@ import { Camera, CameraDevice, VideoFile, useCameraDevice, useCameraPermission }
  * @property {React.Dispatch<React.SetStateAction<number>>} setDefaultEndTimerValue Function that sets the default end timer value
  * @property {boolean} isTimerModalVisible Wether the timer modal is visible or not
  * @property {React.Dispatch<React.SetStateAction<boolean>>} setIsTimerModalVisible Function that sets the visibility of the timer modal
+ * @property {boolean} hasLoaded Wether the camera has loaded or not
  */
 type VideoScreenController = {
   hasPermission: boolean
@@ -63,6 +65,7 @@ type VideoScreenController = {
   setDefaultEndTimerValue: React.Dispatch<React.SetStateAction<number>>
   isTimerModalVisible: boolean
   setIsTimerModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+  hasLoaded: boolean
 }
 
 /**
@@ -84,6 +87,7 @@ const useVideoScreenController = (): VideoScreenController => {
   const [endTimerValue, setEndTimerValue] = useState(0)
   const [defaultEndTimerValue, setDefaultEndTimerValue] = useState(0)
   const [isTimerModalVisible, setIsTimerModalVisible] = useState(false)
+  const [hasLoaded, setHasLoaded] = useState(false)
 
   // TODO If user don't have authorized the access to camera roll, display error page
 
@@ -97,13 +101,23 @@ const useVideoScreenController = (): VideoScreenController => {
     if (!hasPermission) {
       requestPermission()
     }
+    if (hasPermission && Platform.OS === 'android') {
+      setIsCameraActive(true)
+      setTimeout(() => {
+        setHasLoaded(true)
+      }, 1500)
+    }
   }, [hasPermission, requestPermission])
 
   // React-navigation hook allowing us to know when the screen is focused
   useFocusEffect(
     useCallback(() => {
       setIsCameraActive(true)
-
+      if (Platform.OS === 'android') {
+        setTimeout(() => {
+          setHasLoaded(true)
+        }, 1500)
+      }
       return () => {
         setIsCameraActive(false)
       }
@@ -259,6 +273,7 @@ const useVideoScreenController = (): VideoScreenController => {
     setDefaultEndTimerValue,
     isTimerModalVisible,
     setIsTimerModalVisible,
+    hasLoaded: Platform.OS === 'android' ? hasLoaded : true,
   }
 }
 

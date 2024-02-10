@@ -48,7 +48,7 @@
     "react-native-fast-image": "^8.6.3",
     "react-native-maps": "^1.7.1",
     "react-native-screens": "^3.22.1",
-    "react-native-vision-camera": "^3.6.3",
+    "react-native-vision-camera": "^3.8.2",
     "react-native-webview": "^13.6.0"
   },
   "devDependencies": {

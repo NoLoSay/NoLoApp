@@ -20,23 +20,30 @@ import NoCameraView from './Views/NoCameraView'
  * @returns {React.JSX.Element} App component template
  */
 export default function ScanScreen(): React.JSX.Element {
-  const { hasPermission, backCamera, isQRScanningActive, codeScanner } = useScanScreenController()
+  const { hasPermission, backCamera, isQRScanningActive, codeScanner, hasLoaded } = useScanScreenController()
 
-  if (backCamera === undefined || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
+  if (!backCamera || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
   return (
     <SafeAreaView style={styles.container}>
-      <Camera
-        style={styles.camera}
-        device={backCamera}
-        isActive={isQRScanningActive}
-        codeScanner={codeScanner}
-      />
-      <FastImage
-        source={images.icons.qrScanner()}
-        style={styles.qrScannerImage}
-      />
-      <Text style={styles.title}>Scanner un QR Code</Text>
-      <Text style={styles.subtitle}>Placez le QR code dans le rectangle afin de le scanner</Text>
+      {hasLoaded ? (
+        <>
+          <Camera
+            style={styles.camera}
+            device={backCamera}
+            isActive={isQRScanningActive}
+            codeScanner={codeScanner}
+          />
+
+          <FastImage
+            source={images.icons.qrScanner()}
+            style={styles.qrScannerImage}
+          />
+          <Text style={styles.title}>Scanner un QR Code</Text>
+          <Text style={styles.subtitle}>Placez le QR code dans le rectangle afin de le scanner</Text>
+        </>
+      ) : (
+        <Text>Loading</Text>
+      )}
     </SafeAreaView>
   )
 }
