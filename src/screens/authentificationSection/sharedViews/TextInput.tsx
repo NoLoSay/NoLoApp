@@ -1,4 +1,3 @@
-import { colors } from '../../..//global/colors'
 import React from 'react'
 import {
   View,
@@ -11,6 +10,7 @@ import {
   ReturnKeyType,
   Keyboard,
 } from 'react-native'
+import { colors } from '../../../global/colors'
 
 interface InputProps {
   placeholder: string
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
-    marginHorizontal: 52,
+    marginHorizontal: 48,
     paddingHorizontal: 12,
     borderRadius: 12,
     backgroundColor: colors.darkGrey,
