@@ -4,7 +4,8 @@
  * @description Helper functions for videos.
  */
 
-import { Video, VideoValidationStatus } from '../../global/types/Videos'
+import VideosJSON from '@global/types/httpClient/queries/videos'
+import { Video, VideoValidationStatus } from '@global/types/Videos'
 
 type GetUserVideosParams = {
   userId: number
@@ -32,9 +33,13 @@ const VIDEOS: Video[] = [
 // Remove this line when the function is implemented
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function getUserVideos({ userId }: GetUserVideosParams) {
-  return new Promise<Video[]>(resolve => {
+  return new Promise<VideosJSON>(resolve => {
     setTimeout(() => {
-      resolve(VIDEOS)
+      resolve({
+        json: VIDEOS,
+        status: 200,
+        message: 'Success',
+      })
     }, 500)
   })
 }

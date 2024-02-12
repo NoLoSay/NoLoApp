@@ -9,9 +9,9 @@
 
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Place } from '../../../../global/types/Places'
+import { Place } from '@global/types/Places'
+import ImageLoader from '@components/ImageLoader'
 import CategorySeparator from './CategorySeparator'
-import ImageLoader from '../../../../components/ImageLoader'
 
 interface Props {
   text: string

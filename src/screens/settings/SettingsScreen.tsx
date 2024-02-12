@@ -7,9 +7,9 @@
 
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
-import images from '../../global/images'
-import LoadingModal from '../../components/LoadingModal'
-import { colors } from '../../global/colors'
+import images from '@global/images'
+import LoadingModal from '@components/LoadingModal'
+import { colors } from '@global/colors'
 import useSettingsScreenController from './useSettingsScreenController'
 import TopBar from './Views/TopBar'
 import MainInfos from './Views/MainInfos'
@@ -157,6 +157,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         <View style={styles.settingsCategoriesContainer}>
           {MainSettingsCategories.map(category => (
             <SettingCategoryDisplay
+              key={category.title + category.id}
               id={category.id}
               title={category.title}
               subtitle={category.subtitle}
@@ -172,6 +173,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         <View style={styles.settingsCategoriesContainer}>
           {MoreSettingsCategories.map(category => (
             <SettingCategoryDisplay
+              key={category.title + category.id}
               id={category.id}
               title={category.title}
               subtitle={category.subtitle}

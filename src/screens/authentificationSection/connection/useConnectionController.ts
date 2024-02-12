@@ -5,10 +5,10 @@
  * @requires react react
  */
 
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Alert } from 'react-native'
-import { connect, forgotPassword } from '../../../helpers/httpClient/auth'
-import { AccountContext } from '../../../global/contexts/AccountProvider'
+import { forgotPassword } from '@helpers/httpClient/auth'
+import useConnect from '@helpers/httpClient/queries/auth/useConnect'
 
 interface ConnectionController {
   email: string
@@ -39,31 +39,8 @@ export default function useConnectionController({ navigation }: useConnectionCon
   const [password, setPassword] = useState<string>(__DEV__ ? 'JesuisJohan2003?' : '')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { account, setAccount } = useContext(AccountContext)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
-
-  /**
-   * @function analyseServerResponse
-   * @description Analyse the server's response to the request.
-   * @param res Response object from the server.
-   * @returns {Promise<void>} Promise of void
-   */
-  async function analyseServerResponse(res: Response): Promise<void> {
-    res.json().then(response => {
-      if (res.status === 201) {
-        setAccount({
-          ...account,
-          email,
-          username: response.username,
-          accessToken: response.access_token,
-        })
-        navigation.navigate('AppRouter')
-      } else {
-        setError(response.message)
-      }
-    })
-  }
+  const connectionMutation = useConnect({ formUsername: email, password, navigation, setError })
 
   /**
    * @function connectUser
@@ -72,20 +49,7 @@ export default function useConnectionController({ navigation }: useConnectionCon
    */
   async function connectUser(): Promise<void> {
     setError(undefined)
-    setIsLoading(true)
-    await connect({
-      username: email,
-      password,
-    })
-      .then(async res => {
-        await analyseServerResponse(res)
-        setIsLoading(false)
-      })
-      .catch(err => {
-        console.error(err) // TODO Should we send errors to back-end ? To have a trace of what went wrong
-        setIsLoading(false)
-        setError('Une erreur est survenue')
-      })
+    connectionMutation.mutate()
   }
 
   /**
@@ -113,6 +77,6 @@ export default function useConnectionController({ navigation }: useConnectionCon
     connect: connectUser,
     forgottenPassword,
     error,
-    isLoading,
+    isLoading: connectionMutation.isPending,
   }
 }

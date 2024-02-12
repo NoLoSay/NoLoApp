@@ -5,10 +5,10 @@
  */
 import React from 'react'
 import { ScrollView, StyleSheet, Text } from 'react-native'
-import TopBar from './Views/TopBar'
+import { ArtToTranslate, PlaceNeedingTranslation } from '@global/types/Places'
+import ImageLoader from '@components/ImageLoader'
 import usePlaceArtsPiecesScreenController from './usePlaceArtsPiecesScreenController'
-import { ArtToTranslate, PlaceNeedingTranslation } from '../../../global/types/Places'
-import ImageLoader from '../../../components/ImageLoader'
+import TopBar from './Views/TopBar'
 import ArtToDisplay from './Views/ArtToDisplay'
 
 /**

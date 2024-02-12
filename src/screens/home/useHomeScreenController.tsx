@@ -9,9 +9,10 @@
 
 import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
-import { Place } from '../../global/types/Places'
-import getPlaces from '../../helpers/httpClient/places'
-import { AccountContext } from '../../global/contexts/AccountProvider'
+import { Place } from '@global/types/Places'
+import getPlaces from '@helpers/httpClient/places'
+import { AccountContext } from '@global/contexts/AccountProvider'
+import getCity from '@helpers/httpClient/localization'
 
 /**
  * @interface HomeScreenController
@@ -47,7 +48,7 @@ interface HomeScreenController {
  * @returns {HomeScreenController} The controller of the HomeScreen component
  */
 export default function useHomeScreenController(): HomeScreenController {
-  const city = 'Nantes'
+  const [city, setCity] = useState('')
   const [currentPage, setCurrentPage] = useState<'map' | 'carousel'>('carousel')
   const [displaySearchBar, setDisplaySearchBar] = useState(false)
   const [searchValue, setSearchValue] = useState('')
@@ -64,7 +65,13 @@ export default function useHomeScreenController(): HomeScreenController {
   }
 
   useEffect(() => {
-    Geolocation.getCurrentPosition(info => setAccount({ ...account, localisation: info }))
+    Geolocation.getCurrentPosition(async info => {
+      setAccount({ ...account, localisation: info })
+
+      const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
+
+      setCity(reversedCity)
+    })
     getAllPlaces()
     // Avoid infinite loop
     // eslint-disable-next-line react-hooks/exhaustive-deps

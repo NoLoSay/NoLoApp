@@ -8,8 +8,8 @@
 import React from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import FastImage from 'react-native-fast-image'
-import colors from '../../../global/colors'
-import images from '../../../global/images'
+import colors from '@global/colors'
+import images from '@global/images'
 
 type Props = {
   accountImage: string

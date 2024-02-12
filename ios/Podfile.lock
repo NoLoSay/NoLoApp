@@ -956,7 +956,9 @@ PODS:
   - React-Mapbuffer (0.73.2):
     - glog
     - React-debug
-  - react-native-cameraroll (7.3.0):
+  - react-native-cameraroll (7.4.0):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - react-native-geolocation (3.1.0):
     - React-Core
@@ -1441,7 +1443,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 03644c063fc3621c9a4e8bf263a8150909129618
   React-logger: 66b168e2b2bee57bd8ce9e69f739d805732a5570
   React-Mapbuffer: 9ee041e1d7be96da6d76a251f92e72b711c651d6
-  react-native-cameraroll: 5282b6b4451cfed2afa19b9088d4b1e5f2bf9d88
+  react-native-cameraroll: 3301d62d45616ee9da55ceed04be8d788c3de3ef
   react-native-geolocation: ef66fb798d96284c6043f0b16c15d9d1d4955db4
   react-native-maps: 4f45622710094c3603b262279c40026750579b1f
   react-native-safe-area-context: 0ee144a6170530ccc37a0fd9388e28d06f516a89
@@ -1477,8 +1479,8 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   VisionCamera: 459701e86be125db2583392d2d06acb15b04ec03
-  Yoga: e64aa65de36c0832d04e8c7bd614396c77a80047
+  Yoga: 13c8ef87792450193e117976337b8527b49e8c03
 
 PODFILE CHECKSUM: b64d753f83e1a7ba2eba67e86fc669a429862b8e
 
-COCOAPODS: 1.15.0
+COCOAPODS: 1.13.0

@@ -6,10 +6,8 @@
  */
 
 import { NativeModules, Platform } from 'react-native'
-import { Header } from '../../global/types/httpClient/Header'
-
-const API_ENDPOINT = 'http://api.nolosay.com:3001'
-const DEV_API_ENDPOINT = 'http://192.168.106.37:3001' // Local ip for testing on real device
+import { DEV_API_URL, PROD_API_URL } from '@env'
+import { Header } from '@global/types/httpClient/Header'
 
 /**
  * @constant defaultHeaders
@@ -46,7 +44,7 @@ interface PostProps {
  * @param props.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export function post({ url = API_ENDPOINT, endpoint, body, headers = defaultHeaders }: PostProps): Promise<Response> {
+export function post({ url = PROD_API_URL, endpoint, body, headers = defaultHeaders }: PostProps): Promise<Response> {
   return requestServer({
     url,
     endpoint,
@@ -71,7 +69,7 @@ interface GetProps {
  * @param props.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export function get({ url = API_ENDPOINT, endpoint, headers = defaultHeaders }: GetProps): Promise<Response> {
+export function get({ url = PROD_API_URL, endpoint, headers = defaultHeaders }: GetProps): Promise<Response> {
   return requestServer({
     url,
     endpoint,
@@ -100,16 +98,15 @@ interface RequestServerProps {
  * @returns Promise of a Response object
  */
 export function requestServer({
-  url = API_ENDPOINT,
+  url = PROD_API_URL,
   endpoint,
   method,
   headers,
   body,
 }: RequestServerProps): Promise<Response> {
   let finalURL
-  if (url === API_ENDPOINT && __DEV__) finalURL = DEV_API_ENDPOINT
+  if (url === PROD_API_URL && __DEV__) finalURL = DEV_API_URL
   else finalURL = url
-  console.log('finalURL', finalURL)
   return fetch(finalURL + endpoint, {
     method,
     headers: {

@@ -1,15 +1,29 @@
-// prettier-ignore
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true,
-    "baseUrl": "",
+    "baseUrl": ".",
     "paths": {
-      "@source/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@global/*": ["src/global/*"],
-      "@assets/*": ["assets/*"],
+      "@assets/*": ["src/assets/*"],
       "@helpers/*": ["src/helpers/*"],
+      "@screens/*": ["src/screens/*"]
     }
-  },
+  }
 }
+
+// {
+//   "extends": "@tsconfig/react-native/tsconfig.json",
+//   "compilerOptions": {
+//     "skipLibCheck": true,
+//     "moduleResolution": "Node",
+//     "baseUrl": ".",
+//     "paths": {
+//       "@source": ["src"],
+//       "@components": ["src/components"],
+//       "@global": ["src/global"],
+//       "@assets": ["assets"],
+//       "@helpers": ["src/helpers"]
+//     }
+//   }
+// }

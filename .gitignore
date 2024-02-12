@@ -74,3 +74,5 @@ coverage/
 .metro-health-check*
 # testing
 /coverage
+
+*.env

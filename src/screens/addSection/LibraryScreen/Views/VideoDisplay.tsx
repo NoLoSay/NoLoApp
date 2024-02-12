@@ -4,8 +4,8 @@
  * @requires react react-native
  */
 import React, { Text, StyleSheet, View } from 'react-native'
-import ImageLoader from '../../../../components/ImageLoader'
-import { Video, VideoValidationStatus } from '../../../../global/types/Videos'
+import ImageLoader from '@components/ImageLoader'
+import { Video, VideoValidationStatus } from '@global/types/Videos'
 
 /**
  * @typedef Props

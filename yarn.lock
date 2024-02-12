@@ -1526,10 +1526,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@react-native-camera-roll/camera-roll@^7.0.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-7.3.0.tgz#354765d61e9175e8708404c1bb3fb4d2e7c99071"
-  integrity sha512-OjLk+/fnYIKaBvPo85aMNkE9o1EsDsTodT29izy9U5gia66ETfQJV3MTWCrjCH7uhsMvfVDK1sAEeibHWJz/IQ==
+"@react-native-camera-roll/camera-roll@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@react-native-camera-roll/camera-roll/-/camera-roll-7.4.0.tgz#931e25b076b40dc57ca6d380f0a85d494a120f06"
+  integrity sha512-y0bVpMJLaFphYvMMx1BsqgMA0kXq9CKxKYNnt4ocUvwJj5Rp4TZ233rzJoDqz1oxd56Tz5f1g+yhYN5RImKl8Q==
 
 "@react-native-clipboard/clipboard@^1.12.1":
   version "1.13.2"
@@ -1998,6 +1998,25 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@tanstack/eslint-plugin-query@^5.17.22":
+  version "5.17.22"
+  resolved "https://registry.yarnpkg.com/@tanstack/eslint-plugin-query/-/eslint-plugin-query-5.17.22.tgz#a2ceb5d69226c56373b5f8bf713ef276a1602a30"
+  integrity sha512-9y85gtYcU60M4zW5/CNSxNygbil2jairs4DbtNvGKxQHi4LYUs30sLRcsuXDhu1cPGCY/yRN7LTjWFQCrWFGbQ==
+  dependencies:
+    "@typescript-eslint/utils" "^5.62.0"
+
+"@tanstack/query-core@5.20.1":
+  version "5.20.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.20.1.tgz#e5541be149b62c0bc8c53deb6b02cc74e62b38c1"
+  integrity sha512-OONHHYG5vzjob4An+EfzbW7TRyb+sCA0AEgHzUIMlV9NYlF7wIwbla3PUfB3ocnaK1gZyROf0Lux/CBSu0exBQ==
+
+"@tanstack/react-query@^5.20.1":
+  version "5.20.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.20.1.tgz#fadb2ef0d5ee1517af97f79a7f45a7100596a914"
+  integrity sha512-KRkOtJ47tv9B3EXfjHkbPkiFzOzYCOid8BrYBozk0rm9JpDB2xSf71q8w1PRudlQW6QUQIEDI9E6NIMh6AlLUw==
+  dependencies:
+    "@tanstack/query-core" "5.20.1"
+
 "@testing-library/jest-native@^5.4.2":
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/@testing-library/jest-native/-/jest-native-5.4.3.tgz#9334c68eaf45db9eb20d0876728cc5d7fc2c3ea2"
@@ -2294,7 +2313,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.62.0", "@typescript-eslint/utils@^5.10.0":
+"@typescript-eslint/utils@5.62.0", "@typescript-eslint/utils@^5.10.0", "@typescript-eslint/utils@^5.62.0":
   version "5.62.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.62.0.tgz#141e809c71636e4a75daa39faed2fb5f4b10df86"
   integrity sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==
@@ -3299,6 +3318,11 @@ domutils@^3.0.1:
     dom-serializer "^2.0.0"
     domelementtype "^2.3.0"
     domhandler "^5.0.3"
+
+dotenv@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -6226,6 +6250,13 @@ react-native-device-info@^10.11.0:
   version "10.12.0"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-10.12.0.tgz#be4e71cbcc9a05e8643b1a419a4450d4cef9bbcc"
   integrity sha512-gnBkjyZNEqRd+5BNrdzuvmlraHTCH/to2x0Gp9rtDt0O9xWWW1MTYohUVWX9A0Ad2HVYcGanDCIvjWp4ngMZFg==
+
+react-native-dotenv@^3.4.9:
+  version "3.4.9"
+  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-3.4.9.tgz#621c5b0c1d0c5c7f569bfe5a1d804bec7885c010"
+  integrity sha512-dbyd+mcy7SUzxEgmt33TRf1FGcNe6swJhXmB0unKkI49F7+pidog9kPtjxMLTAfmKA8gcN2XHQSKltGfGbGCLQ==
+  dependencies:
+    dotenv "^16.3.1"
 
 react-native-fast-image@^8.6.3:
   version "8.6.3"

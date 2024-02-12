@@ -10,7 +10,7 @@
 
 import React from 'react'
 import { View } from 'react-native'
-import SocialIcon from '../../..//components/SocialIcon'
+import SocialIcon from '@components/SocialIcon'
 
 /**
  * @function SocialButtons

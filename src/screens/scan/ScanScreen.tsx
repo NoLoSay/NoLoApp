@@ -9,9 +9,8 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
 import { Camera } from 'react-native-vision-camera'
 import FastImage from 'react-native-fast-image'
-import YoutubeIframe from 'react-native-youtube-iframe'
-import { colors } from '../../global/colors'
-import images from '../../global/images'
+import { colors } from '@global/colors'
+import images from '@global/images'
 import useScanScreenController from './useScanScreenController'
 import NoCameraView from './Views/NoCameraView'
 
@@ -28,7 +27,13 @@ export default function ScanScreen({ navigation }: any): React.JSX.Element {
     return (
       <NoCameraView
         hasPermission={hasPermission}
-        onNavigationButtonPressed={() => navigateToVideoConsumption('21yj2ji6D1s')}
+        onNavigationButtonPressed={() => {
+          if (__DEV__) {
+            navigateToVideoConsumption('21yj2ji6D1s')
+          } else {
+            navigation.goBack()
+          }
+        }}
       />
     )
   return (

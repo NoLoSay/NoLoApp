@@ -10,7 +10,7 @@ import {
   ReturnKeyType,
   Keyboard,
 } from 'react-native'
-import { colors } from '../../../global/colors'
+import { colors } from '@global/colors'
 
 interface InputProps {
   placeholder: string

@@ -10,9 +10,9 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
-import colors from '../../../global/colors'
-import images from '../../../global/images'
-import { Place } from '../../../global/types/Places'
+import colors from '@global/colors'
+import images from '@global/images'
+import { Place } from '@global/types/Places'
 import useMapViewController from './useMapViewController'
 
 interface Props {
