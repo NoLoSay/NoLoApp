@@ -106,7 +106,11 @@ export function requestServer({
   headers,
   body,
 }: RequestServerProps): Promise<Response> {
-  return fetch((__DEV__ ? DEV_API_ENDPOINT : url) + endpoint, {
+  let finalURL
+  if (url === API_ENDPOINT && __DEV__) finalURL = DEV_API_ENDPOINT
+  else finalURL = url
+  console.log('finalURL', finalURL)
+  return fetch(finalURL + endpoint, {
     method,
     headers: {
       Accept: headers.Accept,

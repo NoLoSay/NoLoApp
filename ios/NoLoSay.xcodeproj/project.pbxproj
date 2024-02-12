@@ -537,7 +537,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.nolosayapp.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolosay.noloapp;
 				PRODUCT_NAME = NoLoSay;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -567,7 +567,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.nolosayapp.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nolosay.noloapp;
 				PRODUCT_NAME = NoLoSay;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
