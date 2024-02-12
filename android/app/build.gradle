@@ -69,18 +69,29 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
 
+
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.nolosay"
+
+    def googleMapsApiKey = ""
+    try {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        googleMapsApiKey = properties.getProperty('GOOGLE_MAPS_API_KEY')
+    } catch (Exception e) {
+        println "Error reading GOOGLE_MAPS_API_KEY from local.properties: " + e.getMessage()
+    }
     defaultConfig {
         applicationId "com.nolosay"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "0.0.1"
+        manifestPlaceholders = [GOOGLE_MAPS_API_KEY: "\"${googleMapsApiKey}\""]
     }
     signingConfigs {
         debug {
