@@ -2,7 +2,7 @@
   "entryPoints": ["./src/screens/**/*.tsx", "./src/**/*.ts"],
   "out": "docs/documentation",
   "tsconfig": "tsconfig.json",
-  "plugin": ["@mxssfd/typedoc-theme", "typedoc-plugin-missing-exports"],
+  "plugin": ["@johancdev/typedoc-theme", "typedoc-plugin-missing-exports"],
   "theme": "my-theme",
   "name": "NoLoApp",
   "customCss": "docs/setup/assets/style.css",
