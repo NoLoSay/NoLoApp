@@ -95,6 +95,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
         <Text style={styles.descriptionText}>{place?.longDescription}</Text>
         <Button
           text='En savoir plus'
+          style={{ marginHorizontal: 32 }}
           onPress={() => navigation.navigate('WebViewModal', { uri: place?.website, name: place?.name })}
         />
       </ScrollView>
