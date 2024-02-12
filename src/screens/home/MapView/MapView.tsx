@@ -8,7 +8,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text, Platform } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
 import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps'
 import colors from '@global/colors'
 import images from '@global/images'
