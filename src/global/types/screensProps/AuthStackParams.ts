@@ -19,6 +19,7 @@ export type AuthStackParamList = {
   SettingsModal: undefined
   WebViewModal: React.JSX.Element
   PlaceDescription: React.JSX.Element
+  VideoConsumptionModal: React.JSX.Element
 }
 
 /**
@@ -50,3 +51,8 @@ export type WebViewModalScreenProps = NativeStackScreenProps<AuthStackParamList,
  * @typedef {Object} PlaceDescriptionScreenProps
  */
 export type PlaceDescriptionScreenProps = NativeStackScreenProps<AuthStackParamList, 'PlaceDescription'>
+
+/**
+ * @typedef {Object} VideoConsumptionModalProps
+ */
+export type VideoConsumptionModalProps = NativeStackScreenProps<AuthStackParamList, 'VideoConsumptionModal'>

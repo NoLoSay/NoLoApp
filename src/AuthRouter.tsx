@@ -19,6 +19,7 @@ import SubscriptionScreen from '@screens/authentificationSection/subscription/Su
 import SettingsScreen from '@screens/settings/SettingsScreen'
 import WebViewScreen from '@screens/webView/WebView'
 import PlaceDescription from '@screens/PlaceDescription/PlaceDescription'
+import VideoConsumptionView from '@screens/VideoConsumptionView/VideoConsumptionView'
 import AppRouter from './AppRouter'
 
 export default function App(): React.JSX.Element {
@@ -70,6 +71,12 @@ export default function App(): React.JSX.Element {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore: Unreachable code error
                 component={WebViewScreen}
+              />
+              <AuthStack.Screen
+                name='VideoConsumptionModal'
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore: Unreachable code error
+                component={VideoConsumptionView}
               />
               <AuthStack.Screen
                 name='PlaceDescription'

@@ -19,10 +19,23 @@ import NoCameraView from './Views/NoCameraView'
  * @description Component that renders the Scan screen.
  * @returns {React.JSX.Element} App component template
  */
-export default function ScanScreen(): React.JSX.Element {
-  const { hasPermission, backCamera, isQRScanningActive, codeScanner } = useScanScreenController()
+export default function ScanScreen({ navigation }: any): React.JSX.Element {
+  const { hasPermission, backCamera, isQRScanningActive, codeScanner, navigateToVideoConsumption } =
+    useScanScreenController({ navigation })
 
-  if (backCamera === undefined || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
+  if (backCamera === undefined || !hasPermission)
+    return (
+      <NoCameraView
+        hasPermission={hasPermission}
+        onNavigationButtonPressed={() => {
+          if (__DEV__) {
+            navigateToVideoConsumption('21yj2ji6D1s')
+          } else {
+            navigation.goBack()
+          }
+        }}
+      />
+    )
   return (
     <SafeAreaView style={styles.container}>
       <Camera

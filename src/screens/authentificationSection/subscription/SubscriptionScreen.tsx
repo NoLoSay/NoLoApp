@@ -98,7 +98,7 @@ export default function SubscriptionScreen({ navigation }: SubscriptionScreenPro
         <Button
           text="S'inscrire"
           onPress={subscribe}
-          style={{ marginVertical: 12 }}
+          style={{ marginVertical: 12, marginHorizontal: 48 }}
         />
         <ButtonChangeScreen
           infoText='Déjà un compte ?'

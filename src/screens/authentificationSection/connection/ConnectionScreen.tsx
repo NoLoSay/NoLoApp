@@ -155,5 +155,6 @@ const styles = StyleSheet.create({
   },
   connectionButton: {
     marginVertical: 12,
+    marginHorizontal: 48,
   },
 })
