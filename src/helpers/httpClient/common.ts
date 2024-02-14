@@ -107,6 +107,7 @@ export function requestServer({
   let finalURL
   if (url === PROD_API_URL && __DEV__) finalURL = DEV_API_URL
   else finalURL = url
+  if (__DEV__) console.log('finalURL:', finalURL + endpoint)
   return fetch(finalURL + endpoint, {
     method,
     headers: {

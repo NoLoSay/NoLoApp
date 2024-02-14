@@ -52,6 +52,21 @@ yarn ios
 yarn android
 ```
 
+To launch the server you'll need to do various things :
+
+- First go to the server folder, then :
+
+```sh
+yarn install
+cd libs/prisma/schema/base && npx prisma generate
+cd ../translator && npx prisma generate
+cd ../logs && npx prisma generate
+cd ../../../../
+docker compose up postgres
+npx prisma migrate deploy --schema libs/prisma/schema/base/prisma/schema.prisma
+nx serve api
+```
+
 ## Tests
 
 Tests are done with [Jest](https://jestjs.io/)
