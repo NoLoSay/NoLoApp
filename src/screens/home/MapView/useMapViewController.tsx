@@ -6,7 +6,7 @@
  * @requires MapView react-native-maps
  */
 import { Ref, useContext, useRef } from 'react'
-import { Alert, Platform } from 'react-native'
+import { Alert } from 'react-native'
 import MapView from 'react-native-maps'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { AccountType } from '@global/types/Account'
@@ -16,7 +16,6 @@ interface MapViewController {
   account: AccountType
   mapRef: Ref<MapView>
   onMarkerPress: (place: Place) => void
-  isMapAvailable: () => boolean
 }
 
 interface Props {
@@ -71,17 +70,9 @@ export default function useMapViewController({ navigation }: Props): MapViewCont
     ])
   }
 
-  /**
-   * @function isMapAvailable
-   * @description Checks if the map is available on the current platform.
-   * @returns {boolean}
-   */
-  const isMapAvailable = (): boolean => Platform.OS === 'ios' || Platform.OS === 'macos'
-
   return {
     account,
     mapRef,
     onMarkerPress,
-    isMapAvailable,
   }
 }

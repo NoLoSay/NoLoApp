@@ -8,8 +8,8 @@
  */
 
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import MapView, { Marker } from 'react-native-maps'
+import { StyleSheet, View, Platform } from 'react-native'
+import MapView, { Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from 'react-native-maps'
 import colors from '@global/colors'
 import images from '@global/images'
 import { Place } from '@global/types/Places'
@@ -27,36 +27,34 @@ interface Props {
  * @returns {JSX.Element}
  */
 export default function PlacesMapView({ places, navigation }: Props): JSX.Element {
-  const { account, onMarkerPress, mapRef, isMapAvailable } = useMapViewController({ navigation })
+  const { account, onMarkerPress, mapRef } = useMapViewController({ navigation })
 
   return (
     <View style={styles.container}>
-      {isMapAvailable() && (
-        <MapView
-          ref={mapRef}
-          initialRegion={{
-            latitude: account.localisation?.coords.latitude ?? 0.0,
-            longitude: account.localisation?.coords.longitude ?? 0.0,
-            latitudeDelta: 0.02,
-            longitudeDelta: 0.02,
-          }}
-          style={styles.map}
-          showsUserLocation
-          loadingEnabled
-          loadingIndicatorColor={colors.accent}
-          loadingBackgroundColor={colors.lightGrey}
-        >
-          {places.map(marker => (
-            <Marker
-              key={marker.id}
-              coordinate={marker.coordinates}
-              image={images.icons.maps.pin()}
-              onPress={() => onMarkerPress(marker)}
-            />
-          ))}
-        </MapView>
-      )}
-      {!isMapAvailable() && <Text style={styles.errorText}>Pas encore fonctionnel</Text>}
+      <MapView
+        ref={mapRef}
+        initialRegion={{
+          latitude: account.localisation?.coords.latitude ?? 0.0,
+          longitude: account.localisation?.coords.longitude ?? 0.0,
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02,
+        }}
+        style={styles.map}
+        showsUserLocation
+        loadingEnabled
+        loadingIndicatorColor={colors.accent}
+        loadingBackgroundColor={colors.lightGrey}
+        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : PROVIDER_DEFAULT}
+      >
+        {places.map(marker => (
+          <Marker
+            key={marker.id}
+            coordinate={marker.coordinates}
+            image={images.icons.maps.pin()}
+            onPress={() => onMarkerPress(marker)}
+          />
+        ))}
+      </MapView>
     </View>
   )
 }
