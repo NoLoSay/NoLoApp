@@ -101,7 +101,7 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
         access_token: requestText,
       },
       status: response.status,
-      message: 'responseData.message',
+      message: requestText,
     }
 
     return data
