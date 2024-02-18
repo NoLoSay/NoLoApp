@@ -66,7 +66,7 @@ async function getCityUsingGouv({
   try {
     const response = await get({
       url: 'https://api-adresse.data.gouv.fr',
-      endpoint: `/reverse/?lon=${longitude}&lat=${latitude}&type=city`,
+      endpoint: `/reverse/?lon=${longitude}&lat=${latitude}`,
     })
 
     return response.json()
@@ -92,6 +92,7 @@ export default async function getCity({
 
       return geoResponse.features[0]?.properties.city || ''
     }
+    return gouvResponse.features[0]?.properties.city || ''
   } catch (error) {
     console.error('Error in getCity:', error)
     return ''
