@@ -4,8 +4,9 @@
  * @description Helper functions to get and handle places.
  */
 
-import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
+import PlacesNeedingTranslationJSON, { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
 import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '@global/types/Places'
+import { get } from './common'
 
 const PLACES: Place[] = [
   {
@@ -304,12 +305,52 @@ const PLACES: Place[] = [
  * @function getPlaces Get the places from the server.
  * @returns Promise of an array of places
  */
-export default async function getPlaces() {
-  return new Promise<Place[]>(resolve => {
-    setTimeout(() => {
-      resolve(PLACES)
-    }, 500)
-  })
+export default async function getPlaces({
+  latitude,
+  longitude,
+  q,
+  radius,
+}: {
+  latitude: number
+  longitude: number
+  q: string
+  radius: number
+}): Promise<NoloPlacesJSON> {
+  try {
+    const response = await get({
+      endpoint: `/search/locations?${new URLSearchParams({
+        latitude: latitude.toString(),
+        longitude: longitude.toString(),
+        radius: radius.toString(),
+        q,
+      })}`,
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(responseData.message)
+    }
+
+    return {
+      json: responseData > 0 ? responseData : PLACES,
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch (error) {
+    console.log("Error, couldn't get places:", error)
+    throw new Error(error instanceof Error ? error.message : String(error))
+  }
+
+  // return new Promise<NoloPlacesJSON>(resolve => {
+  //   setTimeout(() => {
+  //     resolve({
+  //       json: PLACES,
+  //       status: 200,
+  //       message: 'Success',
+  //     })
+  //   }, 500)
+  // })
 }
 
 const PlacesToTranslate: PlaceNeedingTranslation[] = [

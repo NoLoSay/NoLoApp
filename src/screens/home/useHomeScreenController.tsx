@@ -13,6 +13,7 @@ import { Place } from '@global/types/Places'
 import getPlaces from '@helpers/httpClient/places'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import getCity from '@helpers/httpClient/localization'
+import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
 
 /**
  * @interface HomeScreenController
@@ -25,7 +26,11 @@ import getCity from '@helpers/httpClient/localization'
  * @property {(value: string) => void} setSearchValue The function to set the value of the search bar
  * @property {() => void} togglePage The function to toggle the current page of the screen
  * @property {Place[]} places The places of the user
- * @property {AccountType} account The account of the user
+ * @property {() => Place[]} getNearestPlaces The function to get the nearest places
+ * @property {boolean} isLoading The loading state of the screen
+ * @property {() => void} onRefresh The function to refresh the screen
+ * @property {boolean} isRefreshing The refreshing state of the screen
+ * @property {boolean} isSuccessful The success state of the screen
  */
 interface HomeScreenController {
   city: string
@@ -40,6 +45,7 @@ interface HomeScreenController {
   isLoading: boolean
   onRefresh: () => void
   isRefreshing: boolean
+  isSuccessful: boolean
 }
 
 /**
@@ -54,14 +60,19 @@ export default function useHomeScreenController(): HomeScreenController {
   const [searchValue, setSearchValue] = useState('')
   const { account, setAccount } = useContext(AccountContext)
   const [places, setPlaces] = useState<Place[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [isRefreshing, setIsRefreshing] = useState(false)
+  const noloPlacesMutation = useNoloPlaces({
+    setPlaces,
+    displayErrorModal: () => {
+      console.log('error')
+    },
+    latitude: account.localisation?.coords.latitude || 0,
+    longitude: account.localisation?.coords.longitude || 0,
+    q: searchValue,
+    radius: 5,
+  })
 
   const getAllPlaces = () => {
-    getPlaces().then(loadedPlaces => {
-      setPlaces(loadedPlaces)
-      setIsLoading(false)
-    })
+    noloPlacesMutation.mutate()
   }
 
   useEffect(() => {
@@ -78,9 +89,7 @@ export default function useHomeScreenController(): HomeScreenController {
   }, [])
 
   function onRefresh() {
-    setIsRefreshing(true)
     getAllPlaces()
-    setIsRefreshing(false)
   }
 
   function togglePage() {
@@ -122,8 +131,9 @@ export default function useHomeScreenController(): HomeScreenController {
     togglePage,
     places,
     getNearestPlaces,
-    isLoading,
+    isLoading: noloPlacesMutation.isPending,
     onRefresh,
-    isRefreshing,
+    isRefreshing: noloPlacesMutation.isPending,
+    isSuccessful: noloPlacesMutation.isSuccess,
   }
 }
