@@ -5,21 +5,13 @@ import getPlaces from '@helpers/httpClient/places'
 
 type UpdatePlacesDisplayedProps = {
   setPlaces: (places: Place[]) => void
-  displayErrorModal: (text: string) => void
   latitude?: number
   longitude?: number
   q?: string
   radius?: number
 }
 
-export default function useNoloPlaces({
-  setPlaces,
-  displayErrorModal,
-  latitude,
-  longitude,
-  q,
-  radius,
-}: UpdatePlacesDisplayedProps) {
+export default function useNoloPlaces({ setPlaces, latitude, longitude, q, radius }: UpdatePlacesDisplayedProps) {
   function updatePlacesDisplayed({ newPlaces }: { newPlaces: Place[] }) {
     setPlaces(newPlaces)
   }
@@ -30,12 +22,8 @@ export default function useNoloPlaces({
       try {
         updatePlacesDisplayed({ newPlaces: data.json })
       } catch (error) {
-        // @ts-expect-error - error is a string
-        displayErrorModal(error.message)
+        console.error(error)
       }
-    },
-    onError: error => {
-      displayErrorModal(error.message)
     },
   })
 

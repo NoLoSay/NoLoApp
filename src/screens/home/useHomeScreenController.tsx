@@ -62,17 +62,11 @@ export default function useHomeScreenController(): HomeScreenController {
   const [places, setPlaces] = useState<Place[]>([])
   const noloPlacesMutation = useNoloPlaces({
     setPlaces,
-    displayErrorModal: () => {
-      console.log('error')
-    },
     latitude: account.localisation?.coords.latitude || 0,
     longitude: account.localisation?.coords.longitude || 0,
   })
   const noloPlacesMutationUsingSearch = useNoloPlaces({
     setPlaces,
-    displayErrorModal: () => {
-      console.log('error')
-    },
     q: searchValue,
   })
 
