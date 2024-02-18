@@ -13,6 +13,8 @@ import { Place } from '@global/types/Places'
 import getPlaces from '@helpers/httpClient/places'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import getCity from '@helpers/httpClient/localization'
+import { Alert, Linking } from 'react-native'
+import { defaultLocalisation } from '@global/types/Account'
 
 /**
  * @interface HomeScreenController
@@ -65,13 +67,36 @@ export default function useHomeScreenController(): HomeScreenController {
   }
 
   useEffect(() => {
-    Geolocation.getCurrentPosition(async info => {
-      setAccount({ ...account, localisation: info })
+    Geolocation.getCurrentPosition(
+      async info => {
+        setAccount({ ...account, localisation: info })
 
-      const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
+        const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
 
-      setCity(reversedCity)
-    })
+        setCity(reversedCity)
+      },
+      async () => {
+        setAccount({
+          ...account,
+          localisation: defaultLocalisation,
+        })
+        const reversedCity = await getCity({
+          latitude: defaultLocalisation.coords.latitude,
+          longitude: defaultLocalisation.coords.longitude,
+        })
+
+        setCity(reversedCity)
+
+        Alert.alert(
+          'Localisation introuvable',
+          "Vous avez désactivé la localisation, pour optimiser votre expérience, veuillez l'activer dans vos réglages",
+          [
+            { text: 'Activer', onPress: () => Linking.openSettings() },
+            { text: 'Plus tard', style: 'cancel' },
+          ]
+        )
+      }
+    )
     getAllPlaces()
     // Avoid infinite loop
     // eslint-disable-next-line react-hooks/exhaustive-deps

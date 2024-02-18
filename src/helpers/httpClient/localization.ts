@@ -90,7 +90,7 @@ export default async function getCity({
       console.log('Unable to get data from gouv, trying with GeoApify')
       const geoResponse = await getCityUsingGeoapify({ latitude, longitude })
 
-      return geoResponse.features[0]?.properties.city || ''
+      return geoResponse.features[0]?.properties.city || 'Nantes'
     }
   } catch (error) {
     console.error('Error in getCity:', error)

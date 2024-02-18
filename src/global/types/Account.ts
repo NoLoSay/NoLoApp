@@ -16,6 +16,19 @@ export enum AccountElevationEnum {
   ADMIN = 1,
 }
 
+export const defaultLocalisation: GeolocationResponse = {
+  coords: {
+    latitude: 47.21725,
+    longitude: -1.55336,
+    altitude: 14,
+    accuracy: 1,
+    altitudeAccuracy: 1,
+    heading: 1,
+    speed: 0,
+  },
+  timestamp: 123456,
+}
+
 export interface AccountType {
   accountID: number
   email: string
