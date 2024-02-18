@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 import { Header } from '@global/types/httpClient/Header'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import ConnectJSON from '@global/types/httpClient/auth/Connection'
-import { connect } from '@helpers/httpClient/auth'
+import { connect } from '@helpers/httpClient/queries/auth/auth'
 
 interface ConnectProps {
   url?: string
@@ -51,6 +51,7 @@ export default function useConnect({ formUsername, password, navigation, setErro
           message: data.message,
         })
       } catch (error) {
+        console.log(error)
         // @ts-expect-error - error is a string
         setError(error.message)
       }

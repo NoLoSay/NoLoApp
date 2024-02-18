@@ -41,12 +41,7 @@ type SettingsCategory = {
 export default function SettingsScreen({ navigation }: Props): React.JSX.Element {
   const {
     account,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
     username,
-    setUsername,
     isModalVisible,
     showModal,
     hideModal,
@@ -60,7 +55,9 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     aboutApp,
     openTerms,
     isLoading,
-    setIsLoading,
+    changeUserMutation,
+    tmpUsername,
+    setTmpUsername,
   } = useSettingsScreenController({ navigation })
 
   /**
@@ -149,8 +146,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
       <ScrollView style={styles.scrollview}>
         <MainInfos
           accountImage={account.image}
-          firstName={firstName}
-          lastName={lastName}
+          email={account.email}
           username={username}
           showModal={showModal}
         />
@@ -189,11 +185,10 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
       <ModalView
         account={account}
         hideModal={hideModal}
-        setFirstName={setFirstName}
-        setLastName={setLastName}
-        setUsername={setUsername}
         isVisible={isModalVisible}
-        setIsLoading={setIsLoading}
+        changeUserMutation={changeUserMutation}
+        tmpUsername={tmpUsername}
+        setTmpUsername={setTmpUsername}
       />
       <HelpModal
         isVisible={isHelpModalVisible}

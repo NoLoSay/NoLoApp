@@ -9,25 +9,24 @@ import { Modal, StyleSheet, View } from 'react-native'
 import colors from '@global/colors'
 import Button from '@components/Button'
 import { AccountType } from '@global/types/Account'
+import ChangeUserJSON from '@global/types/httpClient/user/ChangeUser'
+import { UseMutationResult } from '@tanstack/react-query'
 import Input from '../Views/Input'
 import useModalViewController from './useModalViewController'
 
 type Props = {
   account: AccountType
-  setFirstName: (firstName: string) => void
-  setLastName: (lastName: string) => void
-  setUsername: (username: string) => void
   isVisible: boolean
   hideModal: () => void
-  setIsLoading: (isLoading: boolean) => void
+  changeUserMutation: UseMutationResult<ChangeUserJSON, Error, void, unknown>
+  tmpUsername: string
+  setTmpUsername: (username: string) => void
 }
 
 /**
  * @function ModalView
  * @description Component that renders the Modal view.
  * @param account The account object
- * @param setFirstName The function that sets the first name
- * @param setLastName The function that sets the last name
  * @param setUsername The function that sets the username
  * @param isVisible Is the modal visible
  * @param hideModal The function that hides the modal
@@ -36,15 +35,19 @@ type Props = {
  */
 export default function ModalView({
   account,
-  setFirstName,
-  setLastName,
-  setUsername,
   isVisible,
   hideModal,
-  setIsLoading,
+  changeUserMutation,
+  tmpUsername,
+  setTmpUsername,
 }: Props): React.JSX.Element {
-  const { tmpFirstName, setTmpFirstName, tmpLastName, setTmpLastName, tmpUsername, setTmpUsername, onModalValidate } =
-    useModalViewController({ account, hideModal, setFirstName, setLastName, setUsername, setIsLoading })
+  const { onModalValidate } = useModalViewController({
+    account,
+    hideModal,
+    changeUserMutation,
+    tmpUsername,
+    setTmpUsername,
+  })
   return (
     <Modal
       animationType='fade'
@@ -53,18 +56,6 @@ export default function ModalView({
     >
       <View style={styles.backgroundOpacity}>
         <View style={styles.container}>
-          <Input
-            value={tmpFirstName}
-            setValue={setTmpFirstName}
-            placeholder='Prénom'
-            autoCapitalize='words'
-          />
-          <Input
-            value={tmpLastName}
-            setValue={setTmpLastName}
-            placeholder='Nom'
-            autoCapitalize='words'
-          />
           <Input
             value={tmpUsername}
             setValue={setTmpUsername}

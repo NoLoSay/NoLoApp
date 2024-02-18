@@ -7,7 +7,7 @@
 import { Header } from '@global/types/httpClient/Header'
 import RegisterJSON from '@global/types/httpClient/auth/Registration'
 import ConnectionJSON from '@global/types/httpClient/auth/Connection'
-import { post } from './common'
+import { post } from '../../common'
 
 interface SubscribeProps {
   url?: string
@@ -85,17 +85,26 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
       }),
     })
 
-    const responseData = await response.json()
+    // TODO: Change this to JSON when it will be done in the backend
+
+    // Backend is retuning a string containing the error or the access_token, not a JSON object containing all informations
+    const requestText = await response.text()
 
     if (!response.ok) {
-      throw new Error(responseData.message)
+      throw new Error(requestText)
     }
 
-    return {
-      json: responseData,
+    const data = {
+      json: {
+        username: formUsername,
+        email: formUsername,
+        access_token: requestText,
+      },
       status: response.status,
-      message: responseData.message,
+      message: 'responseData.message',
     }
+
+    return data
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))
   }

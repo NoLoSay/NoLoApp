@@ -13,8 +13,7 @@ import images from '@global/images'
 
 type Props = {
   accountImage: string
-  firstName: string
-  lastName: string
+  email: string
   username: string
   showModal: () => void
 }
@@ -28,7 +27,7 @@ type Props = {
  * @param showModal The function that shows the modal
  * @returns
  */
-export default function MainInfos({ accountImage, firstName, lastName, username, showModal }: Props) {
+export default function MainInfos({ accountImage, email, username, showModal }: Props) {
   return (
     <View style={styles.container}>
       <FastImage
@@ -36,7 +35,7 @@ export default function MainInfos({ accountImage, firstName, lastName, username,
         source={{ uri: accountImage }}
       />
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{`${firstName} ${lastName}`}</Text>
+        <Text style={styles.name}>{email}</Text>
         <Text style={styles.username}>{`@${username}`}</Text>
       </View>
       <Pressable
