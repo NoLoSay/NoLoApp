@@ -10,7 +10,6 @@
 import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
 import { Place } from '@global/types/Places'
-import getPlaces from '@helpers/httpClient/places'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import getCity from '@helpers/httpClient/localization'
 import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
@@ -42,6 +41,7 @@ interface HomeScreenController {
   togglePage: () => void
   places: Place[]
   getNearestPlaces: () => Place[]
+  getAllPlacesUsingSearch: () => void
   isLoading: boolean
   onRefresh: () => void
   isRefreshing: boolean
@@ -67,12 +67,23 @@ export default function useHomeScreenController(): HomeScreenController {
     },
     latitude: account.localisation?.coords.latitude || 0,
     longitude: account.localisation?.coords.longitude || 0,
+  })
+  const noloPlacesMutationUsingSearch = useNoloPlaces({
+    setPlaces,
+    displayErrorModal: () => {
+      console.log('error')
+    },
     q: searchValue,
-    radius: 5,
   })
 
   const getAllPlaces = () => {
     noloPlacesMutation.mutate()
+  }
+
+  const getAllPlacesUsingSearch = () => {
+    noloPlacesMutationUsingSearch.mutate()
+    toggleSearchBar()
+    setCity(searchValue)
   }
 
   useEffect(() => {
@@ -131,9 +142,10 @@ export default function useHomeScreenController(): HomeScreenController {
     togglePage,
     places,
     getNearestPlaces,
-    isLoading: noloPlacesMutation.isPending,
+    getAllPlacesUsingSearch,
+    isLoading: noloPlacesMutation.isPending || noloPlacesMutationUsingSearch.isPending,
     onRefresh,
     isRefreshing: noloPlacesMutation.isPending,
-    isSuccessful: noloPlacesMutation.isSuccess,
+    isSuccessful: noloPlacesMutation.isSuccess || noloPlacesMutationUsingSearch.isSuccess,
   }
 }

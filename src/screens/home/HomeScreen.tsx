@@ -32,6 +32,7 @@ export default function HomeScreen(): React.JSX.Element {
     togglePage,
     places,
     getNearestPlaces,
+    getAllPlacesUsingSearch,
     isLoading,
     onRefresh,
     isRefreshing,
@@ -49,6 +50,7 @@ export default function HomeScreen(): React.JSX.Element {
         toggleSearchBar={toggleSearchBar}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        getAllPlacesUsingSearch={getAllPlacesUsingSearch}
         navigation={navigation}
       />
       {currentPage === 'carousel' && isSuccessful && places.length > 0 && (

@@ -311,19 +311,29 @@ export default async function getPlaces({
   q,
   radius,
 }: {
-  latitude: number
-  longitude: number
-  q: string
-  radius: number
+  latitude?: number
+  longitude?: number
+  q?: string
+  radius?: number
 }): Promise<NoloPlacesJSON> {
   try {
+    const queryParams: { [key: string]: string } = {}
+
+    if (latitude !== undefined) {
+      queryParams.latitude = latitude.toString()
+    }
+    if (longitude !== undefined) {
+      queryParams.longitude = longitude.toString()
+    }
+    if (radius !== undefined) {
+      queryParams.radius = radius.toString()
+    }
+    if (q !== undefined) {
+      queryParams.q = q
+    }
+
     const response = await get({
-      endpoint: `/search/locations?${new URLSearchParams({
-        latitude: latitude.toString(),
-        longitude: longitude.toString(),
-        radius: radius.toString(),
-        q,
-      })}`,
+      endpoint: `/search/locations?${new URLSearchParams(queryParams)}`,
     })
 
     const responseData = await response.json()
