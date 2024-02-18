@@ -1,4 +1,4 @@
-package com.nolosay;
+package com.nolosay.noloapp;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.nolosay
+package com.nolosay.noloapp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

@@ -75,7 +75,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.nolosay"
+    namespace "com.nolosay.noloapp"
 
     def googleMapsApiKey = ""
     try {
@@ -86,7 +86,7 @@ android {
         println "Error reading GOOGLE_MAPS_API_KEY from local.properties: " + e.getMessage()
     }
     defaultConfig {
-        applicationId "com.nolosay"
+        applicationId "com.nolosay.noloapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

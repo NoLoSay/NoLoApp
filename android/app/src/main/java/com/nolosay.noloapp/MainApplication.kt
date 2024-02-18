@@ -1,4 +1,4 @@
-package com.nolosay
+package com.nolosay.noloapp
 
 import android.app.Application
 import com.facebook.react.PackageList
