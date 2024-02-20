@@ -24,6 +24,7 @@
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
     "start-server": "cd ../MonoLoBack && nx serve api",
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
+    "deploy-apk": "./bin/upload_apk",
     "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
     "documentation": "typedoc --options ./typedoc.json",
     "test": "jest --coverage",
