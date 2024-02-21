@@ -1,0 +1,27 @@
+#!/bin/bash
+
+branch_name="Add-release-apk-$(date +%d)/$(date +%m)/$(date +%Y)"
+
+# Generate the apk
+cd android && \
+./gradlew assembleRelease && \
+
+# Rename the apk
+mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/NoLoSay.apk && \
+
+# Sign the apk
+cd ../
+jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA256 -keystore ./android/app/NoLoSayKey.keystore ./android/app/build/outputs/apk/release/NoLoSay.apk NoLoSayAppAndroid && \
+
+# Copy the apk to the web repository
+cp ./android/app/build/outputs/apk/release/NoLoSay.apk ../NoLoWeb/public/. && \
+
+# Commit the apk to the web repository
+cd ../NoLoWeb && \
+git pull && \
+git checkout -b $branch_name && \
+
+git add ./public/NoLoSay.apk && \
+git commit -m "Add new apk" && \
+git push origin $branch_name && \
+gh pr create --title "Add APK of $branch_name" --body "New apk for NoLoApp" --label "application" --base main --head $branch_name
