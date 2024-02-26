@@ -30,12 +30,7 @@ const PLACES: Place[] = [
     price: 0,
     city: 'Nantes',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 2,
@@ -53,15 +48,11 @@ const PLACES: Place[] = [
       latitude: 47.09750371051718,
       longitude: -1.2700803720514064,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 105,
     city: 'Clisson',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 3,
@@ -79,15 +70,11 @@ const PLACES: Place[] = [
       latitude: 37.33182,
       longitude: -122.03118,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.MUSEUM,
     price: 0,
     city: 'Cupertino',
     country: 'United States',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 4,
@@ -110,12 +97,7 @@ const PLACES: Place[] = [
     price: 0,
     city: 'Les Epesses',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 5,
@@ -133,16 +115,11 @@ const PLACES: Place[] = [
       latitude: 47.248611,
       longitude: -1.519722,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Nantes',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 6,
@@ -160,16 +137,11 @@ const PLACES: Place[] = [
       latitude: 48.924722,
       longitude: 2.360833,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Saint-Denis',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 7,
@@ -191,12 +163,7 @@ const PLACES: Place[] = [
     price: 0,
     city: 'Paris',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 8,
@@ -214,16 +181,11 @@ const PLACES: Place[] = [
       latitude: 48.858844,
       longitude: 2.294351,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Paris',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 9,
@@ -241,16 +203,11 @@ const PLACES: Place[] = [
       latitude: 48.863611,
       longitude: 2.326111,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Paris',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 10,
@@ -267,11 +224,11 @@ const PLACES: Place[] = [
       latitude: 47.208333,
       longitude: -1.562222,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.MUSEUM,
     price: 0,
     city: 'Nantes',
     country: 'France',
-    tags: [{ name: PlaceTag.NO_LOSAY, id: 1 }],
+    tags: [PlaceTag.NOLOSAY],
   },
   {
     id: 11,
@@ -293,10 +250,11 @@ const PLACES: Place[] = [
     city: 'Chicoutimi',
     country: 'Canada',
     tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
+      PlaceTag.NOLOSAY,
+      PlaceTag.DISABILITY_FRIENDLY,
+      PlaceTag.DEAF_FRIENDLY,
+      PlaceTag.BLIND_FRIENDLY,
+      PlaceTag.OTHER,
     ],
   },
 ]
@@ -342,8 +300,16 @@ export default async function getPlaces({
       throw new Error(responseData.message)
     }
 
+    // TODO: Remove this when we will a-have a db populated with fake data
+    let places
+    if (__DEV__) {
+      places = responseData > 0 ? responseData : PLACES
+    } else {
+      places = responseData
+    }
+
     return {
-      json: responseData > 0 ? responseData : PLACES,
+      json: places,
       status: response.status,
       message: responseData.message,
     }
@@ -351,16 +317,6 @@ export default async function getPlaces({
     console.log("Error, couldn't get places:", error)
     throw new Error(error instanceof Error ? error.message : String(error))
   }
-
-  // return new Promise<NoloPlacesJSON>(resolve => {
-  //   setTimeout(() => {
-  //     resolve({
-  //       json: PLACES,
-  //       status: 200,
-  //       message: 'Success',
-  //     })
-  //   }, 500)
-  // })
 }
 
 const PlacesToTranslate: PlaceNeedingTranslation[] = [
