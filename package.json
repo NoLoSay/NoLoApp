@@ -26,7 +26,7 @@
     "android-release": "cd android && ./gradlew assembleRelease && echo 'apk is in android/app/build/outputs/apk/release'",
     "lint": "eslint '**/*.{tsx,ts,jsx,js}' --config './.eslintrc.js' --fix-dry-run",
     "documentation": "typedoc --options ./typedoc.json",
-    "test": "jest --coverage",
+    "test": "jest --coverage --detectOpenHandles --forceExit",
     "format": "prettier --write '**/*.{tsx,ts,jsx,js}' --config './.prettierrc.js'",
     "type-check": "tsc --noEmit",
     "prepare": "husky install",
