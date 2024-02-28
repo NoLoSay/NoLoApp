@@ -14,6 +14,7 @@ import HeaderView from './Views/HeaderView'
 import useHomeScreenController from './useHomeScreenController'
 import CarouselView from './CarouselView/CarouselView'
 import MapView from './MapView/MapView'
+import NoPlacesFound from './Views/NoPlacesFound'
 
 /**
  * @function HomeScreen
@@ -31,9 +32,11 @@ export default function HomeScreen(): React.JSX.Element {
     togglePage,
     places,
     getNearestPlaces,
+    getAllPlacesUsingSearch,
     isLoading,
     onRefresh,
     isRefreshing,
+    isSuccessful,
   } = useHomeScreenController()
   const navigation = useNavigation()
 
@@ -47,9 +50,10 @@ export default function HomeScreen(): React.JSX.Element {
         toggleSearchBar={toggleSearchBar}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        getAllPlacesUsingSearch={getAllPlacesUsingSearch}
         navigation={navigation}
       />
-      {currentPage === 'carousel' && (
+      {currentPage === 'carousel' && isSuccessful && places.length > 0 && (
         <CarouselView
           places={places}
           navigation={navigation}
@@ -58,6 +62,7 @@ export default function HomeScreen(): React.JSX.Element {
           onRefresh={onRefresh}
         />
       )}
+      {currentPage === 'carousel' && isSuccessful && places.length === 0 && <NoPlacesFound />}
       {currentPage === 'map' && (
         <MapView
           places={places}

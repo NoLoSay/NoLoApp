@@ -140,12 +140,7 @@ describe('MapScreenTests', () => {
                 price: 0,
                 city: 'Nantes',
                 country: 'France',
-                tags: [
-                  { name: PlaceTag.NO_LOSAY, id: 1 },
-                  { name: PlaceTag.BLIND, id: 2 },
-                  { name: PlaceTag.DEAF, id: 3 },
-                  { name: PlaceTag.DISABLED, id: 4 },
-                ],
+                tags: [PlaceTag.NOLOSAY, PlaceTag.BLIND_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.DISABILITY_FRIENDLY],
               },
               {
                 id: 2,
@@ -163,15 +158,11 @@ describe('MapScreenTests', () => {
                   latitude: 47.09750371051718,
                   longitude: -1.2700803720514064,
                 },
-                type: PlaceType.PUBLIC,
+                type: PlaceType.PUBLIC_PLACE,
                 price: 105,
                 city: 'Clisson',
                 country: 'France',
-                tags: [
-                  { name: PlaceTag.NO_LOSAY, id: 1 },
-                  { name: PlaceTag.BLIND, id: 2 },
-                  { name: PlaceTag.DISABLED, id: 4 },
-                ],
+                tags: [PlaceTag.NOLOSAY, PlaceTag.BLIND_FRIENDLY, PlaceTag.DISABILITY_FRIENDLY],
               },
             ]}
             navigation={mockedNavigate}

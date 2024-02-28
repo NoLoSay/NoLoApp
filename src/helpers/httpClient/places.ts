@@ -4,8 +4,9 @@
  * @description Helper functions to get and handle places.
  */
 
-import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
+import PlacesNeedingTranslationJSON, { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
 import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '@global/types/Places'
+import { get } from './common'
 
 const PLACES: Place[] = [
   {
@@ -29,12 +30,7 @@ const PLACES: Place[] = [
     price: 0,
     city: 'Nantes',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 2,
@@ -52,15 +48,11 @@ const PLACES: Place[] = [
       latitude: 47.09750371051718,
       longitude: -1.2700803720514064,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 105,
     city: 'Clisson',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 3,
@@ -78,15 +70,11 @@ const PLACES: Place[] = [
       latitude: 37.33182,
       longitude: -122.03118,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.MUSEUM,
     price: 0,
     city: 'Cupertino',
     country: 'United States',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 4,
@@ -109,12 +97,7 @@ const PLACES: Place[] = [
     price: 0,
     city: 'Les Epesses',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 5,
@@ -132,16 +115,11 @@ const PLACES: Place[] = [
       latitude: 47.248611,
       longitude: -1.519722,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Nantes',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 6,
@@ -159,16 +137,11 @@ const PLACES: Place[] = [
       latitude: 48.924722,
       longitude: 2.360833,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Saint-Denis',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 7,
@@ -190,12 +163,7 @@ const PLACES: Place[] = [
     price: 0,
     city: 'Paris',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 8,
@@ -213,16 +181,11 @@ const PLACES: Place[] = [
       latitude: 48.858844,
       longitude: 2.294351,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Paris',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 9,
@@ -240,16 +203,11 @@ const PLACES: Place[] = [
       latitude: 48.863611,
       longitude: 2.326111,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.PUBLIC_PLACE,
     price: 0,
     city: 'Paris',
     country: 'France',
-    tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
-    ],
+    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
   },
   {
     id: 10,
@@ -266,11 +224,11 @@ const PLACES: Place[] = [
       latitude: 47.208333,
       longitude: -1.562222,
     },
-    type: PlaceType.PUBLIC,
+    type: PlaceType.MUSEUM,
     price: 0,
     city: 'Nantes',
     country: 'France',
-    tags: [{ name: PlaceTag.NO_LOSAY, id: 1 }],
+    tags: [PlaceTag.NOLOSAY],
   },
   {
     id: 11,
@@ -292,10 +250,11 @@ const PLACES: Place[] = [
     city: 'Chicoutimi',
     country: 'Canada',
     tags: [
-      { name: PlaceTag.NO_LOSAY, id: 1 },
-      { name: PlaceTag.BLIND, id: 2 },
-      { name: PlaceTag.DEAF, id: 3 },
-      { name: PlaceTag.DISABLED, id: 4 },
+      PlaceTag.NOLOSAY,
+      PlaceTag.DISABILITY_FRIENDLY,
+      PlaceTag.DEAF_FRIENDLY,
+      PlaceTag.BLIND_FRIENDLY,
+      PlaceTag.OTHER,
     ],
   },
 ]
@@ -304,12 +263,60 @@ const PLACES: Place[] = [
  * @function getPlaces Get the places from the server.
  * @returns Promise of an array of places
  */
-export default async function getPlaces() {
-  return new Promise<Place[]>(resolve => {
-    setTimeout(() => {
-      resolve(PLACES)
-    }, 500)
-  })
+export default async function getPlaces({
+  latitude,
+  longitude,
+  q,
+  radius,
+}: {
+  latitude?: number
+  longitude?: number
+  q?: string
+  radius?: number
+}): Promise<NoloPlacesJSON> {
+  try {
+    const queryParams: { [key: string]: string } = {}
+
+    if (latitude !== undefined) {
+      queryParams.latitude = latitude.toString()
+    }
+    if (longitude !== undefined) {
+      queryParams.longitude = longitude.toString()
+    }
+    if (radius !== undefined) {
+      queryParams.radius = radius.toString()
+    }
+    if (q !== undefined) {
+      queryParams.q = q
+    }
+
+    const response = await get({
+      endpoint: `/search/locations?${new URLSearchParams(queryParams)}`,
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(responseData.message)
+    }
+
+    // TODO: Remove this when we will a-have a db populated with fake data
+    let places
+    if (__DEV__) {
+      places = responseData > 0 ? responseData : PLACES
+    } else {
+      places = responseData
+    }
+
+    return {
+      json: places,
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch (error) {
+    console.log("Error, couldn't get places:", error)
+    throw new Error(error instanceof Error ? error.message : String(error))
+  }
 }
 
 const PlacesToTranslate: PlaceNeedingTranslation[] = [

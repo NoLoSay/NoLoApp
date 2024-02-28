@@ -52,6 +52,10 @@ yarn ios
 yarn android
 ```
 
+If the build on iOS fails, you can try to do it manually with XCode.
+
+To do so, open the `ios/NoLoSay.xcworkspace` file with XCode, then select your device and click on the play button.
+
 To launch the server you'll need to do various things :
 
 - First go to the server folder, then :

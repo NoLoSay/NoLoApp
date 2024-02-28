@@ -58,6 +58,7 @@ export default function Category({ text, places, navigation }: Props): React.JSX
             <Text style={styles.itemText}>{item.city}</Text>
           </View>
         ))}
+        {places.length === 0 && <Text style={styles.itemText}>Aucun lieu trouvé</Text>}
       </ScrollView>
     </View>
   )
