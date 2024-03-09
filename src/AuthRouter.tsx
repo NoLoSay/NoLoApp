@@ -20,6 +20,7 @@ import SettingsScreen from '@screens/settings/SettingsScreen'
 import WebViewScreen from '@screens/webView/WebView'
 import PlaceDescription from '@screens/PlaceDescription/PlaceDescription'
 import VideoConsumptionView from '@screens/VideoConsumptionView/VideoConsumptionView'
+import ForgotPassword from '@screens/authentificationSection/passwordForgotten/ForgotPassword'
 import AppRouter from './AppRouter'
 
 export default function App(): React.JSX.Element {
@@ -49,6 +50,10 @@ export default function App(): React.JSX.Element {
               <AuthStack.Screen
                 name='Connection'
                 component={ConnectionScreen}
+              />
+              <AuthStack.Screen
+                name='ForgotPassword'
+                component={ForgotPassword}
               />
               <AuthStack.Screen
                 name='Subscription'
