@@ -21,6 +21,7 @@ import WebViewScreen from '@screens/webView/WebView'
 import PlaceDescription from '@screens/PlaceDescription/PlaceDescription'
 import VideoConsumptionView from '@screens/VideoConsumptionView/VideoConsumptionView'
 import ForgotPassword from '@screens/authentificationSection/passwordForgotten/ForgotPassword'
+import VerifyEmail from '@screens/authentificationSection/verifyEmail/VerifyEmailScreen'
 import AppRouter from './AppRouter'
 
 export default function App(): React.JSX.Element {
@@ -62,6 +63,10 @@ export default function App(): React.JSX.Element {
               <AuthStack.Screen
                 name='AppRouter'
                 component={AppRouter}
+              />
+              <AuthStack.Screen
+                name='VerifyEmail'
+                component={VerifyEmail}
               />
             </AuthStack.Group>
             <AuthStack.Group screenOptions={{ presentation: 'modal', gestureEnabled: true }}>

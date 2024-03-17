@@ -16,6 +16,7 @@ export type AuthStackParamList = {
   Subscription: undefined
   Connection: undefined
   ForgotPassword: undefined
+  VerifyEmail: undefined
   AppRouter: undefined
   SettingsModal: undefined
   WebViewModal: React.JSX.Element
@@ -36,6 +37,8 @@ export type ConnectionScreenProps = NativeStackScreenProps<AuthStackParamList, '
  * @typedef {Object} ForgotPasswordScreenProps
  */
 export type ForgotPasswordScreenProps = NativeStackScreenProps<AuthStackParamList, 'ForgotPassword'>
+
+export type VerifyEmailScreenProps = NativeStackScreenProps<AuthStackParamList, 'VerifyEmail'>
 
 /**
  * @typedef {Object} AppRouterScreenProps
