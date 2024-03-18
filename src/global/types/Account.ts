@@ -13,7 +13,8 @@ export type AccountElevation = 'user' | 'admin'
 // eslint-disable-next-line no-shadow
 export enum AccountElevationEnum {
   USER = 0,
-  ADMIN = 1,
+  REFERENT = 1,
+  ADMIN = 2,
 }
 
 export const defaultLocalisation: GeolocationResponse = {
@@ -31,6 +32,7 @@ export const defaultLocalisation: GeolocationResponse = {
 
 export interface AccountType {
   accountID: number
+  uuid: string
   email: string
   username: string
   phoneNumber: string
@@ -42,6 +44,7 @@ export interface AccountType {
     firstName: string
     lastName: string
   }
+  createdAt: Date
 }
 
 export interface AccountContextType {
