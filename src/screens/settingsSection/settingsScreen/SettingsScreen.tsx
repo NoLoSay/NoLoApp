@@ -8,12 +8,10 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import images from '@global/images'
-import LoadingModal from '@components/LoadingModal'
 import { colors } from '@global/colors'
 import useSettingsScreenController from './useSettingsScreenController'
-import TopBar from './Views/TopBar'
+import TopBar from '../SharedViews/TopBar'
 import MainInfos from './Views/MainInfos'
-import ModalView from './ModalModule/ModalView'
 import SettingCategoryDisplay from './Views/SettingCategoryDisplay'
 import HelpModal from './Views/HelpModal'
 
@@ -42,9 +40,6 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
   const {
     account,
     username,
-    isModalVisible,
-    showModal,
-    hideModal,
     isHelpModalVisible,
     showHelpModal,
     hideHelpModal,
@@ -54,10 +49,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     logoutUser,
     aboutApp,
     openTerms,
-    isLoading,
-    changeUserMutation,
-    tmpUsername,
-    setTmpUsername,
+    openAccountSettings,
   } = useSettingsScreenController({ navigation })
 
   /**
@@ -78,7 +70,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
       id: 1,
       title: 'Mon compte',
       subtitle: 'Faire des changements sur mon compte',
-      onPress: () => console.log('account settings'),
+      onPress: openAccountSettings,
       icon: images.icons.twoTones.profile(),
     },
     {
@@ -142,13 +134,15 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar navigation={navigation} />
+      <TopBar
+        navigation={navigation}
+        title='Mon profil'
+      />
       <ScrollView style={styles.scrollview}>
         <MainInfos
           accountImage={account.image}
           email={account.email}
           username={username}
-          showModal={showModal}
         />
         <View style={styles.settingsCategoriesContainer}>
           {MainSettingsCategories.map(category => (
@@ -182,20 +176,11 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
           ))}
         </View>
       </ScrollView>
-      <ModalView
-        account={account}
-        hideModal={hideModal}
-        isVisible={isModalVisible}
-        changeUserMutation={changeUserMutation}
-        tmpUsername={tmpUsername}
-        setTmpUsername={setTmpUsername}
-      />
       <HelpModal
         isVisible={isHelpModalVisible}
         hideModal={hideHelpModal}
         onValidate={goToMail}
       />
-      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   )
 }
