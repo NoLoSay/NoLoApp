@@ -10,10 +10,10 @@
 import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
 import { Place } from '@global/types/Places'
-import { AccountContext } from '@global/contexts/AccountProvider'
+import { AccountContext, defaultLocalisation } from '@global/contexts/AccountProvider'
 import getCity from '@helpers/httpClient/localization'
 import { Alert, Linking } from 'react-native'
-import { defaultLocalisation } from '@global/types/Account'
+import { GeolocationResponse } from '@global/types/Account'
 import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
 
 /**
@@ -84,7 +84,7 @@ export default function useHomeScreenController(): HomeScreenController {
 
   useEffect(() => {
     Geolocation.getCurrentPosition(
-      async info => {
+      async (info: GeolocationResponse) => {
         setAccount({ ...account, localisation: info })
 
         const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
@@ -92,6 +92,7 @@ export default function useHomeScreenController(): HomeScreenController {
         setCity(reversedCity)
       },
       async () => {
+        setCity('Nantes')
         setAccount({
           ...account,
           localisation: defaultLocalisation,
@@ -111,7 +112,8 @@ export default function useHomeScreenController(): HomeScreenController {
             { text: 'Plus tard', style: 'cancel' },
           ]
         )
-      }
+      },
+      { enableHighAccuracy: true }
     )
     getAllPlaces()
     // Avoid infinite loop

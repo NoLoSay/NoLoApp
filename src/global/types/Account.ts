@@ -5,7 +5,6 @@
  * @requires react react-native
  */
 
-import { GeolocationResponse } from '@react-native-community/geolocation'
 import { Dispatch, SetStateAction } from 'react'
 
 export type AccountElevation = 'user' | 'admin'
@@ -28,6 +27,19 @@ export const defaultLocalisation: GeolocationResponse = {
     speed: 0,
   },
   timestamp: 123456,
+}
+
+export type GeolocationResponse = {
+  coords: {
+    latitude: number
+    longitude: number
+    altitude: number | null
+    accuracy: number
+    altitudeAccuracy: number | null
+    heading: number | null
+    speed: number | null
+  }
+  timestamp: number
 }
 
 export interface AccountType {
