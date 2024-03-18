@@ -19,6 +19,7 @@ export type AuthStackParamList = {
   VerifyEmail: undefined
   AppRouter: undefined
   SettingsModal: undefined
+  AccountModification: undefined
   WebViewModal: React.JSX.Element
   PlaceDescription: React.JSX.Element
   VideoConsumptionModal: React.JSX.Element
@@ -49,6 +50,11 @@ export type AppRouterScreenProps = NativeStackScreenProps<AuthStackParamList, 'A
  * @typedef {Object} SettingsModalScreenProps
  */
 export type SettingsModalScreenProps = NativeStackScreenProps<AuthStackParamList, 'SettingsModal'>
+
+/**
+ * @typedef {Object} SettingsModalScreenProps
+ */
+export type AccountModificationProps = NativeStackScreenProps<AuthStackParamList, 'AccountModification'>
 
 /**
  * @typedef {Object} WebViewModalScreenProps

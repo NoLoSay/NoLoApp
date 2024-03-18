@@ -6,7 +6,21 @@
  */
 
 import React, { createContext, useMemo, useState } from 'react'
-import { AccountContextType, AccountType, AccountElevationEnum } from '@global/types/Account'
+import { AccountContextType, AccountType, AccountElevationEnum, GeolocationResponse } from '@global/types/Account'
+
+// Default localisation data for the account set to Nantes
+export const defaultLocalisation: GeolocationResponse = {
+  coords: {
+    latitude: 47.218371,
+    longitude: -1.553621,
+    altitude: 0,
+    accuracy: 0,
+    altitudeAccuracy: 0,
+    heading: 0,
+    speed: 0,
+  },
+  timestamp: 0,
+}
 
 /**
  * @constant defaultAccount Default account data
@@ -21,6 +35,7 @@ import { AccountContextType, AccountType, AccountElevationEnum } from '@global/t
  */
 export const defaultAccount: AccountType = {
   accountID: 0,
+  uuid: '',
   email: '',
   phoneNumber: '',
   username: '',
@@ -32,6 +47,7 @@ export const defaultAccount: AccountType = {
     firstName: 'Prénom',
     lastName: 'Nom',
   },
+  createdAt: new Date(2020, 0, 0, 0, 0, 0, 0),
 }
 
 /**

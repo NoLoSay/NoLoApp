@@ -20,6 +20,7 @@ interface InputProps {
   keyboardType?: KeyboardType
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
   returnKeyType?: ReturnKeyType
+  autoCorrect?: boolean
   leftIcon?: ImageSourcePropType
   rightIcon?: ImageSourcePropType
   value: string
@@ -32,8 +33,9 @@ export default function Input({
   secureTextEntry = false,
   setSecureTextEntry,
   keyboardType = 'default',
-  autoCapitalize = 'words',
+  autoCapitalize = 'none',
   returnKeyType = 'done',
+  autoCorrect = false,
   leftIcon,
   rightIcon,
   value,
@@ -51,6 +53,7 @@ export default function Input({
       <TextInput
         placeholderTextColor={colors.lightGrey}
         placeholder={placeholder}
+        autoCorrect={autoCorrect}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         value={value}
