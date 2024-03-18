@@ -85,26 +85,25 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
       }),
     })
 
-    // TODO: Change this to JSON when it will be done in the backend
+    const text = await response.text()
 
-    // Backend is retuning a string containing the error or the access_token, not a JSON object containing all informations
-    const requestText = await response.text()
+    // const responseData = await response.json()
 
     if (!response.ok) {
-      throw new Error(requestText)
+      throw new Error(text)
     }
 
-    const data = {
+    console.log('connect', text)
+
+    return {
       json: {
         username: formUsername,
         email: formUsername,
-        access_token: requestText,
+        access_token: text,
       },
       status: response.status,
-      message: requestText,
+      message: text,
     }
-
-    return data
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))
   }

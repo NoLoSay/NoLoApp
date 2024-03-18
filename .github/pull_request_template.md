@@ -9,7 +9,7 @@
 
 ## Related Tickets & Documents
 
-- Related Issue [NOLO-xxx](https://...)
+- Related Issue [NOLO-xxx](https://nolosay.atlassian.net/jira/software/c/projects/NOLO/boards/1?selectedIssue=NOLO-xxx)
 
 ## QA Instructions, Screenshots, Recordings
 

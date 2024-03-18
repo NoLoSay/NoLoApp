@@ -18,6 +18,7 @@ interface HeaderViewProps {
   togglePage: () => void
   searchValue: string
   setSearchValue: (value: string) => void
+  getAllPlacesUsingSearch: () => void
   navigation: any
 }
 
@@ -42,6 +43,7 @@ export default function HeaderView({
   togglePage,
   searchValue,
   setSearchValue,
+  getAllPlacesUsingSearch,
   navigation,
 }: HeaderViewProps): React.JSX.Element {
   const updateText = (val: string) => {
@@ -101,7 +103,16 @@ export default function HeaderView({
           value={searchValue}
           onChangeText={updateText}
           placeholderTextColor={colors.lightGrey}
+          enterKeyHint='search'
+          onSubmitEditing={getAllPlacesUsingSearch}
         />
+        <TouchableOpacity
+          onPress={getAllPlacesUsingSearch}
+          style={styles.submitButton}
+          activeOpacity={0.5}
+        >
+          <Text style={styles.submitText}>Envoyer</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={toggleSearchBar}
           style={styles.cancelButton}
@@ -131,6 +142,10 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     color: colors.system.cancelBlue,
+    fontSize: 14,
+  },
+  submitText: {
+    color: colors.white,
     fontSize: 14,
   },
   logo: {
@@ -163,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 8,
     marginRight: 8,
-    width: '85%',
+    width: '64%',
   },
   cancelButton: {
     width: '15%',
@@ -171,5 +186,18 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     textAlign: 'center',
     color: colors.system.cancelBlue,
+  },
+  submitButton: {
+    paddingHorizontal: 2,
+    width: '20%',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    color: colors.white,
+    backgroundColor: colors.system.cancelBlue,
+    borderRadius: 8,
+    marginRight: 4,
   },
 })
