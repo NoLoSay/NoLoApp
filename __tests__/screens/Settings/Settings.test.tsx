@@ -2,10 +2,11 @@ import React from 'react'
 import { fireEvent, render } from '@testing-library/react-native'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
-import SettingsScreen from '@screens/settings/SettingsScreen'
+import SettingsScreen from '@screens/settingsSection/settingsScreen/SettingsScreen'
 
 const mockDefaultUser: AccountType = {
   accountID: 1,
+  uuid: '753456c8-e53e-11ee-ab2d-365c7c2740da',
   email: 'toto@tata.com',
   username: 'toto',
   phoneNumber: '+330612345678',
@@ -28,6 +29,7 @@ const mockDefaultUser: AccountType = {
     lastName: 'Nom',
   },
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
+  createdAt: new Date(2020, 0, 0, 0, 0, 0, 0),
 }
 
 const mockedNavigate = jest.fn()
@@ -38,7 +40,7 @@ const mockOpenTerms = jest.fn()
 const mockShowHelpModal = jest.fn()
 const mockShowModal = jest.fn()
 
-jest.mock('@screens/settings/useSettingsScreenController', () => {
+jest.mock('@screens/settingsSection/settingsScreen/useSettingsScreenController', () => {
   return jest.fn().mockImplementation(() => {
     return {
       account: mockDefaultUser,
@@ -63,7 +65,7 @@ describe('Settings screen test', () => {
         <SettingsScreen navigation={mockedNavigate} />
       </AccountContext.Provider>
     )
-    expect(screen.getByText(`${mockDefaultUser.name.firstName} ${mockDefaultUser.name.lastName}`))
+    expect(screen.getByText(`${mockDefaultUser.email}`))
     expect(screen.getByText(`@${mockDefaultUser.username}`))
   })
 

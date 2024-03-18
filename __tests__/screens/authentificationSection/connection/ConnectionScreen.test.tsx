@@ -6,7 +6,7 @@ import { AuthStackParamList } from '@global/types/screensProps/AuthStackParams'
 import { forgotPassword } from '@helpers/httpClient/queries/auth/auth'
 import ConnectionScreen from '@screens/authentificationSection/connection/ConnectionScreen'
 
-jest.mock('@helpers/httpClient/auth')
+jest.mock('@helpers/httpClient/queries/auth/auth')
 
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native')
