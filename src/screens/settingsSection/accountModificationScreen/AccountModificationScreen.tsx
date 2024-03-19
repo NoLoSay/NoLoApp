@@ -6,7 +6,10 @@
 import colors from '@global/colors'
 import React, { useContext, useState } from 'react'
 import { KeyboardTypeOptions, SectionList, StyleSheet, Text, TextInput, View } from 'react-native'
+import LoadingModal from '@components/LoadingModal'
 import { AccountContext } from '@global/contexts/AccountProvider'
+import useChangePassword from '@helpers/httpClient/queries/auth/useChangePassword'
+import useChangeUser from '@helpers/httpClient/queries/user/useChangeUser'
 import TopBar from '../SharedViews/TopBar'
 
 type Props = {
@@ -19,6 +22,7 @@ type ItemProps = {
   value: string
   onChange: (value: string) => void
   keyboardType?: KeyboardTypeOptions
+  password?: boolean
   placeholder: string
 }
 
@@ -29,10 +33,11 @@ type ItemProps = {
  * @param props.value Item value
  * @param props.onChange Item value setter
  * @param props.keyboardType Item keyboard type (not required, default is 'default')
+ * @param props.password Item is a password (not required, default is false)
  * @param props.placeholder Item placeholder
  * @returns {JSX.Element} Item component template
  */
-function Item({ title, value, onChange, keyboardType, placeholder }: ItemProps): JSX.Element {
+function Item({ title, value, onChange, keyboardType, password, placeholder }: ItemProps): JSX.Element {
   return (
     <View style={styles.item}>
       <Text style={styles.itemText}>{title}</Text>
@@ -40,6 +45,7 @@ function Item({ title, value, onChange, keyboardType, placeholder }: ItemProps):
         style={styles.inputContainer}
         onChangeText={(t: string) => onChange(t)}
         value={value}
+        secureTextEntry={password}
         keyboardType={keyboardType}
         placeholder={placeholder}
       />
@@ -84,8 +90,33 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
   const [username, setUsername] = useState(account.username)
   const [phoneNumber, setPhoneNumber] = useState(account.phoneNumber)
   const [email, setEmail] = useState(account.email)
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [error, setError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const changePasswordMutation = useChangePassword({ email, newPassword: password, setError: setPasswordError })
+  const changeGeneralDataMutation = useChangeUser({
+    formUsername: username,
+    formEmail: email,
+    formPhoneNumber: phoneNumber,
+    setError,
+  })
 
-  const DATA = [
+  const changePassword = () => {
+    setPasswordError('')
+    if (password === passwordConfirmation && password !== '') {
+      changePasswordMutation.mutate()
+    } else {
+      setError('Mots de passes différents')
+    }
+  }
+
+  const changeGeneralData = () => {
+    setError('')
+    changeGeneralDataMutation.mutate()
+  }
+
+  const GENERAL_DATA = [
     {
       title: 'Informations générales',
       data: [
@@ -108,6 +139,28 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
     },
   ]
 
+  const PASSWORD_DATA = [
+    {
+      title: 'Mot de passe',
+      data: [
+        {
+          title: 'Nouveau mot de passe',
+          value: password,
+          onChange: setPassword,
+          password: true,
+          placeholder: 'Mot de passe',
+        },
+        {
+          title: 'Confirmation du mot de passe',
+          value: passwordConfirmation,
+          onChange: setPasswordConfirmation,
+          password: true,
+          placeholder: 'Mot de passe',
+        },
+      ],
+    },
+  ]
+
   return (
     <View style={styles.container}>
       <TopBar
@@ -117,7 +170,7 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
       <View style={styles.containerView}>
         <SectionList
           style={styles.sectionContainer}
-          sections={DATA}
+          sections={GENERAL_DATA}
           keyExtractor={(item, index) => `${item.title}-${index}`}
           renderItem={({ item }) => (
             <Item
@@ -131,10 +184,32 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
           renderSectionHeader={({ section: { title } }) => (
             <Header
               title={title}
-              onValidate={() => console.log('Validation')}
+              onValidate={changeGeneralData}
             />
           )}
         />
+        {error !== '' && <Text style={styles.error}>{error}</Text>}
+        <SectionList
+          style={styles.sectionContainer}
+          sections={PASSWORD_DATA}
+          keyExtractor={(item, index) => `${item.title}-${index}`}
+          renderItem={({ item }) => (
+            <Item
+              title={item.title}
+              value={item.value}
+              onChange={item.onChange}
+              password={item.password}
+              placeholder={item.placeholder}
+            />
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <Header
+              title={title}
+              onValidate={changePassword}
+            />
+          )}
+        />
+        {passwordError !== '' && <Text style={styles.error}>{passwordError}</Text>}
         <Text style={styles.date}>
           Membre depuis le{' '}
           {`${`0${account.createdAt.getDate()}`.slice(-2)}/${`0${account.createdAt.getMonth() + 1}`.slice(
@@ -142,6 +217,7 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
           )}/${account.createdAt.getFullYear()}`}
         </Text>
       </View>
+      <LoadingModal visible={changePasswordMutation.isPending || changeGeneralDataMutation.isPending} />
     </View>
   )
 }
@@ -181,24 +257,34 @@ const styles = StyleSheet.create({
   sectionContainer: {
     backgroundColor: colors.lightGrey,
     borderRadius: 8,
+    marginTop: 14,
   },
   itemText: {
     fontSize: 14,
     fontWeight: '500',
+    width: '42%',
   },
   inputContainer: {
     color: colors.black,
     fontFamily: 'Poppins',
-    fontSize: 14,
+    fontSize: 12,
     width: '50%',
     textAlign: 'right',
+  },
+  error: {
+    textAlign: 'right',
+    fontFamily: 'Poppins',
+    fontSize: 12,
+    fontWeight: '500',
+    marginTop: 4,
+    color: colors.error,
   },
   date: {
     textAlign: 'center',
     fontFamily: 'Poppins',
     fontSize: 14,
     fontWeight: '300',
-    marginTop: 20,
+    marginTop: 8,
     color: colors.darkGrey,
   },
 })
