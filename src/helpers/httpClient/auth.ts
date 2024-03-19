@@ -85,16 +85,24 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
       }),
     })
 
-    const responseData = await response.json()
+    const text = await response.text()
+
+    // const responseData = await response.json()
 
     if (!response.ok) {
-      throw new Error(responseData.message)
+      throw new Error(text)
     }
 
+    console.log('connect', text)
+
     return {
-      json: responseData,
+      json: {
+        username: formUsername,
+        email: formUsername,
+        access_token: text,
+      },
       status: response.status,
-      message: responseData.message,
+      message: text,
     }
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))
