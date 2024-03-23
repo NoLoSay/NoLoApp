@@ -1,83 +1,65 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, ViewStyle, TouchableOpacityProps} from 'react-native';
+import {TouchableOpacity, StyleSheet, View, ViewStyle, TouchableOpacityProps} from 'react-native';
 import { SvgProps } from 'react-native-svg';
-import { NoloText} from "@components/NoloText";
-import * as path from "node:path";
+import { NoloText } from "@components/NoloText";
+import { colors } from '../global/colors';
 
-interface ButtonProps extends TouchableOpacityProps {
-    gstyle: 'textIconBtn' | 'iconBtn' | 'textBtn';
+interface NoloButtonProps extends TouchableOpacityProps {
     text: string;
-    onButtonPress?: () => void;
-    textGstyle?:  'h1' | 'h2' |'h3' |'text' |'boldtext' |'buttontext1' |'buttontext2';
-    iconSvg?: string,
+    iconSvg?: React.FC<SvgProps>;
     backgroundColor?: string;
     borderWidth?: number;
     borderColor?: string;
     borderRadius?: number;
     paddingVertical?: number;
     paddingHorizontal?: number;
+    textGstyle?: 'h1' | 'h2' | 'h3' | 'text' | 'boldtext' | 'buttontext1' | 'buttontext2';
+    gstyle: 'globalButtonStyle';
+    onButtonPress?: () => void;
 }
 
 export const NoloButton = ({
                                text,
-                               gstyle,
                                iconSvg,
-                               textGstyle,
-                               backgroundColor,
-                               borderWidth,
-                               borderColor,
-                               borderRadius,
-                               paddingVertical,
-                               paddingHorizontal,
+                               gstyle,
+                               textGstyle = 'buttontext1',
+                               backgroundColor = colors.accent,
+                               borderWidth = 0,
+                               borderColor = 'transparent',
+                               borderRadius = 8,
+                               paddingVertical = 10,
+                               paddingHorizontal = 12,
                                style,
                                onButtonPress,
                                ...props
-                           }: ButtonProps) => {
+                           }: NoloButtonProps) => {
 
-    const globalStyle = gstyles[gstyle] || {};
-
-    const buttonStyle: ViewStyle = {
+    const buttonStyles: ViewStyle = {
         backgroundColor,
         borderWidth,
         borderColor,
         borderRadius,
         paddingVertical,
         paddingHorizontal,
+        ...style,
     };
-    if (gstyle == "textIconBtn") {
-        return (
-            <TouchableOpacity style={[styles.button, globalStyle, buttonStyle, style]} {...props} onPress={onButtonPress}>
-                <NoloText
-                    gstyle='buttontext1'
-                    content={text}
-                />
-                <SvgComponent {...props} />
-            </TouchableOpacity>
-        );
-    }
-    if (gstyle == "textBtn") {
-        return (
-            <TouchableOpacity style={[styles.button, globalStyle, buttonStyle, style]} {...props} onPress={onButtonPress}>
-                <NoloText
-                    gstyle='buttontext1'
-                    content={text}
-                />
-            </TouchableOpacity>
-        );
-    }
-    if (gstyle == "iconBtn") {
-        return (
-            <TouchableOpacity style={[styles.button, globalStyle, buttonStyle, style]} {...props} onPress={onButtonPress}>
-                <Svg SvgComponent={iconSvg}/>
-            </TouchableOpacity>
-        );
-    }
+
+    const Content = () => (
+        <>
+            {iconSvg && <iconSvg />}
+            <NoloText gstyle={textGstyle} content={text} />
+        </>
+    );
+
     return (
-        <TouchableOpacity style={[styles.button, globalStyle, buttonStyle, style]} {...props} onPress={onButtonPress}>
-            <NoloText
-                gstyle='buttontext1'
-                content={text}
-            />
+        <TouchableOpacity
+            style={[styles.button, buttonStyles]}
+            onPress={onButtonPress}
+            {...props}
+        >
+            <View style={[styles.flexRow, gstyles[gstyle]]}>
+                <Content />
+            </View>
         </TouchableOpacity>
     );
 };
@@ -87,45 +69,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    flexRow: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 const gstyles = StyleSheet.create({
-    textIconBtn: {
+    globalButtonStyle: {
         flexDirection: 'row',
         paddingVertical: 5,
         paddingHorizontal: 30,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 6,
-        backgroundColor: '#FDC80F',
-        shadowColor: '#FDCC0F',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 9,
-        elevation: 5, // Élévation pour Android
-    },
-    iconBtn: {
-        display: 'flex',
-        paddingVertical: 5,
-        paddingHorizontal: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5,
-        backgroundColor: '#FDC80F',
-        shadowColor: '#FDC80F',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 9,
-        elevation: 5,
-    },
-    textBtn: {
-        display: 'flex',
-        width: 230,
-        padding: 10,
-        alignItems: 'center',
-        borderRadius: 12,
-        backgroundColor: '#FDC80F',
-        shadowColor: '#FDC80F',
+        backgroundColor: colors.accent,
+        shadowColor: colors.accent,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.25,
         shadowRadius: 9,
