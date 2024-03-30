@@ -6,6 +6,7 @@
 
 import PlacesNeedingTranslationJSON, { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
 import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '@global/types/Places'
+import { AccountType } from '@global/types/Account'
 import { get } from './common'
 
 const PLACES: Place[] = [
@@ -350,7 +351,16 @@ const PlacesToTranslate: PlaceNeedingTranslation[] = [
   },
 ]
 
-export async function getPlacesNeedingDescription() {
+export async function getPlacesNeedingDescription({ account }: { account: AccountType }) {
+  try {
+    console.log('bearerToken:', account)
+    // const response = await get({ endpoint: '/items/video-pending', token: bearerToken })
+
+    // const responseData = await response.json()
+  } catch (err) {
+    console.error(err)
+  }
+
   return new Promise<PlacesNeedingTranslationJSON>(resolve => {
     setTimeout(() => {
       resolve({
