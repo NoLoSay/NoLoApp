@@ -75,4 +75,4 @@ coverage/
 # testing
 /coverage
 
-*.env
+.env

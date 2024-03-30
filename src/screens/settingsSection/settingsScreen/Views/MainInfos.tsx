@@ -6,17 +6,14 @@
  */
 
 import React from 'react'
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import colors from '@global/colors'
-import images from '@global/images'
 
 type Props = {
   accountImage: string
-  firstName: string
-  lastName: string
+  email: string
   username: string
-  showModal: () => void
 }
 
 /**
@@ -25,10 +22,9 @@ type Props = {
  * @param firstName The first name of the account
  * @param lastName The last name of the account
  * @param username The username of the account
- * @param showModal The function that shows the modal
  * @returns
  */
-export default function MainInfos({ accountImage, firstName, lastName, username, showModal }: Props) {
+export default function MainInfos({ accountImage, email, username }: Props) {
   return (
     <View style={styles.container}>
       <FastImage
@@ -36,18 +32,9 @@ export default function MainInfos({ accountImage, firstName, lastName, username,
         source={{ uri: accountImage }}
       />
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{`${firstName} ${lastName}`}</Text>
+        <Text style={styles.name}>{email}</Text>
         <Text style={styles.username}>{`@${username}`}</Text>
       </View>
-      <Pressable
-        style={styles.button}
-        onPress={showModal}
-      >
-        <FastImage
-          style={styles.icon}
-          source={images.icons.outline.pen()}
-        />
-      </Pressable>
     </View>
   )
 }

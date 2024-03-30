@@ -7,7 +7,8 @@
 import { Header } from '@global/types/httpClient/Header'
 import RegisterJSON from '@global/types/httpClient/auth/Registration'
 import ConnectionJSON from '@global/types/httpClient/auth/Connection'
-import { post } from './common'
+import ChangePasswordJSON from '@global/types/httpClient/auth/ChangePassword'
+import { post } from '../../common'
 
 interface SubscribeProps {
   url?: string
@@ -26,6 +27,13 @@ interface ConnectProps {
 interface ForgotPasswordProps {
   url?: string
   email: string
+  headers?: Header
+}
+
+interface ChangePasswordProps {
+  url?: string
+  email: string
+  newPassword: string
   headers?: Header
 }
 
@@ -85,24 +93,26 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
       }),
     })
 
-    const text = await response.text()
-
-    // const responseData = await response.json()
+    const responseData = await response.json()
 
     if (!response.ok) {
-      throw new Error(text)
+      throw new Error(responseData.message)
     }
-
-    console.log('connect', text)
 
     return {
       json: {
-        username: formUsername,
-        email: formUsername,
-        access_token: text,
+        id: responseData.id,
+        uuid: responseData.uuid,
+        username: responseData.username,
+        email: responseData.email,
+        picture: responseData.picture,
+        telNumber: responseData.telNumber,
+        role: responseData.role,
+        accessToken: responseData.accessToken,
+        createdAt: responseData.createdAt,
       },
       status: response.status,
-      message: text,
+      message: responseData.message,
     }
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error))
@@ -117,4 +127,26 @@ export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Re
   return new Promise(() => {
     console.log('forgotPassword', email)
   })
+}
+
+export async function changePassword({ email, newPassword }: ChangePasswordProps): Promise<ChangePasswordJSON> {
+  const responseStatus = Math.floor(Math.random() * 2 + 1)
+  await new Promise(resolve => {
+    setTimeout(() => {
+      console.log('Change password')
+      resolve(responseStatus === 1 ? 201 : 400)
+    }, 2000)
+  })
+
+  if (responseStatus === 1) {
+    console.log('|-> Success')
+    return {
+      status: 201,
+      message: 'Password changed',
+    }
+  }
+  return {
+    status: 400,
+    message: 'Erreur serveur',
+  }
 }

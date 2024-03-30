@@ -12,15 +12,7 @@ import { AccountType } from '@global/types/Account'
 
 type SettingsScreenController = {
   account: AccountType
-  firstName: string
-  setFirstName: (firstName: string) => void
-  lastName: string
-  setLastName: (lastName: string) => void
   username: string
-  setUsername: (username: string) => void
-  isModalVisible: boolean
-  showModal: () => void
-  hideModal: () => void
   isHelpModalVisible: boolean
   showHelpModal: () => void
   hideHelpModal: () => void
@@ -30,8 +22,7 @@ type SettingsScreenController = {
   logoutUser: () => void
   aboutApp: () => void
   openTerms: () => void
-  isLoading: boolean
-  setIsLoading: (isLoading: boolean) => void
+  openAccountSettings: () => void
 }
 
 /**
@@ -42,23 +33,16 @@ type SettingsScreenController = {
  */
 const useSettingsScreenController = ({ navigation }: any): SettingsScreenController => {
   const { account, setAccount } = useContext(AccountContext)
-  const [firstName, setFirstName] = useState(account.name.firstName)
-  const [lastName, setLastName] = useState(account.name.lastName)
-  const [username, setUsername] = useState(account.username)
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false)
   const [isBiometryEnabled, setIsBiometryEnabled] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-
-  const showModal = () => setIsModalVisible(true)
-
-  const hideModal = () => setIsModalVisible(false)
 
   const showHelpModal = () => setIsHelpModalVisible(true)
 
   const hideHelpModal = () => setIsHelpModalVisible(false)
 
-  const goToMail = () => Linking.openURL('mailto:johan@chrillesen.net')
+  const openAccountSettings = () => navigation.navigate('AccountModification')
+
+  const goToMail = () => Linking.openURL('mailto:no.lo.pro@gmail.com')
 
   const toggleBiometry = () => setIsBiometryEnabled(!isBiometryEnabled)
 
@@ -68,22 +52,14 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
   }
 
   // TODO: Change to about us route
-  const aboutApp = () => navigation.navigate('WebViewModal', { uri: 'https://nolosay.com', name: 'À propos' })
+  const aboutApp = () => navigation.navigate('WebViewModal', { uri: 'https://nolosay.com/about', name: 'À propos' })
 
   // TODO: Change to CGU route
   const openTerms = () => navigation.navigate('WebViewModal', { uri: 'https://nolosay.com', name: 'CGU' })
 
   return {
     account,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    username,
-    setUsername,
-    isModalVisible,
-    showModal,
-    hideModal,
+    username: account.username,
     isHelpModalVisible,
     showHelpModal,
     hideHelpModal,
@@ -93,8 +69,7 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
     logoutUser,
     aboutApp,
     openTerms,
-    isLoading,
-    setIsLoading,
+    openAccountSettings,
   }
 }
 

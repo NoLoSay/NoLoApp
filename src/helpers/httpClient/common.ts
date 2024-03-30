@@ -32,6 +32,7 @@ interface PostProps {
   endpoint: `/${string}`
   body: string
   headers?: Header
+  authorizationToken?: string
 }
 
 /**
@@ -44,13 +45,47 @@ interface PostProps {
  * @param props.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export function post({ url = PROD_API_URL, endpoint, body, headers = defaultHeaders }: PostProps): Promise<Response> {
+export function post({
+  url = PROD_API_URL,
+  endpoint,
+  body,
+  headers = defaultHeaders,
+  authorizationToken = '',
+}: PostProps): Promise<Response> {
   return requestServer({
     url,
     endpoint,
     method: 'POST',
     headers,
     body,
+    authorizationToken,
+  })
+}
+
+/**
+ * @function put
+ * @description Send a PUT request to the server.
+ * @param props Object containing the url, endpoint, body, and headers.
+ * @param props.url The url to send the request to. Defaults to 'http://api.nolosay.com:3001'
+ * @param props.endpoint The endpoint to send the request to. Must start with a '/'.
+ * @param props.body The body to send with the request.
+ * @param props.headers The headers to send with the request.
+ * @returns Promise of a Response object
+ */
+export function put({
+  url = PROD_API_URL,
+  endpoint,
+  body,
+  headers = defaultHeaders,
+  authorizationToken = '',
+}: PostProps): Promise<Response> {
+  return requestServer({
+    url,
+    endpoint,
+    method: 'PUT',
+    headers,
+    body,
+    authorizationToken,
   })
 }
 
@@ -58,6 +93,7 @@ interface GetProps {
   url?: string
   endpoint: `/${string}`
   headers?: Header
+  authorizationToken?: string
 }
 
 /**
@@ -69,12 +105,18 @@ interface GetProps {
  * @param props.headers The headers to send with the request.
  * @returns Promise of a Response object
  */
-export function get({ url = PROD_API_URL, endpoint, headers = defaultHeaders }: GetProps): Promise<Response> {
+export function get({
+  url = PROD_API_URL,
+  endpoint,
+  headers = defaultHeaders,
+  authorizationToken = '',
+}: GetProps): Promise<Response> {
   return requestServer({
     url,
     endpoint,
     method: 'GET',
     headers,
+    authorizationToken,
   })
 }
 
@@ -84,6 +126,7 @@ interface RequestServerProps {
   method: 'POST' | 'GET' | 'PUT' | 'DELETE'
   headers: Header
   body?: string
+  authorizationToken?: string
 }
 
 /**
@@ -103,6 +146,7 @@ export function requestServer({
   method,
   headers,
   body,
+  authorizationToken,
 }: RequestServerProps): Promise<Response> {
   let finalURL
   if (url === PROD_API_URL && __DEV__) finalURL = DEV_API_URL
@@ -114,6 +158,7 @@ export function requestServer({
       Accept: headers.Accept,
       'Content-Type': headers.ContentType,
       Locale: headers.Locale,
+      Authorization: `Bearer ${authorizationToken}`,
     },
     body,
   })

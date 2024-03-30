@@ -13,15 +13,17 @@ import images from '@global/images'
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
+  title: string
 }
 
 /**
  * @function TopBar
  * @description Component that renders the TopBar view.
  * @param navigation TopBar navigation object
+ * @param title TopBar title
  * @returns {React.JSX.Element} TopBar component template
  */
-export default function TopBar({ navigation }: Props) {
+export default function TopBar({ navigation, title }: Props): JSX.Element {
   return (
     <View style={styles.container}>
       <Pressable
@@ -33,7 +35,7 @@ export default function TopBar({ navigation }: Props) {
           style={styles.backIcon}
         />
       </Pressable>
-      <Text style={styles.title}>Profil</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   )
 }
