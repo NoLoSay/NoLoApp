@@ -41,9 +41,19 @@ export interface Place {
 
 export type ArtToTranslate = {
   id: string
+  uuid: string
   name: string
-  image: string
-  textToTranslate: string
+  description: string
+  picture: string
+  RelatedPerson: any
+  ItemType: {
+    id: number
+    name: string
+    ItemCategory: {
+      id: number
+      name: string
+    }
+  }
 }
 
 export type PlaceNeedingTranslation = {

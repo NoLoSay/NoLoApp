@@ -65,7 +65,7 @@ export default function ArtToDisplay({ artPiece, onCreatePress, onTextPress }: A
   return (
     <View style={styles.container}>
       <ImageLoader
-        imageURL={artPiece.image}
+        imageURL={artPiece.picture}
         imageStyle={styles.image}
       />
       <View style={styles.contentContainer}>

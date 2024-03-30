@@ -5,12 +5,12 @@
  */
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
-import { PlaceNeedingTranslation } from '@global/types/Places'
+import { ArtToTranslate } from '@global/types/Places'
 import LoadingModal from '@components/LoadingModal'
 import colors from '@global/colors'
 import usePlacesNeedingTranslationController from './usePlacesNeedingTranslationController'
 import TopBar from './Views/TopBar'
-import PlaceDisplay from './Views/PlaceDisplay'
+import ArtToDisplay from './Views/ArtToDisplay'
 
 /**
  * @typedef Props
@@ -27,7 +27,7 @@ type Props = {
  * @returns {JSX.Element} PlacesNeedingTranslation component template
  */
 export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Element {
-  const { onPlacePress, places, isLoading, errorText, displayError } = usePlacesNeedingTranslationController({
+  const { onCreatePress, onTextPress, artPieces, errorText, displayError } = usePlacesNeedingTranslationController({
     navigation,
   })
 
@@ -36,28 +36,32 @@ export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Ele
       <TopBar navigation={navigation} />
       <ScrollView>
         {!displayError &&
-          places.map((place: PlaceNeedingTranslation) => (
-            <PlaceDisplay
-              place={place}
-              key={place.id}
-              onPress={() =>
-                onPlacePress({
-                  place,
-                })
-              }
+          artPieces.map((artPiece: ArtToTranslate) => (
+            <ArtToDisplay
+              artPiece={artPiece}
+              key={artPiece.id}
+              onCreatePress={() => onCreatePress(artPiece.description)}
+              onTextPress={() => onTextPress(artPiece.description, artPiece.name)}
             />
           ))}
       </ScrollView>
-      {displayError && <Text style={styles.errorText}>{errorText}</Text>}
-      <LoadingModal visible={isLoading} />
+      {!displayError && artPieces.length === 0 && (
+        <Text style={styles.text}>
+          Nous n&apos;avons pas besoin de traductions actuellement, d&apos;autres demandes arriveront bientôt !
+        </Text>
+      )}
+      {displayError && <Text style={[styles.text, styles.errorText]}>{errorText}</Text>}
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   errorText: {
-    textAlign: 'center',
     color: colors.error,
+  },
+  text: {
+    textAlign: 'center',
+    color: colors.black,
     fontFamily: 'Poppins',
     fontWeight: '600',
     fontSize: 16,
