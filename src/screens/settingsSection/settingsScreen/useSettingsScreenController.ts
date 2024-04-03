@@ -6,9 +6,10 @@
  */
 
 import { useContext, useState } from 'react'
-import { Linking } from 'react-native'
+import { Alert, Linking } from 'react-native'
 import { AccountContext, defaultAccount } from '@global/contexts/AccountProvider'
 import { AccountType } from '@global/types/Account'
+import useDeleteUser from '@helpers/httpClient/queries/user/useDeleteUser'
 
 type SettingsScreenController = {
   account: AccountType
@@ -23,6 +24,9 @@ type SettingsScreenController = {
   aboutApp: () => void
   openTerms: () => void
   openAccountSettings: () => void
+  removeAccount: () => void
+  error: string
+  isLoading: boolean
 }
 
 /**
@@ -35,6 +39,8 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
   const { account, setAccount } = useContext(AccountContext)
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false)
   const [isBiometryEnabled, setIsBiometryEnabled] = useState(false)
+  const [error, setError] = useState('')
+  const deleteAccountMutation = useDeleteUser({ setError, navigation })
 
   const showHelpModal = () => setIsHelpModalVisible(true)
 
@@ -45,6 +51,19 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
   const goToMail = () => Linking.openURL('mailto:no.lo.pro@gmail.com')
 
   const toggleBiometry = () => setIsBiometryEnabled(!isBiometryEnabled)
+
+  const removeAccount = () =>
+    Alert.alert('Suppression du compte', 'Êtes-vous sûr de vouloir supprimer votre compte ?', [
+      {
+        text: 'Annuler',
+        style: 'cancel',
+      },
+      {
+        text: 'Supprimer',
+        style: 'destructive',
+        onPress: () => deleteAccountMutation.mutate(),
+      },
+    ])
 
   const logoutUser = () => {
     setAccount(defaultAccount)
@@ -70,6 +89,9 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
     aboutApp,
     openTerms,
     openAccountSettings,
+    removeAccount,
+    error,
+    isLoading: deleteAccountMutation.isPending,
   }
 }
 

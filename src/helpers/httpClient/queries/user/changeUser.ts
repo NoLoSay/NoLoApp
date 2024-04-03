@@ -1,4 +1,5 @@
 import ChangeUserJSON from '@global/types/httpClient/user/ChangeUser'
+import { put } from '@helpers/httpClient/common'
 
 type ChangeUserProps = {
   username: string
@@ -25,50 +26,29 @@ export default async function changeUser({
   phoneNumber,
   authToken,
 }: ChangeUserProps): Promise<ChangeUserJSON> {
-  const responseStatus = Math.floor(Math.random() * 2 + 1)
-  await new Promise(resolve => {
-    setTimeout(() => {
-      console.log('Change User')
-      resolve(responseStatus === 1 ? 201 : 400)
-    }, 2000)
-  })
-
-  if (responseStatus === 1) {
-    console.log('|-> Success')
-    return {
-      json: {
+  try {
+    const response = await put({
+      endpoint: `/users/${userId}`,
+      body: JSON.stringify({
         username,
         email,
-        phoneNumber,
-      },
-      status: 201,
-      message: 'User changed',
+        telNumber: phoneNumber,
+      }),
+      authorizationToken: authToken,
+    })
+
+    const responseData = await response.json()
+
+    if (!response.ok) {
+      throw new Error(responseData.message)
     }
+
+    return {
+      json: responseData,
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : String(error))
   }
-  throw new Error('Erreur Serveur')
-  // try {
-  //   const response = await put({
-  //     endpoint: `/${userId}`,
-  //     body: JSON.stringify({
-  //       username,
-  //       email,
-  //       phoneNumber,
-  //     }),
-  //     authorizationToken: authToken,
-  //   })
-
-  //   const responseData = await JSON.parse(JSON.stringify(response))
-
-  //   if (!response.ok) {
-  //     throw new Error(responseData.message)
-  //   }
-
-  //   return {
-  //     json: responseData,
-  //     status: response.status,
-  //     message: responseData.message,
-  //   }
-  // } catch (error) {
-  //   throw new Error(error instanceof Error ? error.message : String(error))
-  // }
 }

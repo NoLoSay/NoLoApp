@@ -80,6 +80,7 @@ describe('HomeScreenTests', () => {
   it('should render correctly', async () => {
     const user: AccountType = {
       accountID: 1,
+      uuid: 'acde9b28-2e41-5cd8-990b-d8b9280cfe08',
       email: 'toto@tata.com',
       username: 'toto',
       phoneNumber: '+330612345678',
@@ -102,6 +103,7 @@ describe('HomeScreenTests', () => {
         lastName: 'Nom',
       },
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
+      createdAt: new Date(),
     }
 
     const contextValue = { account: user, setAccount: jest.fn() }

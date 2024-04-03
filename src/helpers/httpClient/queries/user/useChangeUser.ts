@@ -42,8 +42,8 @@ export default function useChangeUser({ formUsername, formEmail, formPhoneNumber
       try {
         setNewAccountInfo({
           username: data.json.username,
-          email: account.email,
-          phoneNumber: account.phoneNumber,
+          email: data.json.email,
+          phoneNumber: data.json.telNumber,
         })
       } catch (error) {
         // @ts-expect-error - error is a string

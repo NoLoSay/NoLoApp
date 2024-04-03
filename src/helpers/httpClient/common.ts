@@ -39,7 +39,7 @@ interface PostProps {
  * @function post
  * @description Send a POST request to the server.
  * @param props Object containing the url, endpoint, body, and headers.
- * @param props.url The url to send the request to. Defaults to 'http://api.nolosay.com:3001'
+ * @param props.url The url to send the request to. Defaults to defaultApiURL
  * @param props.endpoint The endpoint to send the request to. Must start with a '/'.
  * @param props.body The body to send with the request.
  * @param props.headers The headers to send with the request.
@@ -66,7 +66,7 @@ export function post({
  * @function put
  * @description Send a PUT request to the server.
  * @param props Object containing the url, endpoint, body, and headers.
- * @param props.url The url to send the request to. Defaults to 'http://api.nolosay.com:3001'
+ * @param props.url The url to send the request to. Defaults to defaultApiURL
  * @param props.endpoint The endpoint to send the request to. Must start with a '/'.
  * @param props.body The body to send with the request.
  * @param props.headers The headers to send with the request.
@@ -89,6 +89,38 @@ export function put({
   })
 }
 
+interface DeleteProps {
+  url?: string
+  endpoint: `/${string}`
+  headers?: Header
+  authorizationToken?: string
+}
+
+/**
+ * @function delete
+ * @description Send a DELETE request to the server.
+ * @param props Object containing the url, endpoint, body, and headers.
+ * @param props.url The url to send the request to. Defaults to defaultApiUrl
+ * @param props.endpoint The endpoint to send the request to. Must start with a '/'.
+ * @param props.body The body to send with the request.
+ * @param props.headers The headers to send with the request.
+ * @returns Promise of a Response object
+ */
+export function deleteRequest({
+  url = PROD_API_URL,
+  endpoint,
+  headers = defaultHeaders,
+  authorizationToken = '',
+}: DeleteProps): Promise<Response> {
+  return requestServer({
+    url,
+    endpoint,
+    method: 'DELETE',
+    headers,
+    authorizationToken,
+  })
+}
+
 interface GetProps {
   url?: string
   endpoint: `/${string}`
@@ -100,7 +132,7 @@ interface GetProps {
  * @function get
  * @description Send a GET request to the server.
  * @param props Object containing the url, endpoint, and headers.
- * @param props.url The url to send the request to. Defaults to 'http://api.nolosay.com:3001'
+ * @param props.url The url to send the request to. Defaults to defaultApiURL
  * @param props.endpoint The endpoint to send the request to. Must start with a '/'.
  * @param props.headers The headers to send with the request.
  * @returns Promise of a Response object
@@ -133,7 +165,7 @@ interface RequestServerProps {
  * @function requestServer
  * @description Send a request to the server.
  * @param Props Object containing the url, endpoint, method, headers, and body.
- * @param Props.url The url to send the request to. Defaults to 'http://api.nolosay.com:3001'
+ * @param Props.url The url to send the request to. Defaults to defaultApiURL
  * @param Props.endpoint The endpoint to send the request to. Must start with a '/'.
  * @param Props.method The method to use for the request.
  * @param Props.headers The headers to send with the request.

@@ -2,7 +2,7 @@ type ChangeUserJSON = {
   json: {
     username: string
     email: string
-    phoneNumber: string
+    telNumber: string
   }
   status: number
   message: string
