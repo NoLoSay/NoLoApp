@@ -6,7 +6,6 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
 import { ArtToTranslate } from '@global/types/Places'
-import LoadingModal from '@components/LoadingModal'
 import colors from '@global/colors'
 import usePlacesNeedingTranslationController from './usePlacesNeedingTranslationController'
 import TopBar from './Views/TopBar'
