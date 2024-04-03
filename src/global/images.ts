@@ -43,6 +43,7 @@ export const images = {
       pen: () => require('../../assets/icons/outline/pen.png'),
       qr: () => require('../../assets/icons/outline/qr.png'),
       text: () => require('../../assets/icons/outline/text.png'),
+      trash: () => require('../../assets/icons/outline/trash.png'),
     },
     social: {
       apple: () => require('../../assets/icons/social/apple.png'),

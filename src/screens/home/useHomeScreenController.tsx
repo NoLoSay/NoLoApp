@@ -12,8 +12,9 @@ import Geolocation from '@react-native-community/geolocation'
 import { Place } from '@global/types/Places'
 import { AccountContext, defaultLocalisation } from '@global/contexts/AccountProvider'
 import getCity from '@helpers/httpClient/localization'
-import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
+import { Alert, Linking } from 'react-native'
 import { GeolocationResponse } from '@global/types/Account'
+import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
 
 /**
  * @interface HomeScreenController
@@ -65,10 +66,12 @@ export default function useHomeScreenController(): HomeScreenController {
     setPlaces,
     latitude: account.localisation?.coords.latitude || 0,
     longitude: account.localisation?.coords.longitude || 0,
+    token: account.accessToken,
   })
   const noloPlacesMutationUsingSearch = useNoloPlaces({
     setPlaces,
     q: searchValue,
+    token: account.accessToken,
   })
 
   const getAllPlaces = () => {
@@ -90,14 +93,29 @@ export default function useHomeScreenController(): HomeScreenController {
 
         setCity(reversedCity)
       },
-      () => {
+      async () => {
         setCity('Nantes')
         setAccount({
           ...account,
           localisation: defaultLocalisation,
         })
+        const reversedCity = await getCity({
+          latitude: defaultLocalisation.coords.latitude,
+          longitude: defaultLocalisation.coords.longitude,
+        })
+
+        setCity(reversedCity)
+
+        Alert.alert(
+          'Localisation introuvable',
+          "Vous avez désactivé la localisation, pour optimiser votre expérience, veuillez l'activer dans vos réglages",
+          [
+            { text: 'Activer', onPress: () => Linking.openSettings() },
+            { text: 'Plus tard', style: 'cancel' },
+          ]
+        )
       },
-      { enableHighAccuracy: false }
+      { enableHighAccuracy: true }
     )
     getAllPlaces()
     // Avoid infinite loop

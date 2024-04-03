@@ -9,6 +9,7 @@ import PlacesMapView from '@screens/home/MapView/MapView'
 
 const defaultUser: AccountType = {
   accountID: 1,
+  uuid: 'de3a1a8d-12bb-53f7-8f73-0e0240b49599',
   email: 'toto@tata.com',
   username: 'toto',
   phoneNumber: '+330612345678',
@@ -31,6 +32,7 @@ const defaultUser: AccountType = {
     lastName: 'Nom',
   },
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
+  createdAt: new Date(),
 }
 
 jest.mock('react-native', () => {

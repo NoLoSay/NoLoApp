@@ -8,12 +8,11 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import images from '@global/images'
-import LoadingModal from '@components/LoadingModal'
 import { colors } from '@global/colors'
+import LoadingModal from '@components/LoadingModal'
 import useSettingsScreenController from './useSettingsScreenController'
-import TopBar from './Views/TopBar'
+import TopBar from '../SharedViews/TopBar'
 import MainInfos from './Views/MainInfos'
-import ModalView from './ModalModule/ModalView'
 import SettingCategoryDisplay from './Views/SettingCategoryDisplay'
 import HelpModal from './Views/HelpModal'
 
@@ -41,15 +40,7 @@ type SettingsCategory = {
 export default function SettingsScreen({ navigation }: Props): React.JSX.Element {
   const {
     account,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
     username,
-    setUsername,
-    isModalVisible,
-    showModal,
-    hideModal,
     isHelpModalVisible,
     showHelpModal,
     hideHelpModal,
@@ -59,8 +50,10 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     logoutUser,
     aboutApp,
     openTerms,
+    openAccountSettings,
+    removeAccount,
+    error,
     isLoading,
-    setIsLoading,
   } = useSettingsScreenController({ navigation })
 
   /**
@@ -81,7 +74,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
       id: 1,
       title: 'Mon compte',
       subtitle: 'Faire des changements sur mon compte',
-      onPress: () => console.log('account settings'),
+      onPress: openAccountSettings,
       icon: images.icons.twoTones.profile(),
     },
     {
@@ -141,18 +134,27 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
       onPress: openTerms,
       icon: images.icons.outline.contract(),
     },
+    {
+      id: 7,
+      title: 'Supprimer mon compte',
+      backIconColor: colors.veryLightGrey,
+      iconColor: colors.error,
+      onPress: removeAccount,
+      icon: images.icons.outline.trash(),
+    },
   ]
 
   return (
     <SafeAreaView style={styles.container}>
-      <TopBar navigation={navigation} />
+      <TopBar
+        navigation={navigation}
+        title='Mon profil'
+      />
       <ScrollView style={styles.scrollview}>
         <MainInfos
           accountImage={account.image}
-          firstName={firstName}
-          lastName={lastName}
+          email={account.email}
           username={username}
-          showModal={showModal}
         />
         <View style={styles.settingsCategoriesContainer}>
           {MainSettingsCategories.map(category => (
@@ -185,16 +187,10 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
             />
           ))}
         </View>
+        {error && (
+          <Text style={{ textAlign: 'right', color: colors.error, marginTop: 4, fontWeight: '700' }}>{error}</Text>
+        )}
       </ScrollView>
-      <ModalView
-        account={account}
-        hideModal={hideModal}
-        setFirstName={setFirstName}
-        setLastName={setLastName}
-        setUsername={setUsername}
-        isVisible={isModalVisible}
-        setIsLoading={setIsLoading}
-      />
       <HelpModal
         isVisible={isHelpModalVisible}
         hideModal={hideHelpModal}

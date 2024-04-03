@@ -16,10 +16,11 @@ import { AuthStackParamList } from '@global/types/screensProps/AuthStackParams'
 import { AccountProvider } from '@global/contexts/AccountProvider'
 import ConnectionScreen from '@screens/authentificationSection/connection/ConnectionScreen'
 import SubscriptionScreen from '@screens/authentificationSection/subscription/SubscriptionScreen'
-import SettingsScreen from '@screens/settings/SettingsScreen'
+import SettingsScreen from '@screens/settingsSection/settingsScreen/SettingsScreen'
 import WebViewScreen from '@screens/webView/WebView'
 import PlaceDescription from '@screens/PlaceDescription/PlaceDescription'
 import VideoConsumptionView from '@screens/VideoConsumptionView/VideoConsumptionView'
+import AccountModificationScreen from '@screens/settingsSection/accountModificationScreen/AccountModificationScreen'
 import AppRouter from './AppRouter'
 
 export default function App(): React.JSX.Element {
@@ -63,6 +64,10 @@ export default function App(): React.JSX.Element {
               <AuthStack.Screen
                 name='SettingsModal'
                 component={SettingsScreen}
+              />
+              <AuthStack.Screen
+                name='AccountModification'
+                component={AccountModificationScreen}
               />
             </AuthStack.Group>
             <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal', gestureEnabled: true }}>
