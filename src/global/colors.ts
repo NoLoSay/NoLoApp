@@ -5,13 +5,14 @@
  */
 
 const mainColors = {
-  accent: '#FDC810',
+  nollow: '#FDC810',
+  blue: '#1784E8',
   black: '#000000',
   white: '#FFFFFF',
   dark: '#343434',
-  veryLightGrey: '#E6E6E6',
-  lightGrey: '#CFCFCF',
   darkGrey: '#646464',
+  lightGrey: '#CFCFCF',
+  veryLightGrey: '#E6E6E6',
 }
 
 const textColors = {
@@ -42,7 +43,7 @@ const systemColors = {
  * @property {String} system.cancelBlue
  */
 export const colors = {
-  accent: mainColors.accent,
+  accent: mainColors.black,
   black: mainColors.black,
   white: mainColors.white,
   dark: mainColors.dark,
