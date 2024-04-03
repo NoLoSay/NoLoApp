@@ -50,6 +50,9 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
     aboutApp,
     openTerms,
     openAccountSettings,
+    removeAccount,
+    error,
+    isLoading,
   } = useSettingsScreenController({ navigation })
 
   /**
@@ -130,6 +133,14 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
       onPress: openTerms,
       icon: images.icons.outline.contract(),
     },
+    {
+      id: 7,
+      title: 'Supprimer mon compte',
+      backIconColor: colors.veryLightGrey,
+      iconColor: colors.error,
+      onPress: removeAccount,
+      icon: images.icons.outline.trash(),
+    },
   ]
 
   return (
@@ -175,6 +186,9 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
             />
           ))}
         </View>
+        {error && (
+          <Text style={{ textAlign: 'right', color: colors.error, marginTop: 4, fontWeight: '700' }}>{error}</Text>
+        )}
       </ScrollView>
       <HelpModal
         isVisible={isHelpModalVisible}
