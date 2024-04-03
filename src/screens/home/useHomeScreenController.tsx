@@ -66,10 +66,12 @@ export default function useHomeScreenController(): HomeScreenController {
     setPlaces,
     latitude: account.localisation?.coords.latitude || 0,
     longitude: account.localisation?.coords.longitude || 0,
+    token: account.accessToken,
   })
   const noloPlacesMutationUsingSearch = useNoloPlaces({
     setPlaces,
     q: searchValue,
+    token: account.accessToken,
   })
 
   const getAllPlaces = () => {

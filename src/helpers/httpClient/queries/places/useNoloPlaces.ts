@@ -9,15 +9,23 @@ type UpdatePlacesDisplayedProps = {
   longitude?: number
   q?: string
   radius?: number
+  token: string
 }
 
-export default function useNoloPlaces({ setPlaces, latitude, longitude, q, radius }: UpdatePlacesDisplayedProps) {
+export default function useNoloPlaces({
+  setPlaces,
+  latitude,
+  longitude,
+  q,
+  radius,
+  token,
+}: UpdatePlacesDisplayedProps) {
   function updatePlacesDisplayed({ newPlaces }: { newPlaces: Place[] }) {
     setPlaces(newPlaces)
   }
 
   const mutation = useMutation<NoloPlacesJSON>({
-    mutationFn: () => getPlaces({ latitude, longitude, q, radius }),
+    mutationFn: () => getPlaces({ latitude, longitude, q, radius, token }),
     onSuccess: data => {
       try {
         updatePlacesDisplayed({ newPlaces: data.json })

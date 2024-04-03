@@ -268,11 +268,13 @@ export default async function getPlaces({
   longitude,
   q,
   radius,
+  token,
 }: {
   latitude?: number
   longitude?: number
   q?: string
   radius?: number
+  token: string
 }): Promise<NoloPlacesJSON> {
   try {
     const queryParams: { [key: string]: string } = {}
@@ -291,7 +293,8 @@ export default async function getPlaces({
     }
 
     const response = await get({
-      endpoint: `/search/locations?${new URLSearchParams(queryParams)}`,
+      endpoint: `/search/sites?${new URLSearchParams(queryParams)}`,
+      authorizationToken: token,
     })
 
     const responseData = await response.json()
