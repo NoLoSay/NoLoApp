@@ -27,7 +27,7 @@ export const NoloText = ({
                              lineHeight,
                              ...props
                          }: NoloTextProps) => {
-    const globalStyle = styles[gstyle] || {}; // Sélectionne le style global basé sur gstyle
+    const globalStyle = styles[gstyle] || {};
     return (
         <Text
             style={[
@@ -41,7 +41,7 @@ export const NoloText = ({
                     letterSpacing,
                     lineHeight,
                 },
-                globalStyle, // Applique le style global ici
+                globalStyle,
             ]}
             {...props}
         >

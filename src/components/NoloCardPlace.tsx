@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, ImageSourcePropType, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import {NoloText} from "@components/NoloText";
 import {NoloImage} from "@components/NoloImage";
-import Nolo
+import {NoloButton} from "@components/NoloButton";
 
 interface NoloCardPlaceProps {
     imageSource: ImageSourcePropType;
