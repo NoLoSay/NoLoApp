@@ -9,6 +9,7 @@ import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from 'react-native'
 import images from '@global/images'
 import { colors } from '@global/colors'
+import LoadingModal from '@components/LoadingModal'
 import useSettingsScreenController from './useSettingsScreenController'
 import TopBar from '../SharedViews/TopBar'
 import MainInfos from './Views/MainInfos'
@@ -195,6 +196,7 @@ export default function SettingsScreen({ navigation }: Props): React.JSX.Element
         hideModal={hideHelpModal}
         onValidate={goToMail}
       />
+      <LoadingModal visible={isLoading} />
     </SafeAreaView>
   )
 }

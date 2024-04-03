@@ -40,7 +40,7 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false)
   const [isBiometryEnabled, setIsBiometryEnabled] = useState(false)
   const [error, setError] = useState('')
-  const deleteAccountMutation = useDeleteUser({ setError })
+  const deleteAccountMutation = useDeleteUser({ setError, navigation })
 
   const showHelpModal = () => setIsHelpModalVisible(true)
 
@@ -61,15 +61,7 @@ const useSettingsScreenController = ({ navigation }: any): SettingsScreenControl
       {
         text: 'Supprimer',
         style: 'destructive',
-        onPress: () => {
-          deleteAccountMutation
-            .mutateAsync()
-            .then(() => {
-              navigation.popToTop()
-              setError('')
-            })
-            .catch(err => setError(err.message))
-        },
+        onPress: () => deleteAccountMutation.mutate(),
       },
     ])
 

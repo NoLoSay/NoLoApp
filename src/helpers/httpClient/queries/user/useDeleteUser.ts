@@ -6,9 +6,10 @@ import deleteAccount from './deleteUser'
 
 interface DeleteUserProps {
   setError: (error: string) => void
+  navigation: any
 }
 
-export default function useDeleteUser({ setError }: DeleteUserProps) {
+export default function useDeleteUser({ setError, navigation }: DeleteUserProps) {
   const { account, setAccount } = useContext(AccountContext)
 
   const mutation = useMutation<DeleteUserJSON>({
@@ -20,6 +21,7 @@ export default function useDeleteUser({ setError }: DeleteUserProps) {
     onSuccess: () => {
       try {
         setAccount(defaultAccount)
+        navigation.popToTop()
       } catch (error) {
         // @ts-expect-error - error is a string
         setError(error.message)

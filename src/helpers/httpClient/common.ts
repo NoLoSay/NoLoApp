@@ -89,6 +89,13 @@ export function put({
   })
 }
 
+interface DeleteProps {
+  url?: string
+  endpoint: `/${string}`
+  headers?: Header
+  authorizationToken?: string
+}
+
 /**
  * @function delete
  * @description Send a DELETE request to the server.
@@ -102,16 +109,14 @@ export function put({
 export function deleteRequest({
   url = PROD_API_URL,
   endpoint,
-  body,
   headers = defaultHeaders,
   authorizationToken = '',
-}: PostProps): Promise<Response> {
+}: DeleteProps): Promise<Response> {
   return requestServer({
     url,
     endpoint,
     method: 'DELETE',
     headers,
-    body,
     authorizationToken,
   })
 }

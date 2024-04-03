@@ -9,7 +9,6 @@ type DeleteAccountProps = {
 export default async function deleteAccount({ userId, accessToken }: DeleteAccountProps): Promise<DeleteUserJSON> {
   const response = await deleteRequest({
     endpoint: `/users/${userId}`,
-    body: JSON.stringify({}),
     authorizationToken: accessToken,
   })
 
