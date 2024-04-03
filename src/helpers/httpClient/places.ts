@@ -5,7 +5,7 @@
  */
 
 import PlacesNeedingTranslationJSON, { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
-import { Place, PlaceNeedingTranslation, PlaceTag, PlaceType } from '@global/types/Places'
+import { Place, ArtToTranslate, PlaceTag, PlaceType } from '@global/types/Places'
 import { get } from './common'
 
 const PLACES: Place[] = [
@@ -322,45 +322,102 @@ export default async function getPlaces({
   }
 }
 
-const PlacesToTranslate: PlaceNeedingTranslation[] = [
+const PlacesToTranslate: ArtToTranslate[] = [
   {
     id: '1',
-    name: 'Chateau des Ducs de Bretagne',
-    smallImage:
-      'https://www.chateaunantes.fr/wp-content/uploads/2020/09/Chateau-des-ducs-de-Bretagne.-Nantes-©-Philippe-Piron-_-LVAN-4-1-768x1152.jpg',
-    bigImage: 'https://www.balladins.com/assets/img/visiter/735/nantes_-_chateau_des_ducs_de_bretagne__gallery.jpg',
-    artsToTranslate: [
-      {
-        id: '1',
-        name: 'La tapisserie de Charles X',
-        image: 'https://collections.louvre.fr/media/cache/medium/0000000021/0000101500/0000793562_OG.JPG',
-        textToTranslate: "Fantastique tapisserie de Charles X en soie et coton (aucune idée de si c'est vrai)",
+    uuid: '70e24df6-f8ee-594a-bb8f-de3666197fac',
+    name: 'La joconde',
+    picture: 'https://cdn.pariscityvision.com/library/image/5449.jpg',
+    description:
+      "La Joconde est un célèbre portrait de la Renaissance peint par Léonard de Vinci. Il représente une femme avec un léger sourire mystérieux, qui a captivé des générations de spectateurs. Le tableau est exposé au musée du Louvre à Paris, où il est l'une des œuvres les plus célèbres et les plus visitées.",
+    RelatedPerson: {
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      picture: 'https://randomuser.me/api/portraits',
+    },
+    ItemType: {
+      id: 1,
+      name: "Œuvre d'art",
+      ItemCategory: {
+        id: 1,
+        name: 'Musée',
       },
-      {
-        id: '2',
-        name: 'Chateau sur bois',
-        image: 'https://media.paperblog.fr/i/580/5808387/nantes-L-BoeJzB.jpeg',
-        textToTranslate: 'Peinture sur bois représentant le chateau des ducs de Bretagne à Nantes en 1800',
-      },
-    ],
+    },
   },
   {
     id: '2',
-    name: "Rendez vous de l'Erdre",
-    smallImage: 'https://www.nort-sur-erdre.fr/fileadmin/_processed_/f/a/csm_RDVE_2022_Bleu_Portrait_b3ff4ac9b9.jpg',
-    bigImage: 'https://www.bigcitylife.fr/wp-content/uploads/2023/07/RDV-Erdre-©-Patrick-Garcon.jpg',
-    artsToTranslate: [],
+    uuid: '70e24df6-f8ee-594a-bb8f-de3666197fac',
+    name: 'Nuit étoilée',
+    picture:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/800px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
+    description:
+      'La Nuit étoilée est une célèbre peinture de Vincent van Gogh, réalisée en 1889. Elle représente un village endormi sous un ciel étoilé tourbillonnant. La peinture est emblématique du style unique de Van Gogh, avec ses coups de pinceau expressifs',
+    RelatedPerson: {
+      id: 2,
+      firstName: 'Jane',
+      lastName: 'Smith',
+      picture: 'https://randomuser.me/api/portraits',
+    },
+    ItemType: {
+      id: 2,
+      name: 'Centre culturel',
+      ItemCategory: {
+        id: 2,
+        name: 'Lieu',
+      },
+    },
+  },
+  {
+    id: '3',
+    uuid: '70e24df6-f8ee-594a-bb8f-de3666197fac',
+    name: 'Nighthawks',
+    picture:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Nighthawks_by_Edward_Hopper_1942.jpg/1200px-Nighthawks_by_Edward_Hopper_1942.jpg',
+    description:
+      "Nighthawks est une célèbre peinture d'Edward Hopper, réalisée en 1942. Elle représente un café de nuit avec des clients solitaires assis à des tables. La peinture est emblématique du style réaliste de Hopper et de son utilisation de la lumière et de l'ombre pour créer une atmosphère intrigante.",
+    RelatedPerson: {
+      id: 3,
+      firstName: 'Alice',
+      lastName: 'Johnson',
+      picture: 'https://randomuser.me/api/portraits',
+    },
+    ItemType: {
+      id: 3,
+      name: 'Jardin',
+      ItemCategory: {
+        id: 3,
+        name: 'Lieu',
+      },
+    },
   },
 ]
 
-export async function getPlacesNeedingDescription() {
-  return new Promise<PlacesNeedingTranslationJSON>(resolve => {
-    setTimeout(() => {
-      resolve({
+export async function getPlacesNeedingDescription({ token }: { token: string }): Promise<PlacesNeedingTranslationJSON> {
+  try {
+    const response = await get({ endpoint: '/items/video-pending', authorizationToken: token })
+
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
+
+    const responseData = await response.json()
+
+    if (responseData.length === 0) {
+      return {
         json: PlacesToTranslate,
-        status: 200,
-        message: 'Success',
-      })
-    }, 500)
-  })
+        status: response.status,
+        message: response.statusText,
+      }
+    }
+
+    return {
+      json: responseData,
+      status: response.status,
+      message: response.statusText,
+    }
+  } catch (err) {
+    console.error(err)
+    throw new Error(err instanceof Error ? err.message : String(err))
+  }
 }
