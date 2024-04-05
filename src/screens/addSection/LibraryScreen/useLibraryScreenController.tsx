@@ -6,14 +6,14 @@
 
 import { useContext, useEffect, useState } from 'react'
 import { AccountContext } from '@global/contexts/AccountProvider'
-import { Video } from '@global/types/Videos'
+import { VideoLibrary } from '@global/types/httpClient/queries/videos'
 import useUserVideo from '@helpers/httpClient/queries/videos/useUserVideo'
 
 export default function useLibraryScreenController() {
   const { account } = useContext(AccountContext)
-  const [videos, setVideos] = useState<Video[]>([])
+  const [videos, setVideos] = useState<VideoLibrary[]>([])
   const [error, setError] = useState<string>('')
-  const userVideoMutation = useUserVideo({ setVideos, userId: account.accountID, setError })
+  const userVideoMutation = useUserVideo({ setVideos, userId: account.accountID, setError, token: account.accessToken })
 
   useEffect(() => {
     userVideoMutation.mutate()

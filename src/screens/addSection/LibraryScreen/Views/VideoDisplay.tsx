@@ -5,14 +5,15 @@
  */
 import React, { Text, StyleSheet, View } from 'react-native'
 import ImageLoader from '@components/ImageLoader'
-import { Video, VideoValidationStatus } from '@global/types/Videos'
+import { VideoValidationStatus } from '@global/types/Videos'
+import { VideoLibrary } from '@global/types/httpClient/queries/videos'
 
 /**
  * @typedef Props
  * @property {Video} Video Video to display
  */
 type Props = {
-  video: Video
+  video: VideoLibrary
 }
 
 /**
@@ -27,22 +28,21 @@ export default function VideoDisplay({ video }: Props): JSX.Element {
     video.validationStatus === VideoValidationStatus.Pending
       ? { text: 'En attente de vérification', color: 'orange' }
       : VideoValidationStatus.Approved
-        ? { text: 'Validé', color: 'green' }
-        : { text: 'Refusé', color: 'red' }
+      ? { text: 'Validé', color: 'green' }
+      : { text: 'Refusé', color: 'red' }
 
   return (
     <View style={styles.container}>
       <ImageLoader
-        imageURL={video.artWorkImage}
+        imageURL={video.item.picture}
         imageStyle={styles.image}
       />
       <View style={styles.textContainer}>
-        <Text style={styles.placeText}>{video.placeName}</Text>
-        <Text style={styles.artWorkText}>{video.artWorkName}</Text>
+        <Text style={styles.placeText}>{video.item.name}</Text>
         <Text style={[styles.state, { color: validationStatus.color }]}>État: {validationStatus.text}</Text>
         <Text style={styles.durationText}>
-          Durée de la vidéo: {(video.videoDuration / 60).toFixed()}mn
-          {video.videoDuration % 60 !== 0 ? ` ${video.videoDuration % 60}s` : ''}
+          Durée de la vidéo: {(video.duration / 60).toFixed()}mn
+          {video.duration % 60 !== 0 ? ` ${video.duration % 60}s` : ''}
         </Text>
       </View>
     </View>

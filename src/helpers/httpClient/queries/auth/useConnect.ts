@@ -38,6 +38,10 @@ export default function useConnect({ formUsername, password, navigation, setErro
         return AccountElevationEnum.ADMIN
       case 'REFERENT':
         return AccountElevationEnum.REFERENT
+      case 'MODERATOR':
+        return AccountElevationEnum.MODERATOR
+      case 'CREATOR':
+        return AccountElevationEnum.CREATOR
       default:
         return AccountElevationEnum.USER
     }

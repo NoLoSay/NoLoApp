@@ -4,42 +4,99 @@
  * @description Helper functions for videos.
  */
 
-import VideosJSON from '@global/types/httpClient/queries/videos'
-import { Video, VideoValidationStatus } from '@global/types/Videos'
+import VideosJSON, { VideoLibrary } from '@global/types/httpClient/queries/videos'
+import { defaultAccount } from '@global/contexts/AccountProvider'
+import { VideoValidationStatus } from '@global/types/Videos'
+import { get } from './common'
 
 type GetUserVideosParams = {
   userId: number
+  token: string
 }
 
-const VIDEOS: Video[] = [
+const ItemType = {
+  id: 1,
+  name: 'Castle',
+  ItemCategory: {
+    id: 1,
+    name: 'Historical',
+  },
+}
+
+const VIDEOS: VideoLibrary[] = [
   {
-    id: '1',
-    artWorkName: 'La tapisserie de Charles X',
-    artWorkImage: 'https://collections.louvre.fr/media/cache/medium/0000000021/0000101500/0000793562_OG.JPG',
-    placeName: 'Château des ducs de Bretagne',
+    id: 1,
+    uuid: 'f1208994-8525-5268-9e86-144120f2e23a',
+    duration: 140,
+    externalProviderId: 'f1208994-8525-5268-9e86-144120f2e23a',
+    likeBy: [],
+    item: {
+      id: '1',
+      uuid: '88d3bb9e-c9dd-58f8-b0ef-63b4195b4255',
+      name: 'Château de Versailles',
+      description: 'None',
+      picture: 'https://www.unjourdeplusaparis.com/wp-content/uploads/2019/03/chateau-de-versailles.jpg',
+      RelatedPerson: null,
+      ItemType,
+    },
+    postedBy: defaultAccount,
+    createdAt: new Date(),
     validationStatus: VideoValidationStatus.Approved,
-    videoDuration: 140,
   },
   {
-    id: '2',
-    artWorkName: 'Château sur bois',
-    artWorkImage: 'https://media.paperblog.fr/i/580/5808387/nantes-L-BoeJzB.jpeg',
-    placeName: 'Château des ducs de Bretagne',
-    validationStatus: VideoValidationStatus.Pending,
-    videoDuration: 120,
+    id: 1,
+    uuid: 'f1208994-8525-5268-9e86-144120f2e23a',
+    duration: 140,
+    externalProviderId: 'f1208994-8525-5268-9e86-144120f2e23a',
+    likeBy: [],
+    item: {
+      id: '1',
+      uuid: '88d3bb9e-c9dd-58f8-b0ef-63b4195b4255',
+      name: 'Château des Ducs de Bretagne',
+      description: 'None',
+      picture:
+        'https://www.chateaunantes.fr/wp-content/uploads/2020/09/Chateau-des-ducs-de-Bretagne.-Nantes-©-Philippe-Piron-_-LVAN-2-768x614.jpg',
+      RelatedPerson: null,
+      ItemType,
+    },
+    postedBy: defaultAccount,
+    createdAt: new Date(),
+    deleteAt: new Date(),
+    deleteReason: 'Content not appropriate',
+    validationStatus: VideoValidationStatus.Rejected,
   },
 ]
 
-// Remove this line when the function is implemented
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function getUserVideos({ userId }: GetUserVideosParams) {
-  return new Promise<VideosJSON>(resolve => {
-    setTimeout(() => {
-      resolve({
+export default async function getUserVideos({ userId, token }: GetUserVideosParams): Promise<VideosJSON> {
+  try {
+    const response = await get({ endpoint: `/items/${userId}/videos`, authorizationToken: token })
+
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
+
+    const responseData = await response.json()
+
+    if (responseData.length === 0 && __DEV__) {
+      return {
         json: VIDEOS,
-        status: 200,
-        message: 'Success',
-      })
-    }, 500)
-  })
+        status: response.status,
+        message: response.statusText,
+      }
+    }
+
+    return {
+      json: {
+        ...responseData,
+        createdAt: new Date(responseData.createdAt),
+        updatedAt: responseData.updatedAt ? new Date(responseData.updatedAt) : undefined,
+        deleteAt: responseData.deleteAt ? new Date(responseData.deleteAt) : undefined,
+      },
+      status: response.status,
+      message: response.statusText,
+    }
+  } catch (err) {
+    console.error(err)
+    throw new Error(err instanceof Error ? err.message : String(err))
+  }
 }
