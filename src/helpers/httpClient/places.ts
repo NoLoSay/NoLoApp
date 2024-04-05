@@ -403,7 +403,7 @@ export async function getPlacesNeedingDescription({ token }: { token: string }):
 
     const responseData = await response.json()
 
-    if (responseData.length === 0) {
+    if (responseData.length === 0 && __DEV__) {
       return {
         json: PlacesToTranslate,
         status: response.status,
