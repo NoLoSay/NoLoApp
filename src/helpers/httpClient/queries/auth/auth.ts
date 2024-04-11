@@ -107,7 +107,7 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
         email: responseData.email,
         picture: responseData.picture,
         telNumber: responseData.telNumber,
-        role: responseData.role,
+        role: responseData.activeProfile.role,
         accessToken: responseData.accessToken,
         createdAt: responseData.createdAt,
       },

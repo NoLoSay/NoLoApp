@@ -61,15 +61,15 @@ const VIDEOS: VideoLibrary[] = [
     },
     postedBy: defaultAccount,
     createdAt: new Date(),
-    deleteAt: new Date(),
-    deleteReason: 'Content not appropriate',
+    deletedAt: new Date(),
+    deletedReason: 'Content not appropriate',
     validationStatus: VideoValidationStatus.Rejected,
   },
 ]
 
 export default async function getUserVideos({ userId, token }: GetUserVideosParams): Promise<VideosJSON> {
   try {
-    const response = await get({ endpoint: `/items/${userId}/videos`, authorizationToken: token })
+    const response = await get({ endpoint: `/users/${userId}/videos`, authorizationToken: token })
 
     if (!response.ok) {
       throw new Error(response.statusText)

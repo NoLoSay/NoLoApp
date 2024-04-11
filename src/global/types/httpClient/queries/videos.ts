@@ -19,8 +19,8 @@ export type VideoLibrary = {
   validationStatus: VideoValidationStatus
   createdAt: Date
   updatedAt?: Date
-  deleteAt?: Date
-  deleteReason?: string
+  deletedAt?: Date
+  deletedReason?: string
 }
 
 export default VideosJSON

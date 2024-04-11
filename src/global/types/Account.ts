@@ -13,8 +13,8 @@ export type AccountElevation = 'user' | 'admin'
 export enum AccountElevationEnum {
   USER = 0,
   CREATOR = 1,
-  MODERATOR = 2,
-  REFERENT = 3,
+  MANAGER = 2,
+  MODERATOR = 3,
   ADMIN = 4,
 }
 

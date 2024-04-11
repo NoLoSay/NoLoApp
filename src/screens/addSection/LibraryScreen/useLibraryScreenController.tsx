@@ -13,6 +13,7 @@ export default function useLibraryScreenController() {
   const { account } = useContext(AccountContext)
   const [videos, setVideos] = useState<VideoLibrary[]>([])
   const [error, setError] = useState<string>('')
+  const [displayVideos, setDisplayVideos] = useState<boolean>(false)
   const userVideoMutation = useUserVideo({ setVideos, userId: account.accountID, setError, token: account.accessToken })
 
   useEffect(() => {
@@ -20,9 +21,13 @@ export default function useLibraryScreenController() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    setDisplayVideos(videos.length > 0)
+  }, [videos])
+
   return {
-    account,
     videos,
+    displayVideos,
     loading: userVideoMutation.isPending,
     error,
   }

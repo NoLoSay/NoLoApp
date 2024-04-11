@@ -36,8 +36,8 @@ export default function useConnect({ formUsername, password, navigation, setErro
     switch (role) {
       case 'ADMIN':
         return AccountElevationEnum.ADMIN
-      case 'REFERENT':
-        return AccountElevationEnum.REFERENT
+      case 'MANAGER':
+        return AccountElevationEnum.MANAGER
       case 'MODERATOR':
         return AccountElevationEnum.MODERATOR
       case 'CREATOR':
@@ -73,6 +73,7 @@ export default function useConnect({ formUsername, password, navigation, setErro
         accessToken,
         createdAt: new Date(createdAt),
       })
+      console.log(accessToken)
       navigation.navigate('AppRouter')
     } else {
       setError(message)

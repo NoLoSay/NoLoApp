@@ -17,22 +17,22 @@ type Props = {
 }
 
 export default function LibraryScreen({ navigation }: Props) {
-  const { videos, loading, error } = useLibraryScreenController()
+  const { videos, loading, displayVideos, error } = useLibraryScreenController()
 
   return (
     <View style={styles.container}>
       <TopBar navigation={navigation} />
       <ScrollView>
-        {!error &&
+        {displayVideos &&
           videos.map(video => (
             <VideoDisplay
-              key={video.id}
+              key={video.item.name}
               video={video}
             />
           ))}
         {error && <Text style={styles.errorText}>{error}</Text>}
       </ScrollView>
-      <LoadingModal visible={loading} />
+      {/* <LoadingModal visible={loading} /> */}
     </View>
   )
 }
