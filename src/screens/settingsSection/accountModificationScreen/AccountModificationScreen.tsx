@@ -7,7 +7,6 @@ import colors from '@global/colors'
 import React, { useContext, useEffect, useState } from 'react'
 import { KeyboardTypeOptions, SectionList, StyleSheet, Text, TextInput, View } from 'react-native'
 import LoadingModal from '@components/LoadingModal'
-import { Picker } from '@react-native-picker/picker'
 import RNPickerSelect from 'react-native-picker-select'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import useChangePassword from '@helpers/httpClient/queries/auth/useChangePassword'
@@ -44,7 +43,6 @@ function Item({ title, value, onChange, keyboardType, password, placeholder }: I
   return (
     <View style={styles.item}>
       <Text style={styles.itemText}>{title}</Text>
-
       <TextInput
         style={styles.inputContainer}
         onChangeText={(t: string) => onChange(t)}

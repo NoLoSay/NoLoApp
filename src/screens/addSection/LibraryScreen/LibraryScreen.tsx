@@ -30,7 +30,7 @@ export default function LibraryScreen({ navigation }: Props) {
               video={video}
             />
           ))}
-        {error && <Text style={styles.errorText}>{error}</Text>}
+        {error && <Text style={styles.errorText}>{error ?? 'Une erreur est survenue.'}</Text>}
       </ScrollView>
       {/* <LoadingModal visible={loading} /> */}
     </View>
