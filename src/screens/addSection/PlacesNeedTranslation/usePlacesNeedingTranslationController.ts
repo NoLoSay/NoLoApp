@@ -9,6 +9,7 @@ import usePlacesNeedingDescription from '@helpers/httpClient/queries/places/useP
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { Alert, Linking } from 'react-native'
+import RNFetchBlob from 'rn-fetch-blob'
 
 /**
  * @typedef {Object} usePlacesNeedingTranslationControllerType
@@ -128,24 +129,37 @@ export default function usePlacesNeedingTranslationController({
 
     displayAlert(res.errorCode === 'permission')
 
-    if (res.assets !== undefined) {
-      console.log(res.assets[0].uri)
-      const res2 = await fetch('http://localhost:3002/upload/1', {
-        method: 'POST',
-        headers: {
+    if (res.assets !== undefined && res.assets[0].uri) {
+      const res2 = await RNFetchBlob.fetch(
+        'POST',
+        'http://localhost:3002/upload/1',
+        {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${account.accessToken}`,
         },
-        body: JSON.stringify({
-          file: res.assets[0].uri,
-        }),
-      })
+        [
+          {
+            name: 'file',
+            filename: res.assets[0].fileName,
+            data: JSON.stringify({
+              file: RNFetchBlob.wrap(res.assets[0].uri),
+            }),
+          },
+        ]
+      )
 
-      if (res2.ok) {
-        Alert.alert('Succès', 'La vidéo a bien été envoyée')
+      if (res2.respInfo.status % 100 < 100) {
+        Alert.alert('Succès', 'La vidéo a bien été envoyée', [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack()
+              navigation.navigate('Add')
+            },
+          },
+        ])
       } else {
-        Alert.alert('Erreur', "Une erreur est survenue lors de l'envoi de la vidéo")
-        console.log(res2.text().then(text => console.log(text)))
+        console.error(res2.respInfo.status)
       }
     }
   }
