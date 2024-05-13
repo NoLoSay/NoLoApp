@@ -12,8 +12,10 @@ export type AccountElevation = 'user' | 'admin'
 // eslint-disable-next-line no-shadow
 export enum AccountElevationEnum {
   USER = 0,
-  REFERENT = 1,
-  ADMIN = 2,
+  CREATOR = 1,
+  MANAGER = 2,
+  MODERATOR = 3,
+  ADMIN = 4,
 }
 
 export const defaultLocalisation: GeolocationResponse = {

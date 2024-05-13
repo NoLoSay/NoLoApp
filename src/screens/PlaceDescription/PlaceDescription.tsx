@@ -86,7 +86,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
       <View style={styles.imageContainer}>
         <FastImage
           source={{
-            uri: place?.image,
+            uri: place?.picture,
             priority: FastImage.priority.high,
           }}
           style={styles.image}

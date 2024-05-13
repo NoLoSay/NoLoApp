@@ -23,15 +23,19 @@ export interface Place {
   name: string
   shortDescription: string
   longDescription: string
-  image: string
-  address: string
-  phone: string
-  email: string
-  website: string
-  coordinates: {
+  picture: string
+  address: {
+    street: string
+    number: string
+    postalCode: string
+    city: string
+    country: string
     latitude: number
     longitude: number
   }
+  phone: string
+  email: string
+  website: string
   type: PlaceType
   price: number
   city: string

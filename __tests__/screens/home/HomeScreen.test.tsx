@@ -117,7 +117,6 @@ describe('HomeScreenTests', () => {
       </AccountContext.Provider>
     )
 
-    screen.debug()
     expect(screen.getByText('Aucun lieu trouvé'))
   })
 })
