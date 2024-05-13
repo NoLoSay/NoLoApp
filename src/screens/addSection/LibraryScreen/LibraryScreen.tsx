@@ -6,7 +6,6 @@
 
 import React from 'react'
 import { StyleSheet, ScrollView, View, Text } from 'react-native'
-import LoadingModal from '@components/LoadingModal'
 import colors from '@global/colors'
 import useLibraryScreenController from './useLibraryScreenController'
 import TopBar from './Views/TopBar'
@@ -17,7 +16,7 @@ type Props = {
 }
 
 export default function LibraryScreen({ navigation }: Props) {
-  const { videos, loading, displayVideos, error } = useLibraryScreenController()
+  const { videos, displayVideos, error } = useLibraryScreenController()
 
   return (
     <View style={styles.container}>
@@ -30,7 +29,7 @@ export default function LibraryScreen({ navigation }: Props) {
               video={video}
             />
           ))}
-        {error && <Text style={styles.errorText}>{error ?? 'Une erreur est survenue.'}</Text>}
+        {error && <Text style={styles.errorText}>{error}</Text>}
       </ScrollView>
       {/* <LoadingModal visible={loading} /> */}
     </View>

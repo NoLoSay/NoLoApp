@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from 'react'
+import { useCallback, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { ContentCategoryId } from '@global/types/AddContentCategory'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
