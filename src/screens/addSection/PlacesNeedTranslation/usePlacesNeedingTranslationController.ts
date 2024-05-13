@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from 'react'
 import { ArtToTranslate } from '@global/types/Places'
 import usePlacesNeedingDescription from '@helpers/httpClient/queries/places/usePlacesNeedingDescription'
 import { AccountContext } from '@global/contexts/AccountProvider'
+import { launchImageLibrary } from 'react-native-image-picker'
+import { Alert, Linking } from 'react-native'
 
 /**
  * @typedef {Object} usePlacesNeedingTranslationControllerType
@@ -19,6 +21,7 @@ import { AccountContext } from '@global/contexts/AccountProvider'
 type usePlacesNeedingTranslationControllerType = {
   onCreatePress: (textToTranslate: string) => void
   onTextPress: (textToTranslate: string, artName: string) => void
+  onSendPress: () => void
   artPieces: ArtToTranslate[]
   displayError: boolean
   errorText: string
@@ -91,9 +94,66 @@ export default function usePlacesNeedingTranslationController({
     })
   }
 
+  const displayAlert = (libraryAlert: boolean) => {
+    if (libraryAlert) {
+      Alert.alert(
+        'Erreur de permission',
+        "Vous devez autoriser l'accès à votre bibliothèque pour sélectionner une vidéo",
+        [
+          {
+            text: 'Autoriser',
+            onPress: () => {
+              Linking.openSettings()
+            },
+          },
+          {
+            text: 'Annuler',
+            style: 'cancel',
+          },
+        ]
+      )
+    } else if (!libraryAlert) {
+      Alert.alert('Erreur', 'Une erreur est survenue lors de la sélection de la vidéo')
+    }
+  }
+
+  const onSendPress = async () => {
+    const res = await launchImageLibrary({
+      mediaType: 'video',
+    })
+
+    if (res.didCancel) {
+      return
+    }
+
+    displayAlert(res.errorCode === 'permission')
+
+    if (res.assets !== undefined) {
+      console.log(res.assets[0].uri)
+      const res2 = await fetch('http://localhost:3002/upload/1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${account.accessToken}`,
+        },
+        body: JSON.stringify({
+          file: res.assets[0].uri,
+        }),
+      })
+
+      if (res2.ok) {
+        Alert.alert('Succès', 'La vidéo a bien été envoyée')
+      } else {
+        Alert.alert('Erreur', "Une erreur est survenue lors de l'envoi de la vidéo")
+        console.log(res2.text().then(text => console.log(text)))
+      }
+    }
+  }
+
   return {
     onCreatePress,
     onTextPress,
+    onSendPress,
     artPieces,
     displayError,
     errorText,

@@ -26,9 +26,10 @@ type Props = {
  * @returns {JSX.Element} PlacesNeedingTranslation component template
  */
 export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Element {
-  const { onCreatePress, onTextPress, artPieces, errorText, displayError } = usePlacesNeedingTranslationController({
-    navigation,
-  })
+  const { onCreatePress, onTextPress, onSendPress, artPieces, errorText, displayError } =
+    usePlacesNeedingTranslationController({
+      navigation,
+    })
 
   return (
     <SafeAreaView>
@@ -41,6 +42,7 @@ export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Ele
               key={artPiece.id}
               onCreatePress={() => onCreatePress(artPiece.description)}
               onTextPress={() => onTextPress(artPiece.description, artPiece.name)}
+              onSendPress={onSendPress}
             />
           ))}
       </ScrollView>
