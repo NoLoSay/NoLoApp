@@ -144,10 +144,10 @@ export default function useHomeScreenController(): HomeScreenController {
 
     const placesOrderedByDistance = placesBis.sort((a, b) => {
       const distanceA = Math.sqrt(
-        (a.coordinates.latitude - localisation.latitude) ** 2 + (a.coordinates.longitude - localisation.longitude) ** 2
+        (a.address.latitude - localisation.latitude) ** 2 + (a.address.longitude - localisation.longitude) ** 2
       )
       const distanceB = Math.sqrt(
-        (b.coordinates.latitude - localisation.latitude) ** 2 + (b.coordinates.longitude - localisation.longitude) ** 2
+        (b.address.latitude - localisation.latitude) ** 2 + (b.address.longitude - localisation.longitude) ** 2
       )
 
       return distanceA - distanceB

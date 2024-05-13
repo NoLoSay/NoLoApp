@@ -28,7 +28,7 @@ export default async function changeUser({
 }: ChangeUserProps): Promise<ChangeUserJSON> {
   try {
     const response = await put({
-      endpoint: `/users/${userId}`,
+      endpoint: `/users/me`,
       body: JSON.stringify({
         username,
         email,

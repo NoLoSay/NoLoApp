@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { ContentCategoryId } from '@global/types/AddContentCategory'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
@@ -31,9 +31,13 @@ export default function useActionsScreenController(): useActionScreenControllerP
    * @param categoryElevation - Elevation required to access the category
    * @returns {boolean} - Boolean indicating if the admin category should be displayed
    */
-  const displayAdminCategory = (categoryElevation?: AccountElevationEnum) => {
-    return account.elevation >= (categoryElevation ?? AccountElevationEnum.USER)
-  }
+  const displayAdminCategory = useCallback(
+    (categoryElevation?: AccountElevationEnum) => {
+      console.log('account.elevation', account.elevation)
+      return account.elevation >= (categoryElevation ?? AccountElevationEnum.USER)
+    },
+    [account.elevation]
+  )
 
   /**
    * @function onCategoryPress

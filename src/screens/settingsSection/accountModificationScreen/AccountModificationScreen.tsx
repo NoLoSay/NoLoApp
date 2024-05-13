@@ -4,12 +4,14 @@
  * @requires react react-native
  */
 import colors from '@global/colors'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { KeyboardTypeOptions, SectionList, StyleSheet, Text, TextInput, View } from 'react-native'
 import LoadingModal from '@components/LoadingModal'
+import RNPickerSelect from 'react-native-picker-select'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import useChangePassword from '@helpers/httpClient/queries/auth/useChangePassword'
 import useChangeUser from '@helpers/httpClient/queries/user/useChangeUser'
+import useGetRoles, { Role, useChangeRole } from '@helpers/httpClient/queries/user/useRoles'
 import TopBar from '../SharedViews/TopBar'
 
 type Props = {
@@ -23,7 +25,7 @@ type ItemProps = {
   onChange: (value: string) => void
   keyboardType?: KeyboardTypeOptions
   password?: boolean
-  placeholder: string
+  placeholder?: string
 }
 
 /**
@@ -94,6 +96,7 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
   const [error, setError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [roles, setRoles] = useState<Role[]>()
   const changePasswordMutation = useChangePassword({ email, newPassword: password, setError: setPasswordError })
   const changeGeneralDataMutation = useChangeUser({
     formUsername: username,
@@ -101,6 +104,14 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
     formPhoneNumber: phoneNumber,
     setError,
   })
+  const [activeRole, setActiveRole] = useState<number>()
+  const getRolesMutation = useGetRoles({ setRoles, setActiveRole })
+  const changeRoleMutation = useChangeRole()
+
+  useEffect(() => {
+    getRolesMutation.mutate()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const changePassword = () => {
     setPasswordError('')
@@ -166,6 +177,30 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
       <TopBar
         navigation={navigation}
         title='Modifier mon compte'
+      />
+      <RNPickerSelect
+        onValueChange={item => setActiveRole(item)}
+        items={roles?.map(role => ({ label: role.role, value: role.id })) ?? []}
+        value={activeRole}
+        onDonePress={() => {
+          changeRoleMutation.mutate({
+            roleId: activeRole ?? 1,
+            roleName: roles?.find(role => role.id === activeRole)?.role ?? 'USER',
+          })
+        }}
+        placeholder={{ label: 'Choisissez votre profil', value: null }}
+        style={{
+          viewContainer: {
+            backgroundColor: colors.lightGrey,
+            borderRadius: 8,
+            marginTop: 14,
+            height: 36,
+            alignContent: 'center',
+            justifyContent: 'center',
+            paddingHorizontal: 16,
+            marginHorizontal: 16,
+          },
+        }}
       />
       <View style={styles.containerView}>
         <SectionList
