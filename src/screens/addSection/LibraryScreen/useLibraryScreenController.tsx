@@ -22,7 +22,7 @@ export default function useLibraryScreenController() {
   }, [])
 
   useEffect(() => {
-    setDisplayVideos(videos.length > 0)
+    setDisplayVideos(videos[0] != null)
   }, [videos])
 
   return {

@@ -7,6 +7,9 @@ import { useContext, useEffect, useState } from 'react'
 import { ArtToTranslate } from '@global/types/Places'
 import usePlacesNeedingDescription from '@helpers/httpClient/queries/places/usePlacesNeedingDescription'
 import { AccountContext } from '@global/contexts/AccountProvider'
+import { launchImageLibrary } from 'react-native-image-picker'
+import { Alert, Linking } from 'react-native'
+import RNFetchBlob from 'rn-fetch-blob'
 
 /**
  * @typedef {Object} usePlacesNeedingTranslationControllerType
@@ -19,6 +22,7 @@ import { AccountContext } from '@global/contexts/AccountProvider'
 type usePlacesNeedingTranslationControllerType = {
   onCreatePress: (textToTranslate: string) => void
   onTextPress: (textToTranslate: string, artName: string) => void
+  onSendPress: () => void
   artPieces: ArtToTranslate[]
   displayError: boolean
   errorText: string
@@ -91,9 +95,79 @@ export default function usePlacesNeedingTranslationController({
     })
   }
 
+  const displayAlert = (libraryAlert: boolean) => {
+    if (libraryAlert) {
+      Alert.alert(
+        'Erreur de permission',
+        "Vous devez autoriser l'accès à votre bibliothèque pour sélectionner une vidéo",
+        [
+          {
+            text: 'Autoriser',
+            onPress: () => {
+              Linking.openSettings()
+            },
+          },
+          {
+            text: 'Annuler',
+            style: 'cancel',
+          },
+        ]
+      )
+    } else if (!libraryAlert) {
+      Alert.alert('Erreur', 'Une erreur est survenue lors de la sélection de la vidéo')
+    }
+  }
+
+  const onSendPress = async () => {
+    const res = await launchImageLibrary({
+      mediaType: 'video',
+    })
+
+    if (res.didCancel) {
+      return
+    }
+
+    displayAlert(res.errorCode === 'permission')
+
+    if (res.assets !== undefined && res.assets[0].uri) {
+      const res2 = await RNFetchBlob.fetch(
+        'POST',
+        'http://localhost:3002/upload/1',
+        {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${account.accessToken}`,
+        },
+        [
+          {
+            name: 'file',
+            filename: res.assets[0].fileName,
+            data: JSON.stringify({
+              file: RNFetchBlob.wrap(res.assets[0].uri),
+            }),
+          },
+        ]
+      )
+
+      if (res2.respInfo.status % 100 < 100) {
+        Alert.alert('Succès', 'La vidéo a bien été envoyée', [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.goBack()
+              navigation.navigate('Add')
+            },
+          },
+        ])
+      } else {
+        console.error(res2.respInfo.status)
+      }
+    }
+  }
+
   return {
     onCreatePress,
     onTextPress,
+    onSendPress,
     artPieces,
     displayError,
     errorText,
