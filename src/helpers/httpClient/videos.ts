@@ -77,21 +77,8 @@ export default async function getUserVideos({ userId, token }: GetUserVideosPara
 
     const responseData = await response.json()
 
-    if (responseData.length === 0 && __DEV__) {
-      return {
-        json: VIDEOS,
-        status: response.status,
-        message: response.statusText,
-      }
-    }
-
     return {
-      json: {
-        ...responseData,
-        createdAt: new Date(responseData.createdAt),
-        updatedAt: responseData.updatedAt ? new Date(responseData.updatedAt) : undefined,
-        deleteAt: responseData.deleteAt ? new Date(responseData.deleteAt) : undefined,
-      },
+      json: responseData,
       status: response.status,
       message: response.statusText,
     }

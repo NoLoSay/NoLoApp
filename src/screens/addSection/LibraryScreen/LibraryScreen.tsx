@@ -30,8 +30,10 @@ export default function LibraryScreen({ navigation }: Props) {
             />
           ))}
         {error && <Text style={styles.errorText}>{error}</Text>}
+        {!displayVideos && !error && (
+          <Text style={styles.text}>Vous n&apos;avez réalisé aucune vidéo pour le moment !</Text>
+        )}
       </ScrollView>
-      {/* <LoadingModal visible={loading} /> */}
     </View>
   )
 }
@@ -44,6 +46,14 @@ const styles = StyleSheet.create({
   errorText: {
     textAlign: 'center',
     color: colors.error,
+    fontFamily: 'Poppins',
+    fontWeight: '600',
+    fontSize: 16,
+    paddingHorizontal: 16,
+  },
+  text: {
+    textAlign: 'center',
+    color: colors.black,
     fontFamily: 'Poppins',
     fontWeight: '600',
     fontSize: 16,
