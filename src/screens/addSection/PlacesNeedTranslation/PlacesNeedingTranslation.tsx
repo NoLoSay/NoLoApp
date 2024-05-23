@@ -42,7 +42,7 @@ export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Ele
               key={artPiece.id}
               onCreatePress={() => onCreatePress(artPiece.description)}
               onTextPress={() => onTextPress(artPiece.description, artPiece.name)}
-              onSendPress={onSendPress}
+              onSendPress={() => onSendPress(artPiece.id)}
             />
           ))}
       </ScrollView>

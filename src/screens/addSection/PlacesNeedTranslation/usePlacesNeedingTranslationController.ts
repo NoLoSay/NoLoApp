@@ -10,6 +10,7 @@ import { AccountContext } from '@global/contexts/AccountProvider'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { Alert, Linking } from 'react-native'
 import RNFetchBlob from 'rn-fetch-blob'
+import { DEV_VIDEO_API_URL } from '@env'
 
 /**
  * @typedef {Object} usePlacesNeedingTranslationControllerType
@@ -22,7 +23,7 @@ import RNFetchBlob from 'rn-fetch-blob'
 type usePlacesNeedingTranslationControllerType = {
   onCreatePress: (textToTranslate: string) => void
   onTextPress: (textToTranslate: string, artName: string) => void
-  onSendPress: () => void
+  onSendPress: (id: string) => void
   artPieces: ArtToTranslate[]
   displayError: boolean
   errorText: string
@@ -113,12 +114,10 @@ export default function usePlacesNeedingTranslationController({
           },
         ]
       )
-    } else if (!libraryAlert) {
-      Alert.alert('Erreur', 'Une erreur est survenue lors de la sélection de la vidéo')
     }
   }
 
-  const onSendPress = async () => {
+  const onSendPress = async (id: string) => {
     const res = await launchImageLibrary({
       mediaType: 'video',
     })
@@ -132,7 +131,7 @@ export default function usePlacesNeedingTranslationController({
     if (res.assets !== undefined && res.assets[0].uri) {
       const res2 = await RNFetchBlob.fetch(
         'POST',
-        'http://localhost:3002/upload/1',
+        `${DEV_VIDEO_API_URL}/upload/${id}`,
         {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${account.accessToken}`,
