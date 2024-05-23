@@ -5,6 +5,8 @@
  */
 
 import VideosJSON from '@global/types/httpClient/queries/videos'
+import { DEV_VIDEO_API_URL } from '@env'
+import RNFetchBlob from 'rn-fetch-blob'
 import { get } from './common'
 
 type GetUserVideosParams = {
@@ -30,4 +32,38 @@ export default async function getUserVideos({ userId, token }: GetUserVideosPara
   } catch (err) {
     throw new Error(err instanceof Error ? err.message : String(err))
   }
+}
+
+type SendTranslationVideoParams = {
+  artworkId: string
+  token: string
+  filename: string
+  uri: string
+}
+
+export async function sendTranslationVideo({
+  artworkId,
+  token,
+  filename,
+  uri,
+}: SendTranslationVideoParams): Promise<number> {
+  const response = await RNFetchBlob.fetch(
+    'POST',
+    `${DEV_VIDEO_API_URL}/upload/${artworkId}`,
+    {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+    [
+      {
+        name: 'file',
+        filename,
+        data: JSON.stringify({
+          file: RNFetchBlob.wrap(uri),
+        }),
+      },
+    ]
+  )
+
+  return response.respInfo.status
 }

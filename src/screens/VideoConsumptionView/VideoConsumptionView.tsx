@@ -8,9 +8,10 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import YoutubeIframe from 'react-native-youtube-iframe'
+// import WebView from 'react-native-webview'
+import Button from '@components/Button'
+import { colors } from '@global/colors'
 import useVideoConsumptionViewController from './useVideoConsumptionViewController'
-import { colors } from '../../global/colors'
-import Button from '../../components/Button'
 import TopBar from './Views/TopBar'
 
 interface VideoConsumptionViewProps {
@@ -39,6 +40,17 @@ export default function VideoConsumptionView({ navigation, route }: VideoConsump
         navigation={navigation}
       />
       <View style={{ flex: 1 }}>
+        {/* <WebView
+          source={{ uri: `https://www.youtube.com/watch?v=${videoId}` }}
+          style={{ marginTop: 20, height: videoHeight, width: videoWidth }}
+          injectedJavaScript="
+            var element = document.getElementsByClassName('container')[0];
+            element.style.position = 'unset';
+            element.style.paddingBottom = 'unset';
+            true;
+          "
+          injectedJavaScriptForMainFrameOnly
+        /> */}
         <YoutubeIframe
           height={videoHeight}
           width={videoWidth}

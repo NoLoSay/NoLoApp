@@ -9,8 +9,7 @@ import usePlacesNeedingDescription from '@helpers/httpClient/queries/places/useP
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { Alert, Linking } from 'react-native'
-import RNFetchBlob from 'rn-fetch-blob'
-import { DEV_VIDEO_API_URL } from '@env'
+import useSendVideo from '@helpers/httpClient/queries/videos/useSendVideo'
 
 /**
  * @typedef {Object} usePlacesNeedingTranslationControllerType
@@ -54,6 +53,10 @@ export default function usePlacesNeedingTranslationController({
     setArtPieces,
     displayErrorModal,
     token: account.accessToken,
+  })
+  const sendVideoMutation = useSendVideo({
+    token: account.accessToken,
+    navigation,
   })
 
   /**
@@ -128,38 +131,10 @@ export default function usePlacesNeedingTranslationController({
 
     displayAlert(res.errorCode === 'permission')
 
-    if (res.assets !== undefined && res.assets[0].uri) {
-      const res2 = await RNFetchBlob.fetch(
-        'POST',
-        `${DEV_VIDEO_API_URL}/upload/${id}`,
-        {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${account.accessToken}`,
-        },
-        [
-          {
-            name: 'file',
-            filename: res.assets[0].fileName,
-            data: JSON.stringify({
-              file: RNFetchBlob.wrap(res.assets[0].uri),
-            }),
-          },
-        ]
-      )
-
-      if (res2.respInfo.status % 100 < 100) {
-        Alert.alert('Succès', 'La vidéo a bien été envoyée', [
-          {
-            text: 'OK',
-            onPress: () => {
-              navigation.goBack()
-              navigation.navigate('Add')
-            },
-          },
-        ])
-      } else {
-        console.error(res2.respInfo.status)
-      }
+    if (res.assets !== undefined && res.assets[0].uri && res.assets[0].fileName) {
+      sendVideoMutation.mutate({
+        variables: { artworkId: id, filename: res.assets[0].fileName, uri: res.assets[0].uri },
+      })
     }
   }
 
