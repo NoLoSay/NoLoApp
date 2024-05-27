@@ -29,7 +29,7 @@ export default function ScanScreen({ navigation }: any): React.JSX.Element {
         hasPermission={hasPermission}
         onNavigationButtonPressed={() => {
           if (__DEV__) {
-            navigateToVideoConsumption('21yj2ji6D1s')
+            navigateToVideoConsumption('1')
           } else {
             navigation.goBack()
           }

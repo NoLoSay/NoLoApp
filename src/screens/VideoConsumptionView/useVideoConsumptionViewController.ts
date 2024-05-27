@@ -1,11 +1,13 @@
+import { AccountContext } from '@global/contexts/AccountProvider'
+import { get } from '@helpers/httpClient/common'
+import useGetVideoInformation from '@helpers/httpClient/queries/videos/useGetVideoInformation'
+import { useContext, useEffect, useState } from 'react'
 import { Dimensions } from 'react-native'
 
 type useVideoConsumptionViewControllerProps = {
   route: {
     params: {
-      videoId: string
-      title: string
-      videoText: string
+      itemId: string
     }
   }
 }
@@ -16,18 +18,39 @@ type useVideoConsumptionViewController = {
   videoWidth: number
   videoHeight: number
   videoText: string
+  error: string
 }
 
 export default function useVideoConsumptionViewController({
   route,
 }: useVideoConsumptionViewControllerProps): useVideoConsumptionViewController {
-  const { videoId, title, videoText } = route.params
+  const { itemId } = route.params
   const { width, height } = Dimensions.get('window')
+  const { account } = useContext(AccountContext)
+  const [finalVideoId, setFinalVideoId] = useState(itemId)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [error, setError] = useState('')
+  const getVideoMutation = useGetVideoInformation({
+    itemId,
+    setError,
+    token: account.accessToken,
+    setFinalVideoId,
+    setTitle,
+    setDescription,
+  })
+
+  useEffect(() => {
+    getVideoMutation.mutate()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return {
-    videoId,
+    videoId: finalVideoId,
     title,
     videoWidth: width,
     videoHeight: (height / 100) * 60,
-    videoText,
+    videoText: description,
+    error,
   }
 }

@@ -40,9 +40,10 @@ export default function TopBar({ navigation, title }: Props): JSX.Element {
           style={styles.backIcon}
         />
       </Pressable>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{title.length > 28 ? `${title.substring(0, 28)}...` : title}</Text>
     </View>
   )
+  // {item.name.length > 13 ? `${item.name.substring(0, 13)}...` : item.name}
 }
 
 const styles = StyleSheet.create({
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '180deg' }],
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Poppins',
     fontWeight: '500',
     textAlign: 'center',
