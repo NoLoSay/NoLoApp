@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
-import getUserVideos, { getItemVideo } from '@helpers/httpClient/videos'
-import VideosJSON, { ItemVideosJSON, VideoLibrary } from '@global/types/httpClient/queries/videos'
+import { getItemVideo } from '@helpers/httpClient/videos'
+import { ItemVideosJSON } from '@global/types/httpClient/queries/videos'
 
 type GetVideoInformationProps = {
   itemId: string

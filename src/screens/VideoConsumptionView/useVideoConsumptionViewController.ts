@@ -1,5 +1,4 @@
 import { AccountContext } from '@global/contexts/AccountProvider'
-import { get } from '@helpers/httpClient/common'
 import useGetVideoInformation from '@helpers/httpClient/queries/videos/useGetVideoInformation'
 import { useContext, useEffect, useState } from 'react'
 import { Dimensions } from 'react-native'
