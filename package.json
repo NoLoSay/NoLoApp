@@ -51,6 +51,7 @@
     "react-native-maps": "^1.7.1",
     "react-native-picker-select": "^9.1.3",
     "react-native-screens": "^3.22.1",
+    "react-native-video": "^6.1.2",
     "react-native-vision-camera": "^3.6.3",
     "react-native-webview": "^13.6.0",
     "react-native-youtube-iframe": "^2.3.0",

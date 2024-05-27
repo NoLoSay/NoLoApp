@@ -4,7 +4,7 @@
  * @description Helper functions for videos.
  */
 
-import VideosJSON from '@global/types/httpClient/queries/videos'
+import VideosJSON, { ItemVideosJSON } from '@global/types/httpClient/queries/videos'
 import { DEV_VIDEO_API_URL } from '@env'
 import RNFetchBlob from 'rn-fetch-blob'
 import { get } from './common'
@@ -31,6 +31,31 @@ export default async function getUserVideos({ userId, token }: GetUserVideosPara
     }
   } catch (err) {
     throw new Error(err instanceof Error ? err.message : String(err))
+  }
+}
+
+type GetItemVideoProps = {
+  itemId: string
+  token: string
+}
+
+export async function getItemVideo({ itemId, token }: GetItemVideoProps): Promise<ItemVideosJSON> {
+  const res = await get({
+    endpoint: `/items/${itemId}`,
+    authorizationToken: token,
+  })
+
+  if (!res.ok) {
+    console.log('Error getting video info')
+    throw new Error(res.statusText)
+  }
+
+  const response = await res.json()
+
+  return {
+    json: response,
+    status: res.status,
+    message: res.statusText,
   }
 }
 

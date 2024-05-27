@@ -6485,6 +6485,11 @@ react-native-svg@^13.10.0:
     css-select "^5.1.0"
     css-tree "^1.1.3"
 
+react-native-video@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-6.1.2.tgz#84580458e0d0ebbf6ca395cc15cd2f76c337bbda"
+  integrity sha512-oKk4hLhcWiL+k5CRgqs+/Bvp23QrHFGx3ylawrF4OWjKRekGeHNCf2mSf7+er66ZmktMtJC0ofBTgEPq4rRG6A==
+
 react-native-vision-camera@^3.6.3:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/react-native-vision-camera/-/react-native-vision-camera-3.9.2.tgz#d6656a4c0af929916d5e6b57af5adfe94ff8c65a"
