@@ -16,7 +16,7 @@ type MutationParams = {
 }
 
 export default function useSendVideo({ token, navigation }: SendVideoProps) {
-  const mutation = useMutation<number, unknown, MutationParams>({
+  const mutation = useMutation<boolean, unknown, MutationParams>({
     mutationFn: ({ variables }: MutationParams) =>
       sendTranslationVideo({
         artworkId: variables.artworkId,
@@ -25,7 +25,7 @@ export default function useSendVideo({ token, navigation }: SendVideoProps) {
         uri: variables.uri,
       }),
     onSuccess: data => {
-      if (data % 100 < 100) {
+      if (data) {
         Alert.alert('Succès', 'La vidéo a bien été envoyée', [
           {
             text: 'OK',
