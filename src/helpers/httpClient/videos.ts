@@ -5,7 +5,7 @@
  */
 
 import VideosJSON, { ItemVideosJSON } from '@global/types/httpClient/queries/videos'
-import { DEV_VIDEO_API_URL, PROD_API_URL } from '@env'
+import { DEV_VIDEO_API_URL, PROD_VIDEO_API_URL } from '@env'
 import RNFetchBlob from 'rn-fetch-blob'
 import { get } from './common'
 
@@ -74,7 +74,7 @@ export async function sendTranslationVideo({
 }: SendTranslationVideoParams): Promise<number> {
   const response = await RNFetchBlob.fetch(
     'POST',
-    `${__DEV__ ? DEV_VIDEO_API_URL : PROD_API_URL}/upload/${artworkId}`,
+    `${__DEV__ ? DEV_VIDEO_API_URL : PROD_VIDEO_API_URL}/upload/${artworkId}`,
     {
       'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${token}`,
