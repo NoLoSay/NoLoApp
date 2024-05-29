@@ -5,8 +5,7 @@
  */
 
 import VideosJSON, { ItemVideosJSON } from '@global/types/httpClient/queries/videos'
-import { DEV_VIDEO_API_URL, PROD_API_URL } from '@env'
-import RNFetchBlob from 'rn-fetch-blob'
+import { DEV_VIDEO_API_URL, PROD_VIDEO_API_URL } from '@env'
 import { get } from './common'
 
 type GetUserVideosParams = {
@@ -46,7 +45,6 @@ export async function getItemVideo({ itemId, token }: GetItemVideoProps): Promis
   })
 
   if (!res.ok) {
-    console.log('Error getting video info')
     throw new Error(res.statusText)
   }
 
@@ -71,24 +69,24 @@ export async function sendTranslationVideo({
   token,
   filename,
   uri,
-}: SendTranslationVideoParams): Promise<number> {
-  const response = await RNFetchBlob.fetch(
-    'POST',
-    `${__DEV__ ? DEV_VIDEO_API_URL : PROD_API_URL}/upload/${artworkId}`,
+}: SendTranslationVideoParams): Promise<boolean> {
+  const formData = new FormData()
+  formData.append('file', {
+    name: `${filename ?? 'video'}.mp4`,
+    uri,
+    type: 'video/mp4',
+  })
+  const response = await fetch(
+    __DEV__ ? `${DEV_VIDEO_API_URL}/upload/${artworkId}` : `${PROD_VIDEO_API_URL}/upload/${artworkId}`,
     {
-      'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${token}`,
-    },
-    [
-      {
-        name: 'file',
-        filename,
-        data: JSON.stringify({
-          file: RNFetchBlob.wrap(uri),
-        }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
       },
-    ]
+      body: formData,
+    }
   )
 
-  return response.respInfo.status
+  return response.ok
 }
