@@ -8,18 +8,18 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import YoutubeIframe from 'react-native-youtube-iframe'
+// import WebView from 'react-native-webview'
+// import Video from 'react-native-video'
+import Button from '@components/Button'
+import { colors } from '@global/colors'
 import useVideoConsumptionViewController from './useVideoConsumptionViewController'
-import { colors } from '../../global/colors'
-import Button from '../../components/Button'
 import TopBar from './Views/TopBar'
 
 interface VideoConsumptionViewProps {
   navigation: any
   route: {
     params: {
-      videoId: string
-      title: string
-      videoText: string
+      itemId: string
     }
   }
 }
@@ -39,6 +39,17 @@ export default function VideoConsumptionView({ navigation, route }: VideoConsump
         navigation={navigation}
       />
       <View style={{ flex: 1 }}>
+        {/* <WebView
+          source={{ uri: `http://localhost:3002/watch/8dd248b1-2414-46c5-b7f4-be89f9561626` }}
+          style={{ marginTop: 20, height: videoHeight, width: videoWidth }}
+          injectedJavaScript="
+            var element = document.getElementsByClassName('container')[0];
+            element.style.position = 'unset';
+            element.style.paddingBottom = 'unset';
+            true;
+          "
+          injectedJavaScriptForMainFrameOnly
+        /> */}
         <YoutubeIframe
           height={videoHeight}
           width={videoWidth}
@@ -53,6 +64,14 @@ export default function VideoConsumptionView({ navigation, route }: VideoConsump
       `,
           }}
         />
+        {/* <Video
+          // eslint-disable-next-line global-require
+          source={{ uri: `http://localhost:3002/watch/8dd248b1-2414-46c5-b7f4-be89f9561626` }}
+          style={{ marginTop: 20, height: videoHeight, width: videoWidth }}
+          onBuffer={buffer => console.log(buffer)}
+          onError={error => console.log(error)}
+          controls
+        /> */}
         <ScrollView>
           <Text style={styles.description}>{videoText}</Text>
         </ScrollView>

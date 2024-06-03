@@ -9,6 +9,7 @@ import PlacesMapView from '@screens/home/MapView/MapView'
 
 const defaultUser: AccountType = {
   accountID: 1,
+  uuid: 'de3a1a8d-12bb-53f7-8f73-0e0240b49599',
   email: 'toto@tata.com',
   username: 'toto',
   phoneNumber: '+330612345678',
@@ -31,6 +32,7 @@ const defaultUser: AccountType = {
     lastName: 'Nom',
   },
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
+  createdAt: new Date(),
 }
 
 jest.mock('react-native', () => {
@@ -126,26 +128,25 @@ describe('MapScreenTests', () => {
                   "Le Château des Ducs de Bretagne est une imposante forteresse entourée de douves et de remparts, offrant une vue impressionnante dès l'approche. Sa construction a débuté au XIIIe siècle sous Pierre Mauclerc et a été achevée au XVe siècle par François II. Il incarne la puissance et le prestige des ducs de Bretagne. À l'intérieur de ses murs, on découvre un mélange captivant d'architecture médiévale et de style Renaissance, créant une atmosphère unique. Le château abrite aujourd'hui un musée qui raconte l'histoire de Nantes et de la Bretagne, avec des expositions interactives, des artefacts historiques et des maquettes impressionnantes.",
                 shortDescription:
                   'Forteresse historique, ancien siège des ducs de Bretagne, mêlant architecture médiévale et musée captivant.',
-                image:
+                picture:
                   'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
-                address: '4 Place Marc Elder, 44000 Nantes',
+                address: {
+                  street: 'Place Marc Elder',
+                  number: '4',
+                  postalCode: '44000',
+                  city: 'Nantes',
+                  country: 'France',
+                  latitude: 47.214167,
+                  longitude: -1.556944,
+                },
                 phone: '02 51 17 49 48',
                 email: 'chateau@nantes.fr',
                 website: 'https://www.chateaunantes.fr/fr',
-                coordinates: {
-                  latitude: 47.215833,
-                  longitude: -1.55,
-                },
                 type: PlaceType.MUSEUM,
                 price: 0,
                 city: 'Nantes',
                 country: 'France',
-                tags: [
-                  { name: PlaceTag.NO_LOSAY, id: 1 },
-                  { name: PlaceTag.BLIND, id: 2 },
-                  { name: PlaceTag.DEAF, id: 3 },
-                  { name: PlaceTag.DISABLED, id: 4 },
-                ],
+                tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
               },
               {
                 id: 2,
@@ -154,24 +155,24 @@ describe('MapScreenTests', () => {
                   'Festival de musique métal de renommée mondiale, attirant des fans passionnés et offrant des performances exceptionnelles.',
                 longDescription:
                   "Hellfest est un festival de musique métal qui prend place dans un cadre pittoresque à Clisson, une charmante ville de l'ouest de la France. Ce festival, créé en 2006, est devenu rapidement l'un des événements incontournables pour les amateurs de métal, offrant une programmation variée allant du heavy metal au black metal, en passant par le death metal et le doom metal. Chaque année, des milliers de fans se réunissent pour célébrer la musique métal dans une atmosphère de camaraderie et de passion.",
-                image: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
-                address: 'Rue du Champ Louet, 44190 Clisson',
-                phone: '02 51 17 49 48',
-                email: 'hellfest@hellfest.fr',
-                website: 'https://www.hellfest.fr',
-                coordinates: {
+                picture: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
+                address: {
+                  street: 'Rue du Champ Louet',
+                  number: '1',
+                  postalCode: '44190',
+                  city: 'Clisson',
+                  country: 'France',
                   latitude: 47.09750371051718,
                   longitude: -1.2700803720514064,
                 },
-                type: PlaceType.PUBLIC,
+                phone: '02 51 17 49 48',
+                email: 'hellfest@hellfest.fr',
+                website: 'https://www.hellfest.fr',
+                type: PlaceType.PUBLIC_PLACE,
                 price: 105,
                 city: 'Clisson',
                 country: 'France',
-                tags: [
-                  { name: PlaceTag.NO_LOSAY, id: 1 },
-                  { name: PlaceTag.BLIND, id: 2 },
-                  { name: PlaceTag.DISABLED, id: 4 },
-                ],
+                tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
               },
             ]}
             navigation={mockedNavigate}

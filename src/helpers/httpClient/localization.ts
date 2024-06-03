@@ -66,7 +66,7 @@ async function getCityUsingGouv({
   try {
     const response = await get({
       url: 'https://api-adresse.data.gouv.fr',
-      endpoint: `/reverse/?lon=${longitude}&lat=${latitude}&type=city`,
+      endpoint: `/reverse/?lon=${longitude}&lat=${latitude}`,
     })
 
     return response.json()
@@ -83,6 +83,7 @@ export default async function getCity({
   latitude: number
   longitude: number
 }): Promise<string> {
+  const defaultCity = 'Nantes'
   try {
     const gouvResponse = await getCityUsingGouv({ latitude, longitude })
 
@@ -90,12 +91,11 @@ export default async function getCity({
       console.log('Unable to get data from gouv, trying with GeoApify')
       const geoResponse = await getCityUsingGeoapify({ latitude, longitude })
 
-      return geoResponse.features[0]?.properties.city || ''
+      return geoResponse.features[0]?.properties.city || defaultCity
     }
+    return gouvResponse.features[0]?.properties.city || defaultCity
   } catch (error) {
     console.error('Error in getCity:', error)
-    return ''
+    return defaultCity
   }
-
-  return ''
 }

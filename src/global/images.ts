@@ -39,9 +39,12 @@ export const images = {
       mapArrow: () => require('../../assets/icons/outline/map_arrow.png'),
       menu: () => require('../../assets/icons/outline/menu.png'),
       open: () => require('../../assets/icons/outline/open.png'),
+      other: () => require('../../assets/icons/outline/other.png'),
       pen: () => require('../../assets/icons/outline/pen.png'),
       qr: () => require('../../assets/icons/outline/qr.png'),
+      send: () => require('../../assets/icons/outline/send.png'),
       text: () => require('../../assets/icons/outline/text.png'),
+      trash: () => require('../../assets/icons/outline/trash.png'),
     },
     social: {
       apple: () => require('../../assets/icons/social/apple.png'),

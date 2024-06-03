@@ -11,7 +11,6 @@ import { VideoStackParamList } from '@global/types/screensProps/VideoStackParams
 import ActionsScreen from './ActionsScreen/ActionsScreen'
 import VideoScreen from './VideoScreen/VideoScreen'
 import PlacesNeedingTranslation from './PlacesNeedTranslation/PlacesNeedingTranslation'
-import PlaceArtsPiecesScreen from './PlaceArtsPiecesScreen/PlaceArtsPiecesScreen'
 import TextScreen from './TextScreen/TextScreen'
 import LibraryScreen from './LibraryScreen/LibraryScreen'
 
@@ -44,12 +43,6 @@ export default function AddScreen(): React.JSX.Element {
         <VideoStack.Screen
           name='PlacesNeedingTranslation'
           component={PlacesNeedingTranslation}
-        />
-        <VideoStack.Screen
-          name='PlaceArtsPiecesScreen'
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          component={PlaceArtsPiecesScreen}
         />
         <VideoStack.Screen
           name='TextScreen'

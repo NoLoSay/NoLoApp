@@ -44,14 +44,31 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
 
   const getImageForTag = (tag: PlaceTag): (() => ImageSourcePropType) => {
     switch (tag) {
-      case PlaceTag.BLIND:
+      case PlaceTag.BLIND_FRIENDLY:
         return images.icons.outline.blind
-      case PlaceTag.DEAF:
+      case PlaceTag.DEAF_FRIENDLY:
         return images.icons.outline.deaf
-      case PlaceTag.DISABLED:
+      case PlaceTag.DISABILITY_FRIENDLY:
         return images.icons.outline.disabled
+      case PlaceTag.OTHER:
+        return images.icons.outline.other
       default:
         return images.logos.heart
+    }
+  }
+
+  const getTextForTag = (tag: PlaceTag): string => {
+    switch (tag) {
+      case PlaceTag.BLIND_FRIENDLY:
+        return 'blind'
+      case PlaceTag.DEAF_FRIENDLY:
+        return 'deaf'
+      case PlaceTag.DISABILITY_FRIENDLY:
+        return 'disabled'
+      case PlaceTag.OTHER:
+        return 'other'
+      default:
+        return 'nolosay'
     }
   }
 
@@ -69,7 +86,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
       <View style={styles.imageContainer}>
         <FastImage
           source={{
-            uri: place?.image,
+            uri: place?.picture,
             priority: FastImage.priority.high,
           }}
           style={styles.image}
@@ -78,14 +95,14 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
         <View style={styles.iconsContainer}>
           {place?.tags.map(tag => (
             <View
-              key={tag.id}
+              key={tag}
               style={{ marginLeft: 8 }}
             >
               <Image
-                key={tag.id}
-                source={getImageForTag(tag.name)()}
+                key={tag}
+                source={getImageForTag(tag)()}
                 style={styles.tagIcon}
-                accessibilityLabel={`tag ${tag.name}`}
+                accessibilityLabel={`tag ${getTextForTag(tag)}`}
               />
             </View>
           ))}

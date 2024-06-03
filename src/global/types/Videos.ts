@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-shadow
 export enum VideoValidationStatus {
-  Pending = 'Pending',
-  Approved = 'Approved',
-  Rejected = 'Rejected',
+  Pending = 'PENDING',
+  Approved = 'APPROVED',
+  Rejected = 'REJECTED',
 }
 
 export type Video = {

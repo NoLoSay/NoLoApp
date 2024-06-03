@@ -4,42 +4,89 @@
  * @description Helper functions for videos.
  */
 
-import VideosJSON from '@global/types/httpClient/queries/videos'
-import { Video, VideoValidationStatus } from '@global/types/Videos'
+import VideosJSON, { ItemVideosJSON } from '@global/types/httpClient/queries/videos'
+import { DEV_VIDEO_API_URL, PROD_VIDEO_API_URL } from '@env'
+import { get } from './common'
 
 type GetUserVideosParams = {
   userId: number
+  token: string
 }
 
-const VIDEOS: Video[] = [
-  {
-    id: '1',
-    artWorkName: 'La tapisserie de Charles X',
-    artWorkImage: 'https://collections.louvre.fr/media/cache/medium/0000000021/0000101500/0000793562_OG.JPG',
-    placeName: 'Château des ducs de Bretagne',
-    validationStatus: VideoValidationStatus.Approved,
-    videoDuration: 140,
-  },
-  {
-    id: '2',
-    artWorkName: 'Château sur bois',
-    artWorkImage: 'https://media.paperblog.fr/i/580/5808387/nantes-L-BoeJzB.jpeg',
-    placeName: 'Château des ducs de Bretagne',
-    validationStatus: VideoValidationStatus.Pending,
-    videoDuration: 120,
-  },
-]
+export default async function getUserVideos({ userId, token }: GetUserVideosParams): Promise<VideosJSON> {
+  try {
+    const response = await get({ endpoint: `/users/${userId}/videos`, authorizationToken: token })
 
-// Remove this line when the function is implemented
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function getUserVideos({ userId }: GetUserVideosParams) {
-  return new Promise<VideosJSON>(resolve => {
-    setTimeout(() => {
-      resolve({
-        json: VIDEOS,
-        status: 200,
-        message: 'Success',
-      })
-    }, 500)
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
+
+    const responseData = await response.json()
+
+    return {
+      json: responseData,
+      status: response.status,
+      message: response.statusText,
+    }
+  } catch (err) {
+    throw new Error(err instanceof Error ? err.message : String(err))
+  }
+}
+
+type GetItemVideoProps = {
+  itemId: string
+  token: string
+}
+
+export async function getItemVideo({ itemId, token }: GetItemVideoProps): Promise<ItemVideosJSON> {
+  const res = await get({
+    endpoint: `/items/${itemId}`,
+    authorizationToken: token,
   })
+
+  if (!res.ok) {
+    throw new Error(res.statusText)
+  }
+
+  const response = await res.json()
+
+  return {
+    json: response,
+    status: res.status,
+    message: res.statusText,
+  }
+}
+
+type SendTranslationVideoParams = {
+  artworkId: string
+  token: string
+  filename: string
+  uri: string
+}
+
+export async function sendTranslationVideo({
+  artworkId,
+  token,
+  filename,
+  uri,
+}: SendTranslationVideoParams): Promise<boolean> {
+  const formData = new FormData()
+  formData.append('file', {
+    name: `${filename ?? 'video'}.mp4`,
+    uri,
+    type: 'video/mp4',
+  })
+  const response = await fetch(
+    __DEV__ ? `${DEV_VIDEO_API_URL}/upload/${artworkId}` : `${PROD_VIDEO_API_URL}/upload/${artworkId}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    }
+  )
+
+  return response.ok
 }

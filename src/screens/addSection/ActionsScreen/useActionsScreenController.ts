@@ -1,8 +1,9 @@
-import { useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { ContentCategoryId } from '@global/types/AddContentCategory'
 import { AccountElevationEnum, AccountType } from '@global/types/Account'
 import { AccountContext } from '@global/contexts/AccountProvider'
+import { Alert } from 'react-native'
 
 /**
  * @typedef {Object} useActionScreenControllerProps
@@ -31,9 +32,12 @@ export default function useActionsScreenController(): useActionScreenControllerP
    * @param categoryElevation - Elevation required to access the category
    * @returns {boolean} - Boolean indicating if the admin category should be displayed
    */
-  const displayAdminCategory = (categoryElevation?: AccountElevationEnum) => {
-    return account.elevation >= (categoryElevation ?? AccountElevationEnum.USER)
-  }
+  const displayAdminCategory = useCallback(
+    (categoryElevation?: AccountElevationEnum) => {
+      return account.elevation >= (categoryElevation ?? AccountElevationEnum.USER)
+    },
+    [account.elevation]
+  )
 
   /**
    * @function onCategoryPress
@@ -43,9 +47,36 @@ export default function useActionsScreenController(): useActionScreenControllerP
   function onCategoryPress(categoryId: string) {
     switch (categoryId) {
       case ContentCategoryId.ADDCONTENT:
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        navigation.navigate('PlacesNeedingTranslation')
+        if (account.elevation >= AccountElevationEnum.CREATOR) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          navigation.navigate('PlacesNeedingTranslation')
+        } else {
+          Alert.alert(
+            'Erreur de permission',
+            "Vous avez besoin d'un compte créateur pour accéder à cette fonctionnalité",
+            [
+              {
+                text: 'Annuler',
+                style: 'cancel',
+              },
+              {
+                text: 'Changer son profil pour créateur',
+                onPress: () => {
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  navigation.navigate('Home')
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  navigation.navigate('SettingsModal')
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  navigation.navigate('AccountModification')
+                },
+              },
+            ]
+          )
+        }
         break
       case ContentCategoryId.LIBRARY:
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

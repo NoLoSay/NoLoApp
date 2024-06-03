@@ -51,6 +51,7 @@ type ArtToDisplayProps = {
   artPiece: ArtToTranslate
   onCreatePress: () => void
   onTextPress: () => void
+  onSendPress: () => void
 }
 
 /**
@@ -61,11 +62,16 @@ type ArtToDisplayProps = {
  * @param onTextPress Function to execute when the text button is pressed
  * @returns {JSX.Element} ArtToDisplay component template
  */
-export default function ArtToDisplay({ artPiece, onCreatePress, onTextPress }: ArtToDisplayProps): JSX.Element {
+export default function ArtToDisplay({
+  artPiece,
+  onCreatePress,
+  onTextPress,
+  onSendPress,
+}: ArtToDisplayProps): JSX.Element {
   return (
     <View style={styles.container}>
       <ImageLoader
-        imageURL={artPiece.image}
+        imageURL={artPiece.picture}
         imageStyle={styles.image}
       />
       <View style={styles.contentContainer}>
@@ -80,6 +86,11 @@ export default function ArtToDisplay({ artPiece, onCreatePress, onTextPress }: A
             iconURI={images.icons.outline.add()}
             text='Créer'
             onPress={onCreatePress}
+          />
+          <Icon
+            iconURI={images.icons.outline.send()}
+            text='Envoyer'
+            onPress={onSendPress}
           />
         </View>
       </View>
@@ -129,6 +140,8 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     backgroundColor: colors.darkGrey,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 8,
     padding: 4,
   },

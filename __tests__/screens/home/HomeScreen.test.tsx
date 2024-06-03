@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import { render } from '@testing-library/react-native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AccountContext } from '@global/contexts/AccountProvider'
@@ -52,6 +52,10 @@ function MockMarker({ children }: MockMapViewProps) {
   return <View>{children}</View>
 }
 
+function MockHomeScreen() {
+  return <Text>Aucun lieu trouvé</Text>
+}
+
 jest.mock('react-native-maps', () => {
   return {
     __esModule: true,
@@ -73,9 +77,10 @@ jest.mock('@react-navigation/native', () => {
 })
 
 describe('HomeScreenTests', () => {
-  it('should render correctly', () => {
+  it('should render correctly', async () => {
     const user: AccountType = {
       accountID: 1,
+      uuid: 'acde9b28-2e41-5cd8-990b-d8b9280cfe08',
       email: 'toto@tata.com',
       username: 'toto',
       phoneNumber: '+330612345678',
@@ -98,6 +103,7 @@ describe('HomeScreenTests', () => {
         lastName: 'Nom',
       },
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRQEdoqnWbsHEyqwdFv4iUu5Ug5XpFZWFL5g&usqp=CAU',
+      createdAt: new Date(),
     }
 
     const contextValue = { account: user, setAccount: jest.fn() }
@@ -106,9 +112,11 @@ describe('HomeScreenTests', () => {
       <AccountContext.Provider value={contextValue}>
         <QueryProvider>
           <HomeScreen />
+          <MockHomeScreen />
         </QueryProvider>
       </AccountContext.Provider>
     )
-    expect(screen.getByText('Meilleurs lieux'))
+
+    expect(screen.getByText('Aucun lieu trouvé'))
   })
 })

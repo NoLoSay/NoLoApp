@@ -1,7 +1,7 @@
 /**
- * @fileoverview TopBar view of the PlacesNeedTranslation screen
+ * @fileoverview TopBar view of the SettingsScreen component
  * @module TopBar
- * @description TopBar, it displays the title of the screen and a back button.
+ * @description TapBar, it displays the title of the screen and a back button.
  * @requires react react-native
  */
 
@@ -10,25 +10,20 @@ import { View, Pressable, Text, StyleSheet } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import images from '@global/images'
 
-/**
- * @typedef Props
- * @property {any} navigation Navigation object
- * @property {string} text Text to display
- */
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
-  text: string
+  title: string
 }
 
 /**
  * @function TopBar
  * @description Component that renders the TopBar view.
  * @param navigation TopBar navigation object
- * @param text Text to display
+ * @param title TopBar title
  * @returns {React.JSX.Element} TopBar component template
  */
-export default function TopBar({ navigation, text }: Props): JSX.Element {
+export default function TopBar({ navigation, title }: Props): JSX.Element {
   return (
     <View style={styles.container}>
       <Pressable
@@ -40,7 +35,7 @@ export default function TopBar({ navigation, text }: Props): JSX.Element {
           style={styles.backIcon}
         />
       </Pressable>
-      <Text style={styles.title}>{text.length > 30 ? `${text.substring(0, 30)}...` : text}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   )
 }
@@ -64,7 +59,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '180deg' }],
   },
   title: {
-    fontSize: 16,
+    fontSize: 24,
     fontFamily: 'Poppins',
     fontWeight: '500',
     textAlign: 'center',

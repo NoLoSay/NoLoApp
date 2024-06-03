@@ -45,12 +45,28 @@ First launch your metro :
 yarn start
 ```
 
+Compile pods on ios :
+
+```sh
+cd ios && pod install
+```
+
+Generate the entry point for the app :
+
+```sh
+yarn build:ios
+```
+
 Then launch the app on your device, depending on the wanted OS :
 
 ```sh
 yarn ios
 yarn android
 ```
+
+If the build on iOS fails, you can try to do it manually with XCode.
+
+To do so, open the `ios/NoLoSay.xcworkspace` file with XCode, then select your device and click on the play button.
 
 To launch the server you'll need to do various things :
 

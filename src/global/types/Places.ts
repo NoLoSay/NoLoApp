@@ -1,22 +1,21 @@
 // eslint-disable-next-line no-shadow
 export enum PlaceType {
-  MUSEUM = 'museum',
-  RESTAURANT = 'restaurant',
-  ATTRACTION = 'attraction',
-  PUBLIC = 'public',
+  MUSEUM,
+  LIBRARY,
+  ARCHIVE,
+  RESTAURANT,
+  ATTRACTION,
+  PUBLIC_PLACE,
+  OTHER,
 }
 
 // eslint-disable-next-line no-shadow
 export enum PlaceTag {
-  NO_LOSAY = 'nolosay',
-  DISABLED = 'disabled',
-  DEAF = 'deaf',
-  BLIND = 'blind',
-}
-
-export interface Tag {
-  id: number
-  name: PlaceTag
+  NOLOSAY,
+  DISABILITY_FRIENDLY,
+  DEAF_FRIENDLY,
+  BLIND_FRIENDLY,
+  OTHER,
 }
 
 export interface Place {
@@ -24,27 +23,41 @@ export interface Place {
   name: string
   shortDescription: string
   longDescription: string
-  image: string
-  address: string
-  phone: string
-  email: string
-  website: string
-  coordinates: {
+  picture: string
+  address: {
+    street: string
+    number: string
+    postalCode: string
+    city: string
+    country: string
     latitude: number
     longitude: number
   }
+  phone: string
+  email: string
+  website: string
   type: PlaceType
   price: number
   city: string
   country: string
-  tags: Tag[]
+  tags: PlaceTag[]
 }
 
 export type ArtToTranslate = {
   id: string
+  uuid: string
   name: string
-  image: string
-  textToTranslate: string
+  description: string
+  picture: string
+  RelatedPerson: any
+  ItemType: {
+    id: number
+    name: string
+    ItemCategory: {
+      id: number
+      name: string
+    }
+  }
 }
 
 export type PlaceNeedingTranslation = {
