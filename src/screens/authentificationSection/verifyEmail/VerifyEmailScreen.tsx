@@ -9,10 +9,9 @@ import React from 'react'
 import { Linking, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { colors } from '@global/colors'
 import FastImage from 'react-native-fast-image'
-import images from '@source/global/images'
-import Button from '@source/components/Button'
-import DeviceInfo from 'react-native-device-info'
-import { VerifyEmailScreenProps } from '@source/global/types/screensProps/AuthStackParams'
+import images from '@global/images'
+import Button from '@components/Button'
+import { VerifyEmailScreenProps } from '@global/types/screensProps/AuthStackParams'
 
 /**
  * @function VerifyEmail
