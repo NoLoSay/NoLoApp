@@ -29,7 +29,9 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn
+        run: |
+          yarn set version latest 
+          yarn
 
       - name: Check Typescript
         run: |
