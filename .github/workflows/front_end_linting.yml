@@ -27,6 +27,9 @@ jobs:
       - name: Install yarn
         run: sudo apt-get install -y yarn
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install dependencies
         run: yarn
 
