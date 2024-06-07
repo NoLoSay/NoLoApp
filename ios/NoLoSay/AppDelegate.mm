@@ -16,15 +16,15 @@
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-  return [self getBundleURL];
+  return [self bundleURL];
 }
 
 - (BOOL)bridgelessEnabled
 {
-    return YES;
+    return NO;
 }
 
-- (NSURL *)getBundleURL
+- (NSURL *)bundleURL
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
