@@ -44,6 +44,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@tanstack/react-query": "^5.40.1",
     "geolib": "^3.3.4",
+    "globals": "^15.4.0",
     "react-native-device-info": "^11.1.0",
     "react-native-dotenv": "^3.4.11",
     "react-native-fast-image": "^8.6.3",
