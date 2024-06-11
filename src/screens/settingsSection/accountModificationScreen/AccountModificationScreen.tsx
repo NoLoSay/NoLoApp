@@ -110,7 +110,6 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
 
   useEffect(() => {
     getRolesMutation.mutate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const changePassword = () => {

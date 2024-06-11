@@ -183,7 +183,6 @@ const useVideoScreenController = (): VideoScreenController => {
     if (timerValue === 0) {
       startRecording()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when timerValue changes
   }, [timerValue])
 
   // eslint-disable-next-line consistent-return
@@ -208,7 +207,6 @@ const useVideoScreenController = (): VideoScreenController => {
         clearInterval(countdown)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- We only want to run this effect when isRecording changes
   }, [isRecording, timerValue])
 
   return {
