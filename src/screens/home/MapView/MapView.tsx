@@ -17,6 +17,7 @@ import useMapViewController from './useMapViewController'
 
 interface Props {
   places: Place[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 

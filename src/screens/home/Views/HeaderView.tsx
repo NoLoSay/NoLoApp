@@ -19,6 +19,7 @@ interface HeaderViewProps {
   searchValue: string
   setSearchValue: (value: string) => void
   getAllPlacesUsingSearch: () => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 

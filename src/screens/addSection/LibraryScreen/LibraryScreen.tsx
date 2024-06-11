@@ -12,6 +12,7 @@ import TopBar from './Views/TopBar'
 import VideoDisplay from './Views/VideoDisplay'
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 

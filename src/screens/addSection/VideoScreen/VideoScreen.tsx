@@ -20,6 +20,7 @@ import OverlayModule from './OverlayModule/OverlayModule'
  * @description Component that renders the Video screen.
  * @returns {React.JSX.Element} App component template
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function VideoScreen({ route }: any): React.JSX.Element {
   const {
     hasPermission,

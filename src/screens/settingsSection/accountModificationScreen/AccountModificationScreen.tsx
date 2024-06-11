@@ -184,7 +184,6 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
         onDonePress={() => {
           changeRoleMutation.mutate({
             roleId: activeRole ?? 1,
-            roleName: roles?.find(role => role.id === activeRole)?.role ?? 'USER',
           })
         }}
         placeholder={{ label: 'Choisissez votre profil', value: null }}

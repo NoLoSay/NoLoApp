@@ -16,6 +16,7 @@ import useVideoConsumptionViewController from './useVideoConsumptionViewControll
 import TopBar from './Views/TopBar'
 
 interface VideoConsumptionViewProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
   route: {
     params: {

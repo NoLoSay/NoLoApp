@@ -41,7 +41,6 @@ export default function useVideoConsumptionViewController({
 
   useEffect(() => {
     getVideoMutation.mutate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {

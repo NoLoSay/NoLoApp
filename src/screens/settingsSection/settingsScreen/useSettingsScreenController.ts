@@ -35,6 +35,7 @@ type SettingsScreenController = {
  * @param navigation Object containing the navigation prop.
  * @returns {SettingsScreenController} Scan screen controller.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useSettingsScreenController = ({ navigation }: any): SettingsScreenController => {
   const { account, setAccount } = useContext(AccountContext)
   const [isHelpModalVisible, setIsHelpModalVisible] = useState(false)

@@ -33,6 +33,7 @@ type usePlacesNeedingTranslationControllerType = {
  * @property {Object} navigation - Navigation object used to navigate between screens
  */
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
@@ -71,7 +72,6 @@ export default function usePlacesNeedingTranslationController({
 
   useEffect(() => {
     placesNeedingTranslationMutation.mutate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   /**

@@ -6,6 +6,7 @@ import deleteAccount from './deleteUser'
 
 interface DeleteUserProps {
   setError: (error: string) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
