@@ -33,7 +33,6 @@ export default function useChangeUser({ formUsername, formEmail, formPhoneNumber
     mutationFn: () =>
       changeUser({
         username: formUsername,
-        userId: account.accountID,
         email: formEmail,
         phoneNumber: formPhoneNumber,
         authToken: account.accessToken,

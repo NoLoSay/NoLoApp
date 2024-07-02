@@ -10,6 +10,7 @@ interface ConnectProps {
   url?: string
   formUsername: string
   password: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
   headers?: Header
   setError: (error: string) => void

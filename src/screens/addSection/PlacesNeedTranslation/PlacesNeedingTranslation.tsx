@@ -16,6 +16,7 @@ import ArtToDisplay from './Views/ArtToDisplay'
  * @property {any} navigation Navigation object
  */
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 

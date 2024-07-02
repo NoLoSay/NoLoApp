@@ -93,7 +93,7 @@ export function useChangeRole() {
   const { account, setAccount } = useContext(AccountContext)
 
   return useMutation({
-    mutationFn: ({ roleId, roleName }: { roleId: number; roleName: string }) =>
+    mutationFn: ({ roleId }: { roleId: number }) =>
       changeRole({ accessToken: account.accessToken, account, setAccount, roleId }),
   })
 }

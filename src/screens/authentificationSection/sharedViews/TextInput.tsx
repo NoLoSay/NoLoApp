@@ -48,7 +48,7 @@ export default function Input({
         />
       )}
       <TextInput
-        placeholderTextColor={colors.lightGrey}
+        placeholderTextColor={colors.darkGrey}
         placeholder={placeholder}
         autoCorrect={autoCorrect}
         secureTextEntry={secureTextEntry}
@@ -83,12 +83,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 48,
     paddingHorizontal: 12,
     borderRadius: 12,
-    backgroundColor: colors.darkGrey,
+    backgroundColor: 'transparent',
     paddingVertical: 16,
+    borderColor: colors.accent,
+    borderWidth: 1,
   },
   input: {
     paddingHorizontal: 12,
-    color: colors.white,
+    color: colors.darkGrey,
     fontFamily: 'Poppins-Medium',
     width: '80%',
   },

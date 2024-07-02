@@ -47,6 +47,7 @@ export default function ContentCategory({ contentCategory, onPress }: ContentCat
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{contentCategory.title}</Text>
+        {/* eslint-disable-next-line no-constant-binary-expression */}
         {contentCategory.subtitle !== null ?? <Text style={styles.subtitle}>{contentCategory.subtitle}</Text>}
       </View>
       <Image

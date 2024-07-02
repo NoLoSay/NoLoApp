@@ -10,12 +10,9 @@ import { View, Text, StyleSheet } from 'react-native'
 /**
  * @typedef Props
  * @property {number} timerValue The current timer value
- * @property {number} endTimerValue The end timer value
  */
 type Props = {
   timerValue: number
-  endTimerValue: number
-  isRecording: boolean
 }
 
 /**
@@ -26,7 +23,7 @@ type Props = {
  * @param {boolean} isRecording Wether the user is recording a video or not
  * @returns {JSX.Element} TimerCountdownView component
  */
-export default function TimerCountdownView({ timerValue, endTimerValue, isRecording }: Props): JSX.Element {
+export default function TimerCountdownView({ timerValue }: Props): JSX.Element {
   if (timerValue > 0) {
     return (
       <View style={styles.container}>
@@ -34,14 +31,6 @@ export default function TimerCountdownView({ timerValue, endTimerValue, isRecord
       </View>
     )
   }
-  if (endTimerValue > 0 && isRecording) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.textStyle}>{endTimerValue}</Text>
-      </View>
-    )
-  }
-
   return <View />
 }
 

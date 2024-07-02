@@ -49,6 +49,7 @@ export type ArtToTranslate = {
   name: string
   description: string
   picture: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RelatedPerson: any
   ItemType: {
     id: number
