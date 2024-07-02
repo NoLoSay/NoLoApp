@@ -15,6 +15,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 export type AuthStackParamList = {
   Subscription: undefined
   Connection: undefined
+  VerifyEmail: undefined
   AppRouter: undefined
   SettingsModal: undefined
   AccountModification: undefined
@@ -32,6 +33,8 @@ export type SubscriptionScreenProps = NativeStackScreenProps<AuthStackParamList,
  * @typedef {Object} ConnectionScreenProps
  */
 export type ConnectionScreenProps = NativeStackScreenProps<AuthStackParamList, 'Connection'>
+
+export type VerifyEmailScreenProps = NativeStackScreenProps<AuthStackParamList, 'VerifyEmail'>
 
 /**
  * @typedef {Object} AppRouterScreenProps

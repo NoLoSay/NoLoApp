@@ -33,7 +33,7 @@ export default function useRegister({ formEmail, formUsername, password, navigat
         email,
         username,
       })
-      navigation.navigate('AppRouter')
+      navigation.navigate('VerifyEmail')
     } else {
       setError(message)
     }
