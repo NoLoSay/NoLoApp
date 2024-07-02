@@ -12,6 +12,11 @@ module.exports = {
     'prettier',
     'prettier/react',
   ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {

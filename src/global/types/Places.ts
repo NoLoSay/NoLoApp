@@ -1,21 +1,21 @@
 // eslint-disable-next-line no-shadow
 export enum PlaceType {
-  MUSEUM,
-  LIBRARY,
-  ARCHIVE,
-  RESTAURANT,
-  ATTRACTION,
-  PUBLIC_PLACE,
-  OTHER,
+  MUSEUM = 'MUSEUM',
+  LIBRARY = 'LIBRARY',
+  ARCHIVE = 'ARCHIVE',
+  RESTAURANT = 'RESTAURANT',
+  ATTRACTION = 'ATTRACTION',
+  PUBLIC_PLACE = 'PUBLIC_PLACE',
+  OTHER = 'OTHER',
 }
 
 // eslint-disable-next-line no-shadow
 export enum PlaceTag {
-  NOLOSAY,
-  DISABILITY_FRIENDLY,
-  DEAF_FRIENDLY,
-  BLIND_FRIENDLY,
-  OTHER,
+  NOLOSAY = 'NOLOSAY',
+  DISABILITY_FRIENDLY = 'DISABILITY_FRIENDLY',
+  DEAF_FRIENDLY = 'DEAF_FRIENDLY',
+  BLIND_FRIENDLY = 'BLIND_FRIENDLY',
+  OTHER = 'OTHER',
 }
 
 export interface Place {
@@ -25,21 +25,32 @@ export interface Place {
   longDescription: string
   picture: string
   address: {
+    id: number
+    houseNumber: string
     street: string
-    number: string
-    postalCode: string
-    city: string
-    country: string
+    zip: string
+    city: {
+      id: number
+      name: string
+      zip: string
+      department: {
+        id: number
+        name: string
+        country: {
+          id: number
+          name: string
+        }
+      }
+    }
+    otherDetails: string
     latitude: number
     longitude: number
   }
-  phone: string
+  telNumber: string
   email: string
   website: string
   type: PlaceType
   price: number
-  city: string
-  country: string
   tags: PlaceTag[]
 }
 
