@@ -114,6 +114,20 @@ jest.mock('@react-navigation/native', () => {
 const user: AccountType = defaultUser
 const contextValue = { account: user, setAccount: jest.fn() }
 
+const nantes = {
+  id: 1,
+  name: 'Nantes',
+  zip: '44000',
+  department: {
+    id: 1,
+    name: 'Loire-Atlantique',
+    country: {
+      id: 1,
+      name: 'France',
+    },
+  },
+}
+
 describe('MapScreenTests', () => {
   it('should render correctly', () => {
     const screen = render(
@@ -131,21 +145,20 @@ describe('MapScreenTests', () => {
                 picture:
                   'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
                 address: {
+                  id: 1,
                   street: 'Place Marc Elder',
-                  number: '4',
-                  postalCode: '44000',
-                  city: 'Nantes',
-                  country: 'France',
+                  houseNumber: '4',
+                  zip: '44000',
+                  city: nantes,
                   latitude: 47.214167,
                   longitude: -1.556944,
+                  otherDetails: '',
                 },
-                phone: '02 51 17 49 48',
+                telNumber: '02 51 17 49 48',
                 email: 'chateau@nantes.fr',
                 website: 'https://www.chateaunantes.fr/fr',
                 type: PlaceType.MUSEUM,
                 price: 0,
-                city: 'Nantes',
-                country: 'France',
                 tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
               },
               {
@@ -157,21 +170,20 @@ describe('MapScreenTests', () => {
                   "Hellfest est un festival de musique métal qui prend place dans un cadre pittoresque à Clisson, une charmante ville de l'ouest de la France. Ce festival, créé en 2006, est devenu rapidement l'un des événements incontournables pour les amateurs de métal, offrant une programmation variée allant du heavy metal au black metal, en passant par le death metal et le doom metal. Chaque année, des milliers de fans se réunissent pour célébrer la musique métal dans une atmosphère de camaraderie et de passion.",
                 picture: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
                 address: {
+                  id: 1,
                   street: 'Rue du Champ Louet',
-                  number: '1',
-                  postalCode: '44190',
-                  city: 'Clisson',
-                  country: 'France',
-                  latitude: 47.09750371051718,
-                  longitude: -1.2700803720514064,
+                  houseNumber: '1',
+                  zip: '44190',
+                  city: nantes,
+                  latitude: 47.097503,
+                  longitude: -1.27008,
+                  otherDetails: '',
                 },
-                phone: '02 51 17 49 48',
+                telNumber: '02 51 17 49 48',
                 email: 'hellfest@hellfest.fr',
                 website: 'https://www.hellfest.fr',
                 type: PlaceType.PUBLIC_PLACE,
                 price: 105,
-                city: 'Clisson',
-                country: 'France',
                 tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
               },
             ]}
