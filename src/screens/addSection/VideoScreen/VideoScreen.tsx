@@ -20,6 +20,7 @@ import OverlayModule from './OverlayModule/OverlayModule'
  * @description Component that renders the Video screen.
  * @returns {React.JSX.Element} App component template
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function VideoScreen({ route }: any): React.JSX.Element {
   const {
     hasPermission,
@@ -35,10 +36,6 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
     setTimerValue,
     defaultTimerValue,
     setDefaultTimerValue,
-    endTimerValue,
-    setEndTimerValue,
-    defaultEndTimerValue,
-    setDefaultEndTimerValue,
     isTimerModalVisible,
     setIsTimerModalVisible,
   } = useVideoScreenController()
@@ -58,10 +55,6 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
         setTimerValue={setTimerValue}
         defaultTimerValue={defaultTimerValue}
         setDefaultTimerValue={setDefaultTimerValue}
-        endTimerValue={endTimerValue}
-        setEndTimerValue={setEndTimerValue}
-        defaultEndTimerValue={defaultEndTimerValue}
-        setDefaultEndTimerValue={setDefaultEndTimerValue}
         isTimerModalVisible={isTimerModalVisible}
         setIsTimerModalVisible={setIsTimerModalVisible}
         translatedText={route.params.translateText}

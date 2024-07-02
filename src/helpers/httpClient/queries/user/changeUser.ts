@@ -3,7 +3,6 @@ import { put } from '@helpers/httpClient/common'
 
 type ChangeUserProps = {
   username: string
-  userId: number
   email: string
   phoneNumber: string
   authToken: string
@@ -13,7 +12,6 @@ type ChangeUserProps = {
  * @function changeUser Send the user's email, username, and password to the server to change the user's information.
  * @param param Object containing the email, username, password, and headers.
  * @param param.username The user's username.
- * @param param.userId The user's id.
  * @param param.email The user's email.
  * @param param.phoneNumber The user's phone number.
  * @param param.authToken The user's auth token.
@@ -21,7 +19,6 @@ type ChangeUserProps = {
  */
 export default async function changeUser({
   username,
-  userId,
   email,
   phoneNumber,
   authToken,

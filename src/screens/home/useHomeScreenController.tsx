@@ -119,7 +119,6 @@ export default function useHomeScreenController(): HomeScreenController {
     )
     getAllPlaces()
     // Avoid infinite loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function onRefresh() {

@@ -13,6 +13,7 @@ import Category from './Views/Category'
 
 interface CarouselViewProps {
   places: Place[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
   getNearestPlaces: () => Place[]
   isLoading: boolean

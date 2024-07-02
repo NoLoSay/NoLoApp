@@ -130,6 +130,8 @@ export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Re
 }
 
 export async function changePassword({ email, newPassword }: ChangePasswordProps): Promise<ChangePasswordJSON> {
+  void email
+  void newPassword
   const responseStatus = Math.floor(Math.random() * 2 + 1)
   await new Promise(resolve => {
     setTimeout(() => {

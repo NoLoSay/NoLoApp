@@ -13,6 +13,7 @@ import TopBar from './Views/TopBar'
  * @property {any} route Route object
  */
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
   route: {
     params: {

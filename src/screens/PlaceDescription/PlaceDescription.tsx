@@ -40,6 +40,7 @@ interface PlaceDescriptionProps {
  */
 export default function PlaceDescription({ route }: PlaceDescriptionProps): React.JSX.Element {
   const { place } = route.params
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation: any = useNavigation()
 
   const getImageForTag = (tag: PlaceTag): (() => ImageSourcePropType) => {

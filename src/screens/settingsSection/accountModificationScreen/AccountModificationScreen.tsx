@@ -110,7 +110,6 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
 
   useEffect(() => {
     getRolesMutation.mutate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const changePassword = () => {
@@ -185,7 +184,6 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
         onDonePress={() => {
           changeRoleMutation.mutate({
             roleId: activeRole ?? 1,
-            roleName: roles?.find(role => role.id === activeRole)?.role ?? 'USER',
           })
         }}
         placeholder={{ label: 'Choisissez votre profil', value: null }}

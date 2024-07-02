@@ -4,6 +4,7 @@ import { Alert } from 'react-native'
 
 type SendVideoProps = {
   token: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 

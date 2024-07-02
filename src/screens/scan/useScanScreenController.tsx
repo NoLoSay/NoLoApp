@@ -33,6 +33,7 @@ interface ScanScreenController {
  * @description Controller that handles the logic for the scan screen.
  * @returns {ScanScreenController} Scan screen controller.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function useScanScreenController({ navigation }: any): ScanScreenController {
   const { account } = useContext(AccountContext)
   const { hasPermission, requestPermission } = useCameraPermission()

@@ -19,16 +19,17 @@ jobs:
           NODE_VERSION=$(cat _node-version)
           EOF
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install yarn
-        run: npm install -g yarn
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn
 
       - name: Check Typescript
         run: |
