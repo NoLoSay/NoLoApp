@@ -142,8 +142,13 @@ describe('MapScreenTests', () => {
                   "Le Château des Ducs de Bretagne est une imposante forteresse entourée de douves et de remparts, offrant une vue impressionnante dès l'approche. Sa construction a débuté au XIIIe siècle sous Pierre Mauclerc et a été achevée au XVe siècle par François II. Il incarne la puissance et le prestige des ducs de Bretagne. À l'intérieur de ses murs, on découvre un mélange captivant d'architecture médiévale et de style Renaissance, créant une atmosphère unique. Le château abrite aujourd'hui un musée qui raconte l'histoire de Nantes et de la Bretagne, avec des expositions interactives, des artefacts historiques et des maquettes impressionnantes.",
                 shortDescription:
                   'Forteresse historique, ancien siège des ducs de Bretagne, mêlant architecture médiévale et musée captivant.',
-                picture:
-                  'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
+                pictures: [
+                  {
+                    id: 1,
+                    hostingUrl:
+                      'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
+                  },
+                ],
                 address: {
                   id: 1,
                   street: 'Place Marc Elder',
@@ -168,7 +173,12 @@ describe('MapScreenTests', () => {
                   'Festival de musique métal de renommée mondiale, attirant des fans passionnés et offrant des performances exceptionnelles.',
                 longDescription:
                   "Hellfest est un festival de musique métal qui prend place dans un cadre pittoresque à Clisson, une charmante ville de l'ouest de la France. Ce festival, créé en 2006, est devenu rapidement l'un des événements incontournables pour les amateurs de métal, offrant une programmation variée allant du heavy metal au black metal, en passant par le death metal et le doom metal. Chaque année, des milliers de fans se réunissent pour célébrer la musique métal dans une atmosphère de camaraderie et de passion.",
-                picture: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
+                pictures: [
+                  {
+                    id: 1,
+                    hostingUrl: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
+                  },
+                ],
                 address: {
                   id: 1,
                   street: 'Rue du Champ Louet',
