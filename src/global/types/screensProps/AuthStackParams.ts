@@ -22,6 +22,7 @@ export type AuthStackParamList = {
   WebViewModal: React.JSX.Element
   PlaceDescription: React.JSX.Element
   VideoConsumptionModal: React.JSX.Element
+  FilterModal: React.JSX.Element
 }
 
 /**

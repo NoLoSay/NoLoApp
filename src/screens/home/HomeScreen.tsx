@@ -7,7 +7,6 @@
 
 import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import LoadingModal from '@components/LoadingModal'
 import { colors } from '@global/colors'
 import HeaderView from './Views/HeaderView'
@@ -21,7 +20,8 @@ import NoPlacesFound from './Views/NoPlacesFound'
  * @description Component that renders the Home screen.
  * @returns {React.JSX.Element} App component template
  */
-export default function HomeScreen(): React.JSX.Element {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function HomeScreen({ navigation }: any): React.JSX.Element {
   const {
     city,
     currentPage,
@@ -37,8 +37,8 @@ export default function HomeScreen(): React.JSX.Element {
     onRefresh,
     isRefreshing,
     isSuccessful,
-  } = useHomeScreenController()
-  const navigation = useNavigation()
+    goToFilterPage,
+  } = useHomeScreenController(navigation)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,6 +52,7 @@ export default function HomeScreen(): React.JSX.Element {
         setSearchValue={setSearchValue}
         getAllPlacesUsingSearch={getAllPlacesUsingSearch}
         navigation={navigation}
+        goToFilterPage={goToFilterPage}
       />
       {currentPage === 'carousel' && isSuccessful && places.length > 0 && (
         <CarouselView

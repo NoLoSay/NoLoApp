@@ -48,6 +48,7 @@ interface HomeScreenController {
   onRefresh: () => void
   isRefreshing: boolean
   isSuccessful: boolean
+  goToFilterPage: () => void
 }
 
 /**
@@ -55,7 +56,8 @@ interface HomeScreenController {
  * @description HomeScreenController hook logic function
  * @returns {HomeScreenController} The controller of the HomeScreen component
  */
-export default function useHomeScreenController(): HomeScreenController {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function useHomeScreenController(navigation: any): HomeScreenController {
   const [city, setCity] = useState('')
   const [currentPage, setCurrentPage] = useState<'map' | 'carousel'>('carousel')
   const [displaySearchBar, setDisplaySearchBar] = useState(false)
@@ -133,6 +135,11 @@ export default function useHomeScreenController(): HomeScreenController {
     setDisplaySearchBar(!displaySearchBar)
   }
 
+  function goToFilterPage() {
+    navigation.navigate('FilterModal')
+    setDisplaySearchBar(false)
+  }
+
   function getNearestPlaces() {
     let localisation = {
       latitude: 0,
@@ -169,5 +176,6 @@ export default function useHomeScreenController(): HomeScreenController {
     onRefresh,
     isRefreshing: noloPlacesMutation.isPending,
     isSuccessful: noloPlacesMutation.isSuccess || noloPlacesMutationUsingSearch.isSuccess,
+    goToFilterPage,
   }
 }

@@ -10,6 +10,7 @@ import colors from '@global/colors'
 import usePlacesNeedingTranslationController from './usePlacesNeedingTranslationController'
 import TopBar from './Views/TopBar'
 import ArtToDisplay from './Views/ArtToDisplay'
+import Button from '@components/Button'
 
 /**
  * @typedef Props
@@ -27,15 +28,32 @@ type Props = {
  * @returns {JSX.Element} PlacesNeedingTranslation component template
  */
 export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Element {
-  const { onCreatePress, onTextPress, onSendPress, artPieces, errorText, displayError } =
+  const { onCreatePress, onTextPress, onSendPress, artPieces, errorText, displayError, isModerator } =
     usePlacesNeedingTranslationController({
       navigation,
     })
 
   return (
     <SafeAreaView>
-      <TopBar navigation={navigation} />
+      <TopBar
+        navigation={navigation}
+        displayReturnArrow={false}
+      />
       <ScrollView>
+        <Button
+          text='Voir mes vidéos en attente de validation'
+          onPress={() => navigation.navigate('LibraryScreen')}
+          style={{ marginHorizontal: 18, marginBottom: 10 }}
+          textStyle={{ fontSize: 16 }}
+        />
+        {isModerator && (
+          <Button
+            text='Valider des vidéos'
+            onPress={() => console.log('Valider des vidéos')}
+            style={{ marginHorizontal: 18 }}
+            textStyle={{ fontSize: 16 }}
+          />
+        )}
         {!displayError &&
           artPieces.map((artPiece: ArtToTranslate) => (
             <ArtToDisplay
