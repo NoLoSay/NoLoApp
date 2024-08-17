@@ -9,12 +9,17 @@ export const images = {
   icons: {
     full: {
       add: () => require('../../assets/icons/full/add.png'),
+      art: () => require('../../assets/icons/full/art.png'),
       eye: () => require('../../assets/icons/full/eye.png'),
       home: () => require('../../assets/icons/full/home.png'),
-      username: () => require('../../assets/icons/full/username.png'),
+      hourglass: () => require('../../assets/icons/full/hourglass.png'),
+      music: () => require('../../assets/icons/full/music.png'),
       qr: () => require('../../assets/icons/full/qr.png'),
+      sciences: () => require('../../assets/icons/full/sciences.png'),
       shield: () => require('../../assets/icons/full/shield.png'),
+      sports: () => require('../../assets/icons/full/sports.png'),
       user: () => require('../../assets/icons/full/user.png'),
+      username: () => require('../../assets/icons/full/username.png'),
     },
     maps: {
       pin: () => require('../../assets/icons/maps/map_pin.png'),
@@ -32,6 +37,7 @@ export const images = {
       cross: () => require('../../assets/icons/outline/cross.png'),
       deaf: () => require('../../assets/icons/outline/deaf.png'),
       disabled: () => require('../../assets/icons/outline/disabled.png'),
+      filter: () => require('../../assets/icons/outline/filter.png'),
       home: () => require('../../assets/icons/outline/home.png'),
       hourglass: () => require('../../assets/icons/outline/hourglass.png'),
       library: () => require('../../assets/icons/outline/library.png'),

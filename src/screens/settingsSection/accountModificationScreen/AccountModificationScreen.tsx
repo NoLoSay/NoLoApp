@@ -186,6 +186,11 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
             roleId: activeRole ?? 1,
           })
         }}
+        onClose={() => {
+          changeRoleMutation.mutate({
+            roleId: activeRole ?? 1,
+          })
+        }}
         placeholder={{ label: 'Choisissez votre profil', value: null }}
         style={{
           viewContainer: {

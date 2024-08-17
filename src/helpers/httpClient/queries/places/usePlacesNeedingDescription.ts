@@ -29,6 +29,7 @@ export default function usePlacesNeedingDescription({
       }
     },
     onError: error => {
+      console.error(error)
       displayErrorModal(error.message)
     },
   })

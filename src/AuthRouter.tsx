@@ -23,6 +23,7 @@ import VideoConsumptionView from '@screens/VideoConsumptionView/VideoConsumption
 import VerifyEmail from '@screens/authentificationSection/verifyEmail/VerifyEmailScreen'
 import AccountModificationScreen from '@screens/settingsSection/accountModificationScreen/AccountModificationScreen'
 import AppRouter from './AppRouter'
+import FilterScreen from '@screens/home/FilterScreen'
 
 export default function App(): React.JSX.Element {
   const AuthStack = createNativeStackNavigator<AuthStackParamList>()
@@ -73,6 +74,10 @@ export default function App(): React.JSX.Element {
               <AuthStack.Screen
                 name='AccountModification'
                 component={AccountModificationScreen}
+              />
+              <AuthStack.Screen
+                name='FilterModal'
+                component={FilterScreen}
               />
             </AuthStack.Group>
             <AuthStack.Group screenOptions={{ presentation: 'fullScreenModal', gestureEnabled: true }}>

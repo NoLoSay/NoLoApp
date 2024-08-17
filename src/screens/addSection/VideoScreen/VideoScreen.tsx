@@ -42,13 +42,14 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
 
   if (!frontCamera || !hasPermission) return <NoCameraView hasPermission={hasPermission} />
   return (
-    <Camera
-      style={styles.camera}
-      device={frontCamera}
-      ref={cameraRef}
-      isActive={isCameraActive}
-      video
-    >
+    <>
+      <Camera
+        style={StyleSheet.absoluteFill}
+        device={frontCamera}
+        ref={cameraRef}
+        isActive={isCameraActive}
+        video
+      />
       <OverlayModule
         isRecording={isRecording}
         timerValue={timerValue}
@@ -72,7 +73,7 @@ export default function VideoScreen({ route }: any): React.JSX.Element {
         visible={isErrorModalVisible}
         errorText={errorText}
       />
-    </Camera>
+    </>
   )
 }
 
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+    zIndex: 0,
   },
   bottomContainer: {
     position: 'absolute',

@@ -3,13 +3,15 @@
  * @module usePlacesNeedingTranslationController
  * @requires react react-native
  */
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { ArtToTranslate } from '@global/types/Places'
 import usePlacesNeedingDescription from '@helpers/httpClient/queries/places/usePlacesNeedingDescription'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { Alert, Linking } from 'react-native'
 import useSendVideo from '@helpers/httpClient/queries/videos/useSendVideo'
+import { AccountElevationEnum } from '@global/types/Account'
+import { useFocusEffect } from '@react-navigation/native'
 
 /**
  * @typedef {Object} usePlacesNeedingTranslationControllerType
@@ -26,6 +28,7 @@ type usePlacesNeedingTranslationControllerType = {
   artPieces: ArtToTranslate[]
   displayError: boolean
   errorText: string
+  isModerator: boolean
 }
 
 /**
@@ -70,9 +73,46 @@ export default function usePlacesNeedingTranslationController({
     setDisplayError(true)
   }
 
-  useEffect(() => {
-    placesNeedingTranslationMutation.mutate()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      if (account.elevation !== AccountElevationEnum.CREATOR) {
+        setArtPieces([])
+        Alert.alert(
+          'Erreur de permission',
+          "Vous avez besoin d'un compte créateur pour accéder à cette fonctionnalité",
+          [
+            {
+              text: 'Annuler',
+              style: 'cancel',
+              onPress: () => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                navigation.goBack()
+              },
+            },
+            {
+              text: 'Changer son profil pour créateur',
+              onPress: () => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                navigation.navigate('Home')
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                navigation.navigate('SettingsModal')
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                navigation.navigate('AccountModification')
+              },
+            },
+          ]
+        )
+      } else if (account.elevation === AccountElevationEnum.CREATOR) {
+        placesNeedingTranslationMutation.mutate()
+      }
+
+      return () => {}
+    }, [account.elevation])
+  )
 
   /**
    * @function onCreatePress
@@ -80,7 +120,6 @@ export default function usePlacesNeedingTranslationController({
    * @param textToTranslate - Text to translate
    */
   const onCreatePress = (textToTranslate: string) => {
-    navigation.popToTop()
     navigation.navigate('VideoScreen', {
       translateText: textToTranslate,
     })
@@ -145,5 +184,6 @@ export default function usePlacesNeedingTranslationController({
     artPieces,
     displayError,
     errorText,
+    isModerator: account.elevation === AccountElevationEnum.MODERATOR,
   }
 }
