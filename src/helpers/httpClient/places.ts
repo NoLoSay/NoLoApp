@@ -5,76 +5,8 @@
  */
 
 import PlacesNeedingTranslationJSON, { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
-import { Place, ArtToTranslate, PlaceTag, PlaceType } from '@global/types/Places'
+import { ArtToTranslate } from '@global/types/Places'
 import { get } from './common'
-
-const nantes = {
-  id: 1,
-  name: 'Nantes',
-  zip: '44000',
-  department: {
-    id: 1,
-    name: 'Loire-Atlantique',
-    country: {
-      id: 1,
-      name: 'France',
-    },
-  },
-}
-
-const PLACES: Place[] = [
-  {
-    id: 1,
-    name: 'Château des ducs de Bretagne',
-    longDescription:
-      "Le Château des Ducs de Bretagne est une imposante forteresse entourée de douves et de remparts, offrant une vue impressionnante dès l'approche. Sa construction a débuté au XIIIe siècle sous Pierre Mauclerc et a été achevée au XVe siècle par François II. Il incarne la puissance et le prestige des ducs de Bretagne. À l'intérieur de ses murs, on découvre un mélange captivant d'architecture médiévale et de style Renaissance, créant une atmosphère unique. Le château abrite aujourd'hui un musée qui raconte l'histoire de Nantes et de la Bretagne, avec des expositions interactives, des artefacts historiques et des maquettes impressionnantes.",
-    shortDescription:
-      'Forteresse historique, ancien siège des ducs de Bretagne, mêlant architecture médiévale et musée captivant.',
-    picture:
-      'https://www.chateaunantes.fr/wp-content/uploads/2020/02/Musee-dhistoire-de-Nantes.-Nantes-©-David-Gallard-_-LVAN-1800x1200.jpg',
-    address: {
-      id: 1,
-      street: 'Place Marc Elder',
-      houseNumber: '4',
-      zip: '44000',
-      city: nantes,
-      latitude: 47.214167,
-      longitude: -1.556944,
-      otherDetails: '',
-    },
-    telNumber: '02 51 17 49 48',
-    email: 'chateau@nantes.fr',
-    website: 'https://www.chateaunantes.fr/fr',
-    type: PlaceType.MUSEUM,
-    price: 0,
-    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
-  },
-  {
-    id: 2,
-    name: 'Hellfest',
-    shortDescription:
-      'Festival de musique métal de renommée mondiale, attirant des fans passionnés et offrant des performances exceptionnelles.',
-    longDescription:
-      "Hellfest est un festival de musique métal qui prend place dans un cadre pittoresque à Clisson, une charmante ville de l'ouest de la France. Ce festival, créé en 2006, est devenu rapidement l'un des événements incontournables pour les amateurs de métal, offrant une programmation variée allant du heavy metal au black metal, en passant par le death metal et le doom metal. Chaque année, des milliers de fans se réunissent pour célébrer la musique métal dans une atmosphère de camaraderie et de passion.",
-    picture: 'https://lecanalauditif.ca/wp-content/uploads/2021/01/Hellfest-.jpg',
-    address: {
-      id: 1,
-      street: 'Rue du Champ Louet',
-      houseNumber: '1',
-      zip: '44190',
-      city: nantes,
-      latitude: 47.097503,
-      longitude: -1.27008,
-      otherDetails: '',
-    },
-    telNumber: '02 51 17 49 48',
-    email: 'hellfest@hellfest.fr',
-    website: 'https://www.hellfest.fr',
-    type: PlaceType.PUBLIC_PLACE,
-    price: 105,
-    tags: [PlaceTag.NOLOSAY, PlaceTag.DISABILITY_FRIENDLY, PlaceTag.DEAF_FRIENDLY, PlaceTag.BLIND_FRIENDLY],
-  },
-]
 
 /**
  * @function getPlaces Get the places from the server.
@@ -118,14 +50,6 @@ export default async function getPlaces({
 
     if (!response.ok) {
       throw new Error(responseData.message)
-    }
-
-    if (__DEV__ && responseData === 0) {
-      return {
-        json: PLACES,
-        status: response.status,
-        message: responseData.message,
-      }
     }
 
     return {
