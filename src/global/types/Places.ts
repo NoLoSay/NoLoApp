@@ -23,7 +23,10 @@ export interface Place {
   name: string
   shortDescription: string
   longDescription: string
-  picture: string
+  pictures: {
+    id: number
+    hostingUrl: string
+  }[]
   address: {
     id: number
     houseNumber: string
