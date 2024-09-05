@@ -75,7 +75,7 @@ coverage/
 # testing
 /coverage
 
-.env
+.env*
 
 # Yarn
 .yarn/*
