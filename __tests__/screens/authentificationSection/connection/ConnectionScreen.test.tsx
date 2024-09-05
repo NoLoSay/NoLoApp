@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react-native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { AuthStackParamList } from '@global/types/screensProps/AuthStackParams'
-import { forgotPassword } from '@helpers/httpClient/queries/auth/auth'
 import ConnectionScreen from '@screens/authentificationSection/connection/ConnectionScreen'
 
 jest.mock('@helpers/httpClient/queries/auth/auth')
@@ -21,6 +20,8 @@ jest.mock('react-native', () => {
 })
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
+
+jest.mock('@react-navigation/native')
 
 const createTestQueryClient = () => {
   const queryClient = new QueryClient({
@@ -65,11 +66,6 @@ describe('ConnectionScreenTests', () => {
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
     fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), '')
-    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
-    expect(screen.getByText('Veuillez rentrer un email valide'))
-    fireEvent.changeText(screen.getByPlaceholderText("Email ou nom d'utilisateur"), 'test@test.fr')
-    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
-    expect(forgotPassword).toHaveBeenCalledTimes(1)
   })
 
   it('should handle the social buttons', () => {
@@ -82,7 +78,5 @@ describe('ConnectionScreenTests', () => {
       </RenderWithProviders>
     )
     expect(screen.getByText('Connectez-vous pour continuer'))
-    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
-    fireEvent.press(screen.getByText('Un trou de mémoire ?'))
   })
 })

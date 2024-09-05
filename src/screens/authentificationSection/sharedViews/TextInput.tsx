@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ReturnKeyType,
   Keyboard,
+  ViewStyle,
 } from 'react-native'
 import { colors } from '@global/colors'
 
@@ -24,6 +25,7 @@ interface InputProps {
   rightIcon?: ImageSourcePropType
   value: string
   setValue: (value: string) => void
+  containerStyle?: ViewStyle
 }
 
 export default function Input({
@@ -38,9 +40,10 @@ export default function Input({
   rightIcon,
   value,
   setValue,
+  containerStyle,
 }: InputProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {leftIcon && (
         <Image
           style={styles.icon}
