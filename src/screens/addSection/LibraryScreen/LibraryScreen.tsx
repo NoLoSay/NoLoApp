@@ -6,33 +6,35 @@
 
 import React from 'react'
 import { StyleSheet, ScrollView, View, Text } from 'react-native'
-import LoadingModal from '@components/LoadingModal'
 import colors from '@global/colors'
 import useLibraryScreenController from './useLibraryScreenController'
 import TopBar from './Views/TopBar'
 import VideoDisplay from './Views/VideoDisplay'
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
 export default function LibraryScreen({ navigation }: Props) {
-  const { videos, loading, error } = useLibraryScreenController()
+  const { videos, displayVideos, error } = useLibraryScreenController()
 
   return (
     <View style={styles.container}>
       <TopBar navigation={navigation} />
       <ScrollView>
-        {!error &&
+        {displayVideos &&
           videos.map(video => (
             <VideoDisplay
-              key={video.id}
+              key={video.item.name}
               video={video}
             />
           ))}
         {error && <Text style={styles.errorText}>{error}</Text>}
+        {!displayVideos && !error && (
+          <Text style={styles.text}>Vous n&apos;avez réalisé aucune vidéo pour le moment !</Text>
+        )}
       </ScrollView>
-      <LoadingModal visible={loading} />
     </View>
   )
 }
@@ -45,6 +47,14 @@ const styles = StyleSheet.create({
   errorText: {
     textAlign: 'center',
     color: colors.error,
+    fontFamily: 'Poppins',
+    fontWeight: '600',
+    fontSize: 16,
+    paddingHorizontal: 16,
+  },
+  text: {
+    textAlign: 'center',
+    color: colors.black,
     fontFamily: 'Poppins',
     fontWeight: '600',
     fontSize: 16,

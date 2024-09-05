@@ -19,6 +19,7 @@ import NoCameraView from './Views/NoCameraView'
  * @description Component that renders the Scan screen.
  * @returns {React.JSX.Element} App component template
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ScanScreen({ navigation }: any): React.JSX.Element {
   const { hasPermission, backCamera, isQRScanningActive, codeScanner, navigateToVideoConsumption } =
     useScanScreenController({ navigation })
@@ -29,7 +30,7 @@ export default function ScanScreen({ navigation }: any): React.JSX.Element {
         hasPermission={hasPermission}
         onNavigationButtonPressed={() => {
           if (__DEV__) {
-            navigateToVideoConsumption('21yj2ji6D1s')
+            navigateToVideoConsumption('1')
           } else {
             navigation.goBack()
           }

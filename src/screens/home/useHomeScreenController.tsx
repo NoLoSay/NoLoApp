@@ -10,8 +10,10 @@
 import { useContext, useEffect, useState } from 'react'
 import Geolocation from '@react-native-community/geolocation'
 import { Place } from '@global/types/Places'
-import { AccountContext } from '@global/contexts/AccountProvider'
+import { AccountContext, defaultLocalisation } from '@global/contexts/AccountProvider'
 import getCity from '@helpers/httpClient/localization'
+import { Alert, Linking } from 'react-native'
+import { GeolocationResponse } from '@global/types/Account'
 import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
 
 /**
@@ -46,6 +48,7 @@ interface HomeScreenController {
   onRefresh: () => void
   isRefreshing: boolean
   isSuccessful: boolean
+  goToFilterPage: () => void
 }
 
 /**
@@ -53,7 +56,8 @@ interface HomeScreenController {
  * @description HomeScreenController hook logic function
  * @returns {HomeScreenController} The controller of the HomeScreen component
  */
-export default function useHomeScreenController(): HomeScreenController {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function useHomeScreenController(navigation: any): HomeScreenController {
   const [city, setCity] = useState('')
   const [currentPage, setCurrentPage] = useState<'map' | 'carousel'>('carousel')
   const [displaySearchBar, setDisplaySearchBar] = useState(false)
@@ -64,10 +68,12 @@ export default function useHomeScreenController(): HomeScreenController {
     setPlaces,
     latitude: account.localisation?.coords.latitude || 0,
     longitude: account.localisation?.coords.longitude || 0,
+    token: account.accessToken,
   })
   const noloPlacesMutationUsingSearch = useNoloPlaces({
     setPlaces,
     q: searchValue,
+    token: account.accessToken,
   })
 
   const getAllPlaces = () => {
@@ -81,16 +87,40 @@ export default function useHomeScreenController(): HomeScreenController {
   }
 
   useEffect(() => {
-    Geolocation.getCurrentPosition(async info => {
-      setAccount({ ...account, localisation: info })
+    Geolocation.getCurrentPosition(
+      async (info: GeolocationResponse) => {
+        setAccount({ ...account, localisation: info })
 
-      const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
+        const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
 
-      setCity(reversedCity)
-    })
+        setCity(reversedCity)
+      },
+      async () => {
+        setCity('Nantes')
+        setAccount({
+          ...account,
+          localisation: defaultLocalisation,
+        })
+        const reversedCity = await getCity({
+          latitude: defaultLocalisation.coords.latitude,
+          longitude: defaultLocalisation.coords.longitude,
+        })
+
+        setCity(reversedCity)
+
+        Alert.alert(
+          'Localisation introuvable',
+          "Vous avez désactivé la localisation, pour optimiser votre expérience, veuillez l'activer dans vos réglages",
+          [
+            { text: 'Activer', onPress: () => Linking.openSettings() },
+            { text: 'Plus tard', style: 'cancel' },
+          ]
+        )
+      },
+      { enableHighAccuracy: true }
+    )
     getAllPlaces()
     // Avoid infinite loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function onRefresh() {
@@ -105,6 +135,11 @@ export default function useHomeScreenController(): HomeScreenController {
     setDisplaySearchBar(!displaySearchBar)
   }
 
+  function goToFilterPage() {
+    navigation.navigate('FilterModal')
+    setDisplaySearchBar(false)
+  }
+
   function getNearestPlaces() {
     let localisation = {
       latitude: 0,
@@ -115,10 +150,10 @@ export default function useHomeScreenController(): HomeScreenController {
 
     const placesOrderedByDistance = placesBis.sort((a, b) => {
       const distanceA = Math.sqrt(
-        (a.coordinates.latitude - localisation.latitude) ** 2 + (a.coordinates.longitude - localisation.longitude) ** 2
+        (a.address.latitude - localisation.latitude) ** 2 + (a.address.longitude - localisation.longitude) ** 2
       )
       const distanceB = Math.sqrt(
-        (b.coordinates.latitude - localisation.latitude) ** 2 + (b.coordinates.longitude - localisation.longitude) ** 2
+        (b.address.latitude - localisation.latitude) ** 2 + (b.address.longitude - localisation.longitude) ** 2
       )
 
       return distanceA - distanceB
@@ -141,5 +176,6 @@ export default function useHomeScreenController(): HomeScreenController {
     onRefresh,
     isRefreshing: noloPlacesMutation.isPending,
     isSuccessful: noloPlacesMutation.isSuccess || noloPlacesMutationUsingSearch.isSuccess,
+    goToFilterPage,
   }
 }

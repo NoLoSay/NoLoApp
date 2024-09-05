@@ -3,7 +3,7 @@
  * @description Controller for the ForgotPassword screen.
  * @requires react
  */
-import { forgotPassword } from '@helpers/httpClient/auth'
+import { forgotPassword } from '@helpers/httpClient/queries/auth/auth'
 import { useState } from 'react'
 
 type ForgotPassword = {

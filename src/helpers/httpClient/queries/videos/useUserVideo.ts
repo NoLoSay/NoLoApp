@@ -1,21 +1,21 @@
 import { useMutation } from '@tanstack/react-query'
 import getUserVideos from '@helpers/httpClient/videos'
-import { Video } from '@global/types/Videos'
-import VideosJSON from '@global/types/httpClient/queries/videos'
+import VideosJSON, { VideoLibrary } from '@global/types/httpClient/queries/videos'
 
 type UpdatePlacesDisplayedProps = {
   userId: number
-  setVideos: (places: Video[]) => void
+  setVideos: (places: VideoLibrary[]) => void
   setError: (text: string) => void
+  token: string
 }
 
-export default function useUserVideo({ setVideos, userId, setError }: UpdatePlacesDisplayedProps) {
-  function updatePlacesDisplayed({ userVideos }: { userVideos: Video[] }) {
+export default function useUserVideo({ setVideos, userId, setError, token }: UpdatePlacesDisplayedProps) {
+  function updatePlacesDisplayed({ userVideos }: { userVideos: VideoLibrary[] }) {
     setVideos(userVideos)
   }
 
   const mutation = useMutation<VideosJSON>({
-    mutationFn: () => getUserVideos({ userId }),
+    mutationFn: () => getUserVideos({ userId, token }),
     onSuccess: data => {
       try {
         updatePlacesDisplayed({ userVideos: data.json })

@@ -17,6 +17,7 @@ import useMapViewController from './useMapViewController'
 
 interface Props {
   places: Place[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
@@ -49,7 +50,7 @@ export default function PlacesMapView({ places, navigation }: Props): JSX.Elemen
         {places.map(marker => (
           <Marker
             key={marker.id}
-            coordinate={marker.coordinates}
+            coordinate={{ longitude: marker.address.longitude, latitude: marker.address.latitude }}
             image={images.icons.maps.pin()}
             onPress={() => onMarkerPress(marker)}
           />

@@ -45,6 +45,18 @@ First launch your metro :
 yarn start
 ```
 
+Compile pods on ios :
+
+```sh
+cd ios && pod install
+```
+
+Generate the entry point for the app :
+
+```sh
+yarn build:ios
+```
+
 Then launch the app on your device, depending on the wanted OS :
 
 ```sh

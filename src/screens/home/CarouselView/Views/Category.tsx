@@ -8,10 +8,11 @@
  */
 
 import React from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Place } from '@global/types/Places'
+import { Image, ImageSourcePropType, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Place, PlaceTag } from '@global/types/Places'
 import ImageLoader from '@components/ImageLoader'
 import CategorySeparator from './CategorySeparator'
+import images from '@global/images'
 
 interface Props {
   text: string
@@ -29,6 +30,21 @@ interface Props {
  * @returns {React.JSX.Element}
  */
 export default function Category({ text, places, navigation }: Props): React.JSX.Element {
+  const getImageForTag = (tag: PlaceTag): (() => ImageSourcePropType) => {
+    switch (tag) {
+      case PlaceTag.BLIND_FRIENDLY:
+        return images.icons.outline.blind
+      case PlaceTag.DEAF_FRIENDLY:
+        return images.icons.outline.deaf
+      case PlaceTag.DISABILITY_FRIENDLY:
+        return images.icons.outline.disabled
+      case PlaceTag.OTHER:
+        return images.icons.outline.other
+      default:
+        return images.logos.heart
+    }
+  }
+
   return (
     <View style={styles.container}>
       <CategorySeparator text={text} />
@@ -44,18 +60,29 @@ export default function Category({ text, places, navigation }: Props): React.JSX
           >
             <TouchableOpacity onPress={() => navigation.navigate('PlaceDescription', { place: item })}>
               <ImageLoader
-                imageURL={item.image}
+                imageURL={item.pictures[0].hostingUrl}
                 imageStyle={{
-                  width: 96,
-                  height: 154,
+                  width: 280,
+                  height: 280,
                   borderRadius: 20,
                 }}
               />
             </TouchableOpacity>
-            <Text style={styles.itemText}>
-              {item.name.length > 13 ? `${item.name.substring(0, 13)}...` : item.name}
-            </Text>
-            <Text style={styles.itemText}>{item.city}</Text>
+            <View style={{ paddingHorizontal: 8, paddingTop: 4, flexDirection: 'column' }}>
+              <Text style={styles.itemText}>{item.name}</Text>
+              <Text style={styles.itemAddressText}>
+                {item.address.houseNumber} {item.address.street}, {item.address.city.name}
+              </Text>
+              <View style={{ flexDirection: 'row' }}>
+                {item.tags.map(tag => (
+                  <Image
+                    key={tag}
+                    source={getImageForTag(tag)()}
+                    style={styles.tagIcon}
+                  />
+                ))}
+              </View>
+            </View>
           </View>
         ))}
         {places.length === 0 && <Text style={styles.itemText}>Aucun lieu trouvé</Text>}
@@ -69,11 +96,26 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   itemText: {
-    fontSize: 12,
-    textAlign: 'center',
+    fontSize: 14,
+    textAlign: 'left',
+    fontFamily: 'Poppins',
+    fontWeight: 'bold',
+  },
+  itemAddressText: {
+    fontSize: 14,
+    textAlign: 'left',
+    fontFamily: 'Poppins',
+    fontWeight: '300',
+    marginVertical: 6,
   },
   categoryContainer: {
     flexDirection: 'column',
     marginRight: 16,
+  },
+  tagIcon: {
+    height: 32,
+    width: 32,
+    resizeMode: 'contain',
+    marginRight: 8,
   },
 })
