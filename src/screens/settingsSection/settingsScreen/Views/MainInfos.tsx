@@ -6,9 +6,10 @@
  */
 
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Alert, Pressable } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import colors from '@global/colors'
+import DeviceInfo from 'react-native-device-info'
 
 type Props = {
   accountImage: string
@@ -26,7 +27,11 @@ type Props = {
  */
 export default function MainInfos({ accountImage, email, username }: Props) {
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      delayLongPress={3000}
+      onLongPress={() => Alert.alert('Version number', DeviceInfo.getVersion())}
+    >
       <FastImage
         style={styles.accountImage}
         source={{ uri: accountImage }}
@@ -35,7 +40,7 @@ export default function MainInfos({ accountImage, email, username }: Props) {
         <Text style={styles.name}>{email}</Text>
         <Text style={styles.username}>{`@${username}`}</Text>
       </View>
-    </View>
+    </Pressable>
   )
 }
 

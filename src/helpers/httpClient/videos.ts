@@ -5,7 +5,7 @@
  */
 
 import VideosJSON, { ItemVideosJSON } from '@global/types/httpClient/queries/videos'
-import { DEV_VIDEO_API_URL, PROD_VIDEO_API_URL } from '@env'
+import { VIDEO_API_URL } from '@env'
 import { get } from './common'
 
 type GetUserVideosParams = {
@@ -76,17 +76,14 @@ export async function sendTranslationVideo({
     uri,
     type: 'video/mp4',
   })
-  const response = await fetch(
-    __DEV__ ? `${DEV_VIDEO_API_URL}/upload/${artworkId}` : `${PROD_VIDEO_API_URL}/upload/${artworkId}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    }
-  )
+  const response = await fetch(`${VIDEO_API_URL}/upload/${artworkId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  })
 
   return response.ok
 }

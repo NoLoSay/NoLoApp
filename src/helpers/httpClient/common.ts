@@ -6,7 +6,7 @@
  */
 
 import { NativeModules, Platform } from 'react-native'
-import { DEV_API_URL, PROD_API_URL } from '@env'
+import { API_URL } from '@env'
 import { Header } from '@global/types/httpClient/Header'
 
 /**
@@ -46,7 +46,7 @@ interface PostProps {
  * @returns Promise of a Response object
  */
 export function post({
-  url = PROD_API_URL,
+  url = API_URL,
   endpoint,
   body,
   headers = defaultHeaders,
@@ -73,7 +73,7 @@ export function post({
  * @returns Promise of a Response object
  */
 export function put({
-  url = PROD_API_URL,
+  url = API_URL,
   endpoint,
   body,
   headers = defaultHeaders,
@@ -107,7 +107,7 @@ interface DeleteProps {
  * @returns Promise of a Response object
  */
 export function deleteRequest({
-  url = PROD_API_URL,
+  url = API_URL,
   endpoint,
   headers = defaultHeaders,
   authorizationToken = '',
@@ -138,7 +138,7 @@ interface GetProps {
  * @returns Promise of a Response object
  */
 export function get({
-  url = PROD_API_URL,
+  url = API_URL,
   endpoint,
   headers = defaultHeaders,
   authorizationToken = '',
@@ -173,18 +173,15 @@ interface RequestServerProps {
  * @returns Promise of a Response object
  */
 export function requestServer({
-  url = PROD_API_URL,
+  url = API_URL,
   endpoint,
   method,
   headers,
   body,
   authorizationToken,
 }: RequestServerProps): Promise<Response> {
-  let finalURL
-  if (url === PROD_API_URL && __DEV__) finalURL = DEV_API_URL
-  else finalURL = url
-  if (__DEV__) console.log('finalURL:', finalURL + endpoint)
-  return fetch(finalURL + endpoint, {
+  if (__DEV__) console.log('finalURL:', url + endpoint)
+  return fetch(url + endpoint, {
     method,
     headers: {
       Accept: headers.Accept,
