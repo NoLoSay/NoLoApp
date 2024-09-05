@@ -53,8 +53,6 @@ export default function PlacesMapView({ places, navigation }: Props): JSX.Elemen
             coordinate={{ longitude: marker.address.longitude, latitude: marker.address.latitude }}
             image={images.icons.maps.pin()}
             onPress={() => onMarkerPress(marker)}
-            // @ts-expect-error - n
-            height={150}
           />
         ))}
       </MapView>

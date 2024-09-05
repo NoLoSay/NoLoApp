@@ -30,7 +30,7 @@ export default function MainInfos({ accountImage, email, username }: Props) {
     <Pressable
       style={styles.container}
       delayLongPress={3000}
-      onLongPress={() => Alert.alert('Version number', DeviceInfo.getVersion())}
+      onLongPress={() => Alert.alert('Version number', `${DeviceInfo.getVersion()}.${DeviceInfo.getBuildNumber()}`)}
     >
       <FastImage
         style={styles.accountImage}
