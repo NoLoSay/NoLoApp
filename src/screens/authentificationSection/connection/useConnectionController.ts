@@ -6,8 +6,6 @@
  */
 
 import { useState } from 'react'
-import { Alert } from 'react-native'
-import { forgotPassword } from '@helpers/httpClient/queries/auth/auth'
 import useConnect from '@helpers/httpClient/queries/auth/useConnect'
 
 interface ConnectionController {
@@ -39,7 +37,6 @@ export default function useConnectionController({ navigation }: useConnectionCon
   const [password, setPassword] = useState<string>(__DEV__ ? 'password' : '')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
-  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
   const connectionMutation = useConnect({ formUsername: email, password, navigation, setError })
 
   /**
