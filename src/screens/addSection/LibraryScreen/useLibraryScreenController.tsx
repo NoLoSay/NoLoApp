@@ -6,23 +6,27 @@
 
 import { useContext, useEffect, useState } from 'react'
 import { AccountContext } from '@global/contexts/AccountProvider'
-import { Video } from '@global/types/Videos'
+import { VideoLibrary } from '@global/types/httpClient/queries/videos'
 import useUserVideo from '@helpers/httpClient/queries/videos/useUserVideo'
 
 export default function useLibraryScreenController() {
   const { account } = useContext(AccountContext)
-  const [videos, setVideos] = useState<Video[]>([])
+  const [videos, setVideos] = useState<VideoLibrary[]>([])
   const [error, setError] = useState<string>('')
-  const userVideoMutation = useUserVideo({ setVideos, userId: account.accountID, setError })
+  const [displayVideos, setDisplayVideos] = useState<boolean>(false)
+  const userVideoMutation = useUserVideo({ setVideos, userId: account.accountID, setError, token: account.accessToken })
 
   useEffect(() => {
     userVideoMutation.mutate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    setDisplayVideos(videos[0] != null)
+  }, [videos])
+
   return {
-    account,
     videos,
+    displayVideos,
     loading: userVideoMutation.isPending,
     error,
   }

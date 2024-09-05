@@ -17,26 +17,30 @@ import images from '@global/images'
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
+  displayReturnArrow?: boolean
 }
 
 /**
  * @function TopBar
  * @description Component that renders the TopBar view.
  * @param navigation TopBar navigation object
+ * @param displayReturnArrow Boolean indicating if the back arrow should be displayed
  * @returns {React.JSX.Element} TopBar component template
  */
-export default function TopBar({ navigation }: Props): JSX.Element {
+export default function TopBar({ navigation, displayReturnArrow = true }: Props): JSX.Element {
   return (
     <View style={styles.container}>
-      <Pressable
-        style={styles.pressablePosition}
-        onPress={() => navigation.goBack()}
-      >
-        <FastImage
-          source={images.icons.outline.backArrow()}
-          style={styles.backIcon}
-        />
-      </Pressable>
+      {displayReturnArrow && (
+        <Pressable
+          style={styles.pressablePosition}
+          onPress={() => navigation.goBack()}
+        >
+          <FastImage
+            source={images.icons.outline.backArrow()}
+            style={styles.backIcon}
+          />
+        </Pressable>
+      )}
       <Text style={styles.title}>Oeuvres à traduire</Text>
     </View>
   )

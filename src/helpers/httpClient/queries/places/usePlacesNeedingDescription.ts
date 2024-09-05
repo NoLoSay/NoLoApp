@@ -1,20 +1,25 @@
 import { useMutation } from '@tanstack/react-query'
-import { PlaceNeedingTranslation } from '@global/types/Places'
+import { ArtToTranslate } from '@global/types/Places'
 import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
 import { getPlacesNeedingDescription } from '@helpers/httpClient/places'
 
 type UpdatePlacesDisplayedProps = {
-  setPlaces: (places: PlaceNeedingTranslation[]) => void
+  setArtPieces: (artPieces: ArtToTranslate[]) => void
   displayErrorModal: (text: string) => void
+  token: string
 }
 
-export default function usePlacesNeedingDescription({ setPlaces, displayErrorModal }: UpdatePlacesDisplayedProps) {
-  function updatePlacesDisplayed({ newPlaces }: { newPlaces: PlaceNeedingTranslation[] }) {
-    setPlaces(newPlaces)
+export default function usePlacesNeedingDescription({
+  setArtPieces,
+  displayErrorModal,
+  token,
+}: UpdatePlacesDisplayedProps) {
+  function updatePlacesDisplayed({ newPlaces }: { newPlaces: ArtToTranslate[] }) {
+    setArtPieces(newPlaces)
   }
 
   const mutation = useMutation<PlacesNeedingTranslationJSON>({
-    mutationFn: getPlacesNeedingDescription,
+    mutationFn: () => getPlacesNeedingDescription({ token }),
     onSuccess: data => {
       try {
         updatePlacesDisplayed({ newPlaces: data.json })
@@ -24,6 +29,7 @@ export default function usePlacesNeedingDescription({ setPlaces, displayErrorMod
       }
     },
     onError: error => {
+      console.error(error)
       displayErrorModal(error.message)
     },
   })

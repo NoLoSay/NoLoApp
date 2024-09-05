@@ -33,6 +33,7 @@ interface ScanScreenController {
  * @description Controller that handles the logic for the scan screen.
  * @returns {ScanScreenController} Scan screen controller.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function useScanScreenController({ navigation }: any): ScanScreenController {
   const { account } = useContext(AccountContext)
   const { hasPermission, requestPermission } = useCameraPermission()
@@ -62,12 +63,9 @@ export default function useScanScreenController({ navigation }: any): ScanScreen
     }
   }, [hasPermission, requestPermission])
 
-  function navigateToVideoConsumption(videoId: string | undefined) {
+  function navigateToVideoConsumption(itemId: string | undefined) {
     navigation.navigate('VideoConsumptionModal', {
-      videoId,
-      title: "Titre de l'oeuvre",
-      videoText:
-        'Do qui commodo cupidatat dolor velit dolor elit consequat mollit incididunt nisi officia. Exercitation aute ut dolore eiusmod ut aute veniam nostrud id laboris amet in culpa dolore.',
+      itemId,
     })
   }
 

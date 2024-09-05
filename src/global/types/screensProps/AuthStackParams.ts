@@ -16,11 +16,14 @@ export type AuthStackParamList = {
   Subscription: undefined
   Connection: undefined
   ForgotPassword: undefined
+  VerifyEmail: undefined
   AppRouter: undefined
   SettingsModal: undefined
+  AccountModification: undefined
   WebViewModal: React.JSX.Element
   PlaceDescription: React.JSX.Element
   VideoConsumptionModal: React.JSX.Element
+  FilterModal: React.JSX.Element
 }
 
 /**
@@ -37,6 +40,8 @@ export type ConnectionScreenProps = NativeStackScreenProps<AuthStackParamList, '
  */
 export type ForgotPasswordScreenProps = NativeStackScreenProps<AuthStackParamList, 'ForgotPassword'>
 
+export type VerifyEmailScreenProps = NativeStackScreenProps<AuthStackParamList, 'VerifyEmail'>
+
 /**
  * @typedef {Object} AppRouterScreenProps
  */
@@ -46,6 +51,11 @@ export type AppRouterScreenProps = NativeStackScreenProps<AuthStackParamList, 'A
  * @typedef {Object} SettingsModalScreenProps
  */
 export type SettingsModalScreenProps = NativeStackScreenProps<AuthStackParamList, 'SettingsModal'>
+
+/**
+ * @typedef {Object} SettingsModalScreenProps
+ */
+export type AccountModificationProps = NativeStackScreenProps<AuthStackParamList, 'AccountModification'>
 
 /**
  * @typedef {Object} WebViewModalScreenProps

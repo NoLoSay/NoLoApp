@@ -19,6 +19,7 @@ interface MapViewController {
 }
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
@@ -51,8 +52,8 @@ export default function useMapViewController({ navigation }: Props): MapViewCont
     // @ts-ignore: Object is possibly 'null'.
     mapRef.current?.animateToRegion(
       {
-        latitude: place.coordinates.latitude,
-        longitude: place.coordinates.longitude,
+        latitude: place.address.latitude,
+        longitude: place.address.longitude,
         latitudeDelta: 0.02,
         longitudeDelta: 0.02,
       },

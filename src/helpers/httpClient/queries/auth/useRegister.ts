@@ -3,13 +3,14 @@ import { useMutation } from '@tanstack/react-query'
 import { Header } from '@global/types/httpClient/Header'
 import { AccountContext } from '@global/contexts/AccountProvider'
 import RegisterJSON from '@global/types/httpClient/auth/Registration'
-import { subscribe } from '@helpers/httpClient/auth'
+import { subscribe } from '@helpers/httpClient/queries/auth/auth'
 
 interface RegisterProps {
   url?: string
   formUsername: string
   formEmail: string
   password: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
   headers?: Header
   setError: (error: string) => void
@@ -32,7 +33,7 @@ export default function useRegister({ formEmail, formUsername, password, navigat
         email,
         username,
       })
-      navigation.navigate('AppRouter')
+      navigation.navigate('VerifyEmail')
     } else {
       setError(message)
     }

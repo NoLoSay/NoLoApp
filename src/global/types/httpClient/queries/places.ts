@@ -1,7 +1,7 @@
-import { Place, PlaceNeedingTranslation } from '@global/types/Places'
+import { ArtToTranslate, Place } from '@global/types/Places'
 
 export type PlacesNeedingTranslationJSON = {
-  json: PlaceNeedingTranslation[]
+  json: ArtToTranslate[]
   status: number
   message: string
 }

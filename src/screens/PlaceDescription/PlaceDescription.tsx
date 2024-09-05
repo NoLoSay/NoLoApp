@@ -40,6 +40,7 @@ interface PlaceDescriptionProps {
  */
 export default function PlaceDescription({ route }: PlaceDescriptionProps): React.JSX.Element {
   const { place } = route.params
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation: any = useNavigation()
 
   const getImageForTag = (tag: PlaceTag): (() => ImageSourcePropType) => {
@@ -86,7 +87,7 @@ export default function PlaceDescription({ route }: PlaceDescriptionProps): Reac
       <View style={styles.imageContainer}>
         <FastImage
           source={{
-            uri: place?.image,
+            uri: place?.pictures[0].hostingUrl,
             priority: FastImage.priority.high,
           }}
           style={styles.image}

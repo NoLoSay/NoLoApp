@@ -19,7 +19,9 @@ interface HeaderViewProps {
   searchValue: string
   setSearchValue: (value: string) => void
   getAllPlacesUsingSearch: () => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
+  goToFilterPage: () => void
 }
 
 /**
@@ -45,6 +47,7 @@ export default function HeaderView({
   setSearchValue,
   getAllPlacesUsingSearch,
   navigation,
+  goToFilterPage,
 }: HeaderViewProps): React.JSX.Element {
   const updateText = (val: string) => {
     setSearchValue(val)
@@ -97,6 +100,12 @@ export default function HeaderView({
   function searchView(): React.JSX.Element {
     return (
       <View style={styles.searchContainer}>
+        <TouchableOpacity onPress={goToFilterPage}>
+          <Image
+            source={images.icons.outline.filter()}
+            style={[styles.icon, { marginLeft: -2, marginRight: 6, marginTop: 8 }]}
+          />
+        </TouchableOpacity>
         <TextInput
           style={styles.input}
           placeholder='Rechercher'
@@ -178,7 +187,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 8,
     marginRight: 8,
-    width: '64%',
+    width: '56%',
   },
   cancelButton: {
     width: '15%',

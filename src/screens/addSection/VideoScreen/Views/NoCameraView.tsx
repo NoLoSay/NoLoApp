@@ -44,7 +44,7 @@ function NoCamera(): React.JSX.Element {
       {!DeviceInfo.isEmulator() && (
         <Button
           text='Nous contacter'
-          onPress={() => Linking.openURL('mailto:johan@chrillesen.net')}
+          onPress={() => Linking.openURL('mailto:no.lo.pro@gmail.com')}
           style={styles.buttonStyle}
         />
       )}

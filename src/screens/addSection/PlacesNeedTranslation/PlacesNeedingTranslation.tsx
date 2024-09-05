@@ -5,18 +5,19 @@
  */
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
-import { PlaceNeedingTranslation } from '@global/types/Places'
-import LoadingModal from '@components/LoadingModal'
+import { ArtToTranslate } from '@global/types/Places'
 import colors from '@global/colors'
 import usePlacesNeedingTranslationController from './usePlacesNeedingTranslationController'
 import TopBar from './Views/TopBar'
-import PlaceDisplay from './Views/PlaceDisplay'
+import ArtToDisplay from './Views/ArtToDisplay'
+import Button from '@components/Button'
 
 /**
  * @typedef Props
  * @property {any} navigation Navigation object
  */
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
 }
 
@@ -27,37 +28,60 @@ type Props = {
  * @returns {JSX.Element} PlacesNeedingTranslation component template
  */
 export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Element {
-  const { onPlacePress, places, isLoading, errorText, displayError } = usePlacesNeedingTranslationController({
-    navigation,
-  })
+  const { onCreatePress, onTextPress, onSendPress, artPieces, errorText, displayError, isModerator } =
+    usePlacesNeedingTranslationController({
+      navigation,
+    })
 
   return (
     <SafeAreaView>
-      <TopBar navigation={navigation} />
+      <TopBar
+        navigation={navigation}
+        displayReturnArrow={false}
+      />
       <ScrollView>
+        <Button
+          text='Voir mes vidéos en attente de validation'
+          onPress={() => navigation.navigate('LibraryScreen')}
+          style={{ marginHorizontal: 18, marginBottom: 10 }}
+          textStyle={{ fontSize: 16 }}
+        />
+        {isModerator && (
+          <Button
+            text='Valider des vidéos'
+            onPress={() => console.log('Valider des vidéos')}
+            style={{ marginHorizontal: 18 }}
+            textStyle={{ fontSize: 16 }}
+          />
+        )}
         {!displayError &&
-          places.map((place: PlaceNeedingTranslation) => (
-            <PlaceDisplay
-              place={place}
-              key={place.id}
-              onPress={() =>
-                onPlacePress({
-                  place,
-                })
-              }
+          artPieces.map((artPiece: ArtToTranslate) => (
+            <ArtToDisplay
+              artPiece={artPiece}
+              key={artPiece.id}
+              onCreatePress={() => onCreatePress(artPiece.description)}
+              onTextPress={() => onTextPress(artPiece.description, artPiece.name)}
+              onSendPress={() => onSendPress(artPiece.id)}
             />
           ))}
       </ScrollView>
-      {displayError && <Text style={styles.errorText}>{errorText}</Text>}
-      <LoadingModal visible={isLoading} />
+      {!displayError && artPieces.length === 0 && (
+        <Text style={styles.text}>
+          Nous n&apos;avons pas besoin de traductions actuellement, d&apos;autres demandes arriveront bientôt !
+        </Text>
+      )}
+      {displayError && <Text style={[styles.text, styles.errorText]}>{errorText}</Text>}
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   errorText: {
-    textAlign: 'center',
     color: colors.error,
+  },
+  text: {
+    textAlign: 'center',
+    color: colors.black,
     fontFamily: 'Poppins',
     fontWeight: '600',
     fontSize: 16,

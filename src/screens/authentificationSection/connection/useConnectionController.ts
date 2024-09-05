@@ -6,6 +6,8 @@
  */
 
 import { useState } from 'react'
+import { Alert } from 'react-native'
+import { forgotPassword } from '@helpers/httpClient/queries/auth/auth'
 import useConnect from '@helpers/httpClient/queries/auth/useConnect'
 
 interface ConnectionController {
@@ -33,8 +35,8 @@ interface useConnectionControllerProps {
  * @returns {ConnectionController} Object containing the email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation, showPassword, setShowPassword, showPasswordConfirmation, setShowPasswordConfirmation, subscribe, and error.
  */
 export default function useConnectionController({ navigation }: useConnectionControllerProps): ConnectionController {
-  const [email, setEmail] = useState<string>(__DEV__ ? 'JohanDev' : '')
-  const [password, setPassword] = useState<string>(__DEV__ ? 'Azerty1234?' : '')
+  const [email, setEmail] = useState<string>(__DEV__ ? 'User' : '')
+  const [password, setPassword] = useState<string>(__DEV__ ? 'password' : '')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
   const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
