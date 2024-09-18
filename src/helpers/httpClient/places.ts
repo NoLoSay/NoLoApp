@@ -134,6 +134,12 @@ const PlacesToTranslate: ArtToTranslate[] = [
   },
 ]
 
+/**
+ * @function getPlacesNeedingDescription Get the places that need a description.
+ * @param props The user's token
+ * @param props.token The user's token
+ * @returns Promise of an array of places
+ */
 export async function getPlacesNeedingDescription({ token }: { token: string }): Promise<PlacesNeedingTranslationJSON> {
   try {
     const response = await get({ endpoint: '/items/video-pending', authorizationToken: token })

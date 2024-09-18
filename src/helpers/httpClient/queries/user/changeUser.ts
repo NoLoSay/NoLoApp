@@ -1,3 +1,7 @@
+/**
+ * @fileoverview API call to change the user's information.
+ */
+
 import ChangeUserJSON from '@global/types/httpClient/user/ChangeUser'
 import { put } from '@helpers/httpClient/common'
 

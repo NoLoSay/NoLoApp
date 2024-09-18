@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Filter screen, used to filter videos by themes and accessibility.
+ */
 import Button from '@components/Button'
 import colors from '@global/colors'
 import images from '@global/images'
@@ -68,7 +71,17 @@ const ACCESSIBILITY = [
   },
 ]
 
-function Category({ icon, text, onPress, isSelected }: CategoryProps) {
+/**
+ * @function Category - Category component
+ * @description Category component used to display a category with an icon and a text
+ * @param props - Component props
+ * @param {ImageProps} props.icon - Icon of the category
+ * @param {string} props.text - Text of the category
+ * @param {Function} props.onPress - Function to call when the category is pressed
+ * @param {boolean} props.isSelected - Wether the category is selected or not
+ * @returns {JSX.Element} Category component template
+ */
+function Category({ icon, text, onPress, isSelected }: CategoryProps): JSX.Element {
   return (
     <TouchableOpacity
       style={styles.buttonContainer}
@@ -92,6 +105,13 @@ function Category({ icon, text, onPress, isSelected }: CategoryProps) {
   )
 }
 
+/**
+ * @function FilterScreen - Filter screen component
+ * @description Filter screen component used to filter videos by themes and accessibility
+ * @param props - Component props
+ * @param {Function} props.navigation - Navigation object
+ * @returns {JSX.Element} Filter screen component template
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function FilterScreen({ navigation }: any): JSX.Element {
   const [selectedThemes, setSelectedThemes] = React.useState<number[]>([])

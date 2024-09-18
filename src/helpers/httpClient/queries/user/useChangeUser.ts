@@ -1,3 +1,9 @@
+/**
+ * @fileoverview useChangeUser hook
+ * @module useChangeUser
+ * @requires react
+ * @requires @tanstack/react-query
+ */
 import { useContext } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AccountContext } from '@global/contexts/AccountProvider'
@@ -17,6 +23,15 @@ type SetNewAccountInfoProps = {
   phoneNumber: string
 }
 
+/**
+ * @function useChangeUser Handles the change user mutation
+ * @param props The username, email, phone number, and setError function
+ * @param props.formUsername The user's username
+ * @param props.formEmail The user's email
+ * @param props.formPhoneNumber The user's phone number
+ * @param props.setError The function to set the error
+ * @returns The mutation object
+ */
 export default function useChangeUser({ formUsername, formEmail, formPhoneNumber, setError }: ChangeUserProps) {
   const { account, setAccount } = useContext(AccountContext)
 

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview API for places needing description mutation.
+ * @module usePlacesNeedingDescription Handles the places needing description mutation
+ */
+
 import { useMutation } from '@tanstack/react-query'
 import { ArtToTranslate } from '@global/types/Places'
 import PlacesNeedingTranslationJSON from '@global/types/httpClient/queries/places'
@@ -9,6 +14,14 @@ type UpdatePlacesDisplayedProps = {
   token: string
 }
 
+/**
+ * @function usePlacesNeedingDescription Handles the places needing description mutation
+ * @param props The setArtPieces function, and the token
+ * @param props.setArtPieces The function to set the art pieces
+ * @param props.displayErrorModal The function to display the error modal
+ * @param props.token The token
+ * @returns The mutation object
+ */
 export default function usePlacesNeedingDescription({
   setArtPieces,
   displayErrorModal,

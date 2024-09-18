@@ -1,3 +1,9 @@
+/**
+ * @fileoverview useDeleteUser handles the delete user mutation
+ * @module useDeleteUser
+ * @requires react
+ * @requires @tanstack/react-query
+ */
 import { useContext } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AccountContext, defaultAccount } from '@global/contexts/AccountProvider'
@@ -10,6 +16,13 @@ interface DeleteUserProps {
   navigation: any
 }
 
+/**
+ * @function useDeleteUser Handles the delete user mutation
+ * @param props The setError function and navigation object
+ * @param props.setError The function to set the error
+ * @param props.navigation The navigation object
+ * @returns The mutation object
+ */
 export default function useDeleteUser({ setError, navigation }: DeleteUserProps) {
   const { account, setAccount } = useContext(AccountContext)
 

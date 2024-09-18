@@ -1,3 +1,9 @@
+/**
+ * @fileoverview useChangePassword is a custom react hook that handles the change password mutation
+ * @module useChangePassword
+ * @description A custom hook that handles the change password mutation
+ */
+
 import { useMutation } from '@tanstack/react-query'
 import { changePassword } from '@helpers/httpClient/queries/auth/auth'
 import ChangePasswordJSON from '@global/types/httpClient/auth/ChangePassword'
@@ -13,6 +19,14 @@ type ChangePasswordProps = {
   status: number
 }
 
+/**
+ * @function useChangePassword Handles the change password mutation
+ * @param props The email, new password, and setError function
+ * @param props.email The user's email
+ * @param props.newPassword The user's new password
+ * @param props.setError The function to set the error
+ * @returns The mutation object
+ */
 export default function useChangePassword({ email, newPassword, setError }: ChangePasswordUseProps) {
   function handleResponse({ message, status }: ChangePasswordProps) {
     if (status !== 201) {

@@ -1,3 +1,9 @@
+/**
+ * @fileoverview useConnect hook is used to connect the user to the server.
+ * @module useConnect
+ * @requires react
+ * @requires @tanstack/react-query
+ */
 import { useContext } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { Header } from '@global/types/httpClient/Header'
@@ -30,6 +36,15 @@ type LogUserProps = {
   message: string
 }
 
+/**
+ * @function useConnect Handles the connection mutation
+ * @param props The username, password, navigation, and setError function
+ * @param props.formUsername The user's username
+ * @param props.password The user's password
+ * @param props.navigation The navigation object
+ * @param props.setError The function to set the error
+ * @returns The mutation object
+ */
 export default function useConnect({ formUsername, password, navigation, setError }: ConnectProps) {
   const { account, setAccount } = useContext(AccountContext)
 

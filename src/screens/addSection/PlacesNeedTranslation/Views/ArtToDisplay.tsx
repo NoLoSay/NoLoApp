@@ -1,3 +1,10 @@
+/**
+ * @fileoverview ArtToDisplay component that renders an art piece to translate
+ * @module ArtToDisplay
+ * @requires react
+ * @requires react-native
+ */
+
 import React from 'react'
 import { Image, ImageProps, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ArtToTranslate } from '@global/types/Places'

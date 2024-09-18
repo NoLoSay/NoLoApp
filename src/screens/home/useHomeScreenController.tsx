@@ -140,6 +140,11 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
     setDisplaySearchBar(false)
   }
 
+  /**
+   * @function getNearestPlaces
+   * @description Get the nearest places from the user with a calculation of the distance
+   * @returns {Place[]} The 5 nearest places
+   */
   function getNearestPlaces() {
     let localisation = {
       latitude: 0,

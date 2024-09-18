@@ -9,6 +9,11 @@ import { AccountContext } from '@global/contexts/AccountProvider'
 import { VideoLibrary } from '@global/types/httpClient/queries/videos'
 import useUserVideo from '@helpers/httpClient/queries/videos/useUserVideo'
 
+/**
+ * @function useLibraryScreenController
+ * @description This hook contains the logic for the LibraryScreen component.
+ * @returns {Object} The logic for the LibraryScreen component
+ */
 export default function useLibraryScreenController() {
   const { account } = useContext(AccountContext)
   const [videos, setVideos] = useState<VideoLibrary[]>([])

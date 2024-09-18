@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Input component that renders an input field.
+ * @description This component renders an input field.
+ * @module TextInput
+ * @requires react react
+ * @requires react-native react-native
+ * @requires ImageSourcePropType from 'react-native'
+ * @requires TouchableOpacity from 'react-native'
+ * @requires Keyboard from 'react-native'
+ * @requires ViewStyle from 'react-native'
+ */
 import React from 'react'
 import {
   View,
@@ -28,6 +39,24 @@ interface InputProps {
   containerStyle?: ViewStyle
 }
 
+/**
+ * @function Input
+ * @description Component that renders an input field.
+ * @param {InputProps} props - Component props
+ * @param {string} props.placeholder - Input placeholder
+ * @param {boolean} [props.secureTextEntry=false] - Wether the input should be a password field
+ * @param {Function} [props.setSecureTextEntry] - Function to set the secureTextEntry value
+ * @param {KeyboardType} [props.keyboardType='default'] - Keyboard type
+ * @param {'none' | 'sentences' | 'words' | 'characters'} [props.autoCapitalize='none'] - Auto capitalize type
+ * @param {ReturnKeyType} [props.returnKeyType='done'] - Return key type
+ * @param {boolean} [props.autoCorrect=false] - Wether the input should be auto corrected
+ * @param {ImageSourcePropType} [props.leftIcon] - Left icon
+ * @param {ImageSourcePropType} [props.rightIcon] - Right icon
+ * @param {string} props.value - Input value
+ * @param {Function} props.setValue - Function to set the input value
+ * @param {ViewStyle} [props.containerStyle] - Input container style
+ * @returns {JSX.Element} Input component template
+ */
 export default function Input({
   placeholder,
   secureTextEntry = false,

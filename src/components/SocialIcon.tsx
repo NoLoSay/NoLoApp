@@ -1,3 +1,12 @@
+/**
+ * @fileoverview Social icon component
+ * @module SocialIcon
+ * @description Social icon component, it is a button that displays a social media icon.
+ * @requires react react-native
+ * @requires Image react-native
+ * @requires Pressable react-native
+ */
+
 import React from 'react'
 import { Image, StyleSheet, Pressable } from 'react-native'
 import { images } from '../global/images'
@@ -10,6 +19,15 @@ interface SocialIconProps {
   onPress?: () => void
 }
 
+/**
+ * @function SocialIcon - Social icon component
+ * @param {SocialIconProps} props - Component props
+ * @param {string} props.socialMedia - Social media to display
+ * @param {number} [props.size=24] - Size of the icon in pixels
+ * @param {boolean} [props.darkMode=false] - Wether the icon should be dark or not
+ * @param {Function} [props.onPress] - Function that is called when the icon is pressed
+ * @returns {JSX.Element}
+ */
 export default function SocialIcon({ socialMedia, size = 24, darkMode = false, onPress }: SocialIconProps) {
   const socialMediaIcon = {
     facebook: images.icons.social.facebook,

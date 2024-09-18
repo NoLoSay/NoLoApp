@@ -1,8 +1,21 @@
+/**
+ * @fileoverview LineSeparator component, used to render a line separator.
+ * @module LineSeparator
+ * @description This component is used to render a line separator.
+ * @requires React
+ * @requires StyleSheet from 'react-native'
+ * @requires View from 'react-native'
+ */
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { colors } from '@global/colors'
 
-export default function LineSeparator() {
+/**
+ * @function LineSeparator
+ * @description Component that renders a line separator.
+ * @returns {JSX.Element} LineSeparator component template
+ */
+export default function LineSeparator(): JSX.Element {
   return (
     <View style={styles.separatorContainer}>
       <View style={styles.separatorLine} />

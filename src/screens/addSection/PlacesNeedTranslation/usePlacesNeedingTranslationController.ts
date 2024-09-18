@@ -138,6 +138,10 @@ export default function usePlacesNeedingTranslationController({
     })
   }
 
+  /**
+   * @function displayAlert
+   * @param libraryAlert - Boolean indicating if the alert should be displayed
+   */
   const displayAlert = (libraryAlert: boolean) => {
     if (libraryAlert) {
       Alert.alert(
@@ -159,6 +163,11 @@ export default function usePlacesNeedingTranslationController({
     }
   }
 
+  /**
+   * @function onSendPress
+   * @description Function to call when the send button is pressed
+   * @param id - Id of the art piece
+   */
   const onSendPress = async (id: string) => {
     const res = await launchImageLibrary({
       mediaType: 'video',

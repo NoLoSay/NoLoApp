@@ -13,6 +13,13 @@ type GetUserVideosParams = {
   token: string
 }
 
+/**
+ * @function getUserVideos Get the videos of a user.
+ * @param props The user id and token.
+ * @param props.userId The user id.
+ * @param props.token The token.
+ * @returns Promise of a VideosJSON object
+ */
 export default async function getUserVideos({ userId, token }: GetUserVideosParams): Promise<VideosJSON> {
   try {
     const response = await get({ endpoint: `/users/${userId}/videos`, authorizationToken: token })
@@ -38,6 +45,13 @@ type GetItemVideoProps = {
   token: string
 }
 
+/**
+ * @function getItemVideo Get the video of an item.
+ * @param props The item id and token.
+ * @param props.itemId The item id.
+ * @param props.token The token.
+ * @returns Promise of an ItemVideosJSON object
+ */
 export async function getItemVideo({ itemId, token }: GetItemVideoProps): Promise<ItemVideosJSON> {
   const res = await get({
     endpoint: `/items/${itemId}`,
@@ -64,6 +78,15 @@ type SendTranslationVideoParams = {
   uri: string
 }
 
+/**
+ * @function sendTranslationVideo Send a translation video.
+ * @param props The artwork id, token, filename, and uri.
+ * @param props.artworkId The artwork id.
+ * @param props.token The token.
+ * @param props.filename The filename.
+ * @param props.uri The uri.
+ * @returns Promise of a boolean
+ */
 export async function sendTranslationVideo({
   artworkId,
   token,

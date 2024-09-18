@@ -129,6 +129,13 @@ export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Re
   })
 }
 
+/**
+ * @function changePassword Send the user's email and new password to the server to change their password.
+ * @param props Object containing the email and new password.
+ * @param props.email The user's email.
+ * @param props.newPassword The user's new password.
+ * @returns Promise of a Response object
+ */
 export async function changePassword({ email, newPassword }: ChangePasswordProps): Promise<ChangePasswordJSON> {
   void email
   void newPassword

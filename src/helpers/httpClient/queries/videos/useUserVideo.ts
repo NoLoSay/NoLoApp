@@ -1,3 +1,8 @@
+/**
+ * @fileoverview useUserVideo handles the user video mutation
+ * @module useUserVideo
+ * @requires @tanstack/react-query
+ */
 import { useMutation } from '@tanstack/react-query'
 import getUserVideos from '@helpers/httpClient/videos'
 import VideosJSON, { VideoLibrary } from '@global/types/httpClient/queries/videos'
@@ -9,6 +14,15 @@ type UpdatePlacesDisplayedProps = {
   token: string
 }
 
+/**
+ * @function useUserVideo Handles the user video mutation
+ * @param props The user id, setVideos, setError, and token
+ * @param props.userId The user id
+ * @param props.setVideos The function to set the videos
+ * @param props.setError The function to set the error
+ * @param props.token The token
+ * @returns The mutation object
+ */
 export default function useUserVideo({ setVideos, userId, setError, token }: UpdatePlacesDisplayedProps) {
   function updatePlacesDisplayed({ userVideos }: { userVideos: VideoLibrary[] }) {
     setVideos(userVideos)

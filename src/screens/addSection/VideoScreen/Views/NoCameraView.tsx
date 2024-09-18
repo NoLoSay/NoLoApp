@@ -18,6 +18,11 @@ interface NoCameraViewProps {
   hasPermission: boolean
 }
 
+/**
+ * @function PermissionNotGranted
+ * @description Component that renders the PermissionNotGranted view.
+ * @returns {React.JSX.Element} PermissionNotGranted component template
+ */
 function PermissionNotGranted(): React.JSX.Element {
   return (
     <>
@@ -33,6 +38,11 @@ function PermissionNotGranted(): React.JSX.Element {
   )
 }
 
+/**
+ * @function NoCamera
+ * @description Component that renders the NoCamera view.
+ * @returns {React.JSX.Element} NoCamera component template
+ */
 function NoCamera(): React.JSX.Element {
   return (
     <>

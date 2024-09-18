@@ -1,3 +1,10 @@
+/**
+ * @fileoverview HelpModal component that renders the HelpModal.
+ * @module HelpModal
+ * @description Component that renders the HelpModal.
+ * @requires react
+ */
+
 import React from 'react'
 import { Text, Modal, View, StyleSheet } from 'react-native'
 import Button from '@components/Button'
@@ -9,7 +16,16 @@ type Props = {
   onValidate: () => void
 }
 
-export default function HelpModal({ isVisible, hideModal, onValidate }: Props) {
+/**
+ * @function HelpModal
+ * @description Component that renders the HelpModal.
+ * @param props HelpModal props
+ * @param props.isVisible HelpModal visibility
+ * @param props.hideModal HelpModal hide function
+ * @param props.onValidate HelpModal validate function
+ * @returns {React.JSX.Element} HelpModal component template
+ */
+export default function HelpModal({ isVisible, hideModal, onValidate }: Props): React.JSX.Element {
   return (
     <Modal
       animationType='fade'

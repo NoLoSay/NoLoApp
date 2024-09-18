@@ -16,6 +16,12 @@ type Props = {
   navigation: any
 }
 
+/**
+ * @function LibraryScreen
+ * @description Component that renders the Library screen.
+ * @param navigation LibraryScreen navigation object
+ * @returns {React.JSX.Element} LibraryScreen component template
+ */
 export default function LibraryScreen({ navigation }: Props) {
   const { videos, displayVideos, error } = useLibraryScreenController()
 

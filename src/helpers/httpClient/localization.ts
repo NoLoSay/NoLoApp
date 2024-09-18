@@ -1,3 +1,8 @@
+/**
+ * @fileoverview localization helper functions
+ * @module localization
+ * @description Contains helper functions to get the city of a given latitude and longitude.
+ */
 import { GEOAPIFY_API_KEY } from '@env'
 import { get } from './common'
 
@@ -36,6 +41,13 @@ type GeoCodeJSON = {
   limit: number
 }
 
+/**
+ * @function getCityUsingGeoapify gets the city of user from lat long using the Geoapify API
+ * @param props Object containing the latitude and longitude of the user
+ * @param props.latitude The latitude of the user
+ * @param props.longitude The longitude of the user
+ * @returns Promise of a GeoCodeJSON object
+ */
 async function getCityUsingGeoapify({
   latitude,
   longitude,
@@ -56,6 +68,13 @@ async function getCityUsingGeoapify({
   }
 }
 
+/**
+ * @function getCityUsingGouv gets the city of user from lat long using the Gouv API
+ * @param props Object containing the latitude and longitude of the user
+ * @param props.latitude The latitude of the user
+ * @param props.longitude The longitude of the user
+ * @returns Promise of a GeoCodeJSON object
+ */
 async function getCityUsingGouv({
   latitude,
   longitude,
@@ -76,6 +95,14 @@ async function getCityUsingGouv({
   }
 }
 
+/**
+ * @function getCity gets the city of user from lat long
+ * @description Try with gouv API that successes most of the time if user is in france, if not try with geoapify
+ * @param props Object containing the latitude and longitude of the user
+ * @param props.latitude The latitude of the user
+ * @param props.longitude The longitude of the user
+ * @returns A Promise containing the city of the user
+ */
 export default async function getCity({
   latitude,
   longitude,

@@ -1,6 +1,18 @@
+/**
+ * @fileoverview NoPlacesFound component, used to render a no places found view.
+ * @description Component that is rendered if no places are found in the database.
+ * @module NoPlacesFound
+ * @requires react
+ * @requires react-native
+ */
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
+/**
+ * @function NoPlacesFound
+ * @description Component that renders a no places found view.
+ * @returns {React.JSX.Element}
+ */
 export default function NoPlacesFound() {
   return (
     <View style={styles.container}>
