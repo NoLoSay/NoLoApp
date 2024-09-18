@@ -1,7 +1,7 @@
 # Welcome to NoLoSay 👋
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000"/>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000"/>
   <a href="https://nolosay.github.io/documentation" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg"/>
   </a>
@@ -21,11 +21,9 @@
 
 > NoLoSay is an EPITECH project made to improve the accessibility of deaf people in cultural sites
 
-## 🏠 [Homepage](https://nolosay.github.io)
+## 🏠 [Homepage](https://nolosay.com)
 
-## ✨ [Visuals](https://nolosay.github.io/demo)
-
-## 📝 [Documentation](https://nolosay.github.io/documentation)
+## 📝 [Documentation](https://nolosay.github.io/NoLoApp)
 
 ## Development environment installation
 
