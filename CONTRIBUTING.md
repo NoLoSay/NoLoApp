@@ -1,5 +1,9 @@
 # How to contribute
 
+## Code Quality and Rules
+
+You can find all the code related rules in the [Code Architecture](docs/technical/CodeArchitecture.md) document.
+
 ## Issue Rules
 
 ### When creating an issue, you must follow the given format :
