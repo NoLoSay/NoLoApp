@@ -118,7 +118,6 @@ Issues and requests for improvements are welcome!<br />Feel free to check [issue
         <tr>
             <td align="center"><a href="https://github.com/JohanCDev"><img src="https://avatars.githubusercontent.com/u/25590592?v=4" width="100px;" alt="JohanCDev"/><br/><sub><b>Johan Chrillesen</b></sub></a><br/></td>
             <td align="center"><a href="https://github.com/TomDUVAL-MAHE/"><img src="https://avatars.githubusercontent.com/u/72017980?s=96&v=4" width="100px;" alt="TomDUVAL-MAHE"/><br/><sub><b>Tom Duval-Mahé</b></sub></a><br/></td>
-            <td align="center"><a href="https://github.com/alaborde29/"><img src="https://avatars.githubusercontent.com/u/72009912?v=4" width="100px;" alt="alaborde29"/><br/><sub><b>Alexandre Laborde</b></sub></a><br/></td>
             <td align="center"><a href="https://github.com/julienlafargue"><img src="https://avatars.githubusercontent.com/u/72009611?s=96&v=4" width="100px;" alt="julienlafargue"/><br/><sub><b>Julien Lafargue</b></sub></a><br/></td>
         </tr>
         <tr>
