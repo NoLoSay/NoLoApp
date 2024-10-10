@@ -34,7 +34,7 @@ export default function VideoDisplay({ video }: Props): JSX.Element {
   return (
     <View style={styles.container}>
       <ImageLoader
-        imageURL={video.item.picture}
+        imageURL={video.item.pictures[0]?.hostingUrl}
         imageStyle={styles.image}
       />
       <View style={styles.textContainer}>
@@ -44,6 +44,7 @@ export default function VideoDisplay({ video }: Props): JSX.Element {
           Durée de la vidéo: {(video.duration / 60).toFixed()}mn
           {video.duration % 60 !== 0 ? ` ${video.duration % 60}s` : ''}
         </Text>
+        {video.deletedReason && <Text style={styles.state}>Raison de la suppression: {video.deletedReason}</Text>}
       </View>
     </View>
   )

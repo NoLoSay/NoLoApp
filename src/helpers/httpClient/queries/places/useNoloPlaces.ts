@@ -6,15 +6,44 @@
 import { useMutation } from '@tanstack/react-query'
 import { Place } from '@global/types/Places'
 import { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
-import getPlaces from '@helpers/httpClient/places'
+import searchPlaces, { getPlaces } from '@helpers/httpClient/places'
 
 type UpdatePlacesDisplayedProps = {
   setPlaces: (places: Place[]) => void
+  token: string
+}
+
+interface UpdatePlacesDisplayedPropsSearch extends UpdatePlacesDisplayedProps {
   latitude?: number
   longitude?: number
   q?: string
   radius?: number
-  token: string
+}
+
+/**
+ * @function useNoloPlaces Handles the places mutation
+ * @param props The setPlaces function and token
+ * @param props.setPlaces The function to set the places
+ * @param props.token The token
+ * @returns The mutation object
+ */
+export default function useNoloPlaces({ setPlaces, token }: UpdatePlacesDisplayedProps) {
+  function updatePlacesDisplayed({ newPlaces }: { newPlaces: Place[] }) {
+    setPlaces(newPlaces)
+  }
+
+  const mutation = useMutation<NoloPlacesJSON>({
+    mutationFn: () => getPlaces({ token }),
+    onSuccess: data => {
+      try {
+        updatePlacesDisplayed({ newPlaces: data.json })
+      } catch (error) {
+        console.error(error)
+      }
+    },
+  })
+
+  return mutation
 }
 
 /**
@@ -28,20 +57,20 @@ type UpdatePlacesDisplayedProps = {
  * @param props.token The token
  * @returns The mutation object
  */
-export default function useNoloPlaces({
+export function useSearchNoloPlaces({
   setPlaces,
   latitude,
   longitude,
   q,
   radius,
   token,
-}: UpdatePlacesDisplayedProps) {
+}: UpdatePlacesDisplayedPropsSearch) {
   function updatePlacesDisplayed({ newPlaces }: { newPlaces: Place[] }) {
     setPlaces(newPlaces)
   }
 
   const mutation = useMutation<NoloPlacesJSON>({
-    mutationFn: () => getPlaces({ latitude, longitude, q, radius, token }),
+    mutationFn: () => searchPlaces({ latitude, longitude, q, radius, token }),
     onSuccess: data => {
       try {
         updatePlacesDisplayed({ newPlaces: data.json })

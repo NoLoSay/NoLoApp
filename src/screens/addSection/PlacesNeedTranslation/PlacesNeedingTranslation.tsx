@@ -59,8 +59,8 @@ export default function PlacesNeedingTranslation({ navigation }: Props): JSX.Ele
             <ArtToDisplay
               artPiece={artPiece}
               key={artPiece.id}
-              onCreatePress={() => onCreatePress(artPiece.description)}
-              onTextPress={() => onTextPress(artPiece.description, artPiece.name)}
+              onCreatePress={() => onCreatePress(artPiece.textToTranslate)}
+              onTextPress={() => onTextPress(artPiece.textToTranslate, artPiece.name)}
               onSendPress={() => onSendPress(artPiece.id)}
             />
           ))}

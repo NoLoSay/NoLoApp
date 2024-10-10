@@ -14,12 +14,12 @@ import { AccountContext, defaultLocalisation } from '@global/contexts/AccountPro
 import getCity from '@helpers/httpClient/localization'
 import { Alert, Linking } from 'react-native'
 import { GeolocationResponse } from '@global/types/Account'
-import useNoloPlaces from '@helpers/httpClient/queries/places/useNoloPlaces'
+import useNoloPlaces, { useSearchNoloPlaces } from '@helpers/httpClient/queries/places/useNoloPlaces'
 
 /**
  * @interface HomeScreenController
  * @description HomeScreenController types
- * @property {string} city The city of the user
+ * @property {string} city The search of the user
  * @property {'map' | 'carousel'} currentPage The current page of the screen
  * @property {boolean} displaySearchBar The display state of the search bar
  * @property {() => void} toggleSearchBar The function to toggle the search bar
@@ -58,6 +58,7 @@ interface HomeScreenController {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function useHomeScreenController(navigation: any): HomeScreenController {
+  const [userCity, setUserCity] = useState('')
   const [city, setCity] = useState('')
   const [currentPage, setCurrentPage] = useState<'map' | 'carousel'>('carousel')
   const [displaySearchBar, setDisplaySearchBar] = useState(false)
@@ -66,11 +67,9 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
   const [places, setPlaces] = useState<Place[]>([])
   const noloPlacesMutation = useNoloPlaces({
     setPlaces,
-    latitude: account.localisation?.coords.latitude || 0,
-    longitude: account.localisation?.coords.longitude || 0,
     token: account.accessToken,
   })
-  const noloPlacesMutationUsingSearch = useNoloPlaces({
+  const noloPlacesMutationUsingSearch = useSearchNoloPlaces({
     setPlaces,
     q: searchValue,
     token: account.accessToken,
@@ -83,7 +82,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
   const getAllPlacesUsingSearch = () => {
     noloPlacesMutationUsingSearch.mutate()
     toggleSearchBar()
-    setCity(searchValue)
+    setCity(searchValue === '' ? userCity : searchValue)
   }
 
   useEffect(() => {
@@ -93,7 +92,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
 
         const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
 
-        setCity(reversedCity)
+        setUserCity(reversedCity)
       },
       async () => {
         setCity('Nantes')
@@ -106,7 +105,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
           longitude: defaultLocalisation.coords.longitude,
         })
 
-        setCity(reversedCity)
+        setUserCity(reversedCity)
 
         Alert.alert(
           'Localisation introuvable',
@@ -119,6 +118,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
       },
       { enableHighAccuracy: true }
     )
+    setCity(userCity)
     getAllPlaces()
     // Avoid infinite loop
   }, [])
@@ -136,7 +136,11 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
   }
 
   function goToFilterPage() {
-    navigation.navigate('FilterModal')
+    navigation.navigate('FilterModal', {
+      userCity,
+      setCity,
+      mutationToApply: noloPlacesMutation.mutate,
+    })
     setDisplaySearchBar(false)
   }
 
