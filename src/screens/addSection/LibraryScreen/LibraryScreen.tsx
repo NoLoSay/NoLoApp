@@ -32,7 +32,7 @@ export default function LibraryScreen({ navigation }: Props) {
         {displayVideos &&
           videos.map(video => (
             <VideoDisplay
-              key={video.item.name}
+              key={video.id}
               video={video}
             />
           ))}

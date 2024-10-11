@@ -78,7 +78,7 @@ export default function ArtToDisplay({
   return (
     <View style={styles.container}>
       <ImageLoader
-        imageURL={artPiece.picture}
+        imageURL={artPiece?.pictures?.[0]?.hostingUrl}
         imageStyle={styles.image}
       />
       <View style={styles.contentContainer}>

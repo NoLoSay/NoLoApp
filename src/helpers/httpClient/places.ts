@@ -5,14 +5,13 @@
  */
 
 import PlacesNeedingTranslationJSON, { NoloPlacesJSON } from '@global/types/httpClient/queries/places'
-import { ArtToTranslate } from '@global/types/Places'
 import { get } from './common'
 
 /**
- * @function getPlaces Get the places from the server.
+ * @function searchPlaces Search the places from the server.
  * @returns Promise of an array of places
  */
-export default async function getPlaces({
+export default async function searchPlaces({
   latitude,
   longitude,
   q,
@@ -41,12 +40,17 @@ export default async function getPlaces({
       queryParams.q = q
     }
 
+    const queryString = new URLSearchParams(queryParams).toString()
+    const endpoint = `search/sites${queryString ? `?${queryString}` : ''}`
+
     const response = await get({
-      endpoint: `/sites`,
+      endpoint: `/${endpoint}`,
       authorizationToken: token,
     })
 
     const responseData = await response.json()
+
+    console.log('searchPlaces response:', responseData)
 
     if (!response.ok) {
       throw new Error(responseData.message)
@@ -63,76 +67,35 @@ export default async function getPlaces({
   }
 }
 
-const PlacesToTranslate: ArtToTranslate[] = [
-  {
-    id: '1',
-    uuid: '70e24df6-f8ee-594a-bb8f-de3666197fac',
-    name: 'La joconde',
-    picture: 'https://cdn.pariscityvision.com/library/image/5449.jpg',
-    description:
-      "La Joconde est un célèbre portrait de la Renaissance peint par Léonard de Vinci. Il représente une femme avec un léger sourire mystérieux, qui a captivé des générations de spectateurs. Le tableau est exposé au musée du Louvre à Paris, où il est l'une des œuvres les plus célèbres et les plus visitées.",
-    RelatedPerson: {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      picture: 'https://randomuser.me/api/portraits',
-    },
-    ItemType: {
-      id: 1,
-      name: "Œuvre d'art",
-      ItemCategory: {
-        id: 1,
-        name: 'Musée',
-      },
-    },
-  },
-  {
-    id: '2',
-    uuid: '70e24df6-f8ee-594a-bb8f-de3666197fac',
-    name: 'Nuit étoilée',
-    picture:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/800px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
-    description:
-      'La Nuit étoilée est une célèbre peinture de Vincent van Gogh, réalisée en 1889. Elle représente un village endormi sous un ciel étoilé tourbillonnant. La peinture est emblématique du style unique de Van Gogh, avec ses coups de pinceau expressifs',
-    RelatedPerson: {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Smith',
-      picture: 'https://randomuser.me/api/portraits',
-    },
-    ItemType: {
-      id: 2,
-      name: 'Centre culturel',
-      ItemCategory: {
-        id: 2,
-        name: 'Lieu',
-      },
-    },
-  },
-  {
-    id: '3',
-    uuid: '70e24df6-f8ee-594a-bb8f-de3666197fac',
-    name: 'Nighthawks',
-    picture:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Nighthawks_by_Edward_Hopper_1942.jpg/1200px-Nighthawks_by_Edward_Hopper_1942.jpg',
-    description:
-      "Nighthawks est une célèbre peinture d'Edward Hopper, réalisée en 1942. Elle représente un café de nuit avec des clients solitaires assis à des tables. La peinture est emblématique du style réaliste de Hopper et de son utilisation de la lumière et de l'ombre pour créer une atmosphère intrigante.",
-    RelatedPerson: {
-      id: 3,
-      firstName: 'Alice',
-      lastName: 'Johnson',
-      picture: 'https://randomuser.me/api/portraits',
-    },
-    ItemType: {
-      id: 3,
-      name: 'Jardin',
-      ItemCategory: {
-        id: 3,
-        name: 'Lieu',
-      },
-    },
-  },
-]
+/**
+ * @function getPlaces Get the places from the server.
+ * @returns Promise of an array of places
+ */
+export async function getPlaces({ token }: { token: string }): Promise<NoloPlacesJSON> {
+  try {
+    const response = await get({
+      endpoint: `/sites`,
+      authorizationToken: token,
+    })
+
+    const responseData = await response.json()
+
+    console.log('getPlaces response:', responseData)
+
+    if (!response.ok) {
+      throw new Error(responseData.message)
+    }
+
+    return {
+      json: responseData,
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch (error) {
+    console.log("Error, couldn't get places:", error)
+    throw new Error(error instanceof Error ? error.message : String(error))
+  }
+}
 
 /**
  * @function getPlacesNeedingDescription Get the places that need a description.
@@ -149,14 +112,6 @@ export async function getPlacesNeedingDescription({ token }: { token: string }):
     }
 
     const responseData = await response.json()
-
-    if (responseData.length === 0 && __DEV__) {
-      return {
-        json: PlacesToTranslate,
-        status: response.status,
-        message: response.statusText,
-      }
-    }
 
     return {
       json: responseData,

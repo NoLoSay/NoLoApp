@@ -136,7 +136,11 @@ export type ArtToTranslate = {
   uuid: string
   name: string
   description: string
-  picture: string
+  textToTranslate: string
+  pictures: {
+    id: number
+    hostingUrl: string
+  }[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RelatedPerson: any
   ItemType: {

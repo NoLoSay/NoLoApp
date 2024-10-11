@@ -113,9 +113,10 @@ function Category({ icon, text, onPress, isSelected }: CategoryProps): JSX.Eleme
  * @returns {JSX.Element} Filter screen component template
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function FilterScreen({ navigation }: any): JSX.Element {
+export default function FilterScreen({ navigation, route }: any): JSX.Element {
   const [selectedThemes, setSelectedThemes] = React.useState<number[]>([])
   const [selectedAccessibility, setSelectedAccessibility] = React.useState<number[]>([])
+  const { userCity, setCity, mutationToApply } = route.params
 
   return (
     <View style={{ flex: 1 }}>
@@ -185,6 +186,9 @@ export default function FilterScreen({ navigation }: any): JSX.Element {
             onPress={() => {
               setSelectedThemes([])
               setSelectedAccessibility([])
+              setCity(userCity)
+              mutationToApply()
+              navigation.goBack()
             }}
             style={{ marginTop: 8, backgroundColor: 'transparent', borderColor: colors.accent, borderWidth: 2 }}
           />
