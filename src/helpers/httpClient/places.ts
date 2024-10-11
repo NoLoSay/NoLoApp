@@ -50,8 +50,6 @@ export default async function searchPlaces({
 
     const responseData = await response.json()
 
-    console.log('searchPlaces response:', responseData)
-
     if (!response.ok) {
       throw new Error(responseData.message)
     }
