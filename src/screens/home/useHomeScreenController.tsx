@@ -120,6 +120,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
       },
       { enableHighAccuracy: true }
     )
+    setCity(userCity)
     getAllPlaces()
     // Avoid infinite loop
   }, [])
