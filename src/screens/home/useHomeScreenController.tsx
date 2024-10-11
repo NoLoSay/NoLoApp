@@ -93,6 +93,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
         const reversedCity = await getCity({ latitude: info.coords.latitude, longitude: info.coords.longitude })
 
         setUserCity(reversedCity)
+        setCity(reversedCity)
       },
       async () => {
         setCity('Nantes')
@@ -106,6 +107,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
         })
 
         setUserCity(reversedCity)
+        setCity(reversedCity)
 
         Alert.alert(
           'Localisation introuvable',
