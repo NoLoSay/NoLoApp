@@ -13,6 +13,7 @@ import Category from './Views/Category'
 
 interface CarouselViewProps {
   places: Place[]
+  latestPlaces: Place[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation: any
   getNearestPlaces: () => Place[]
@@ -32,6 +33,7 @@ interface CarouselViewProps {
  */
 export default function CarouselView({
   places,
+  latestPlaces,
   navigation,
   getNearestPlaces,
   isLoading,
@@ -49,13 +51,13 @@ export default function CarouselView({
       }
     >
       <Category
-        text='Meilleurs lieux'
+        text='Découvrir des musées'
         places={places}
         navigation={navigation}
       />
       <Category
         text='Nouveaux lieux'
-        places={places}
+        places={latestPlaces}
         navigation={navigation}
       />
       <Category

@@ -31,6 +31,7 @@ export default function HomeScreen({ navigation }: any): React.JSX.Element {
     setSearchValue,
     togglePage,
     places,
+    latestPlaces,
     getNearestPlaces,
     getAllPlacesUsingSearch,
     isLoading,
@@ -57,6 +58,7 @@ export default function HomeScreen({ navigation }: any): React.JSX.Element {
       {currentPage === 'carousel' && isSuccessful && places.length > 0 && (
         <CarouselView
           places={places}
+          latestPlaces={latestPlaces}
           navigation={navigation}
           getNearestPlaces={getNearestPlaces}
           isLoading={isRefreshing}

@@ -42,6 +42,7 @@ interface HomeScreenController {
   setSearchValue: (value: string) => void
   togglePage: () => void
   places: Place[]
+  latestPlaces: Place[]
   getNearestPlaces: () => Place[]
   getAllPlacesUsingSearch: () => void
   isLoading: boolean
@@ -65,6 +66,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
   const [searchValue, setSearchValue] = useState('')
   const { account, setAccount } = useContext(AccountContext)
   const [places, setPlaces] = useState<Place[]>([])
+  const [latestPlaces, setLatestPlaces] = useState<Place[]>([])
   const noloPlacesMutation = useNoloPlaces({
     setPlaces,
     token: account.accessToken,
@@ -74,9 +76,15 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
     q: searchValue,
     token: account.accessToken,
   })
+  const noloLatestPlacesMutation = useNoloPlaces({
+    setPlaces: setLatestPlaces,
+    token: account.accessToken,
+    getLatest: true,
+  })
 
   const getAllPlaces = () => {
     noloPlacesMutation.mutate()
+    noloLatestPlacesMutation.mutate()
   }
 
   const getAllPlacesUsingSearch = () => {
@@ -169,7 +177,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
 
       return distanceA - distanceB
     })
-    return placesOrderedByDistance.slice(0, 5)
+    return placesOrderedByDistance.slice(0, 10)
   }
 
   return {
@@ -181,6 +189,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
     setSearchValue,
     togglePage,
     places,
+    latestPlaces,
     getNearestPlaces,
     getAllPlacesUsingSearch,
     isLoading: noloPlacesMutation.isPending || noloPlacesMutationUsingSearch.isPending,

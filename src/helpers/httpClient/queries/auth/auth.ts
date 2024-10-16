@@ -124,8 +124,11 @@ export async function connect({ formUsername, password }: ConnectProps): Promise
  * @param email email The user's email.
  */
 export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Response> {
-  return new Promise(() => {
-    console.log('forgotPassword', email)
+  return await post({
+    endpoint: '/auth/forgot-password',
+    body: JSON.stringify({
+      email,
+    }),
   })
 }
 

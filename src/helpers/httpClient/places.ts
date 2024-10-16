@@ -69,10 +69,10 @@ export default async function searchPlaces({
  * @function getPlaces Get the places from the server.
  * @returns Promise of an array of places
  */
-export async function getPlaces({ token }: { token: string }): Promise<NoloPlacesJSON> {
+export async function getPlaces({ token, getLatest }: { token: string; getLatest: boolean }): Promise<NoloPlacesJSON> {
   try {
     const response = await get({
-      endpoint: `/sites`,
+      endpoint: `/sites${getLatest ? '?_sort=createdAt&_order=desc&_end=10' : '?_end=100'}`,
       authorizationToken: token,
     })
 
@@ -110,6 +110,8 @@ export async function getPlacesNeedingDescription({ token }: { token: string }):
     }
 
     const responseData = await response.json()
+
+    console.log('getPlacesNeedingDescription response:', responseData)
 
     return {
       json: responseData,

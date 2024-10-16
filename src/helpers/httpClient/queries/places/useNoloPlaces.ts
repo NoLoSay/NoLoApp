@@ -11,6 +11,7 @@ import searchPlaces, { getPlaces } from '@helpers/httpClient/places'
 type UpdatePlacesDisplayedProps = {
   setPlaces: (places: Place[]) => void
   token: string
+  getLatest?: boolean
 }
 
 interface UpdatePlacesDisplayedPropsSearch extends UpdatePlacesDisplayedProps {
@@ -25,15 +26,16 @@ interface UpdatePlacesDisplayedPropsSearch extends UpdatePlacesDisplayedProps {
  * @param props The setPlaces function and token
  * @param props.setPlaces The function to set the places
  * @param props.token The token
+ * @param props.getLatest The flag to get the latest places
  * @returns The mutation object
  */
-export default function useNoloPlaces({ setPlaces, token }: UpdatePlacesDisplayedProps) {
+export default function useNoloPlaces({ setPlaces, token, getLatest = false }: UpdatePlacesDisplayedProps) {
   function updatePlacesDisplayed({ newPlaces }: { newPlaces: Place[] }) {
     setPlaces(newPlaces)
   }
 
   const mutation = useMutation<NoloPlacesJSON>({
-    mutationFn: () => getPlaces({ token }),
+    mutationFn: () => getPlaces({ token, getLatest }),
     onSuccess: data => {
       try {
         updatePlacesDisplayed({ newPlaces: data.json })

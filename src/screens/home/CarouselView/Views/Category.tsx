@@ -60,7 +60,7 @@ export default function Category({ text, places, navigation }: Props): React.JSX
           >
             <TouchableOpacity onPress={() => navigation.navigate('PlaceDescription', { place: item })}>
               <ImageLoader
-                imageURL={item.pictures[0].hostingUrl}
+                imageURL={item.pictures[0]?.hostingUrl ?? ''}
                 imageStyle={{
                   width: 280,
                   height: 280,
