@@ -9,7 +9,7 @@ import { changePassword } from '@helpers/httpClient/queries/auth/auth'
 import ChangePasswordJSON from '@global/types/httpClient/auth/ChangePassword'
 
 interface ChangePasswordUseProps {
-  email: string
+  token: string
   newPassword: string
   setError: (error: string) => void
 }
@@ -22,12 +22,12 @@ type ChangePasswordProps = {
 /**
  * @function useChangePassword Handles the change password mutation
  * @param props The email, new password, and setError function
- * @param props.email The user's email
+ * @param props.token The user's token
  * @param props.newPassword The user's new password
  * @param props.setError The function to set the error
  * @returns The mutation object
  */
-export default function useChangePassword({ email, newPassword, setError }: ChangePasswordUseProps) {
+export default function useChangePassword({ token, newPassword, setError }: ChangePasswordUseProps) {
   function handleResponse({ message, status }: ChangePasswordProps) {
     if (status !== 201) {
       setError(message)
@@ -35,7 +35,7 @@ export default function useChangePassword({ email, newPassword, setError }: Chan
   }
 
   const mutation = useMutation<ChangePasswordJSON>({
-    mutationFn: () => changePassword({ email, newPassword }),
+    mutationFn: () => changePassword({ token, newPassword }),
     onSuccess: data => {
       try {
         handleResponse({

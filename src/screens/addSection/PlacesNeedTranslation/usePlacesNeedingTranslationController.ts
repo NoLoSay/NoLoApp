@@ -169,21 +169,35 @@ export default function usePlacesNeedingTranslationController({
    * @param id - Id of the art piece
    */
   const onSendPress = async (id: string) => {
-    const res = await launchImageLibrary({
-      mediaType: 'video',
-    })
+    Alert.alert('Envoyer une vidéo', 'Voulez-vous effectuer un montage sur CapCut avant de nous envoyer la vidéo ?', [
+      {
+        text: 'Aller sur CapCut',
+        onPress: () => {
+          Linking.openURL('capcut://app')
+        },
+      },
+      {
+        text: 'Annuler',
+        onPress: async () => {
+          const res = await launchImageLibrary({
+            mediaType: 'video',
+          })
 
-    if (res.didCancel) {
-      return
-    }
+          if (res.didCancel) {
+            return
+          }
 
-    displayAlert(res.errorCode === 'permission')
+          displayAlert(res.errorCode === 'permission')
 
-    if (res.assets !== undefined && res.assets[0].uri && res.assets[0].fileName) {
-      sendVideoMutation.mutate({
-        variables: { artworkId: id, filename: res.assets[0].fileName, uri: res.assets[0].uri },
-      })
-    }
+          if (res.assets !== undefined && res.assets[0].uri && res.assets[0].fileName) {
+            sendVideoMutation.mutate({
+              variables: { artworkId: id, filename: res.assets[0].fileName, uri: res.assets[0].uri },
+            })
+          }
+        },
+        style: 'cancel',
+      },
+    ])
   }
 
   return {

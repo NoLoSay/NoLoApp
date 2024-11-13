@@ -32,7 +32,7 @@ interface ForgotPasswordProps {
 
 interface ChangePasswordProps {
   url?: string
-  email: string
+  token: string
   newPassword: string
   headers?: Header
 }
@@ -135,30 +135,31 @@ export async function forgotPassword({ email }: ForgotPasswordProps): Promise<Re
 /**
  * @function changePassword Send the user's email and new password to the server to change their password.
  * @param props Object containing the email and new password.
- * @param props.email The user's email.
+ * @param props.token The user's token.
  * @param props.newPassword The user's new password.
  * @returns Promise of a Response object
  */
-export async function changePassword({ email, newPassword }: ChangePasswordProps): Promise<ChangePasswordJSON> {
-  void email
-  void newPassword
-  const responseStatus = Math.floor(Math.random() * 2 + 1)
-  await new Promise(resolve => {
-    setTimeout(() => {
-      console.log('Change password')
-      resolve(responseStatus === 1 ? 201 : 400)
-    }, 2000)
-  })
+export async function changePassword({ token, newPassword }: ChangePasswordProps): Promise<ChangePasswordJSON> {
+  try {
+    const response = await post({
+      endpoint: '/auth/change-password',
+      body: JSON.stringify({
+        token,
+        password: newPassword,
+      }),
+    })
+    console.log(response)
+    const responseData = await response.json()
 
-  if (responseStatus === 1) {
-    console.log('|-> Success')
-    return {
-      status: 201,
-      message: 'Password changed',
+    if (!response.ok) {
+      throw new Error(responseData.message)
     }
-  }
-  return {
-    status: 400,
-    message: 'Erreur serveur',
+
+    return {
+      status: response.status,
+      message: responseData.message,
+    }
+  } catch {
+    throw new Error('Error changing password')
   }
 }

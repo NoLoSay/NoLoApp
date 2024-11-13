@@ -3,7 +3,7 @@
  * @module VideoDisplay
  * @requires react react-native
  */
-import React, { Text, StyleSheet, View } from 'react-native'
+import React, { Text, StyleSheet, View, TouchableHighlight } from 'react-native'
 import ImageLoader from '@components/ImageLoader'
 import { VideoValidationStatus } from '@global/types/Videos'
 import { VideoLibrary } from '@global/types/httpClient/queries/videos'
@@ -14,6 +14,7 @@ import { VideoLibrary } from '@global/types/httpClient/queries/videos'
  */
 type Props = {
   video: VideoLibrary
+  setCurrentId: (id: number) => void
 }
 
 /**
@@ -22,7 +23,7 @@ type Props = {
  * @param place Video to display
  * @returns {JSX.Element} VideoDisplay component
  */
-export default function VideoDisplay({ video }: Props): JSX.Element {
+export default function VideoDisplay({ video, setCurrentId }: Props): JSX.Element {
   const validationStatus =
     // eslint-disable-next-line no-nested-ternary
     video.validationStatus === VideoValidationStatus.Pending
@@ -32,21 +33,28 @@ export default function VideoDisplay({ video }: Props): JSX.Element {
         : { text: 'Refusé', color: 'red' }
 
   return (
-    <View style={styles.container}>
-      <ImageLoader
-        imageURL={video.item.pictures[0]?.hostingUrl}
-        imageStyle={styles.image}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.placeText}>{video.item.name}</Text>
-        <Text style={[styles.state, { color: validationStatus.color }]}>État: {validationStatus.text}</Text>
-        <Text style={styles.durationText}>
-          Durée de la vidéo: {(video.duration / 60).toFixed()}mn
-          {video.duration % 60 !== 0 ? ` ${video.duration % 60}s` : ''}
-        </Text>
-        {video.deletedReason && <Text style={styles.state}>Raison de la suppression: {video.deletedReason}</Text>}
-      </View>
-    </View>
+    <TouchableHighlight
+      style={styles.container}
+      onLongPress={() => setCurrentId(video.id)}
+      underlayColor='transparent'
+      activeOpacity={1}
+    >
+      <>
+        <ImageLoader
+          imageURL={video.item.pictures[0]?.hostingUrl}
+          imageStyle={styles.image}
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.placeText}>{video.item.name}</Text>
+          <Text style={[styles.state, { color: validationStatus.color }]}>État: {validationStatus.text}</Text>
+          <Text style={styles.durationText}>
+            Durée de la vidéo: {(video.duration / 60).toFixed()}mn
+            {video.duration % 60 !== 0 ? ` ${video.duration % 60}s` : ''}
+          </Text>
+          {video.deletedReason && <Text style={styles.state}>Raison de la suppression: {video.deletedReason}</Text>}
+        </View>
+      </>
+    </TouchableHighlight>
   )
 }
 

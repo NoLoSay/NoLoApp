@@ -97,7 +97,11 @@ export default function AccountModificationScreen({ navigation }: Props): JSX.El
   const [error, setError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [roles, setRoles] = useState<Role[]>()
-  const changePasswordMutation = useChangePassword({ email, newPassword: password, setError: setPasswordError })
+  const changePasswordMutation = useChangePassword({
+    token: account.accessToken,
+    newPassword: password,
+    setError: setPasswordError,
+  })
   const changeGeneralDataMutation = useChangeUser({
     formUsername: username,
     formEmail: email,

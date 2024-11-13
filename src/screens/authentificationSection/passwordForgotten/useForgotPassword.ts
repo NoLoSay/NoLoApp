@@ -5,6 +5,7 @@
  */
 import { forgotPassword } from '@helpers/httpClient/queries/auth/auth'
 import { useState } from 'react'
+import { Alert, Linking } from 'react-native'
 
 type ForgotPassword = {
   email: string
@@ -21,7 +22,18 @@ const useForgotPassword = (): ForgotPassword => {
   const [email, setEmail] = useState('')
 
   const sendEmail = async () => {
-    await forgotPassword({ email })
+    forgotPassword({ email }).then(() => {
+      Alert.alert('Email envoyé', 'Un email vous a été envoyé pour réinitialiser votre mot de passe.', [
+        {
+          text: "Voir l'email",
+          onPress: () => Linking.openURL('message://'),
+        },
+        {
+          text: 'OK',
+          style: 'cancel',
+        },
+      ])
+    })
   }
 
   return {

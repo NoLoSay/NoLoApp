@@ -20,6 +20,7 @@ export default function useLibraryScreenController() {
   const [error, setError] = useState<string>('')
   const [displayVideos, setDisplayVideos] = useState<boolean>(false)
   const userVideoMutation = useUserVideo({ setVideos, userId: account.accountID, setError, token: account.accessToken })
+  const [currentId, setCurrentId] = useState<number | undefined>()
 
   useEffect(() => {
     userVideoMutation.mutate()
@@ -27,6 +28,7 @@ export default function useLibraryScreenController() {
 
   useEffect(() => {
     setDisplayVideos(videos[0] != null)
+    console.log(videos)
   }, [videos])
 
   return {
@@ -34,5 +36,7 @@ export default function useLibraryScreenController() {
     displayVideos,
     loading: userVideoMutation.isPending,
     error,
+    currentId,
+    setCurrentId,
   }
 }
