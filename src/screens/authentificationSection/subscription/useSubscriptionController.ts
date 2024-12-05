@@ -7,6 +7,7 @@
 
 import { useState } from 'react'
 import useRegister from '@helpers/httpClient/queries/auth/useRegister'
+import { checkValues } from './utils'
 
 interface SubscriptionController {
   email: string
@@ -47,7 +48,6 @@ export default function useSubscriptionController({
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
-  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/
   const regitrationMutation = useRegister({ formUsername: username, formEmail: email, password, navigation, setError })
 
   /**
@@ -56,19 +56,7 @@ export default function useSubscriptionController({
    * @returns {Promise<void>} Promise of void
    */
   async function subscribeUser(): Promise<void> {
-    setError(undefined)
-    if (emailRegex.test(email) === false) {
-      setError('Veuillez rentrer un email valide')
-      return
-    }
-    if (!__DEV__ && password.length < 8) {
-      setError('Mot de passe trop court')
-      return
-    }
-    if (password !== passwordConfirmation) {
-      setError('Mots de passe différents')
-      return
-    }
+    setError(checkValues(email, password, passwordConfirmation, __DEV__))
     regitrationMutation.mutate()
   }
 

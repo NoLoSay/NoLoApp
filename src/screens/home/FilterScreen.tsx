@@ -4,6 +4,7 @@
 import Button from '@components/Button'
 import colors from '@global/colors'
 import images from '@global/images'
+import { Place, PlaceTag } from '@global/types/Places'
 import TopBar from '@screens/VideoConsumptionView/Views/TopBar'
 import React from 'react'
 import { Image, ImageProps, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
@@ -15,59 +16,31 @@ interface CategoryProps {
   isSelected: boolean
 }
 
-const THEMES = [
-  {
-    icon: images.icons.full.art(),
-    text: 'Art',
-    id: '1',
-  },
-  {
-    icon: images.icons.full.music(),
-    text: 'Musique',
-    id: '2',
-  },
-  {
-    icon: images.icons.full.hourglass(),
-    text: 'Histoire',
-    id: '3',
-  },
-  {
-    icon: images.icons.full.sciences(),
-    text: 'Sciences',
-    id: '4',
-  },
-  {
-    icon: images.icons.full.sports(),
-    text: 'Sport',
-    id: '5',
-  },
-]
-
 const ACCESSIBILITY = [
   {
     icon: images.logos.heart(),
     text: 'NoLoSay',
-    id: '1',
+    id: PlaceTag.NOLOSAY,
   },
   {
     icon: images.icons.outline.deaf(),
     text: 'Handicap Auditif',
-    id: '2',
+    id: PlaceTag.DEAF_FRIENDLY,
   },
   {
     icon: images.icons.outline.blind(),
     text: 'Handicap Visuel',
-    id: '3',
+    id: PlaceTag.BLIND_FRIENDLY,
   },
   {
     icon: images.icons.outline.disabled(),
     text: 'Handicap Moteur',
-    id: '4',
+    id: PlaceTag.DISABILITY_FRIENDLY,
   },
   {
     icon: images.icons.outline.other(),
     text: 'Handicap Autre',
-    id: '5',
+    id: PlaceTag.OTHER,
   },
 ]
 
@@ -114,9 +87,8 @@ function Category({ icon, text, onPress, isSelected }: CategoryProps): JSX.Eleme
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function FilterScreen({ navigation, route }: any): JSX.Element {
-  const [selectedThemes, setSelectedThemes] = React.useState<number[]>([])
-  const [selectedAccessibility, setSelectedAccessibility] = React.useState<number[]>([])
-  const { userCity, setCity, mutationToApply } = route.params
+  const [selectedAccessibility, setSelectedAccessibility] = React.useState<PlaceTag[]>([])
+  const { userCity, setCity, mutationToApply, setPlaces } = route.params
 
   return (
     <View style={{ flex: 1 }}>
@@ -131,28 +103,6 @@ export default function FilterScreen({ navigation, route }: any): JSX.Element {
           flex: 1,
         }}
       >
-        <Text style={styles.title}>Thèmes</Text>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ overflow: 'visible', flex: 1 }}
-        >
-          {THEMES.map(category => (
-            <Category
-              key={category.id}
-              icon={category.icon}
-              text={category.text}
-              onPress={() => {
-                if (selectedThemes.includes(parseInt(category.id))) {
-                  setSelectedThemes(selectedThemes.filter(theme => theme !== parseInt(category.id)))
-                } else {
-                  setSelectedThemes([...selectedThemes, parseInt(category.id)])
-                }
-              }}
-              isSelected={selectedThemes.includes(parseInt(category.id))}
-            />
-          ))}
-        </ScrollView>
         <Text style={[styles.title, { marginTop: 8 }]}>Accessibilité</Text>
         <ScrollView
           horizontal
@@ -165,26 +115,34 @@ export default function FilterScreen({ navigation, route }: any): JSX.Element {
               icon={category.icon}
               text={category.text}
               onPress={() => {
-                if (selectedAccessibility.includes(parseInt(category.id))) {
-                  setSelectedAccessibility(selectedAccessibility.filter(theme => theme !== parseInt(category.id)))
+                if (selectedAccessibility.includes(category.id)) {
+                  setSelectedAccessibility(selectedAccessibility.filter(theme => theme !== category.id))
                 } else {
-                  setSelectedAccessibility([...selectedAccessibility, parseInt(category.id)])
+                  setSelectedAccessibility([...selectedAccessibility, category.id])
                 }
               }}
-              isSelected={selectedAccessibility.includes(parseInt(category.id))}
+              isSelected={selectedAccessibility.includes(category.id)}
             />
           ))}
         </ScrollView>
         <View style={{ flex: 3, justifyContent: 'flex-end', marginBottom: 42 }}>
           <Button
             text='Valider la sélection'
-            onPress={() => navigation.goBack()}
+            onPress={() => {
+              if (selectedAccessibility?.length > 0) {
+                setPlaces((prev: Place[]) =>
+                  prev.filter(place => place.tags?.some(tag => selectedAccessibility.includes(tag)))
+                )
+              } else {
+                mutationToApply()
+              }
+              navigation.goBack()
+            }}
             style={{ marginTop: 24 }}
           />
           <Button
             text='Réinitialiser les filtres'
             onPress={() => {
-              setSelectedThemes([])
               setSelectedAccessibility([])
               setCity(userCity)
               mutationToApply()

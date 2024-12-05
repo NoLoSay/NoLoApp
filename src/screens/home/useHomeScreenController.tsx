@@ -15,6 +15,7 @@ import getCity from '@helpers/httpClient/localization'
 import { Alert, Linking } from 'react-native'
 import { GeolocationResponse } from '@global/types/Account'
 import useNoloPlaces, { useSearchNoloPlaces } from '@helpers/httpClient/queries/places/useNoloPlaces'
+import { orderAndFilterPlacesByLocation } from './utils'
 
 /**
  * @interface HomeScreenController
@@ -150,6 +151,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
       userCity,
       setCity,
       mutationToApply: noloPlacesMutation.mutate,
+      setPlaces,
     })
     setDisplaySearchBar(false)
   }
@@ -160,24 +162,7 @@ export default function useHomeScreenController(navigation: any): HomeScreenCont
    * @returns {Place[]} The 5 nearest places
    */
   function getNearestPlaces() {
-    let localisation = {
-      latitude: 0,
-      longitude: 0,
-    }
-    if (account.localisation) localisation = account.localisation.coords
-    const placesBis = [...places]
-
-    const placesOrderedByDistance = placesBis.sort((a, b) => {
-      const distanceA = Math.sqrt(
-        (a.address.latitude - localisation.latitude) ** 2 + (a.address.longitude - localisation.longitude) ** 2
-      )
-      const distanceB = Math.sqrt(
-        (b.address.latitude - localisation.latitude) ** 2 + (b.address.longitude - localisation.longitude) ** 2
-      )
-
-      return distanceA - distanceB
-    })
-    return placesOrderedByDistance.slice(0, 10)
+    return orderAndFilterPlacesByLocation(account.localisation, places)
   }
 
   return {

@@ -33,8 +33,8 @@ interface useConnectionControllerProps {
  * @returns {ConnectionController} Object containing the email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation, showPassword, setShowPassword, showPasswordConfirmation, setShowPasswordConfirmation, subscribe, and error.
  */
 export default function useConnectionController({ navigation }: useConnectionControllerProps): ConnectionController {
-  const [email, setEmail] = useState<string>(__DEV__ ? 'Creator' : '')
-  const [password, setPassword] = useState<string>(__DEV__ ? 'password' : '')
+  const [email, setEmail] = useState<string>(__DEV__ ? 'JohanCDev' : '')
+  const [password, setPassword] = useState<string>(__DEV__ ? 'Maxime2003??' : '')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>(undefined)
   const connectionMutation = useConnect({ formUsername: email, password, navigation, setError })
